@@ -1,11 +1,15 @@
 "use client";
 
+import type { CSSProperties } from "react";
+
 import type {
   AgentSummary,
   OperatorLimits,
   ProviderStatus,
   RoutingPolicy,
 } from "@/lib/types";
+import { providerMeta, tierLabel } from "@/lib/providers";
+import { ProviderIcon } from "@/components/ProviderIcon";
 
 export function SettingsPanel({
   actor,
@@ -62,7 +66,7 @@ export function SettingsPanel({
 
   return (
     <div className="settings-stack">
-      <section className="panel">
+      <section className="panel panel-glow">
         <h2 className="panel-title">General</h2>
         <label className="field">
           <span>Operator ID</span>
@@ -75,8 +79,12 @@ export function SettingsPanel({
         </label>
         <label className="check" style={{ marginTop: 12 }}>
           <input type="checkbox" checked={freeOnly} onChange={onToggleFree} />
-          Free Only — prefer free/cheapest models; never silently use expensive pins
+          Free Only — prefer free/cheapest models when available
         </label>
+        <p className="muted" style={{ marginTop: 8 }}>
+          Turn Free Only off to use paid subscriptions (Claude, Kimi, ChatGPT, Grok, …) you
+          connect below.
+        </p>
         {limits && (
           <p className="meta" style={{ marginTop: 12 }}>
             Rate {limits.rate_remaining}/{limits.rate_limit}
@@ -87,92 +95,129 @@ export function SettingsPanel({
         )}
       </section>
 
-      <section className="panel">
-        <h2 className="panel-title">AI providers</h2>
-        <p className="muted">Credentials stay on the server. Never paste keys into chat logs.</p>
-        {providerMessage && <p className="muted">{providerMessage}</p>}
-        <div className="provider-grid">
-          {live.map((provider) => (
-            <article key={provider.name} className="provider-card">
-              <header>
-                <h3>{provider.label}</h3>
-                <span
-                  className={`pill ${provider.configured ? "ok" : "warn"}`}
-                >
-                  {provider.configured ? "Connected" : "Not connected"}
-                </span>
-              </header>
-              {!provider.configured && (
-                <label className="field">
-                  <span>API key</span>
-                  <input
-                    type="password"
-                    autoComplete="off"
-                    placeholder="Paste key…"
-                    value={providerKeys[provider.name] ?? ""}
-                    onChange={(event) => onProviderKey(provider.name, event.target.value)}
-                  />
-                </label>
-              )}
-              {provider.configured && provider.key_hint && (
-                <p className="meta">Key {provider.key_hint}</p>
-              )}
-              <ul className="model-list">
-                {provider.models.slice(0, 8).map((model) => (
-                  <li key={model.id}>
-                    <span>{model.id}</span>
-                    <span>${model.output_cost_per_million}/M</span>
-                  </li>
-                ))}
-              </ul>
-              <div className="form-row">
-                {!provider.configured ? (
-                  <button
-                    type="button"
-                    className="px-btn primary"
-                    disabled={providerBusy === provider.name}
-                    onClick={() => onProviderAction(provider.name, "connect")}
-                  >
-                    Connect
-                  </button>
-                ) : (
-                  <>
-                    <button
-                      type="button"
-                      className="px-btn"
-                      disabled={providerBusy === provider.name}
-                      onClick={() => onProviderAction(provider.name, "test")}
-                    >
-                      Test
-                    </button>
-                    <button
-                      type="button"
-                      className="px-btn"
-                      disabled={providerBusy === provider.name}
-                      onClick={() => onProviderAction(provider.name, "refresh")}
-                    >
-                      Refresh
-                    </button>
-                    <button
-                      type="button"
-                      className="px-btn danger"
-                      disabled={providerBusy === provider.name}
-                      onClick={() => onProviderAction(provider.name, "disconnect")}
-                    >
-                      Disconnect
-                    </button>
-                  </>
+      <section className="panel panel-glow">
+        <div className="panel-head">
+          <h2 className="panel-title" style={{ margin: 0 }}>
+            AI providers
+          </h2>
+          <span className="chip accent">Bring your own key</span>
+        </div>
+        <p className="muted">
+          Connect any lab you already subscribe to. Keys stay on the server — never in the browser
+          bundle.
+        </p>
+        {providerMessage && <p className="banner warn">{providerMessage}</p>}
+        <div className="provider-showcase">
+          {live.map((provider, index) => {
+            const meta = providerMeta(provider.name);
+            return (
+              <article
+                key={provider.name}
+                className={`provider-card showcase ${provider.configured ? "live" : ""}`}
+                style={
+                  {
+                    "--provider-accent": meta.accent,
+                    animationDelay: `${index * 40}ms`,
+                  } as CSSProperties
+                }
+              >
+                <div className="provider-mark" aria-hidden>
+                  <ProviderIcon providerId={provider.name} size={26} />
+                </div>
+                <header>
+                  <div>
+                    <h3>{meta.brand}</h3>
+                    <p className="provider-blurb">{meta.blurb}</p>
+                  </div>
+                  <div className="provider-tags">
+                    <span className={`pill ${provider.configured ? "ok" : ""}`}>
+                      {provider.configured ? "Connected" : "Not connected"}
+                    </span>
+                    <span className="pill">{tierLabel(meta.tier)}</span>
+                  </div>
+                </header>
+                <p className="meta">{meta.modelsHint}</p>
+                {!provider.configured && (
+                  <label className="field">
+                    <span>API key</span>
+                    <input
+                      type="password"
+                      autoComplete="off"
+                      placeholder={`Paste ${meta.brand} key…`}
+                      value={providerKeys[provider.name] ?? ""}
+                      onChange={(event) => onProviderKey(provider.name, event.target.value)}
+                    />
+                  </label>
                 )}
-              </div>
-            </article>
-          ))}
+                {provider.configured && provider.key_hint && (
+                  <p className="meta">Key {provider.key_hint}</p>
+                )}
+                {provider.models.length > 0 && (
+                  <ul className="model-list">
+                    {provider.models.slice(0, 6).map((model) => (
+                      <li key={model.id}>
+                        <span>{model.id}</span>
+                        <span>${model.output_cost_per_million}/M</span>
+                      </li>
+                    ))}
+                  </ul>
+                )}
+                <div className="form-row">
+                  {!provider.configured ? (
+                    <button
+                      type="button"
+                      className="px-btn primary"
+                      disabled={providerBusy === provider.name}
+                      onClick={() => onProviderAction(provider.name, "connect")}
+                    >
+                      Connect
+                    </button>
+                  ) : (
+                    <>
+                      <button
+                        type="button"
+                        className="px-btn"
+                        disabled={providerBusy === provider.name}
+                        onClick={() => onProviderAction(provider.name, "test")}
+                      >
+                        Test
+                      </button>
+                      <button
+                        type="button"
+                        className="px-btn"
+                        disabled={providerBusy === provider.name}
+                        onClick={() => onProviderAction(provider.name, "refresh")}
+                      >
+                        Refresh models
+                      </button>
+                      <button
+                        type="button"
+                        className="px-btn danger"
+                        disabled={providerBusy === provider.name}
+                        onClick={() => onProviderAction(provider.name, "disconnect")}
+                      >
+                        Disconnect
+                      </button>
+                    </>
+                  )}
+                </div>
+              </article>
+            );
+          })}
           {demo.map((provider) => (
-            <article key={provider.name} className="provider-card demo">
+            <article key={provider.name} className="provider-card showcase demo">
+              <div className="provider-mark" aria-hidden>
+                <ProviderIcon providerId="fake" size={26} />
+              </div>
               <header>
-                <h3>{provider.label}</h3>
-                <span className="pill warn">Offline demo</span>
+                <div>
+                  <h3>Offline demo</h3>
+                  <p className="provider-blurb">
+                    Simulated responses when no live key is connected — for local smoke tests only.
+                  </p>
+                </div>
+                <span className="pill warn">Offline</span>
               </header>
-              <p className="muted">Used when no live provider is connected. Not a free cloud API.</p>
             </article>
           ))}
         </div>
@@ -216,7 +261,10 @@ export function SettingsPanel({
             <div className="stack-gap">
               {configuredProviderIds.map((id, index) => (
                 <div className="row" key={id}>
-                  <span className="name">{id}</span>
+                  <span className="name provider-priority-name">
+                    <ProviderIcon providerId={id} size={18} />
+                    {providerMeta(id).brand}
+                  </span>
                   <div className="form-row">
                     <button
                       type="button"

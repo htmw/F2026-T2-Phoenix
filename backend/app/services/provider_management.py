@@ -13,11 +13,17 @@ from app.domain.enums import ErrorKind, ProviderConnectionStatus
 from app.providers.anthropic import AnthropicProvider
 from app.providers.base import LLMProvider, ProviderError
 from app.providers.openai_compatible import (
+    CohereProvider,
     DeepSeekProvider,
     GeminiProvider,
+    GroqProvider,
     MistralProvider,
+    MoonshotProvider,
     OpenAIProvider,
     OpenRouterProvider,
+    PerplexityProvider,
+    QwenProvider,
+    TogetherProvider,
     XAIProvider,
 )
 from app.providers.registry import ProviderRegistry, build_provider_registry
@@ -35,12 +41,18 @@ class ProviderCatalogEntry:
 
 
 PROVIDER_CATALOG: tuple[ProviderCatalogEntry, ...] = (
-    ProviderCatalogEntry("openai", "OpenAI"),
-    ProviderCatalogEntry("anthropic", "Anthropic"),
+    ProviderCatalogEntry("openai", "OpenAI (ChatGPT)"),
+    ProviderCatalogEntry("anthropic", "Claude (Anthropic)"),
     ProviderCatalogEntry("google", "Google Gemini"),
+    ProviderCatalogEntry("moonshot", "Kimi (Moonshot)"),
+    ProviderCatalogEntry("groq", "Groq"),
     ProviderCatalogEntry("deepseek", "DeepSeek"),
-    ProviderCatalogEntry("xai", "xAI"),
+    ProviderCatalogEntry("xai", "xAI (Grok)"),
     ProviderCatalogEntry("mistral", "Mistral"),
+    ProviderCatalogEntry("cohere", "Cohere"),
+    ProviderCatalogEntry("perplexity", "Perplexity"),
+    ProviderCatalogEntry("together", "Together AI"),
+    ProviderCatalogEntry("qwen", "Qwen (Alibaba)"),
     ProviderCatalogEntry("openrouter", "OpenRouter"),
 )
 
@@ -61,6 +73,12 @@ def env_key_for(settings: Settings, provider_id: str) -> str | None:
         "xai": settings.xai_api_key,
         "mistral": settings.mistral_api_key,
         "openrouter": settings.openrouter_api_key,
+        "groq": settings.groq_api_key,
+        "moonshot": settings.moonshot_api_key,
+        "cohere": settings.cohere_api_key,
+        "perplexity": settings.perplexity_api_key,
+        "together": settings.together_api_key,
+        "qwen": settings.qwen_api_key,
     }
     secret = mapping.get(provider_id)
     if secret is None:
@@ -77,6 +95,12 @@ def make_provider(provider_id: str, api_key: str) -> LLMProvider:
         "xai": XAIProvider,
         "mistral": MistralProvider,
         "openrouter": OpenRouterProvider,
+        "groq": GroqProvider,
+        "moonshot": MoonshotProvider,
+        "cohere": CohereProvider,
+        "perplexity": PerplexityProvider,
+        "together": TogetherProvider,
+        "qwen": QwenProvider,
     }
     factory = factories.get(provider_id)
     if factory is None:

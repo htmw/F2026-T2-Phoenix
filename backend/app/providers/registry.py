@@ -21,11 +21,17 @@ from app.providers.anthropic import AnthropicProvider
 from app.providers.base import LLMProvider, ModelSpec
 from app.providers.fake import FakeProvider
 from app.providers.openai_compatible import (
+    CohereProvider,
     DeepSeekProvider,
     GeminiProvider,
+    GroqProvider,
     MistralProvider,
+    MoonshotProvider,
     OpenAIProvider,
     OpenRouterProvider,
+    PerplexityProvider,
+    QwenProvider,
+    TogetherProvider,
     XAIProvider,
 )
 from app.schemas.agent import ModelPreference
@@ -267,10 +273,16 @@ def build_provider_registry(
         OpenAIProvider(resolve("openai", settings.openai_api_key)),
         AnthropicProvider(resolve("anthropic", settings.anthropic_api_key)),
         GeminiProvider(resolve("google", settings.google_api_key)),
+        MoonshotProvider(resolve("moonshot", settings.moonshot_api_key)),
         DeepSeekProvider(resolve("deepseek", settings.deepseek_api_key)),
         XAIProvider(resolve("xai", settings.xai_api_key)),
         MistralProvider(resolve("mistral", settings.mistral_api_key)),
+        CohereProvider(resolve("cohere", settings.cohere_api_key)),
+        PerplexityProvider(resolve("perplexity", settings.perplexity_api_key)),
+        TogetherProvider(resolve("together", settings.together_api_key)),
+        QwenProvider(resolve("qwen", settings.qwen_api_key)),
         OpenRouterProvider(resolve("openrouter", settings.openrouter_api_key)),
+        GroqProvider(resolve("groq", settings.groq_api_key)),
     ]
 
     configured = [provider for provider in candidates if provider.is_configured()]

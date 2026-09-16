@@ -29,34 +29,28 @@ model.
 > [0008](docs/adr/0008-rate-limits.md),
 > [0009](docs/adr/0009-production-fail-fast.md).
 
-## Quick start
+## Run with Docker
 
-Requirements: Docker with Compose v2+. Nothing else needs to be installed.
+Requires Docker with Compose v2+. From the repo root:
 
 ```bash
-cp .env.example .env     # or: make env
+cp .env.example .env
 docker compose up --build
 ```
 
-Then open:
+That starts Postgres, Redis, the API, and the UI. Open **http://localhost:3000**.
 
-| URL                            | What it is                             |
-|--------------------------------|----------------------------------------|
-| http://localhost:3000          | Frontend — AI operations Home          |
-| http://localhost:8000/healthz  | Backend liveness                       |
-| http://localhost:8000/readyz   | Backend readiness (Postgres + Redis)   |
-| http://localhost:8000/docs     | Interactive API docs (non-production)  |
-| http://localhost:8000/metrics  | Prometheus scrape                      |
-| http://localhost:3001          | Grafana (compose profile `observability`) |
+Optional provider keys (Claude, Kimi, OpenAI, Gemini, …) go in `.env` — see `.env.example`. Without keys, offline demo mode still works.
 
-Backend and frontend both hot-reload from your working tree, so no rebuild is needed
-while editing code. Rebuild only when dependencies change.
+| URL | What |
+|-----|------|
+| http://localhost:3000 | Agent Office UI |
+| http://localhost:8000/docs | API docs |
+| http://localhost:8000/healthz | Backend health |
 
-The frontend mounts `app/`, `lib/`, `components/`, and `public/` rather than the whole directory, so
-Next.js' generated files stay on the container filesystem (see Troubleshooting). If you
-add a new top-level frontend source directory, add it to `docker-compose.yml` too.
+Stop with `Ctrl+C`, or run detached with `docker compose up --build -d` and stop with `docker compose down`.
 
-`make help` lists every available task.
+Backend and frontend hot-reload from your working tree. The frontend mounts `app/`, `lib/`, `components/`, and `public/` (not the whole directory), so Next.js generated files stay in the container. `make help` lists other tasks.
 
 ## Architecture at a glance
 

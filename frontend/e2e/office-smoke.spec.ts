@@ -5,16 +5,12 @@ test.describe("Agent Office smoke (J-2)", () => {
     await page.goto("/");
     await expect(page.getByTestId("brand")).toHaveText("Agent Office");
     await expect(page.getByTestId("office-tabs")).toBeVisible();
-    await expect(page.getByTestId("backend-badge")).toContainText(/api (ready|degraded)/, {
-      timeout: 30_000,
-    });
+    await expect(page.getByTestId("command-form")).toBeVisible({ timeout: 30_000 });
   });
 
   test("submit brief reaches a terminal workflow status via Demo Mode", async ({ page }) => {
     await page.goto("/");
-    await expect(page.getByTestId("backend-badge")).toContainText("api ready", {
-      timeout: 30_000,
-    });
+    await expect(page.getByTestId("command-form")).toBeVisible({ timeout: 30_000 });
 
     await page.getByTestId("tab-command").click();
     await expect(page.getByTestId("command-form")).toBeVisible();

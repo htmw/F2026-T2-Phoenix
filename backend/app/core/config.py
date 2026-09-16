@@ -102,6 +102,12 @@ class Settings(BaseSettings):
     deepseek_api_key: SecretStr | None = None
     mistral_api_key: SecretStr | None = None
     openrouter_api_key: SecretStr | None = None
+    groq_api_key: SecretStr | None = None
+    moonshot_api_key: SecretStr | None = None
+    cohere_api_key: SecretStr | None = None
+    perplexity_api_key: SecretStr | None = None
+    together_api_key: SecretStr | None = None
+    qwen_api_key: SecretStr | None = None
 
     # Symmetric key for encrypting Settings-managed provider credentials at rest.
     # Required in production. Development falls back to a derived key (see service).

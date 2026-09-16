@@ -29,7 +29,21 @@ async def test_list_providers_includes_disconnected_catalogue(
     assert response.status_code == 200
     body = response.json()
     names = {item["name"] for item in body}
-    assert {"openai", "anthropic", "google", "deepseek", "xai", "mistral", "openrouter"} <= names
+    assert {
+        "openai",
+        "anthropic",
+        "google",
+        "moonshot",
+        "groq",
+        "deepseek",
+        "xai",
+        "mistral",
+        "cohere",
+        "perplexity",
+        "together",
+        "qwen",
+        "openrouter",
+    } <= names
     openai = next(item for item in body if item["name"] == "openai")
     assert openai["configured"] is False
     assert openai["connection_status"] == "disconnected"

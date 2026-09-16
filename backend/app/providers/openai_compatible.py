@@ -1,7 +1,8 @@
 """Adapter for providers exposing an OpenAI-compatible chat-completions API.
 
-OpenAI, DeepSeek, xAI, Mistral, OpenRouter, and Gemini (via Google's OpenAI-compatible
-endpoint) share one request shape and differ only in base URL, credential, and catalogue.
+OpenAI, DeepSeek, xAI, Mistral, OpenRouter, Groq, Moonshot (Kimi), Cohere, Perplexity,
+Together, Qwen, and Gemini (via Google's OpenAI-compatible endpoint) share one request
+shape and differ only in base URL, credential, and catalogue.
 Anthropic stays in ``anthropic.py`` because the Messages API is a different protocol.
 
 Vendor HTTP details, status codes, and response parsing stop here. Callers see
@@ -521,5 +522,228 @@ class OpenRouterProvider(OpenAICompatibleProvider):
             input_cost_per_million=0.15,
             output_cost_per_million=0.60,
             typical_latency_ms=2_000,
+        ),
+    )
+
+
+class GroqProvider(OpenAICompatibleProvider):
+    """Groq OpenAI-compatible inference (Llama / Mixtral)."""
+
+    name = "groq"
+    base_url = "https://api.groq.com/openai/v1"
+    models = (
+        ModelSpec(
+            id="groq:llama-3.3-70b-versatile",
+            provider="groq",
+            model_name="llama-3.3-70b-versatile",
+            traits=frozenset(
+                {
+                    ModelTrait.FAST,
+                    ModelTrait.CHEAP,
+                    ModelTrait.CODING,
+                    ModelTrait.REASONING,
+                    ModelTrait.STRUCTURED_OUTPUT,
+                }
+            ),
+            context_tokens=128_000,
+            max_output_tokens=32_768,
+            input_cost_per_million=0.59,
+            output_cost_per_million=0.79,
+            typical_latency_ms=400,
+        ),
+        ModelSpec(
+            id="groq:llama-3.1-8b-instant",
+            provider="groq",
+            model_name="llama-3.1-8b-instant",
+            traits=frozenset(
+                {
+                    ModelTrait.FAST,
+                    ModelTrait.CHEAP,
+                    ModelTrait.STRUCTURED_OUTPUT,
+                }
+            ),
+            context_tokens=128_000,
+            max_output_tokens=8_192,
+            input_cost_per_million=0.05,
+            output_cost_per_million=0.08,
+            typical_latency_ms=200,
+        ),
+    )
+
+
+class MoonshotProvider(OpenAICompatibleProvider):
+    """Kimi models via Moonshot OpenAI-compatible API."""
+
+    name = "moonshot"
+    base_url = "https://api.moonshot.ai/v1"
+    models = (
+        ModelSpec(
+            id="moonshot:kimi-k2.6",
+            provider="moonshot",
+            model_name="kimi-k2.6",
+            traits=frozenset(
+                {
+                    ModelTrait.REASONING,
+                    ModelTrait.CODING,
+                    ModelTrait.LONG_CONTEXT,
+                    ModelTrait.STRUCTURED_OUTPUT,
+                }
+            ),
+            context_tokens=256_000,
+            max_output_tokens=32_768,
+            input_cost_per_million=0.60,
+            output_cost_per_million=2.50,
+            typical_latency_ms=3_000,
+        ),
+        ModelSpec(
+            id="moonshot:moonshot-v1-128k",
+            provider="moonshot",
+            model_name="moonshot-v1-128k",
+            traits=frozenset(
+                {
+                    ModelTrait.LONG_CONTEXT,
+                    ModelTrait.CHEAP,
+                    ModelTrait.STRUCTURED_OUTPUT,
+                }
+            ),
+            context_tokens=128_000,
+            max_output_tokens=8_192,
+            input_cost_per_million=0.20,
+            output_cost_per_million=2.0,
+            typical_latency_ms=2_500,
+        ),
+    )
+
+
+class CohereProvider(OpenAICompatibleProvider):
+    """Cohere Command models via the OpenAI-compatibility endpoint."""
+
+    name = "cohere"
+    base_url = "https://api.cohere.com/compatibility/v1"
+    models = (
+        ModelSpec(
+            id="cohere:command-r-plus",
+            provider="cohere",
+            model_name="command-r-plus",
+            traits=frozenset(
+                {
+                    ModelTrait.REASONING,
+                    ModelTrait.LONG_CONTEXT,
+                    ModelTrait.STRUCTURED_OUTPUT,
+                }
+            ),
+            context_tokens=128_000,
+            max_output_tokens=8_192,
+            input_cost_per_million=2.50,
+            output_cost_per_million=10.0,
+            typical_latency_ms=3_000,
+        ),
+        ModelSpec(
+            id="cohere:command-r",
+            provider="cohere",
+            model_name="command-r",
+            traits=frozenset({ModelTrait.FAST, ModelTrait.CHEAP, ModelTrait.STRUCTURED_OUTPUT}),
+            context_tokens=128_000,
+            max_output_tokens=4_096,
+            input_cost_per_million=0.15,
+            output_cost_per_million=0.60,
+            typical_latency_ms=1_500,
+        ),
+    )
+
+
+class PerplexityProvider(OpenAICompatibleProvider):
+    """Perplexity Sonar search-grounded models."""
+
+    name = "perplexity"
+    base_url = "https://api.perplexity.ai"
+    models = (
+        ModelSpec(
+            id="perplexity:sonar-pro",
+            provider="perplexity",
+            model_name="sonar-pro",
+            traits=frozenset({ModelTrait.REASONING, ModelTrait.LONG_CONTEXT}),
+            context_tokens=200_000,
+            max_output_tokens=8_192,
+            input_cost_per_million=3.0,
+            output_cost_per_million=15.0,
+            typical_latency_ms=4_000,
+        ),
+        ModelSpec(
+            id="perplexity:sonar",
+            provider="perplexity",
+            model_name="sonar",
+            traits=frozenset({ModelTrait.FAST, ModelTrait.CHEAP}),
+            context_tokens=127_000,
+            max_output_tokens=8_192,
+            input_cost_per_million=1.0,
+            output_cost_per_million=1.0,
+            typical_latency_ms=2_500,
+        ),
+    )
+
+
+class TogetherProvider(OpenAICompatibleProvider):
+    """Together AI open-model hosting."""
+
+    name = "together"
+    base_url = "https://api.together.xyz/v1"
+    models = (
+        ModelSpec(
+            id="together:meta-llama/Llama-3.3-70B-Instruct-Turbo",
+            provider="together",
+            model_name="meta-llama/Llama-3.3-70B-Instruct-Turbo",
+            traits=frozenset(
+                {
+                    ModelTrait.FAST,
+                    ModelTrait.CHEAP,
+                    ModelTrait.CODING,
+                    ModelTrait.REASONING,
+                    ModelTrait.STRUCTURED_OUTPUT,
+                }
+            ),
+            context_tokens=131_072,
+            max_output_tokens=8_192,
+            input_cost_per_million=0.88,
+            output_cost_per_million=0.88,
+            typical_latency_ms=1_200,
+        ),
+    )
+
+
+class QwenProvider(OpenAICompatibleProvider):
+    """Alibaba Qwen via DashScope OpenAI-compatible mode."""
+
+    name = "qwen"
+    base_url = "https://dashscope-intl.aliyuncs.com/compatible-mode/v1"
+    models = (
+        ModelSpec(
+            id="qwen:qwen-plus",
+            provider="qwen",
+            model_name="qwen-plus",
+            traits=frozenset(
+                {
+                    ModelTrait.REASONING,
+                    ModelTrait.CODING,
+                    ModelTrait.LONG_CONTEXT,
+                    ModelTrait.STRUCTURED_OUTPUT,
+                }
+            ),
+            context_tokens=131_072,
+            max_output_tokens=16_384,
+            input_cost_per_million=0.40,
+            output_cost_per_million=1.20,
+            typical_latency_ms=2_500,
+        ),
+        ModelSpec(
+            id="qwen:qwen-turbo",
+            provider="qwen",
+            model_name="qwen-turbo",
+            traits=frozenset({ModelTrait.FAST, ModelTrait.CHEAP, ModelTrait.STRUCTURED_OUTPUT}),
+            context_tokens=131_072,
+            max_output_tokens=8_192,
+            input_cost_per_million=0.05,
+            output_cost_per_million=0.20,
+            typical_latency_ms=1_000,
         ),
     )

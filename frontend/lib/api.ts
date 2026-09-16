@@ -178,6 +178,10 @@ export async function setAgentModelBinding(
   });
 }
 
+export async function listWorkflows(limit = 50): Promise<WorkflowView[]> {
+  return request<WorkflowView[]>(`/api/v1/workflows?limit=${limit}`);
+}
+
 export async function getWorkflow(id: string): Promise<WorkflowView> {
   return request<WorkflowView>(`/api/v1/workflows/${id}`);
 }

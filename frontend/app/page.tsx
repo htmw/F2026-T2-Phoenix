@@ -2,10 +2,11 @@
 
 import { FormEvent, useCallback, useEffect, useMemo, useState } from "react";
 
-import { ActivityFeed } from "@/components/ActivityFeed";
 import { AgentDrawer } from "@/components/AgentDrawer";
 import { AgentStrip } from "@/components/AgentStrip";
 import { AppShell, type NavTab } from "@/components/AppShell";
+import { ChatThread } from "@/components/ChatThread";
+import { ConversationSidebar } from "@/components/ConversationSidebar";
 import { MessagesPanel } from "@/components/MessagesPanel";
 import { SettingsPanel } from "@/components/SettingsPanel";
 import { TaskComposer } from "@/components/TaskComposer";
@@ -16,7 +17,6 @@ import {
   connectProvider,
   controlNode,
   disconnectProvider,
-  fetchBackendStatus,
   getMailbox,
   getMemory,
   getOffice,
@@ -27,6 +27,7 @@ import {
   listAgents,
   listArtifacts,
   listProviders,
+  listWorkflows,
   refreshProviderModels,
   setAgentModelBinding,
   setOperatorId,
@@ -39,14 +40,12 @@ import {
   getFreeOnly,
   hasUsableModels,
   liveModels,
-  resolveAiMode,
   setFreeOnly,
 } from "@/lib/office";
 import type {
   AgentMailbox,
   AgentSummary,
   ArtifactView,
-  BackendStatus,
   MemoryView,
   OfficeSnapshot,
   OperatorLimits,
@@ -61,7 +60,6 @@ type MailFolder = "inbox" | "sent" | "archive";
 
 export default function HomePage() {
   const [tab, setTab] = useState<NavTab>("home");
-  const [status, setStatus] = useState<BackendStatus | null>(null);
   const [office, setOffice] = useState<OfficeSnapshot | null>(null);
   const [selected, setSelected] = useState<string | null>(null);
   const [drawerOpen, setDrawerOpen] = useState(false);
@@ -98,16 +96,14 @@ export default function HomePage() {
   const [advancedSettings, setAdvancedSettings] = useState(false);
   const [advancedWorkflow, setAdvancedWorkflow] = useState(false);
   const [advancedDrawer, setAdvancedDrawer] = useState(false);
-  const [showNetwork, setShowNetwork] = useState(false);
   const [showMsgDev, setShowMsgDev] = useState(false);
+  const [conversations, setConversations] = useState<WorkflowView[]>([]);
+  const [composerMode, setComposerMode] = useState<"new" | "followup">("new");
+
 
   useEffect(() => {
     setActor(getOperatorId());
     setFreeOnlyState(getFreeOnly());
-  }, []);
-
-  useEffect(() => {
-    void fetchBackendStatus().then(setStatus);
   }, []);
 
   const refreshLimits = useCallback(async () => {
@@ -126,10 +122,19 @@ export default function HomePage() {
     }
   }, []);
 
+  const refreshConversations = useCallback(async () => {
+    try {
+      setConversations(await listWorkflows(50));
+    } catch {
+      /* keep prior list */
+    }
+  }, []);
+
   useEffect(() => {
     const immediate = window.setTimeout(() => {
       void refreshOffice();
       void refreshLimits();
+      void refreshConversations();
     }, 0);
     const timer = window.setInterval(() => {
       void refreshOffice();
@@ -138,7 +143,7 @@ export default function HomePage() {
       window.clearTimeout(immediate);
       window.clearInterval(timer);
     };
-  }, [refreshOffice, refreshLimits]);
+  }, [refreshOffice, refreshLimits, refreshConversations]);
 
   useEffect(() => {
     let cancelled = false;
@@ -192,17 +197,25 @@ export default function HomePage() {
 
   useEffect(() => {
     if (!workflow || TERMINAL_STATUSES.has(workflow.status)) {
+      if (workflow && TERMINAL_STATUSES.has(workflow.status)) {
+        void refreshConversations();
+      }
       return;
     }
     const timer = window.setInterval(() => {
       void getWorkflow(workflow.id)
-        .then(setWorkflow)
+        .then((next) => {
+          setWorkflow(next);
+          if (TERMINAL_STATUSES.has(next.status)) {
+            void refreshConversations();
+          }
+        })
         .catch((cause: unknown) => {
           setError(cause instanceof Error ? cause.message : "Failed to refresh workflow");
         });
     }, 750);
     return () => window.clearInterval(timer);
-  }, [workflow]);
+  }, [workflow, refreshConversations]);
 
   const liveProviders = useMemo(
     () => providers.filter((provider) => !provider.demo),
@@ -228,7 +241,6 @@ export default function HomePage() {
 
   const offlineDemo = demoOnly(providers);
   const noModels = !hasUsableModels(providers);
-  const aiMode = resolveAiMode(providers, freeOnly);
 
   const freeOnlyBlocked = useMemo(() => {
     if (!freeOnly || offlineDemo) {
@@ -301,8 +313,11 @@ export default function HomePage() {
         model_overrides: routingStrategy === "mixed" ? overrides : {},
       });
       setWorkflow(created);
-      setTab("work");
+      setComposerMode("followup");
+      setRequest("");
+      setTab("home");
       void refreshOffice();
+      void refreshConversations();
       void listAgents().then(setAgents);
     } catch (cause) {
       setError(cause instanceof ApiError || cause instanceof Error ? cause.message : "Submit failed");
@@ -430,6 +445,27 @@ export default function HomePage() {
     [providers],
   );
 
+  const startNewChat = () => {
+    setWorkflow(null);
+    setRequest("");
+    setComposerMode("new");
+    setAdvancedComposer(false);
+    setTab("home");
+  };
+
+  const openConversation = async (id: string) => {
+    setError(null);
+    try {
+      const full = await getWorkflow(id);
+      setWorkflow(full);
+      setComposerMode("followup");
+      setRequest("");
+      setTab("home");
+    } catch (cause) {
+      setError(cause instanceof Error ? cause.message : "Failed to open chat");
+    }
+  };
+
   const openAgent = (agentId: string) => {
     setSelected(agentId);
     setDrawerOpen(true);
@@ -450,14 +486,7 @@ export default function HomePage() {
     <AppShell
       tab={tab}
       onTab={setTab}
-      status={status}
-      aiMode={aiMode}
-      freeOnly={freeOnly}
-      onToggleFree={toggleFree}
-      onNewTask={() => {
-        setTab("home");
-        setAdvancedComposer(false);
-      }}
+      onNewTask={startNewChat}
     >
       {error && (
         <p className="banner-err" role="alert">
@@ -466,9 +495,21 @@ export default function HomePage() {
       )}
 
       {tab === "home" && (
-        <div className="workspace home">
-          <div className="stack-gap">
+        <div className="workspace chat">
+          <ConversationSidebar
+            conversations={conversations}
+            activeId={workflow?.id ?? null}
+            onSelect={(id) => void openConversation(id)}
+            onNew={startNewChat}
+          />
+          <div className="chat-main">
+            <ChatThread
+              workflow={workflow}
+              busy={busy}
+              onOpenWork={() => setTab("work")}
+            />
             <TaskComposer
+              compact={composerMode === "followup" || !!workflow}
               request={request}
               onRequest={setRequest}
               busy={busy}
@@ -507,30 +548,18 @@ export default function HomePage() {
               freeOnlyBlocked={freeOnlyBlocked}
               onSubmit={(event) => void onSubmit(event)}
             />
-            <section className="panel">
-              <h2 className="panel-title">Agents</h2>
-              <AgentStrip
-                agents={office?.agents ?? []}
-                selected={selected}
-                onSelect={openAgent}
-              />
-            </section>
-          </div>
-          <div className="stack-gap">
-            {workflow && (
-              <WorkflowProgress
-                workflow={workflow}
-                busy={busy}
-                compact
-                onControl={(action, nodeKey) => void runControl(action, nodeKey)}
-              />
-            )}
-            <ActivityFeed
-              events={office?.recent_events ?? []}
-              links={office?.links ?? []}
-              showNetwork={showNetwork}
-              onToggleNetwork={() => setShowNetwork((v) => !v)}
-            />
+            <details className="panel" style={{ padding: "8px 12px" }}>
+              <summary className="muted" style={{ cursor: "pointer" }}>
+                Agents ({office?.agents.length ?? 0})
+              </summary>
+              <div style={{ marginTop: 12 }}>
+                <AgentStrip
+                  agents={office?.agents ?? []}
+                  selected={selected}
+                  onSelect={openAgent}
+                />
+              </div>
+            </details>
           </div>
         </div>
       )}

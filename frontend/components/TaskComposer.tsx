@@ -38,6 +38,7 @@ export function TaskComposer({
   onMaxCost,
   freeOnlyBlocked,
   onSubmit,
+  compact = false,
 }: {
   request: string;
   onRequest: (value: string) => void;
@@ -66,16 +67,21 @@ export function TaskComposer({
   onMaxCost: (value: string) => void;
   freeOnlyBlocked: string | null;
   onSubmit: (event: FormEvent<HTMLFormElement>) => void;
+  compact?: boolean;
 }) {
   const roster = pickAgents ? selectedAgents : agents.map((agent) => agent.id);
 
   return (
-    <section className="panel composer-hero">
-      <h2>What would you like the agents to work on?</h2>
-      <p className="muted" style={{ margin: 0 }}>
-        Describe the task. Agents and models are chosen automatically
-        {offlineDemo ? " (offline demo)." : "."}
-      </p>
+    <section className={`panel composer-hero ${compact ? "composer-compact" : ""}`}>
+      {!compact && (
+        <>
+          <h2>What should the office take on?</h2>
+          <p className="muted" style={{ margin: 0 }}>
+            One brief in — specialists plan across Claude, Kimi, ChatGPT, Gemini, Grok, and more
+            {offlineDemo ? " (offline demo)." : "."}
+          </p>
+        </>
+      )}
 
       {noModels && (
         <div className="banner warn">
@@ -107,26 +113,28 @@ export function TaskComposer({
             data-testid="request-input"
             value={request}
             onChange={(event) => onRequest(event.target.value)}
-            rows={4}
+            rows={compact ? 2 : 4}
             required
             minLength={3}
-            placeholder="Describe your task…"
+            placeholder={compact ? "Message Agent Office…" : "Describe your task…"}
             disabled={noModels}
           />
         </label>
 
-        <div className="examples">
-          {EXAMPLES.map((example) => (
-            <button
-              key={example}
-              type="button"
-              className="chip-btn"
-              onClick={() => onRequest(example)}
-            >
-              {example}
-            </button>
-          ))}
-        </div>
+        {!compact && (
+          <div className="examples">
+            {EXAMPLES.map((example) => (
+              <button
+                key={example}
+                type="button"
+                className="chip-btn"
+                onClick={() => onRequest(example)}
+              >
+                {example}
+              </button>
+            ))}
+          </div>
+        )}
 
         <div className="form-row">
           <button
@@ -135,7 +143,7 @@ export function TaskComposer({
             data-testid="assign-work"
             disabled={busy || request.trim().length < 3 || noModels || !!freeOnlyBlocked}
           >
-            {busy ? "Starting…" : "Start task"}
+            {busy ? "Starting…" : compact ? "Send" : "Start task"}
           </button>
           <button type="button" className="advanced-toggle" onClick={onToggleAdvanced}>
             {advancedOpen ? "Hide advanced" : "Advanced"}

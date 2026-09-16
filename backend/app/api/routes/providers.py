@@ -19,11 +19,17 @@ from app.domain.enums import ProviderConnectionStatus
 from app.providers.anthropic import AnthropicProvider
 from app.providers.base import ModelSpec
 from app.providers.openai_compatible import (
+    CohereProvider,
     DeepSeekProvider,
     GeminiProvider,
+    GroqProvider,
     MistralProvider,
+    MoonshotProvider,
     OpenAIProvider,
     OpenRouterProvider,
+    PerplexityProvider,
+    QwenProvider,
+    TogetherProvider,
     XAIProvider,
 )
 from app.schemas.api import (
@@ -42,9 +48,15 @@ _CATALOGUE_MODELS: dict[str, tuple] = {
     "openai": OpenAIProvider.models,
     "anthropic": AnthropicProvider.models,
     "google": GeminiProvider.models,
+    "moonshot": MoonshotProvider.models,
+    "groq": GroqProvider.models,
     "deepseek": DeepSeekProvider.models,
     "xai": XAIProvider.models,
     "mistral": MistralProvider.models,
+    "cohere": CohereProvider.models,
+    "perplexity": PerplexityProvider.models,
+    "together": TogetherProvider.models,
+    "qwen": QwenProvider.models,
     "openrouter": OpenRouterProvider.models,
 }
 
