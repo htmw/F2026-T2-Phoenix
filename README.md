@@ -6,6 +6,8 @@ capabilities are needed, wires them into a workflow graph (sequential, parallel,
 conditional), routes each agent to an appropriate model provider, validates every
 output, and synthesises a single result.
 
+![Agent Office home — chat sidebar, task composer, and multi-lab desk](docs/images/agent-office-home.jpg)
+
 It is not a chat interface that sends the same prompt to several models. The product is
 the orchestration decision: what to run, what *not* to run, in what order, and on which
 model.
