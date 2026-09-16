@@ -212,6 +212,12 @@ class OpenAICompatibleProvider(LLMProvider):
                 kind = ErrorKind.AUTHENTICATION
             case 404:
                 kind = ErrorKind.INVALID_REQUEST
+                # Retired or mistyped model ids often surface as bare 404s.
+                if detail.upper().startswith("HTTP ") or detail.strip() == "":
+                    detail = (
+                        f"model not found (HTTP 404). Refresh models in Settings or "
+                        f"pick a current catalogue id."
+                    )
             case 408:
                 kind = ErrorKind.TIMEOUT
             case 429:
@@ -458,11 +464,12 @@ class GeminiProvider(OpenAICompatibleProvider):
 
     name = "google"
     base_url = "https://generativelanguage.googleapis.com/v1beta/openai"
+    # Prefer *-latest aliases: fixed version ids (1.5 / 2.5) are often 404 for new keys.
     models = (
         ModelSpec(
-            id="google:gemini-1.5-pro",
+            id="google:gemini-pro-latest",
             provider="google",
-            model_name="gemini-1.5-pro",
+            model_name="gemini-pro-latest",
             traits=frozenset(
                 {
                     ModelTrait.REASONING,
@@ -471,28 +478,30 @@ class GeminiProvider(OpenAICompatibleProvider):
                     ModelTrait.CODING,
                 }
             ),
-            context_tokens=2_000_000,
-            max_output_tokens=8_192,
+            context_tokens=1_000_000,
+            max_output_tokens=65_536,
             input_cost_per_million=1.25,
-            output_cost_per_million=5.0,
+            output_cost_per_million=10.0,
             typical_latency_ms=3_500,
         ),
         ModelSpec(
-            id="google:gemini-1.5-flash",
+            id="google:gemini-flash-latest",
             provider="google",
-            model_name="gemini-1.5-flash",
+            model_name="gemini-flash-latest",
             traits=frozenset(
                 {
                     ModelTrait.FAST,
                     ModelTrait.CHEAP,
+                    ModelTrait.REASONING,
                     ModelTrait.LONG_CONTEXT,
                     ModelTrait.STRUCTURED_OUTPUT,
+                    ModelTrait.CODING,
                 }
             ),
             context_tokens=1_000_000,
-            max_output_tokens=8_192,
-            input_cost_per_million=0.075,
-            output_cost_per_million=0.30,
+            max_output_tokens=65_536,
+            input_cost_per_million=0.15,
+            output_cost_per_million=0.60,
             typical_latency_ms=1_200,
         ),
     )
