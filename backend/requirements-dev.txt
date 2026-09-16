@@ -1,0 +1,9 @@
+# Development and test dependencies. Not installed into the production image.
+-r requirements.txt
+
+pytest==9.1.1
+pytest-asyncio==1.4.0
+pytest-cov==7.1.0
+ruff==0.16.7
+mypy==2.3.1
+types-jsonschema==4.26.0.20260518

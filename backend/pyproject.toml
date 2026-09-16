@@ -1,0 +1,66 @@
+# Tool configuration only. Dependencies live in requirements*.txt so Docker layer
+# caching can install them before the source is copied.
+
+[tool.ruff]
+line-length = 100
+target-version = "py312"
+src = ["."]
+
+[tool.ruff.lint]
+select = [
+    "E",    # pycodestyle
+    "F",    # pyflakes
+    "I",    # import sorting
+    "UP",   # pyupgrade
+    "B",    # bugbear
+    "C4",   # comprehensions
+    "SIM",  # simplify
+    "ASYNC",# async correctness
+    "S",    # bandit security rules
+    "T20",  # no print/pprint left behind
+    "RET",  # return consistency
+    "ARG",  # unused arguments
+    "PTH",  # prefer pathlib
+    "TID",  # tidy imports
+]
+ignore = [
+    "E501",  # line length is enforced by the formatter
+]
+
+[tool.ruff.lint.per-file-ignores]
+# Tests assert on internals, use fixtures that shadow names, and hard-code fake secrets.
+"tests/*" = ["S101", "S105", "S106", "ARG001", "SLF001"]
+
+[tool.ruff.lint.flake8-tidy-imports]
+ban-relative-imports = "all"
+
+[tool.mypy]
+python_version = "3.12"
+strict = true
+warn_unreachable = true
+plugins = ["pydantic.mypy"]
+files = ["app", "tests"]
+
+[[tool.mypy.overrides]]
+module = ["asyncpg.*"]
+ignore_missing_imports = true
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+# "auto" keeps async tests free of per-test markers; sync tests are unaffected.
+asyncio_mode = "auto"
+asyncio_default_fixture_loop_scope = "function"
+addopts = [
+    "--strict-markers",
+    "--strict-config",
+    "-ra",
+    "--cov=app",
+    "--cov-report=term-missing",
+]
+
+[tool.coverage.run]
+source = ["app"]
+omit = ["app/main.py"]
+
+[tool.coverage.report]
+exclude_also = ["if TYPE_CHECKING:", "raise NotImplementedError"]

@@ -1,0 +1,15 @@
+# Runtime dependencies. Pinned exactly so every environment and CI run is identical.
+fastapi==0.141.1
+uvicorn[standard]==0.53.0
+pydantic==2.13.5
+pydantic-settings==2.15.0
+structlog==26.1.0
+asyncpg==0.31.0
+redis==8.1.0
+sqlalchemy[asyncio]==2.0.54
+alembic==1.20.0
+greenlet==3.3.1
+httpx==0.28.1
+jsonschema==4.26.0
+cryptography==46.0.3
+PyJWT==2.10.1

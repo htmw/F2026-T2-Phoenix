@@ -1,0 +1,133 @@
+# Development environment. One command brings up the whole stack.
+#
+# Production uses the multi-stage `Dockerfile` in each service directory; this file
+# targets the `Dockerfile.dev` variants so source is bind-mounted and reloads live.
+
+name: agent-orchestration
+
+services:
+  postgres:
+    image: postgres:17-alpine
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-agentorch}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-agentorch}
+      POSTGRES_DB: ${POSTGRES_DB:-agentorch}
+    ports:
+      - "${POSTGRES_PORT:-5432}:5432"
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    healthcheck:
+      # Dependents wait on this, so the backend never starts against a database that is
+      # listening but not yet accepting queries.
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-agentorch} -d ${POSTGRES_DB:-agentorch}"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+      start_period: 10s
+
+  redis:
+    image: redis:8-alpine
+    # Append-only persistence: Redis is not the source of truth, but surviving a restart
+    # avoids losing queued jobs during ordinary development.
+    command: ["redis-server", "--appendonly", "yes"]
+    ports:
+      - "${REDIS_PORT:-6379}:6379"
+    volumes:
+      - redis-data:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile.dev
+    env_file:
+      - path: .env
+        required: false
+    environment:
+      ENVIRONMENT: ${ENVIRONMENT:-development}
+      LOG_LEVEL: ${LOG_LEVEL:-INFO}
+      LOG_FORMAT: ${LOG_FORMAT:-console}
+      # Service names resolve over the compose network, overriding the localhost
+      # defaults that host-based runs use.
+      DATABASE_URL: postgresql+asyncpg://${POSTGRES_USER:-agentorch}:${POSTGRES_PASSWORD:-agentorch}@postgres:5432/${POSTGRES_DB:-agentorch}
+      REDIS_URL: redis://redis:6379/0
+      CORS_ALLOW_ORIGINS: http://localhost:${FRONTEND_PORT:-3000}
+    ports:
+      - "${BACKEND_PORT:-8000}:8000"
+    volumes:
+      # Source is mounted for reload; the container keeps its own caches out of the way.
+      - ./backend:/app
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request,sys; sys.exit(0 if urllib.request.urlopen('http://127.0.0.1:8000/healthz', timeout=3).status == 200 else 1)"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 15s
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile.dev
+    environment:
+      # Server-side calls go over the compose network; browser-side calls use the
+      # host-published port.
+      BACKEND_INTERNAL_URL: http://backend:8000
+      NEXT_PUBLIC_API_BASE_URL: http://localhost:${BACKEND_PORT:-8000}
+      WATCHPACK_POLLING: "true"
+    ports:
+      - "${FRONTEND_PORT:-3000}:3000"
+    volumes:
+      # Only edited source is mounted. Mounting all of ./frontend puts Next.js'
+      # generated root files (next-env.d.ts, .next, node_modules) on the host bind
+      # mount, where file locking is unsupported on macOS -- Next takes a lock on
+      # next-env.d.ts and the dev server dies with EDEADLK. Keeping generated files on
+      # the container filesystem avoids that entirely; hot reload still works for
+      # everything below.
+      - ./frontend/app:/app/app
+      - ./frontend/lib:/app/lib
+      - ./frontend/components:/app/components
+      - ./frontend/public:/app/public
+    depends_on:
+      backend:
+        condition: service_started
+
+  prometheus:
+    image: prom/prometheus:v3.5.0
+    profiles: ["observability"]
+    command:
+      - "--config.file=/etc/prometheus/prometheus.yml"
+    volumes:
+      - ./observability/prometheus.yml:/etc/prometheus/prometheus.yml:ro
+    ports:
+      - "9090:9090"
+    depends_on:
+      backend:
+        condition: service_started
+
+  grafana:
+    image: grafana/grafana:12.1.0
+    profiles: ["observability"]
+    environment:
+      GF_SECURITY_ADMIN_USER: admin
+      GF_SECURITY_ADMIN_PASSWORD: admin
+      GF_USERS_DEFAULT_THEME: dark
+    ports:
+      - "3001:3000"
+    volumes:
+      - ./observability/grafana/provisioning:/etc/grafana/provisioning:ro
+      - ./observability/grafana/dashboards:/var/lib/grafana/dashboards:ro
+    depends_on:
+      - prometheus
+
+volumes:
+  postgres-data:
+  redis-data:

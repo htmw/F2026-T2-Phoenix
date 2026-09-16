@@ -1,0 +1,14 @@
+# Overlay for Playwright browser smoke (J-2).
+# Forces Demo Mode by clearing provider credentials so FakeProvider is registered.
+# Usage: docker compose -f docker-compose.yml -f docker-compose.e2e.yml up --build -d
+
+services:
+  backend:
+    environment:
+      OPENAI_API_KEY: ""
+      ANTHROPIC_API_KEY: ""
+      GOOGLE_API_KEY: ""
+      XAI_API_KEY: ""
+      DEEPSEEK_API_KEY: ""
+      MISTRAL_API_KEY: ""
+      OPENROUTER_API_KEY: ""

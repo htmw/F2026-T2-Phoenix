@@ -1,0 +1,22 @@
+# Development image: includes test/lint tooling and relies on a bind mount for source,
+# so code changes reload without a rebuild.
+FROM python:3.12-slim
+
+ENV PYTHONDONTWRITEBYTECODE=1 \
+    PYTHONUNBUFFERED=1 \
+    PIP_NO_CACHE_DIR=1
+
+WORKDIR /app
+
+# Requirements are copied alone so the dependency layer is reused when only source
+# changes.
+COPY requirements.txt requirements-dev.txt ./
+RUN pip install --no-cache-dir -r requirements-dev.txt
+
+COPY . .
+
+EXPOSE 8000
+
+# Migrations run before the server in development so a fresh clone needs one command.
+# Production runs them as a deliberate deploy step instead (see docs/architecture.md).
+CMD ["sh", "-c", "alembic upgrade head && uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload"]

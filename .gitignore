@@ -1,0 +1,41 @@
+# ---- Secrets: never commit ----
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+secrets/
+
+# ---- Python ----
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+coverage.xml
+htmlcov/
+
+# ---- Node / Next.js ----
+node_modules/
+.next/
+out/
+next-env.d.ts
+*.tsbuildinfo
+npm-debug.log*
+playwright-report/
+test-results/
+blob-report/
+playwright/.cache/
+
+# ---- Editors / OS ----
+.DS_Store
+.idea/
+*.swp
+
+# ---- Local data ----
+*.log
+*.sqlite3
