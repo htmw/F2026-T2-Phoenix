@@ -40,15 +40,16 @@ cp .env.example .env
 docker compose up --build
 ```
 
-That starts Postgres, Redis, the API, and the UI. Open **http://localhost:3000**.
-
-Optional provider keys (Claude, Kimi, OpenAI, Gemini, …) go in `.env` — see `.env.example`. Without keys, offline demo mode still works.
+That starts Postgres, Redis, the API, and the UI.
 
 | URL | What |
 |-----|------|
-| http://localhost:3000 | Agent Office UI |
+| http://localhost:3000 | Product site (story + agent visualization) |
+| http://localhost:3000/office | Workspace — run tasks with the agent roster |
 | http://localhost:8000/docs | API docs |
 | http://localhost:8000/healthz | Backend health |
+
+Optional provider keys (Claude, Kimi, OpenAI, Gemini, …) go in `.env` — see `.env.example`. Without keys, offline demo mode still works.
 
 Stop with `Ctrl+C`, or run detached with `docker compose up --build -d` and stop with `docker compose down`.
 

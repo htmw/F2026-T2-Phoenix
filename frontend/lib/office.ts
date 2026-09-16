@@ -69,7 +69,12 @@ export function modelIsExpensive(model: ModelView, freeOnly: boolean): boolean {
 }
 
 export function shortAgentName(agentId: string): string {
-  return agentId.replace(/-agent$/, "").replace(/-/g, " ");
+  return agentId
+    .replace(/-agent$/, "")
+    .split("-")
+    .filter(Boolean)
+    .map((part) => part.charAt(0).toUpperCase() + part.slice(1))
+    .join(" ");
 }
 
 export function messagePreview(content: Record<string, unknown>, fallback: string): string {

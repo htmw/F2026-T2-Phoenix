@@ -27,12 +27,12 @@ export function AppShell({
     <div className="app-shell">
       <header className="titlebar">
         <div className="brand-row">
-          <div className="brand-mark" aria-hidden />
+          <a href="/" className="brand-mark" aria-label="Agent Office marketing site" />
           <div className="brand-block">
             <h1 className="brand" data-testid="brand">
               Agent Office
             </h1>
-            <p className="tagline">Multi-lab AI desk — bring your keys, run the roster.</p>
+            <p className="tagline">Autonomous specialists. One brief. Clear results.</p>
           </div>
         </div>
         <nav className="tabs" aria-label="Office sections" data-testid="office-tabs">
@@ -49,6 +49,9 @@ export function AppShell({
           ))}
         </nav>
         <div className="header-meta">
+          <a href="/" className="px-btn ghost">
+            Overview
+          </a>
           <button type="button" className="px-btn primary" onClick={onNewTask}>
             New task
           </button>
