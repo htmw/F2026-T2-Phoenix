@@ -243,6 +243,60 @@ def test_synthesis_prefers_a_documentation_agent_and_lists_skips() -> None:
     }
 
 
+def test_synthesis_returns_full_answer_not_just_summary() -> None:
+    plan = WorkflowPlan(
+        nodes=(WorkflowNode(key="general", agent_id="general-agent", objective="Write code"),),
+        edges=(),
+    )
+    outputs = {
+        "general": AgentOutput(
+            agent_id="general-agent",
+            node_key="general",
+            status=ExecutionStatus.SUCCEEDED,
+            payload={
+                "summary": "Provided Python code.",
+                "answer": "```python\nprint(1)\n```",
+                "artifacts": [
+                    {"name": "main.py", "kind": "code", "content": "print(1)\n"},
+                ],
+            },
+            summary="Provided Python code.",
+        ),
+    }
+    result = synthesise(plan, outputs, {}, total_cost_usd=0.01)
+    assert "print(1)" in str(result["answer"])
+    assert result["answer"] != "Provided Python code."
+
+
+def test_synthesis_formats_coding_file_contents() -> None:
+    plan = WorkflowPlan(
+        nodes=(WorkflowNode(key="coding", agent_id="coding-agent", objective="Write file"),),
+        edges=(),
+    )
+    outputs = {
+        "coding": AgentOutput(
+            agent_id="coding-agent",
+            node_key="coding",
+            status=ExecutionStatus.SUCCEEDED,
+            payload={
+                "summary": "Created fibonacci.py",
+                "changes": [
+                    {
+                        "file": "fibonacci.py",
+                        "action": "create",
+                        "content": "def fib(n):\n    return n\n",
+                    }
+                ],
+            },
+            summary="Created fibonacci.py",
+        ),
+    }
+    result = synthesise(plan, outputs, {}, total_cost_usd=0.02)
+    answer = str(result["answer"])
+    assert "fibonacci.py" in answer
+    assert "def fib(n):" in answer
+
+
 # ---------------------------------------------------------------------------
 # HTTP
 # ---------------------------------------------------------------------------

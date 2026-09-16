@@ -6,16 +6,97 @@ import { ProviderIcon, providerIdFromModel } from "@/components/ProviderIcon";
 
 function resultText(workflow: WorkflowView): string | null {
   const result = workflow.final_result;
-  if (!result || Object.keys(result).length === 0) {
-    return null;
+  const fromNodes = workflow.nodes
+    .map((node) => nodeBody(node.result))
+    .filter((text): text is string => Boolean(text && text.trim()));
+
+  const richestNode = fromNodes.reduce<string | null>((best, text) => {
+    if (!best || text.length > best.length) {
+      return text;
+    }
+    return best;
+  }, null);
+
+  if (result && Object.keys(result).length > 0) {
+    if (typeof result.answer === "string" && result.answer.trim()) {
+      const answer = result.answer.trim();
+      // Prefer a fuller node deliverable when synthesis only kept a short summary label.
+      if (richestNode && richestNode.length > answer.length + 40) {
+        return richestNode;
+      }
+      return answer;
+    }
+    if (typeof result.summary === "string" && result.summary.trim()) {
+      return richestNode && richestNode.length > result.summary.length
+        ? richestNode
+        : result.summary;
+    }
   }
-  if (typeof result.answer === "string") {
-    return result.answer;
+
+  if (richestNode) {
+    return richestNode;
   }
-  if (typeof result.summary === "string") {
+  if (result && Object.keys(result).length > 0) {
+    return JSON.stringify(result, null, 2);
+  }
+  return null;
+}
+
+function nodeBody(result: Record<string, unknown>): string | null {
+  for (const key of ["answer", "document", "content", "code"] as const) {
+    const value = result[key];
+    if (typeof value === "string" && value.trim()) {
+      return value;
+    }
+  }
+
+  const changes = result.changes;
+  if (Array.isArray(changes) && changes.length > 0) {
+    const blocks: string[] = [];
+    for (const raw of changes) {
+      if (!raw || typeof raw !== "object") {
+        continue;
+      }
+      const change = raw as Record<string, unknown>;
+      const file = String(change.file ?? "file");
+      const content = typeof change.content === "string" ? change.content : null;
+      const diff = typeof change.diff === "string" ? change.diff : null;
+      if (content?.trim()) {
+        blocks.push(`### ${file}\n\n\`\`\`\n${content.trimEnd()}\n\`\`\``);
+      } else if (diff?.trim()) {
+        blocks.push(`### ${file}\n\n\`\`\`diff\n${diff.trimEnd()}\n\`\`\``);
+      }
+    }
+    if (blocks.length > 0) {
+      const summary = typeof result.summary === "string" ? result.summary.trim() : "";
+      return summary ? `${summary}\n\n${blocks.join("\n\n")}` : blocks.join("\n\n");
+    }
+  }
+
+  const artifacts = result.artifacts;
+  if (Array.isArray(artifacts) && artifacts.length > 0) {
+    const blocks: string[] = [];
+    for (const raw of artifacts) {
+      if (!raw || typeof raw !== "object") {
+        continue;
+      }
+      const artifact = raw as Record<string, unknown>;
+      const name = String(artifact.name ?? "artifact");
+      const content = typeof artifact.content === "string" ? artifact.content : null;
+      if (content?.trim()) {
+        blocks.push(`### ${name}\n\n\`\`\`\n${content.trimEnd()}\n\`\`\``);
+      }
+    }
+    if (blocks.length > 0) {
+      const summary = typeof result.summary === "string" ? result.summary.trim() : "";
+      return summary ? `${summary}\n\n${blocks.join("\n\n")}` : blocks.join("\n\n");
+    }
+  }
+
+  if (typeof result.summary === "string" && result.summary.trim()) {
     return result.summary;
   }
-  return JSON.stringify(result, null, 2);
+  return null;
 }
 
 export function ChatThread({
@@ -58,12 +139,7 @@ export function ChatThread({
 
       {workflow.nodes.map((node) => {
         const last = node.executions.at(-1);
-        const nodeAnswer =
-          typeof node.result.summary === "string"
-            ? node.result.summary
-            : typeof node.result.answer === "string"
-              ? node.result.answer
-              : null;
+        const nodeAnswer = nodeBody(node.result);
         return (
           <article className="chat-bubble agent" key={node.key}>
             <div className="chat-role">

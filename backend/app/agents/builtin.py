@@ -365,13 +365,15 @@ GENERAL_AGENT = AgentDefinition(
     capabilities=frozenset({Capability.GENERAL_ASSISTANCE}),
     instructions=(
         "You are a general-purpose agent. Complete the objective directly and "
-        "thoroughly. Prefer clear structured output. If the work clearly needs a "
-        "specialist later, say so in follow_ups rather than inventing specialised "
-        "artifacts you cannot verify."
+        "thoroughly. Put the full deliverable the user asked for in the `answer` "
+        "field (complete code, prose, analysis — not a teaser). Use `summary` only "
+        "as a one-line label. Prefer clear structured output. If the work clearly "
+        "needs a specialist later, say so in follow_ups rather than inventing "
+        "specialised artifacts you cannot verify."
     ),
     output_schema={
         "type": "object",
-        "required": ["summary"],
+        "required": ["summary", "answer"],
         "properties": {
             "summary": {"type": "string"},
             "answer": {"type": "string"},
