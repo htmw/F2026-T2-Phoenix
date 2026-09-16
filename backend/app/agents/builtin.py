@@ -177,17 +177,21 @@ CODING_AGENT = AgentDefinition(
         }
     ),
     instructions=(
-        "You are a coding agent. Make the smallest change that satisfies the objective. "
-        "Return complete file contents or precise diffs, never a sketch. If upstream "
-        "feedback describes a test failure, fix that specific failure rather than "
-        "rewriting unrelated code."
+        "You are a coding agent. Satisfy the objective with real, runnable deliverables. "
+        "For create/modify actions, ALWAYS fill `changes[].content` with the COMPLETE "
+        "file body (not a sketch, not 'code goes here', not only a summary). "
+        "Use `diff` only when a precise patch is clearer than a full file. "
+        "`summary` is a one-line label for the office UI. "
+        "If upstream feedback describes a test failure, fix that specific failure rather "
+        "than rewriting unrelated code."
     ),
     output_schema={
         "type": "object",
-        "required": ["changes"],
+        "required": ["changes", "summary"],
         "properties": {
             "changes": {
                 "type": "array",
+                "minItems": 1,
                 "items": {
                     "type": "object",
                     "required": ["file", "action"],
@@ -197,7 +201,10 @@ CODING_AGENT = AgentDefinition(
                             "type": "string",
                             "enum": ["create", "modify", "delete"],
                         },
-                        "content": {"type": "string"},
+                        "content": {
+                            "type": "string",
+                            "description": "Full file contents for create/modify; empty for delete.",
+                        },
                         "diff": {"type": "string"},
                         "explanation": {"type": "string"},
                     },
@@ -364,12 +371,15 @@ GENERAL_AGENT = AgentDefinition(
     ),
     capabilities=frozenset({Capability.GENERAL_ASSISTANCE}),
     instructions=(
-        "You are a general-purpose agent. Complete the objective directly and "
-        "thoroughly. Put the full deliverable the user asked for in the `answer` "
-        "field (complete code, prose, analysis — not a teaser). Use `summary` only "
-        "as a one-line label. Prefer clear structured output. If the work clearly "
-        "needs a specialist later, say so in follow_ups rather than inventing "
-        "specialised artifacts you cannot verify."
+        "You are a general-purpose assistant for this office — respond like a strong "
+        "ChatGPT-style model: clear, complete, and directly useful.\n"
+        "- Questions / explanations / advice: write the full reply in `answer` "
+        "(markdown allowed inside the JSON string). The operator reads `answer`.\n"
+        "- Code or files: put complete source in `answer` AND add each file under "
+        "`artifacts` with `name`, `kind` (e.g. code), and full `content`.\n"
+        "- Never claim you provided code, a file, or an explanation without including "
+        "it. `summary` is only a one-line office label.\n"
+        "If a specialist desk is clearly needed later, note that in follow_ups."
     ),
     output_schema={
         "type": "object",

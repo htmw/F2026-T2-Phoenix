@@ -93,6 +93,20 @@ async def test_unclassifiable_request_still_gets_a_capability() -> None:
     assert Capability.GENERAL_ASSISTANCE in result.required
 
 
+async def test_write_python_routes_to_code_generation() -> None:
+    result = await analyse("Write Python that prints the first 10 Fibonacci numbers")
+
+    assert Capability.CODE_GENERATION in result.required
+    assert Capability.GENERAL_ASSISTANCE not in result.required
+
+
+async def test_general_question_stays_on_general_desk() -> None:
+    result = await analyse("What is the difference between TCP and UDP?")
+
+    assert Capability.GENERAL_ASSISTANCE in result.required
+    assert Capability.CODE_GENERATION not in result.required
+
+
 async def test_analysis_explains_itself() -> None:
     result = await analyse("Find security vulnerabilities in this code")
 
