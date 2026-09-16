@@ -747,3 +747,70 @@ class QwenProvider(OpenAICompatibleProvider):
             typical_latency_ms=1_000,
         ),
     )
+
+
+class HuggingFaceProvider(OpenAICompatibleProvider):
+    """Hugging Face Inference Providers (OpenAI-compatible router).
+
+    Uses a Hub user access token with Inference Providers permission.
+    Model ids are Hub repo ids (optionally ``:fastest`` / ``:cheapest``).
+    """
+
+    name = "huggingface"
+    base_url = "https://router.huggingface.co/v1"
+    models = (
+        ModelSpec(
+            id="huggingface:meta-llama/Llama-3.1-8B-Instruct",
+            provider="huggingface",
+            model_name="meta-llama/Llama-3.1-8B-Instruct",
+            traits=frozenset(
+                {
+                    ModelTrait.FAST,
+                    ModelTrait.CHEAP,
+                    ModelTrait.CODING,
+                    ModelTrait.STRUCTURED_OUTPUT,
+                }
+            ),
+            context_tokens=128_000,
+            max_output_tokens=8_192,
+            input_cost_per_million=0.06,
+            output_cost_per_million=0.06,
+            typical_latency_ms=800,
+        ),
+        ModelSpec(
+            id="huggingface:Qwen/Qwen2.5-72B-Instruct",
+            provider="huggingface",
+            model_name="Qwen/Qwen2.5-72B-Instruct",
+            traits=frozenset(
+                {
+                    ModelTrait.REASONING,
+                    ModelTrait.CODING,
+                    ModelTrait.LONG_CONTEXT,
+                    ModelTrait.STRUCTURED_OUTPUT,
+                }
+            ),
+            context_tokens=131_072,
+            max_output_tokens=16_384,
+            input_cost_per_million=0.35,
+            output_cost_per_million=0.40,
+            typical_latency_ms=2_000,
+        ),
+        ModelSpec(
+            id="huggingface:deepseek-ai/DeepSeek-V3-0324",
+            provider="huggingface",
+            model_name="deepseek-ai/DeepSeek-V3-0324",
+            traits=frozenset(
+                {
+                    ModelTrait.REASONING,
+                    ModelTrait.CODING,
+                    ModelTrait.CHEAP,
+                    ModelTrait.STRUCTURED_OUTPUT,
+                }
+            ),
+            context_tokens=128_000,
+            max_output_tokens=16_384,
+            input_cost_per_million=0.27,
+            output_cost_per_million=1.10,
+            typical_latency_ms=2_500,
+        ),
+    )

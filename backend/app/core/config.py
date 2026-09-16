@@ -13,7 +13,7 @@ from __future__ import annotations
 from functools import lru_cache
 from typing import Annotated, Literal
 
-from pydantic import Field, SecretStr, field_validator, model_validator
+from pydantic import AliasChoices, Field, SecretStr, field_validator, model_validator
 from pydantic_settings import BaseSettings, NoDecode, SettingsConfigDict
 
 Environment = Literal["development", "test", "staging", "production"]
@@ -108,6 +108,11 @@ class Settings(BaseSettings):
     perplexity_api_key: SecretStr | None = None
     together_api_key: SecretStr | None = None
     qwen_api_key: SecretStr | None = None
+    # Accept HF_TOKEN (Hub default) or HUGGINGFACE_API_KEY.
+    huggingface_api_key: SecretStr | None = Field(
+        default=None,
+        validation_alias=AliasChoices("HUGGINGFACE_API_KEY", "HF_TOKEN", "huggingface_api_key"),
+    )
 
     # Symmetric key for encrypting Settings-managed provider credentials at rest.
     # Required in production. Development falls back to a derived key (see service).
@@ -182,6 +187,13 @@ class Settings(BaseSettings):
             "deepseek": self.deepseek_api_key,
             "mistral": self.mistral_api_key,
             "openrouter": self.openrouter_api_key,
+            "groq": self.groq_api_key,
+            "moonshot": self.moonshot_api_key,
+            "cohere": self.cohere_api_key,
+            "perplexity": self.perplexity_api_key,
+            "together": self.together_api_key,
+            "qwen": self.qwen_api_key,
+            "huggingface": self.huggingface_api_key,
         }
         return sorted(name for name, key in candidates.items() if key and key.get_secret_value())
 

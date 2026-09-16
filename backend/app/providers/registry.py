@@ -25,6 +25,7 @@ from app.providers.openai_compatible import (
     DeepSeekProvider,
     GeminiProvider,
     GroqProvider,
+    HuggingFaceProvider,
     MistralProvider,
     MoonshotProvider,
     OpenAIProvider,
@@ -283,6 +284,7 @@ def build_provider_registry(
         QwenProvider(resolve("qwen", settings.qwen_api_key)),
         OpenRouterProvider(resolve("openrouter", settings.openrouter_api_key)),
         GroqProvider(resolve("groq", settings.groq_api_key)),
+        HuggingFaceProvider(resolve("huggingface", settings.huggingface_api_key)),
     ]
 
     configured = [provider for provider in candidates if provider.is_configured()]

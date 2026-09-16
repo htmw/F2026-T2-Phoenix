@@ -16,6 +16,7 @@ const LOGO_IDS = new Set([
   "together",
   "qwen",
   "openrouter",
+  "huggingface",
   "fake",
 ]);
 

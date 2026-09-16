@@ -151,9 +151,16 @@ ExecutorDep = Annotated[AgentExecutor, Depends(get_executor)]
 
 
 def get_single_agent_service(
-    registry: RegistryDep, executor: ExecutorDep, repository: RepositoryDep
+    registry: RegistryDep,
+    executor: ExecutorDep,
+    repository: RepositoryDep,
+    session: SessionDep,
 ) -> SingleAgentService:
-    return SingleAgentService(registry, executor, repository)
+    from app.messaging.store import PresenceService
+
+    return SingleAgentService(
+        registry, executor, repository, presence=PresenceService(session)
+    )
 
 
 SingleAgentServiceDep = Annotated[SingleAgentService, Depends(get_single_agent_service)]

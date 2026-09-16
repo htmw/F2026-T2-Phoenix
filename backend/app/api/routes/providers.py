@@ -23,6 +23,7 @@ from app.providers.openai_compatible import (
     DeepSeekProvider,
     GeminiProvider,
     GroqProvider,
+    HuggingFaceProvider,
     MistralProvider,
     MoonshotProvider,
     OpenAIProvider,
@@ -58,6 +59,7 @@ _CATALOGUE_MODELS: dict[str, tuple] = {
     "together": TogetherProvider.models,
     "qwen": QwenProvider.models,
     "openrouter": OpenRouterProvider.models,
+    "huggingface": HuggingFaceProvider.models,
 }
 
 

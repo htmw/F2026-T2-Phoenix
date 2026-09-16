@@ -114,6 +114,14 @@ export const PROVIDER_META: Record<string, ProviderMeta> = {
     modelsHint: "Multi-provider gateway",
     accent: "#a78bfa",
   },
+  huggingface: {
+    id: "huggingface",
+    brand: "Hugging Face",
+    blurb: "Inference Providers router — open models via a Hub token.",
+    tier: "freemium",
+    modelsHint: "Llama · Qwen · DeepSeek",
+    accent: "#ffd21e",
+  },
   fake: {
     id: "fake",
     brand: "Offline demo",

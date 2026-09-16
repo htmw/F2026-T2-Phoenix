@@ -17,6 +17,7 @@ from app.providers.openai_compatible import (
     DeepSeekProvider,
     GeminiProvider,
     GroqProvider,
+    HuggingFaceProvider,
     MistralProvider,
     MoonshotProvider,
     OpenAIProvider,
@@ -54,6 +55,7 @@ PROVIDER_CATALOG: tuple[ProviderCatalogEntry, ...] = (
     ProviderCatalogEntry("together", "Together AI"),
     ProviderCatalogEntry("qwen", "Qwen (Alibaba)"),
     ProviderCatalogEntry("openrouter", "OpenRouter"),
+    ProviderCatalogEntry("huggingface", "Hugging Face"),
 )
 
 _PROVIDER_LABELS = {entry.id: entry.label for entry in PROVIDER_CATALOG}
@@ -79,6 +81,7 @@ def env_key_for(settings: Settings, provider_id: str) -> str | None:
         "perplexity": settings.perplexity_api_key,
         "together": settings.together_api_key,
         "qwen": settings.qwen_api_key,
+        "huggingface": settings.huggingface_api_key,
     }
     secret = mapping.get(provider_id)
     if secret is None:
@@ -101,6 +104,7 @@ def make_provider(provider_id: str, api_key: str) -> LLMProvider:
         "perplexity": PerplexityProvider,
         "together": TogetherProvider,
         "qwen": QwenProvider,
+        "huggingface": HuggingFaceProvider,
     }
     factory = factories.get(provider_id)
     if factory is None:

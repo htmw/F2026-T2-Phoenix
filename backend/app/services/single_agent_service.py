@@ -12,8 +12,14 @@ from dataclasses import dataclass
 
 from app.agents.registry import AgentRegistry
 from app.core.logging import get_logger
-from app.domain.enums import DecisionKind, NodeStatus, TaskStatus, WorkflowStatus
-from app.messaging.store import DecisionService
+from app.domain.enums import (
+    AgentRuntimeStatus,
+    DecisionKind,
+    NodeStatus,
+    TaskStatus,
+    WorkflowStatus,
+)
+from app.messaging.store import DecisionService, PresenceService
 from app.models.workflow import WorkflowRecord
 from app.schemas.execution import AgentInput, AgentOutput
 from app.schemas.memory import DecisionCreate
@@ -36,10 +42,12 @@ class SingleAgentService:
         registry: AgentRegistry,
         executor: AgentExecutor,
         repository: WorkflowRepository,
+        presence: PresenceService | None = None,
     ) -> None:
         self._registry = registry
         self._executor = executor
         self._repository = repository
+        self._presence = presence
 
     async def run(
         self, agent_id: str, request: TaskRequest, *, owner_id: str = "operator"
@@ -63,6 +71,13 @@ class SingleAgentService:
         await self._repository.start_workflow(workflow.id)
         await self._repository.set_task_status(task.id, TaskStatus.RUNNING)
         await self._repository.set_node_status(workflow.id, "main", NodeStatus.RUNNING)
+        if self._presence is not None:
+            await self._presence.set(
+                agent.id,
+                AgentRuntimeStatus.WORKING,
+                current_task=request.request,
+                detail="running main",
+            )
 
         output = await self._executor.execute(
             agent,
@@ -117,6 +132,10 @@ class SingleAgentService:
                 workflow.id, WorkflowStatus.COMPLETED, final_result=output.payload
             )
             await self._repository.set_task_status(task.id, TaskStatus.COMPLETED)
+            if self._presence is not None:
+                await self._presence.set(
+                    agent.id, AgentRuntimeStatus.IDLE, detail="completed"
+                )
         else:
             # A single-node workflow has nowhere to recover to, so a failed attempt ends
             # the workflow. Retries and alternative routing arrive with the engine.
@@ -127,6 +146,12 @@ class SingleAgentService:
                 error=output.error.message if output.error else "agent failed",
             )
             await self._repository.set_task_status(task.id, TaskStatus.FAILED)
+            if self._presence is not None:
+                await self._presence.set(
+                    agent.id,
+                    AgentRuntimeStatus.FAILED,
+                    detail=output.error.message if output.error else "failed",
+                )
 
         logger.info(
             "single_agent_run_finished",

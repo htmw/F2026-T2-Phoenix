@@ -43,6 +43,7 @@ async def test_list_providers_includes_disconnected_catalogue(
         "together",
         "qwen",
         "openrouter",
+        "huggingface",
     } <= names
     openai = next(item for item in body if item["name"] == "openai")
     assert openai["configured"] is False

@@ -112,11 +112,12 @@ export function ChatThread({
     return (
       <div className="chat-thread empty">
         <div className="empty-state">
-          <div className="empty-orb" aria-hidden />
-          <h3>Start a conversation</h3>
+          <div className={`empty-orb${busy ? " loading" : ""}`} aria-hidden />
+          <h3>{busy ? "Starting…" : "Start a conversation"}</h3>
           <p>
-            Describe a task below. Specialists plan, collaborate across models, and stream the
-            answer here.
+            {busy
+              ? "Assigning specialists and opening the thread."
+              : "Describe a task below. Specialists plan, collaborate across models, and stream the answer here."}
           </p>
         </div>
       </div>

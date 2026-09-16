@@ -111,7 +111,14 @@ class AgentExecutor:
             last_error = annotated
             if not _can_fallback(annotated):
                 return annotated
-            skipped_providers.add(provider.name)
+            # Provider-wide failures skip every remaining model on that adapter.
+            # Model-specific failures (404, per-model quota, bad output) try the next
+            # ranked model — often another id on the same vendor.
+            if annotated.error is not None and annotated.error.kind in {
+                ErrorKind.AUTHENTICATION,
+                ErrorKind.PROVIDER_UNAVAILABLE,
+            }:
+                skipped_providers.add(provider.name)
             nxt = next(
                 (
                     item
@@ -364,18 +371,18 @@ class AgentExecutor:
 
 
 def _can_fallback(output: AgentOutput) -> bool:
-    """Whether another *provider* might succeed where this one did not.
+    """Whether another ranked model might succeed where this one did not.
 
-    Authentication and malformed requests will fail the same way on every vendor of a
-    given key. Unavailability, timeouts, and rate limits are properties of one vendor,
-    so remaining models on that same adapter are skipped.
+    Hard stops: authentication (same key fails across that vendor's catalogue) and
+    budget / cancel. Everything else — including model-not-found 404s, per-model rate
+    limits, and invalid output — can try the next candidate.
     """
     if output.error is None:
         return False
-    return output.error.kind in {
-        ErrorKind.PROVIDER_UNAVAILABLE,
-        ErrorKind.TIMEOUT,
-        ErrorKind.RATE_LIMITED,
+    return output.error.kind not in {
+        ErrorKind.AUTHENTICATION,
+        ErrorKind.BUDGET_EXCEEDED,
+        ErrorKind.CANCELLED,
     }
 
 
