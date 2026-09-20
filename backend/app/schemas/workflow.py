@@ -40,6 +40,10 @@ class TaskRequest(BaseModel):
     routing_strategy: RoutingStrategy = RoutingStrategy.AUTO
     shared_model: str | None = Field(default=None, max_length=128)
     model_overrides: dict[str, str] = Field(default_factory=dict)
+    #: When set, this run continues a conversation: the prior workflow's result is
+    #: threaded into the new plan as context so agents build on it instead of starting
+    #: over. A missing or unowned parent is ignored (the run proceeds as a fresh task).
+    parent_workflow_id: uuid.UUID | None = None
 
     @model_validator(mode="after")
     def _validate_overrides(self) -> TaskRequest:

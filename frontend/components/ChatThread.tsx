@@ -99,46 +99,30 @@ function nodeBody(result: Record<string, unknown>): string | null {
   return null;
 }
 
-export function ChatThread({
-  workflow,
+function TurnView({
+  turn,
+  active,
   busy,
-  onOpenWork,
 }: {
-  workflow: WorkflowView | null;
+  turn: WorkflowView;
+  active: boolean;
   busy: boolean;
-  onOpenWork: () => void;
 }) {
-  if (!workflow) {
-    return (
-      <div className="chat-thread empty">
-        <div className="empty-state">
-          <div className={`empty-orb${busy ? " loading" : ""}`} aria-hidden />
-          <h3>{busy ? "Starting…" : "Start a conversation"}</h3>
-          <p>
-            {busy
-              ? "Assigning specialists and opening the thread."
-              : "Describe a task below. Specialists plan, collaborate across models, and stream the answer here."}
-          </p>
-        </div>
-      </div>
-    );
-  }
-
-  const answer = resultText(workflow);
+  const answer = resultText(turn);
   const live =
-    workflow.status === "running" ||
-    workflow.status === "pending" ||
-    workflow.status === "awaiting_approval";
+    turn.status === "running" ||
+    turn.status === "pending" ||
+    turn.status === "awaiting_approval";
 
   return (
-    <div className="chat-thread">
+    <>
       <article className="chat-bubble user">
         <div className="chat-role">You</div>
-        <div className="chat-body">{workflow.request}</div>
-        <div className="meta">{formatWhen(workflow.created_at)}</div>
+        <div className="chat-body">{turn.request}</div>
+        <div className="meta">{formatWhen(turn.created_at)}</div>
       </article>
 
-      {workflow.nodes.map((node) => {
+      {turn.nodes.map((node) => {
         const last = node.executions.at(-1);
         const nodeAnswer = nodeBody(node.result);
         return (
@@ -150,9 +134,9 @@ export function ChatThread({
               </span>
             </div>
             <div className="chat-body">
-              {node.status === "failed" && (node.executions.at(-1)?.error_message || workflow.error) && (
+              {node.status === "failed" && (node.executions.at(-1)?.error_message || turn.error) && (
                 <p className="banner-err" style={{ marginBottom: 8 }}>
-                  {last?.error_message || workflow.error}
+                  {last?.error_message || turn.error}
                 </p>
               )}
               {nodeAnswer ||
@@ -175,7 +159,7 @@ export function ChatThread({
         );
       })}
 
-      {(live || busy) && (
+      {active && (live || busy) && (
         <article className="chat-bubble agent thinking">
           <div className="chat-role">Office</div>
           <div className="chat-body">
@@ -184,19 +168,60 @@ export function ChatThread({
         </article>
       )}
 
-      {workflow.status === "completed" && answer && (
+      {turn.status === "completed" && answer && (
         <article className="chat-bubble agent result">
           <div className="chat-role">Result</div>
           <pre className="chat-body answer">{answer}</pre>
         </article>
       )}
 
-      {workflow.status === "failed" && workflow.error && workflow.nodes.length === 0 && (
+      {turn.status === "failed" && turn.error && turn.nodes.length === 0 && (
         <article className="chat-bubble agent">
           <div className="chat-role">Office</div>
-          <p className="banner-err">{workflow.error}</p>
+          <p className="banner-err">{turn.error}</p>
         </article>
       )}
+    </>
+  );
+}
+
+export function ChatThread({
+  workflow,
+  history = [],
+  busy,
+  onOpenWork,
+}: {
+  workflow: WorkflowView | null;
+  history?: WorkflowView[];
+  busy: boolean;
+  onOpenWork: () => void;
+}) {
+  if (!workflow && history.length === 0) {
+    return (
+      <div className="chat-thread empty">
+        <div className="empty-state">
+          <div className={`empty-orb${busy ? " loading" : ""}`} aria-hidden />
+          <h3>{busy ? "Starting…" : "Start a conversation"}</h3>
+          <p>
+            {busy
+              ? "Assigning specialists and opening the thread."
+              : "Describe a task below. Specialists plan, collaborate across models, and stream the answer here."}
+          </p>
+        </div>
+      </div>
+    );
+  }
+
+  // Prior turns first, then the active one. Each turn keeps its own request and result,
+  // so a follow-up reads as a continuation rather than a fresh thread.
+  const turns = [...history, ...(workflow ? [workflow] : [])];
+  const activeId = workflow?.id ?? null;
+
+  return (
+    <div className="chat-thread">
+      {turns.map((turn) => (
+        <TurnView key={turn.id} turn={turn} active={turn.id === activeId} busy={busy} />
+      ))}
 
       <div className="chat-thread-actions">
         <button type="button" className="px-btn ghost" onClick={onOpenWork}>

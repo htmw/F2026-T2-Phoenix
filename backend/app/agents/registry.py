@@ -87,6 +87,37 @@ class InMemoryAgentRegistry:
         }
 
 
+class OverlayAgentRegistry:
+    """A base registry with a per-run overlay of ephemeral agents.
+
+    Generative teams are designed on the fly and must not be persisted into the shared
+    registry: they are specific to one run, and writing them as rows would pollute
+    selection and the office roster. ``get`` resolves the overlay first, so the engine
+    can execute a generated agent by id, while capability queries and listings delegate
+    to the base — an ephemeral agent is run because the plan names it, never selected.
+    """
+
+    def __init__(self, base: AgentRegistry, overlay: dict[str, AgentDefinition]) -> None:
+        self._base = base
+        self._overlay = dict(overlay)
+
+    async def get(self, agent_id: str) -> AgentDefinition:
+        if agent_id in self._overlay:
+            return self._overlay[agent_id]
+        return await self._base.get(agent_id)
+
+    async def list_all(self, *, include_disabled: bool = False) -> list[AgentDefinition]:
+        return await self._base.list_all(include_disabled=include_disabled)
+
+    async def find_by_capability(self, capability: Capability) -> list[AgentDefinition]:
+        return await self._base.find_by_capability(capability)
+
+    async def find_by_capabilities(
+        self, capabilities: set[Capability]
+    ) -> dict[Capability, list[AgentDefinition]]:
+        return await self._base.find_by_capabilities(capabilities)
+
+
 class DatabaseAgentRegistry:
     """Registry backed by the ``agents`` table.
 

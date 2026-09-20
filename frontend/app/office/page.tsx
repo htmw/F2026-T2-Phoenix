@@ -23,6 +23,7 @@ import {
   getOperatorId,
   getOperatorLimits,
   getRoutingPolicy,
+  getThread,
   getWorkflow,
   listAgents,
   listArtifacts,
@@ -31,6 +32,7 @@ import {
   refreshProviderModels,
   setAgentModelBinding,
   setOperatorId,
+  submitGenerativeTask,
   submitTask,
   testProvider,
   updateRoutingPolicy,
@@ -74,6 +76,9 @@ export default function HomePage() {
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [workflow, setWorkflow] = useState<WorkflowView | null>(null);
+  // Completed earlier turns of the active conversation, oldest first. The active turn
+  // stays in `workflow`; these render above it so a follow-up reads as one thread.
+  const [threadHistory, setThreadHistory] = useState<WorkflowView[]>([]);
   const [agents, setAgents] = useState<AgentSummary[]>([]);
   const [providers, setProviders] = useState<ProviderStatus[]>([]);
   const [pickAgents, setPickAgents] = useState(false);
@@ -99,6 +104,9 @@ export default function HomePage() {
   const [showMsgDev, setShowMsgDev] = useState(false);
   const [conversations, setConversations] = useState<WorkflowView[]>([]);
   const [composerMode, setComposerMode] = useState<"new" | "followup">("new");
+  // Level 3: design a bespoke team of specialists for the request instead of routing to
+  // the fixed roster. Runs synchronously and is standalone (not part of a chat thread).
+  const [generative, setGenerative] = useState(false);
 
 
   useEffect(() => {
@@ -259,12 +267,12 @@ export default function HomePage() {
       return model.output_cost_per_million > cheap && model.output_cost_per_million > 0;
     };
     if (routingStrategy === "one" && sharedModel && isCostly(sharedModel)) {
-      return "Free Only is on — the selected model is not the cheapest available. Choose Auto or a cheaper model in Advanced.";
+      return "Free Only is on, the selected model is not the cheapest available. Choose Auto or a cheaper model in Advanced.";
     }
     if (routingStrategy === "mixed") {
       const costly = Object.values(modelOverrides).some((id) => isCostly(id));
       if (costly) {
-        return "Free Only is on — a pinned model is more expensive than necessary. Switch to Auto or cheaper models.";
+        return "Free Only is on, a pinned model is more expensive than necessary. Switch to Auto or cheaper models.";
       }
     }
     return null;
@@ -277,6 +285,23 @@ export default function HomePage() {
     setError(null);
     setBusy(true);
     try {
+      if (generative) {
+        // Design-a-team mode: no roster/routing choices apply; it runs synchronously and
+        // returns a finished workflow, so there is nothing to poll.
+        const budget = maxCost.trim() === "" ? null : Number(maxCost);
+        if (budget !== null && (!Number.isFinite(budget) || budget <= 0)) {
+          throw new Error("Budget must be a positive number.");
+        }
+        const created = await submitGenerativeTask({ request: request.trim(), max_cost_usd: budget });
+        setThreadHistory([]);
+        setWorkflow(created);
+        setComposerMode("followup");
+        setRequest("");
+        setTab("home");
+        void refreshOffice();
+        void refreshConversations();
+        return;
+      }
       if (pickAgents && selectedAgents.length === 0) {
         throw new Error("Select at least one agent, or turn off Pick agents.");
       }
@@ -303,6 +328,9 @@ export default function HomePage() {
       if (routingStrategy === "one" && !sharedModel) {
         throw new Error("One-model routing needs a shared model.");
       }
+      // A follow-up continues the active turn: link to it so the backend threads its
+      // result into the new plan, and move it into the visible history.
+      const parentWorkflow = composerMode === "followup" ? workflow : null;
       const created = await submitTask({
         request: request.trim(),
         max_cost_usd: parsedCost,
@@ -311,7 +339,9 @@ export default function HomePage() {
         routing_strategy: routingStrategy,
         shared_model: routingStrategy === "one" ? sharedModel : null,
         model_overrides: routingStrategy === "mixed" ? overrides : {},
+        parent_workflow_id: parentWorkflow ? parentWorkflow.id : null,
       });
+      setThreadHistory((history) => (parentWorkflow ? [...history, parentWorkflow] : history));
       setWorkflow(created);
       setComposerMode("followup");
       setRequest("");
@@ -447,6 +477,7 @@ export default function HomePage() {
 
   const startNewChat = () => {
     setWorkflow(null);
+    setThreadHistory([]);
     setRequest("");
     setComposerMode("new");
     setAdvancedComposer(false);
@@ -456,8 +487,17 @@ export default function HomePage() {
   const openConversation = async (id: string) => {
     setError(null);
     try {
-      const full = await getWorkflow(id);
-      setWorkflow(full);
+      // Load the whole conversation (this turn and its ancestors) so a reopened chat
+      // shows its full history, not just the last turn.
+      const turns = await getThread(id);
+      const last = turns.at(-1);
+      if (last) {
+        setThreadHistory(turns.slice(0, -1));
+        setWorkflow(last);
+      } else {
+        setThreadHistory([]);
+        setWorkflow(await getWorkflow(id));
+      }
       setComposerMode("followup");
       setRequest("");
       setTab("home");
@@ -505,9 +545,21 @@ export default function HomePage() {
           <div className="chat-main">
             <ChatThread
               workflow={workflow}
+              history={threadHistory}
               busy={busy}
               onOpenWork={() => setTab("work")}
             />
+            <label
+              className="muted"
+              style={{ display: "flex", alignItems: "center", gap: 8, padding: "4px 12px", cursor: "pointer" }}
+            >
+              <input
+                type="checkbox"
+                checked={generative}
+                onChange={(event) => setGenerative(event.target.checked)}
+              />
+              Design a bespoke team for this task (beta), spawns up to 4 specialists on the cheapest model
+            </label>
             <TaskComposer
               compact={composerMode === "followup" || !!workflow}
               request={request}

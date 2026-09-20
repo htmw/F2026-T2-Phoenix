@@ -10,7 +10,7 @@ from __future__ import annotations
 
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from app.agents.registry import DatabaseAgentRegistry
+from app.agents.registry import DatabaseAgentRegistry, OverlayAgentRegistry
 from app.core.config import Settings
 from app.orchestration.capability_analysis import (
     CapabilityAnalyser,
@@ -20,6 +20,7 @@ from app.orchestration.capability_analysis import (
 from app.orchestration.planner import WorkflowPlanner
 from app.orchestration.selection import AgentSelector
 from app.providers.registry import ProviderRegistry
+from app.schemas.agent import AgentDefinition
 from app.services.agent_executor import AgentExecutor
 from app.services.collaboration import Collaboration
 from app.services.orchestration_service import OrchestrationService
@@ -44,6 +45,28 @@ def build_engine(
     session: AsyncSession, providers: ProviderRegistry, settings: Settings
 ) -> WorkflowEngine:
     registry = DatabaseAgentRegistry(session)
+    return WorkflowEngine(
+        registry,
+        AgentExecutor(providers),
+        WorkflowRepository(session),
+        collaboration=Collaboration(session, registry, providers=providers),
+        max_parallel_agents=settings.max_parallel_agents,
+        max_repair_cycles=settings.max_repair_cycles,
+    )
+
+
+def build_generative_engine(
+    session: AsyncSession,
+    providers: ProviderRegistry,
+    settings: Settings,
+    ephemeral: dict[str, AgentDefinition],
+) -> WorkflowEngine:
+    """An engine whose registry resolves this run's generated agents by id.
+
+    Same wiring as ``build_engine``, but over an overlay registry so the ephemeral team
+    is executable without being persisted into the shared ``agents`` table.
+    """
+    registry = OverlayAgentRegistry(DatabaseAgentRegistry(session), ephemeral)
     return WorkflowEngine(
         registry,
         AgentExecutor(providers),

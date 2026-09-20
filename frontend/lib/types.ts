@@ -65,6 +65,7 @@ export type WorkflowView = {
   status: WorkflowStatus;
   request: string;
   owner_id?: string;
+  parent_workflow_id?: string | null;
   nodes: NodeView[];
   edges: EdgeView[];
   selection: Record<string, unknown>;

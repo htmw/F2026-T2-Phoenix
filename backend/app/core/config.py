@@ -82,6 +82,15 @@ class Settings(BaseSettings):
     # and a testing agent can disagree indefinitely, and each round costs money.
     max_repair_cycles: int = Field(default=1, ge=0, le=5)
 
+    # ---- Generative teams (Level 3) ----
+    # A meta-planner designs a bespoke team of specialist agents per request. Hard cap on
+    # team size keeps a generated plan from spawning an unbounded, unaffordable roster.
+    generative_max_agents: int = Field(default=4, ge=2, le=4)
+    # Per-run spend ceiling for a generative task when the caller sets none. The engine
+    # enforces it as the workflow budget, and each agent gets an equal slice as its own
+    # hard cap, so cost is bounded by construction.
+    generative_default_budget_usd: float = Field(default=0.50, gt=0, le=100.0)
+
     # ---- HTTP ----
     # NoDecode disables pydantic-settings' automatic JSON decoding of complex types.
     # Without it, a plain `CORS_ALLOW_ORIGINS=http://localhost:3000` is rejected as

@@ -71,6 +71,8 @@ class WorkflowView(BaseModel):
     status: WorkflowStatus
     request: str = ""
     owner_id: str = "operator"
+    #: The prior turn when this workflow continues a conversation; null for the root.
+    parent_workflow_id: uuid.UUID | None = None
     nodes: list[NodeView]
     edges: list[EdgeView] = Field(default_factory=list)
     selection: dict[str, object] = Field(default_factory=dict)
@@ -131,6 +133,7 @@ class WorkflowView(BaseModel):
             status=WorkflowStatus(record.status),
             request=record.task.request if record.task is not None else "",
             owner_id=record.owner_id,
+            parent_workflow_id=record.parent_workflow_id,
             nodes=nodes,
             edges=[
                 EdgeView(

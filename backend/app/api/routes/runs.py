@@ -107,6 +107,27 @@ async def get_workflow(
     return WorkflowView.from_record(record)
 
 
+@router.get(
+    "/workflows/{workflow_id}/thread",
+    response_model=list[WorkflowView],
+    summary="Get every turn in a workflow's conversation, oldest first",
+)
+async def get_thread(
+    workflow_id: uuid.UUID, repository: RepositoryDep, operator: OperatorDep
+) -> list[WorkflowView]:
+    """Walk the ``parent_workflow_id`` chain so a client can render a whole conversation.
+
+    Scoped to the calling operator; a turn owned by someone else simply ends the chain.
+    """
+    try:
+        records = await repository.load_thread(workflow_id, owner_id=operator.id)
+    except WorkflowNotFoundError:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND, detail=f"workflow '{workflow_id}' not found"
+        ) from None
+    return [WorkflowView.from_record(record, include_executions=False) for record in records]
+
+
 @router.post(
     "/workflows/{workflow_id}/cancel",
     response_model=WorkflowView,

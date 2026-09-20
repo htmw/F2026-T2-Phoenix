@@ -91,18 +91,26 @@ class WorkflowRepository:
     # ---- workflows ---------------------------------------------------------
 
     async def create_workflow(
-        self, task_id: uuid.UUID, plan: WorkflowPlan, *, owner_id: str = "operator"
+        self,
+        task_id: uuid.UUID,
+        plan: WorkflowPlan,
+        *,
+        owner_id: str = "operator",
+        parent_workflow_id: uuid.UUID | None = None,
     ) -> WorkflowRecord:
         """Persist a plan as a workflow graph.
 
         Nodes and edges are written together with the workflow so a caller can never
-        observe a workflow whose graph is half-written.
+        observe a workflow whose graph is half-written. ``parent_workflow_id`` links a
+        follow-up turn to its predecessor; the caller must have already verified it
+        exists, because the foreign key would otherwise reject the insert.
         """
         workflow = WorkflowRecord(
             task_id=task_id,
             status=WorkflowStatus.PENDING,
             selection=plan.selection.model_dump(mode="json") if plan.selection else {},
             owner_id=owner_id,
+            parent_workflow_id=parent_workflow_id,
         )
         self._session.add(workflow)
         await self._session.flush()
@@ -173,6 +181,25 @@ class WorkflowRepository:
             statement = statement.where(WorkflowRecord.owner_id == owner_id)
         result = await self._session.execute(statement)
         return list(result.scalars())
+
+    async def load_thread(
+        self, workflow_id: uuid.UUID, *, owner_id: str | None = None
+    ) -> list[WorkflowRecord]:
+        """Every turn in a conversation, oldest (root) first.
+
+        Walks the ``parent_workflow_id`` chain up from the given workflow. A ``seen``
+        guard makes a corrupted self-referential cycle terminate rather than loop.
+        """
+        chain: list[WorkflowRecord] = []
+        seen: set[uuid.UUID] = set()
+        current: uuid.UUID | None = workflow_id
+        while current is not None and current not in seen:
+            seen.add(current)
+            record = await self.get_workflow(current, owner_id=owner_id)
+            chain.append(record)
+            current = record.parent_workflow_id
+        chain.reverse()
+        return chain
 
     async def start_workflow(self, workflow_id: uuid.UUID) -> None:
         workflow = await self._session.get(WorkflowRecord, workflow_id)

@@ -64,6 +64,12 @@ class WorkflowRecord(Base, TimestampMixin):
     cancel_requested: Mapped[bool] = mapped_column(Boolean, nullable=False, default=False)
     #: Copied from the task so list/get can filter without a join.
     owner_id: Mapped[str] = mapped_column(String(64), nullable=False, default="operator")
+    #: Set when this workflow continues a conversation; points at the prior turn. Null
+    #: for the first turn (the conversation root). SET NULL on delete so pruning an old
+    #: turn never cascades away later ones.
+    parent_workflow_id: Mapped[uuid.UUID | None] = mapped_column(
+        ForeignKey("workflows.id", ondelete="SET NULL"), nullable=True
+    )
     started_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True), nullable=True)
     completed_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True), nullable=True)
 
@@ -78,6 +84,7 @@ class WorkflowRecord(Base, TimestampMixin):
     __table_args__ = (
         Index("ix_workflows_status", "status"),
         Index("ix_workflows_owner_id", "owner_id"),
+        Index("ix_workflows_parent", "parent_workflow_id"),
     )
 
 

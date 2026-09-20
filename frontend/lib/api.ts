@@ -153,6 +153,7 @@ export async function submitTask(body: {
   routing_strategy: RoutingStrategy;
   shared_model: string | null;
   model_overrides: Record<string, string>;
+  parent_workflow_id?: string | null;
 }): Promise<WorkflowView> {
   return request<WorkflowView>("/api/v1/tasks?wait=false", {
     method: "POST",
@@ -164,7 +165,24 @@ export async function submitTask(body: {
       routing_strategy: body.routing_strategy,
       shared_model: body.shared_model,
       model_overrides: body.model_overrides,
+      parent_workflow_id: body.parent_workflow_id ?? null,
     }),
+  });
+}
+
+export async function getThread(id: string): Promise<WorkflowView[]> {
+  return request<WorkflowView[]>(`/api/v1/workflows/${id}/thread`);
+}
+
+export async function submitGenerativeTask(body: {
+  request: string;
+  max_cost_usd: number | null;
+}): Promise<WorkflowView> {
+  // Synchronous: the backend designs a bespoke team and runs it to completion, so the
+  // returned workflow is already finished (no polling needed).
+  return request<WorkflowView>("/api/v1/tasks/generative", {
+    method: "POST",
+    body: JSON.stringify({ request: body.request, max_cost_usd: body.max_cost_usd }),
   });
 }
 

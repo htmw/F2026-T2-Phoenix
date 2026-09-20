@@ -30,6 +30,39 @@ from app.workflows.engine import WorkflowEngine, WorkflowRun, restore_run
 
 logger = get_logger(__name__)
 
+#: Prior-turn context is trimmed so a long conversation cannot grow the prompt without
+#: bound. Truncation is explicit in the text rather than silent.
+_MAX_PRIOR_CONTEXT_CHARS = 8_000
+
+
+def _extract_prior_answer(parent: WorkflowRecord) -> str | None:
+    """The previous turn's deliverable, as text to hand the next turn."""
+    result = parent.final_result or {}
+    answer = result.get("answer")
+    if not isinstance(answer, str) or not answer.strip():
+        return None
+    text = answer.strip()
+    if len(text) > _MAX_PRIOR_CONTEXT_CHARS:
+        text = text[:_MAX_PRIOR_CONTEXT_CHARS] + "\n… [truncated: earlier result was longer]"
+    return text
+
+
+def _augment_request(request_text: str, prior_answer: str) -> str:
+    """Fold the previous turn's result into this turn's brief.
+
+    The follow-up text stays first so the agent's task is what the user actually asked;
+    the prior result follows as context to build on rather than restate.
+    """
+    return (
+        f"{request_text}\n\n"
+        "# Conversation so far\n"
+        "This request continues an earlier task in the same conversation. Build on the "
+        "previous result below — modify or extend it as asked — rather than starting "
+        "from scratch.\n\n"
+        "## Previous result\n"
+        f"{prior_answer}"
+    )
+
 
 class UnservableRequestError(RuntimeError):
     """Raised when no registered agent can satisfy part of the request."""
@@ -106,8 +139,13 @@ class OrchestrationService:
         render immediately, while the agents run elsewhere. A user watching an empty
         screen cannot tell "thinking" from "broken".
         """
+        # Capability analysis sees only the follow-up text: the prior result belongs in
+        # the agents' objectives (what to build on), not in the selection signal, where a
+        # large earlier payload could over-activate desks.
         analysis = await self._analyser.analyse(request.request)
         self._validate_routing_models(request)
+
+        parent_id, prior_context = await self._resolve_parent(request, owner_id=owner_id)
 
         try:
             selection = await self._selector.select(
@@ -128,13 +166,18 @@ class OrchestrationService:
             )
             raise UnservableRequestError(str(exc)) from exc
 
+        planner_request = (
+            _augment_request(request.request, prior_context) if prior_context else request.request
+        )
         plan = self._planner.plan(
-            request.request, analysis, selection, require_approval=request.require_approval
+            planner_request, analysis, selection, require_approval=request.require_approval
         )
         plan = apply_routing_to_plan(plan, request)
 
         task = await self._repository.create_task(request, owner_id=owner_id)
-        workflow = await self._repository.create_workflow(task.id, plan, owner_id=owner_id)
+        workflow = await self._repository.create_workflow(
+            task.id, plan, owner_id=owner_id, parent_workflow_id=parent_id
+        )
         await self._record_selection_decision(workflow.id, plan, request)
         await self._record_pin_routing_decision(workflow.id, plan, request)
 
@@ -148,6 +191,7 @@ class OrchestrationService:
             shared_model=request.shared_model,
             model_overrides=dict(request.model_overrides),
             analysis_source=analysis.source,
+            continued_from=str(parent_id) if parent_id else None,
         )
         return PreparedWorkflow(
             task_id=task.id,
@@ -371,6 +415,31 @@ class OrchestrationService:
         return PlanPreviewResult(
             analysis=analysis, plan=plan, estimated_max_cost_usd=round(ceiling, 4)
         )
+
+    async def _resolve_parent(
+        self, request: TaskRequest, *, owner_id: str
+    ) -> tuple[uuid.UUID | None, str | None]:
+        """Validate a follow-up's parent and pull its result forward as context.
+
+        Returns ``(parent_id, prior_context)``. The parent id is returned only when the
+        workflow exists and is owned by this operator — otherwise the foreign key would
+        reject the insert, and threading another operator's work would leak it. A missing
+        or unowned parent degrades to a fresh task rather than an error.
+        """
+        if request.parent_workflow_id is None:
+            return None, None
+        try:
+            parent = await self._repository.get_workflow(
+                request.parent_workflow_id, owner_id=owner_id
+            )
+        except WorkflowNotFoundError:
+            logger.warning(
+                "followup_parent_unavailable",
+                parent_workflow_id=str(request.parent_workflow_id),
+                owner_id=owner_id,
+            )
+            return None, None
+        return parent.id, _extract_prior_answer(parent)
 
     def _validate_routing_models(self, request: TaskRequest) -> None:
         if self._providers is None:

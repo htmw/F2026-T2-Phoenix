@@ -11,11 +11,15 @@ from app.api.dependencies import (
     AbuseGuardDep,
     OperatorDep,
     OrchestrationServiceDep,
+    ProviderRegistryDep,
     RepositoryDep,
+    SessionDep,
+    SettingsDep,
     WorkflowRunnerDep,
 )
 from app.schemas.api import WorkflowView
 from app.schemas.workflow import TaskRequest
+from app.services.generative_service import GenerativeOrchestrator
 from app.services.orchestration_service import (
     UnknownModelOverrideError,
     UnservableRequestError,
@@ -81,6 +85,32 @@ async def submit_task(
         raise HTTPException(
             status_code=status.HTTP_422_UNPROCESSABLE_ENTITY, detail=str(exc)
         ) from exc
+
+
+@router.post(
+    "/generative",
+    response_model=WorkflowView,
+    summary="Design a bespoke agent team for the request and run it (Level 3)",
+)
+async def submit_generative_task(
+    request: TaskRequest,
+    session: SessionDep,
+    providers: ProviderRegistryDep,
+    settings: SettingsDep,
+    repository: RepositoryDep,
+    operator: OperatorDep,
+    _limits: AbuseGuardDep,
+) -> WorkflowView:
+    """Design a team of specialist agents for this request, then run it to completion.
+
+    Unlike ``POST /tasks``, no agent is selected from the registry: the team is generated
+    per request, capped at ``generative_max_agents``, pinned to the cheapest model, and
+    bounded by ``max_cost_usd`` (or the configured default). The run is synchronous
+    because the generated agents live only in memory for this request.
+    """
+    service = GenerativeOrchestrator(session, providers, settings, repository)
+    result = await service.submit(request, owner_id=operator.id)
+    return WorkflowView.from_record(result.workflow)
 
 
 @router.post(
