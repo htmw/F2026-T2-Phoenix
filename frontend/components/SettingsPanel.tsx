@@ -79,7 +79,7 @@ export function SettingsPanel({
         </label>
         <label className="check" style={{ marginTop: 12 }}>
           <input type="checkbox" checked={freeOnly} onChange={onToggleFree} />
-          Free Only — prefer free/cheapest models when available
+          Free Only, prefer free/cheapest models when available
         </label>
         <p className="muted" style={{ marginTop: 8 }}>
           Turn Free Only off to use paid subscriptions (Claude, Kimi, ChatGPT, Grok, …) you
@@ -103,7 +103,7 @@ export function SettingsPanel({
           <span className="chip accent">Bring your own key</span>
         </div>
         <p className="muted">
-          Connect any lab you already subscribe to. Keys stay on the server — never in the browser
+          Connect any lab you already subscribe to. Keys stay on the server, never in the browser
           bundle.
         </p>
         {providerMessage && <p className="banner warn">{providerMessage}</p>}
@@ -213,7 +213,7 @@ export function SettingsPanel({
                 <div>
                   <h3>Offline demo</h3>
                   <p className="provider-blurb">
-                    Simulated responses when no live key is connected — for local smoke tests only.
+                    Simulated responses when no live key is connected, for local smoke tests only.
                   </p>
                 </div>
                 <span className="pill warn">Offline</span>

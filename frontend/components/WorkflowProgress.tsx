@@ -117,7 +117,7 @@ export function WorkflowProgress({
               <div className="step-meta">
                 {node.status.replaceAll("_", " ")}
                 {!compact && node.objective
-                  ? ` — ${node.objective.slice(0, 80)}${node.objective.length > 80 ? "…" : ""}`
+                  ? ` · ${node.objective.slice(0, 80)}${node.objective.length > 80 ? "…" : ""}`
                   : ""}
               </div>
               {!compact && (

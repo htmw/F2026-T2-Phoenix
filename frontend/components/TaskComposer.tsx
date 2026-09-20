@@ -5,9 +5,9 @@ import { FormEvent } from "react";
 import type { AgentSummary, RoutingStrategy } from "@/lib/types";
 
 const EXAMPLES = [
-  "Find security vulnerabilities in the payments service",
-  "Fix the login handler and write tests for it",
-  "Research this topic and create a summary",
+  "Analyze the market opportunity for an AI meal-planning app",
+  "Draft a go-to-market plan for a new eco-friendly water bottle",
+  "Find security vulnerabilities in the payments service and fix them",
 ];
 
 export function TaskComposer({
@@ -77,7 +77,7 @@ export function TaskComposer({
         <>
           <h2>What should the office take on?</h2>
           <p className="muted" style={{ margin: 0 }}>
-            One brief in — specialists plan across Claude, Kimi, ChatGPT, Gemini, Grok, and more
+            One brief in, specialists plan across Claude, Kimi, ChatGPT, Gemini, Grok, and more
             {offlineDemo ? " (offline demo)." : "."}
           </p>
         </>
@@ -99,7 +99,7 @@ export function TaskComposer({
 
       {offlineDemo && !noModels && (
         <p className="banner warn">
-          Offline demo — responses are simulated. Connect a provider in Settings for live models.
+          Offline demo, responses are simulated. Connect a provider in Settings for live models.
         </p>
       )}
 

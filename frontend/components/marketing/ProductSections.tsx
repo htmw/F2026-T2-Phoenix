@@ -37,7 +37,7 @@ export function WorkflowSection() {
     <section className="mkt-section" id="how-it-works">
       <div className="mkt-grid">
         <Reveal>
-          <p className="mkt-kicker">03 — The workflow</p>
+          <p className="mkt-kicker">03 · The workflow</p>
           <h2 className="mkt-title">From brief to result.</h2>
         </Reveal>
         <ol className="workflow-rail" aria-label="Workflow stages">
@@ -60,11 +60,11 @@ export function CommunicationSection() {
     <section className="mkt-section mkt-section-dark" id="communication">
       <div className="mkt-grid">
         <Reveal>
-          <p className="mkt-kicker light">04 — Agents talk to each other</p>
+          <p className="mkt-kicker light">04 · Agents talk to each other</p>
           <h2 className="mkt-title light">AI doesn&apos;t work alone.</h2>
           <p className="mkt-body light mkt-measure">
-            Research hands findings to Coding. Review sends notes back. Testing closes the loop.
-            Messages move through the office — quietly, precisely.
+            One specialist hands findings to the next. A reviewer sends notes back. The loop closes
+            when the brief is done. Messages move through the office, quietly, precisely.
           </p>
         </Reveal>
         <Reveal delay={0.1}>
@@ -81,10 +81,10 @@ export function WorkspaceSection() {
     <section className="mkt-section" id="workspace">
       <div className="mkt-grid">
         <Reveal>
-          <p className="mkt-kicker">05 — One workspace</p>
+          <p className="mkt-kicker">05 · One workspace</p>
           <h2 className="mkt-title">Everything in one desk.</h2>
           <p className="mkt-body mkt-measure">
-            Briefs, specialists, mail, and progress live together — so you watch the organization
+            Briefs, specialists, mail, and progress live together, so you watch the organization
             work, not a pile of disconnected chats.
           </p>
         </Reveal>
@@ -101,12 +101,12 @@ export function WorkspaceSection() {
               <span />
               <span />
               <span />
-              <em>localhost — Agent Office</em>
+              <em>localhost · Agent Office</em>
             </div>
             <div className="product-preview-body">
               <div className="product-preview-side">
                 <strong>Active task</strong>
-                <p>Research API architecture</p>
+                <p>Go-to-market plan</p>
               </div>
               <div className="product-preview-agents">
                 <div className="pp-row on">
@@ -114,7 +114,7 @@ export function WorkspaceSection() {
                   <em>Working</em>
                 </div>
                 <div className="pp-row">
-                  <span>Coding</span>
+                  <span>Analysis</span>
                   <em>Waiting</em>
                 </div>
                 <div className="pp-row done">
@@ -122,7 +122,7 @@ export function WorkspaceSection() {
                   <em>Complete</em>
                 </div>
                 <div className="pp-row">
-                  <span>Review</span>
+                  <span>Report</span>
                   <em>Ready</em>
                 </div>
               </div>
@@ -139,16 +139,17 @@ export function ModelsSection() {
     <section className="mkt-section mkt-section-muted">
       <div className="mkt-grid mkt-two">
         <Reveal>
-          <p className="mkt-kicker">06 — AI models</p>
+          <p className="mkt-kicker">06 · AI models</p>
           <h2 className="mkt-title">Agents stay. Models change.</h2>
           <p className="mkt-body">
-            Coding remains Coding whether it runs on Gemini, Groq, Claude, Kimi, or OpenRouter. Bring
-            the keys you already subscribe to — the roster does not rename itself after a provider.
+            A specialist keeps its role whether it runs on Gemini, Groq, Claude, Kimi, or OpenRouter.
+            Bring the keys you already subscribe to, the roster does not rename itself after a
+            provider.
           </p>
         </Reveal>
         <Reveal delay={0.08}>
           <div className="model-stack" aria-label="Model independence example">
-            <div className="model-stack-agent">Coding</div>
+            <div className="model-stack-agent">Specialist</div>
             <div className="model-stack-arrow" aria-hidden />
             <ul>
               <li>Gemini</li>
@@ -168,11 +169,11 @@ export function FreeAISection() {
     <section className="mkt-section">
       <div className="mkt-grid mkt-section-narrow">
         <Reveal>
-          <p className="mkt-kicker">07 — Free AI</p>
+          <p className="mkt-kicker">07 · Free AI</p>
           <h2 className="mkt-title">Free AI mode.</h2>
           <p className="mkt-body">
             Prefer verified free or lowest-cost models when you want $0 provider spend. Free Only
-            never presents paid models as free — it routes to what your connected catalogue actually
+            never presents paid models as free, it routes to what your connected catalogue actually
             offers at no (or minimal) cost.
           </p>
           <ul className="free-points">

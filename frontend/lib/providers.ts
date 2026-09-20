@@ -21,7 +21,7 @@ export const PROVIDER_META: Record<string, ProviderMeta> = {
   anthropic: {
     id: "anthropic",
     brand: "Claude",
-    blurb: "Anthropic Claude — strong coding, long context, and careful reasoning.",
+    blurb: "Anthropic Claude, strong coding, long context, and careful reasoning.",
     tier: "paid",
     modelsHint: "Sonnet · Opus · Haiku",
     accent: "#d4a27f",
@@ -37,7 +37,7 @@ export const PROVIDER_META: Record<string, ProviderMeta> = {
   moonshot: {
     id: "moonshot",
     brand: "Kimi",
-    blurb: "Moonshot Kimi — long-context chat and coding from the Kimi lab.",
+    blurb: "Moonshot Kimi, long-context chat and coding from the Kimi lab.",
     tier: "paid",
     modelsHint: "Kimi K2.6 · Moonshot 128K",
     accent: "#1a1a1a",
@@ -45,7 +45,7 @@ export const PROVIDER_META: Record<string, ProviderMeta> = {
   groq: {
     id: "groq",
     brand: "Groq",
-    blurb: "Ultra-fast Llama and Mixtral inference — great for demos.",
+    blurb: "Ultra-fast Llama and Mixtral inference, great for demos.",
     tier: "freemium",
     modelsHint: "Llama 3.3 · Mixtral",
     accent: "#f55036",
@@ -101,7 +101,7 @@ export const PROVIDER_META: Record<string, ProviderMeta> = {
   qwen: {
     id: "qwen",
     brand: "Qwen",
-    blurb: "Alibaba Qwen via DashScope — strong multilingual coding models.",
+    blurb: "Alibaba Qwen via DashScope, strong multilingual coding models.",
     tier: "paid",
     modelsHint: "Qwen Plus · Turbo",
     accent: "#615ced",
@@ -109,7 +109,7 @@ export const PROVIDER_META: Record<string, ProviderMeta> = {
   openrouter: {
     id: "openrouter",
     brand: "OpenRouter",
-    blurb: "One key for many labs — route across vendors.",
+    blurb: "One key for many labs, route across vendors.",
     tier: "gateway",
     modelsHint: "Multi-provider gateway",
     accent: "#a78bfa",
@@ -117,7 +117,7 @@ export const PROVIDER_META: Record<string, ProviderMeta> = {
   huggingface: {
     id: "huggingface",
     brand: "Hugging Face",
-    blurb: "Inference Providers router — open models via a Hub token.",
+    blurb: "Inference Providers router, open models via a Hub token.",
     tier: "freemium",
     modelsHint: "Llama · Qwen · DeepSeek",
     accent: "#ffd21e",

@@ -1,4 +1,4 @@
-/* Agent Office — premium light design system */
+/* Agent Office, premium light design system */
 
 :root {
   --bg: #f6f5f2;
@@ -229,22 +229,25 @@ button:disabled {
     transform var(--transition);
 }
 
-.mkt-btn-primary {
+/* Compound selectors so these beat the `a.mkt-btn { color: inherit }` reset, which is
+   more specific than a single `.mkt-btn-primary` class and was hiding the label. */
+.mkt-btn.mkt-btn-primary {
   background: var(--text);
   color: #f7f6f3;
 }
 
-.mkt-btn-primary:hover {
+.mkt-btn.mkt-btn-primary:hover {
   background: #000;
+  color: #fff;
 }
 
-.mkt-btn-ghost {
+.mkt-btn.mkt-btn-ghost {
   background: transparent;
   border-color: var(--border-strong);
   color: var(--text);
 }
 
-.mkt-btn-ghost:hover {
+.mkt-btn.mkt-btn-ghost:hover {
   background: var(--surface-2);
 }
 
@@ -372,17 +375,17 @@ button:disabled {
 
 .agent-roster {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-  gap: 1px;
-  background: var(--border);
-  border: 1px solid var(--border);
+  /* auto-fit collapses the empty trailing tracks so a 7-card roster never leaves grey
+     filler cells; separate bordered cards keep the last row aligned to the columns. */
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 12px;
   margin-top: var(--space-7);
-  border-radius: var(--radius);
-  overflow: hidden;
 }
 
 .agent-roster-item {
   background: var(--bg-elevated);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
   padding: var(--space-5);
   margin: 0;
   min-height: 180px;

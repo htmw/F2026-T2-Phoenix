@@ -24,7 +24,7 @@ export function IdeaSection() {
     <section className="mkt-section" id="idea">
       <div className="mkt-grid mkt-section-narrow">
         <Reveal>
-          <p className="mkt-kicker">01 — The idea</p>
+          <p className="mkt-kicker">01 · The idea</p>
           <h2 className="mkt-title">
             One AI can work.
             <br />
@@ -33,7 +33,7 @@ export function IdeaSection() {
           <p className="mkt-body">
             Agent Office is not a chat that fans the same prompt to many models. It is an operating
             system for specialist agents that plan, hand off, and share context until the brief is
-            done.
+            done, whatever the domain.
           </p>
         </Reveal>
       </div>
@@ -46,11 +46,13 @@ export function AgentsSection() {
     <section className="mkt-section mkt-section-muted" id="agents">
       <div className="mkt-grid">
         <Reveal>
-          <p className="mkt-kicker">02 — The agents</p>
+          <p className="mkt-kicker">02 · The agents</p>
           <h2 className="mkt-title">Specialists with clear desks.</h2>
           <p className="mkt-body mkt-measure">
-            Each agent keeps its identity. Models are interchangeable — Gemini, Groq, OpenRouter,
-            and others can power the same desk.
+            The office activates only the specialists a brief needs, and when a task calls for a
+            discipline the standing desks don&apos;t cover, it designs a bespoke team for that
+            request. Models are interchangeable: Gemini, Groq, OpenRouter, and others can power the
+            same desk.
           </p>
         </Reveal>
         <div className="agent-roster">

@@ -18,20 +18,20 @@ const dmSans = DM_Sans({
 
 export const metadata: Metadata = {
   title: {
-    default: "Agent Office — AI agents that work as one organization",
+    default: "Agent Office, AI agents that work as one organization",
     template: "%s · Agent Office",
   },
   description:
-    "A collaborative AI workspace where autonomous agents research, plan, build, review, and test together. Bring your own model keys. Free AI mode available.",
+    "Describe any goal, market research, a product plan, analysis, or code, and Agent Office assembles a team of AI specialists to deliver it, designing a bespoke team when a task doesn't fit the standing desks. Bring your own model keys. Free AI mode available.",
   openGraph: {
     title: "Agent Office",
-    description: "An operating system for autonomous AI teams.",
+    description: "An operating system for autonomous AI teams, assembled for whatever you're working on.",
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
     title: "Agent Office",
-    description: "AI agents that work as one organization.",
+    description: "AI specialists that assemble into a team for any brief.",
   },
 };
 

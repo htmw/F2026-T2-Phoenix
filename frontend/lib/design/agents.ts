@@ -1,13 +1,18 @@
-/** Canonical Agent Office specialist names — do not rename. */
+/** Marketing-only role archetypes shown on the landing page.
+ *
+ * These are domain-neutral illustrations of how a team collaborates, not the backend
+ * agent ids. The office activates whichever specialists a brief needs, and designs a
+ * bespoke team when a task calls for a discipline the standing desks don't cover.
+ */
 
 export type OfficeAgentId =
-  | "planning"
-  | "research"
-  | "security"
-  | "coding"
-  | "testing"
-  | "review"
-  | "documentation";
+  | "planner"
+  | "researcher"
+  | "analyst"
+  | "builder"
+  | "reviewer"
+  | "strategist"
+  | "synthesizer";
 
 export type OfficeAgent = {
   id: OfficeAgentId;
@@ -18,64 +23,67 @@ export type OfficeAgent = {
 
 export const OFFICE_AGENTS: OfficeAgent[] = [
   {
-    id: "planning",
-    name: "Planning",
-    role: "Orchestrates the brief",
-    blurb: "Breaks work into ordered steps and decides who acts next.",
+    id: "planner",
+    name: "Planner",
+    role: "Shapes the brief",
+    blurb: "Breaks the request into the right steps and decides who works on what.",
   },
   {
-    id: "research",
-    name: "Research",
+    id: "researcher",
+    name: "Researcher",
     role: "Gathers context",
-    blurb: "Finds documentation, APIs, and facts the team needs to proceed.",
+    blurb: "Finds the facts, sources, and market context the team needs to proceed.",
   },
   {
-    id: "security",
-    name: "Security",
-    role: "Threat awareness",
-    blurb: "Looks for vulnerabilities and unsafe patterns before they ship.",
+    id: "analyst",
+    name: "Analyst",
+    role: "Reads the signals",
+    blurb: "Weighs data, risks, and opportunities to sharpen the direction.",
   },
   {
-    id: "coding",
-    name: "Coding",
-    role: "Implements change",
-    blurb: "Writes and modifies code against the plan and research.",
+    id: "builder",
+    name: "Builder",
+    role: "Does the core work",
+    blurb: "Produces the substance the brief calls for, a plan, a design, analysis, or code.",
   },
   {
-    id: "testing",
-    name: "Testing",
-    role: "Proves it works",
-    blurb: "Validates behavior with checks so regressions do not slip through.",
-  },
-  {
-    id: "review",
-    name: "Review",
+    id: "reviewer",
+    name: "Reviewer",
     role: "Quality gate",
-    blurb: "Assesses whether work is acceptable and sends it back if not.",
+    blurb: "Judges the work against the goal and sends it back if it falls short.",
   },
   {
-    id: "documentation",
-    name: "Documentation",
-    role: "Records the outcome",
-    blurb: "Captures what changed and why for humans who follow later.",
+    id: "strategist",
+    name: "Strategist",
+    role: "Turns findings into moves",
+    blurb: "Shapes clear recommendations and a path to act on them.",
+  },
+  {
+    id: "synthesizer",
+    name: "Synthesizer",
+    role: "Writes the deliverable",
+    blurb: "Combines every contribution into one clear, complete result.",
   },
 ];
 
 export const WORKFLOW_STEPS = [
-  "Task",
-  "Planning",
+  "Brief",
+  "Plan",
   "Research",
-  "Coding",
+  "Specialists",
   "Review",
-  "Testing",
-  "Result",
+  "Synthesize",
+  "Deliver",
 ] as const;
 
+// One connected network: everything feeds the Builder, then flows out to the
+// Synthesizer, so no specialist is left floating. Segments are all distinct.
 export const COMM_EDGES: { from: OfficeAgentId; to: OfficeAgentId; sample: string }[] = [
-  { from: "research", to: "coding", sample: "Found relevant API documentation." },
-  { from: "coding", to: "review", sample: "Adapter implementation ready for review." },
-  { from: "review", to: "coding", sample: "Please tighten error handling on timeouts." },
-  { from: "testing", to: "coding", sample: "Coverage gap on the failure path." },
-  { from: "planning", to: "research", sample: "Need architecture notes before coding." },
-  { from: "security", to: "coding", sample: "Avoid logging secrets in this path." },
+  { from: "planner", to: "researcher", sample: "We need competitor pricing before we position." },
+  { from: "researcher", to: "builder", sample: "Market size and the top three competitors are in." },
+  { from: "analyst", to: "builder", sample: "Demand skews to the 25-34 segment." },
+  { from: "builder", to: "reviewer", sample: "First draft of the go-to-market plan is ready." },
+  { from: "builder", to: "strategist", sample: "Here's the positioning, what's the launch play?" },
+  { from: "reviewer", to: "synthesizer", sample: "Approved, tighten the pricing line in the summary." },
+  { from: "strategist", to: "synthesizer", sample: "Recommend a freemium launch in Q2." },
 ];

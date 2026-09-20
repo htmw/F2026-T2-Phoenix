@@ -36,8 +36,9 @@ export function HeroSection() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.12 }}
           >
-            A collaborative AI workspace where autonomous agents research, plan, build, review, and
-            test as one organization.
+            A collaborative AI workspace where a team of specialists is assembled for your brief:
+            market research, a product plan, analysis, code, and more, working together as one
+            organization.
           </motion.p>
           <motion.div
             className="mkt-hero-cta"

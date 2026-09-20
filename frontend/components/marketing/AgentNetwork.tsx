@@ -6,13 +6,13 @@ import { motion, useReducedMotion } from "framer-motion";
 import { COMM_EDGES, OFFICE_AGENTS, type OfficeAgentId } from "@/lib/design/agents";
 
 const POSITIONS: Record<OfficeAgentId, { x: number; y: number }> = {
-  research: { x: 50, y: 12 },
-  planning: { x: 18, y: 38 },
-  coding: { x: 50, y: 48 },
-  security: { x: 82, y: 38 },
-  review: { x: 32, y: 72 },
-  testing: { x: 68, y: 72 },
-  documentation: { x: 50, y: 90 },
+  researcher: { x: 50, y: 12 },
+  planner: { x: 18, y: 38 },
+  builder: { x: 50, y: 48 },
+  analyst: { x: 82, y: 38 },
+  reviewer: { x: 32, y: 72 },
+  strategist: { x: 68, y: 72 },
+  synthesizer: { x: 50, y: 90 },
 };
 
 type Props = {
@@ -23,7 +23,7 @@ type Props = {
 
 export function AgentNetwork({ interactive = true, dark = false, className = "" }: Props) {
   const reduce = useReducedMotion();
-  const [active, setActive] = useState<OfficeAgentId>("coding");
+  const [active, setActive] = useState<OfficeAgentId>("builder");
   const [pulse, setPulse] = useState(0);
   const [selected, setSelected] = useState<OfficeAgentId | null>(null);
 
@@ -47,7 +47,13 @@ export function AgentNetwork({ interactive = true, dark = false, className = "" 
 
   return (
     <div className={`agent-network ${dark ? "dark" : ""} ${className}`.trim()}>
-      <svg className="agent-network-svg" viewBox="0 0 100 100" role="img" aria-label="Agent collaboration network">
+      <svg
+        className="agent-network-svg"
+        viewBox="0 0 100 100"
+        preserveAspectRatio="none"
+        role="img"
+        aria-label="Agent collaboration network"
+      >
         {COMM_EDGES.map((e) => {
           const a = POSITIONS[e.from];
           const b = POSITIONS[e.to];
