@@ -198,6 +198,9 @@ class WorkflowEngine:
                         candidate = output.error.details.get("raw_output")
                         raw = candidate if isinstance(candidate, str) else None
                     await self._repository.record_execution(workflow_id, output, raw_output=raw)
+                    # Serialised here rather than inside the concurrent attempt so parallel
+                    # siblings never flush the shared session at the same time.
+                    await self._record_routing_decision(workflow_id, output)
 
                 if not final.succeeded:
                     await self._repository.mark_node_failed(workflow_id, final.node_key)
@@ -454,7 +457,9 @@ class WorkflowEngine:
             )
             output = await self._executor.execute(agent, attempt_input, context)
             outputs.append(output)
-            await self._record_routing_decision(state.workflow_id, output)
+            # The routing decision is persisted later, in the serialised loop after the
+            # batch: writing to the shared session here would race with sibling agents
+            # running concurrently under gather ("Session is already flushing").
 
             if output.succeeded:
                 break
