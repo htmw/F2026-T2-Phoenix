@@ -155,23 +155,23 @@ Agent Mesh follows an end-to-end modular-monolith pipeline:
   <img height="48" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" alt="React" />
   <img height="48" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nextjs/nextjs-original.svg" alt="Next.js" />
   <img height="48" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg" alt="CSS" />
-  <img height="48" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/framer/framer-original.svg" alt="Framer Motion" />
+  <img height="48" src="https://cdn.jsdelivr.net/npm/simple-icons@11.15.0/icons/framer.svg" alt="Framer Motion" />
 </p>
 
 ### Backend
 <p>
   <img height="48" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/fastapi/fastapi-original.svg" alt="FastAPI" />
   <img height="48" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/sqlalchemy/sqlalchemy-original.svg" alt="SQLAlchemy" />
-  <img height="48" src="https://cdn.simpleicons.org/jsonwebtokens" alt="JWT" />
+  <img height="48" src="https://cdn.jsdelivr.net/npm/simple-icons@11.15.0/icons/jsonwebtokens.svg" alt="JWT" />
   <img height="48" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/pytest/pytest-original.svg" alt="pytest" />
 </p>
 
 ### Orchestration / AI
 <p>
-  <img height="48" src="https://cdn.simpleicons.org/openai" alt="OpenAI" />
-  <img height="48" src="https://cdn.simpleicons.org/anthropic" alt="Anthropic" />
-  <img height="48" src="https://cdn.simpleicons.org/googlegemini" alt="Google Gemini" />
-  <img height="48" src="https://cdn.simpleicons.org/huggingface" alt="Hugging Face" />
+  <img height="48" src="https://cdn.jsdelivr.net/npm/simple-icons@11.15.0/icons/openai.svg" alt="OpenAI" />
+  <img height="48" src="https://cdn.jsdelivr.net/npm/simple-icons@11.15.0/icons/anthropic.svg" alt="Anthropic" />
+  <img height="48" src="https://cdn.jsdelivr.net/npm/simple-icons@11.15.0/icons/googlegemini.svg" alt="Google Gemini" />
+  <img height="48" src="https://huggingface.co/front/assets/huggingface_logo-noborder.svg" alt="Hugging Face" />
   <img height="48" src="https://raw.githubusercontent.com/Soumen2581/Capstone-Project/master/frontend/public/brand/icon.png" alt="Agent Mesh" />
 </p>
 
@@ -195,7 +195,7 @@ Agent Mesh follows an end-to-end modular-monolith pipeline:
   <img height="48" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/pytest/pytest-original.svg" alt="pytest" />
   <img height="48" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/playwright/playwright-original.svg" alt="Playwright" />
   <img height="48" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/eslint/eslint-original.svg" alt="ESLint" />
-  <img height="48" src="https://cdn.simpleicons.org/prettier" alt="Prettier" />
+  <img height="48" src="https://cdn.jsdelivr.net/npm/simple-icons@11.15.0/icons/prettier.svg" alt="Prettier" />
 </p>
 
 * * *
