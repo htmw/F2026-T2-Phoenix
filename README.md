@@ -10,19 +10,19 @@ output, and synthesises a single result.
 
 ### Product site
 
-![Hero — AI agents working together](docs/images/01-hero.jpg)
+![Hero — Agent Mesh home](docs/images/01-hero.jpg)
 
-![Agents roster](docs/images/02-agents.jpg)
+![Specialist agents roster](docs/images/02-agents.jpg)
 
-![Workflow stages](docs/images/03-workflow.jpg)
+![Workflow — brief to result](docs/images/03-workflow.jpg)
 
-![Agent-to-agent communication](docs/images/04-communication.jpg)
+![Agents talk to each other](docs/images/04-communication.jpg)
 
-![Workspace preview](docs/images/05-workspace.jpg)
+![One workspace preview](docs/images/05-workspace.jpg)
 
 ### Workspace app (`/office`)
 
-![Office home](docs/images/06-office.jpg)
+![Office — start a conversation](docs/images/06-office.jpg)
 
 ![Provider settings](docs/images/07-settings.jpg)
 
