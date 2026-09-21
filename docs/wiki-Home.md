@@ -52,17 +52,44 @@ Agent Mesh is an **AI-assisted orchestration and research/engineering support to
 
 **Team 2 — Phoenix**
 
-| Name | GitHub | Role |
-|------|--------|------|
-| Dhwani Dobariya | [DhwaniDobariya](https://github.com/DhwaniDobariya) | Team Leader / Developer |
-| Aniruddha Rath | [AniRath020697](https://github.com/AniRath020697) | Developer |
-| Soumen Nageshkar | [Soumen2581](https://github.com/Soumen2581) | Developer |
-| Puneet Tulsiani | [puneett12](https://github.com/puneett12) | Developer |
-| Sutej Kulkarni | [Sutej12](https://github.com/Sutej12) | Developer |
-| Gurjot Singh | [gurjotsingh01](https://github.com/gurjotsingh01) | Developer |
-| Om Jadhav | [jadhavom37](https://github.com/jadhavom37) | Developer |
+| | Name | GitHub | Role |
+|---|------|--------|------|
+| <img src="https://raw.githubusercontent.com/Soumen2581/Capstone-Project/master/docs/wiki/team/dhwani-dobariya.jpg" width="96" height="96" alt="Dhwani Dobariya" /> | **Dhwani Dobariya** | [DhwaniDobariya](https://github.com/DhwaniDobariya) | Team Leader / Developer |
+| <img src="https://raw.githubusercontent.com/Soumen2581/Capstone-Project/master/docs/wiki/team/aniruddha-rath.jpg" width="96" height="96" alt="Aniruddha Rath" /> | **Aniruddha Rath** | [AniRath020697](https://github.com/AniRath020697) | Developer |
+| <img src="https://raw.githubusercontent.com/Soumen2581/Capstone-Project/master/docs/wiki/team/soumen-nageshkar.jpg" width="96" height="96" alt="Soumen Nageshkar" /> | **Soumen Nageshkar** | [Soumen2581](https://github.com/Soumen2581) | Developer |
+| <img src="https://raw.githubusercontent.com/Soumen2581/Capstone-Project/master/docs/wiki/team/puneet-tulsiani.jpg" width="96" height="96" alt="Puneet Tulsiani" /> | **Puneet Tulsiani** | [puneett12](https://github.com/puneett12) | Developer |
+| <img src="https://raw.githubusercontent.com/Soumen2581/Capstone-Project/master/docs/wiki/team/sutej-kulkarni.jpg" width="96" height="96" alt="Sutej Kulkarni" /> | **Sutej Kulkarni** | [Sutej12](https://github.com/Sutej12) | Developer |
+| <img src="https://raw.githubusercontent.com/Soumen2581/Capstone-Project/master/docs/wiki/team/gurjot-singh.jpg" width="96" height="96" alt="Gurjot Singh" /> | **Gurjot Singh** | [gurjotsingh01](https://github.com/gurjotsingh01) | Developer |
+| | **Om Jadhav** | [jadhavom37](https://github.com/jadhavom37) | Developer |
 
-> Add Pace emails and refined role titles (Scrum Master, Backend, Frontend, ML/Cloud, Tester) when your roster is finalized.
+### Team photos
+
+<p align="center">
+  <img src="https://raw.githubusercontent.com/Soumen2581/Capstone-Project/master/docs/wiki/team/dhwani-dobariya.jpg" width="140" alt="Dhwani Dobariya" /><br/>
+  <strong>Dhwani Dobariya</strong> — Team Leader
+</p>
+
+<p align="center">
+  <img src="https://raw.githubusercontent.com/Soumen2581/Capstone-Project/master/docs/wiki/team/aniruddha-rath.jpg" width="140" alt="Aniruddha Rath" />
+  &nbsp;
+  <img src="https://raw.githubusercontent.com/Soumen2581/Capstone-Project/master/docs/wiki/team/puneet-tulsiani.jpg" width="140" alt="Puneet Tulsiani" />
+  &nbsp;
+  <img src="https://raw.githubusercontent.com/Soumen2581/Capstone-Project/master/docs/wiki/team/soumen-nageshkar.jpg" width="140" alt="Soumen Nageshkar" />
+</p>
+<p align="center">
+  Aniruddha Rath &nbsp;·&nbsp; Puneet Tulsiani &nbsp;·&nbsp; Soumen Nageshkar
+</p>
+
+<p align="center">
+  <img src="https://raw.githubusercontent.com/Soumen2581/Capstone-Project/master/docs/wiki/team/sutej-kulkarni.jpg" width="140" alt="Sutej Kulkarni" />
+  &nbsp;
+  <img src="https://raw.githubusercontent.com/Soumen2581/Capstone-Project/master/docs/wiki/team/gurjot-singh.jpg" width="140" alt="Gurjot Singh" />
+</p>
+<p align="center">
+  Sutej Kulkarni &nbsp;·&nbsp; Gurjot Singh
+</p>
+
+> Add a photo for Om Jadhav when available. Pace emails and refined role titles can be filled in later.
 
 ---
 
