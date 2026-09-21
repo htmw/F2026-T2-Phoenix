@@ -50,7 +50,7 @@ Improved **consistency**, **scalability**, and reduced **wasted spend** through 
       <img src="https://github.com/Soumen2581/Capstone-Project/raw/master/docs/wiki/team/dhwani-dobariya.jpg" width="200" height="250" alt="Dhwani Dobariya" /><br/>
       <b>Dhwani Dobariya</b><br/>
       (<a href="https://github.com/DhwaniDobariya">DhwaniDobariya</a>)<br/>
-      Team Leader / Developer
+      Team Leader / Product Owner
     </td>
   </tr>
   <tr>
@@ -58,19 +58,19 @@ Improved **consistency**, **scalability**, and reduced **wasted spend** through 
       <img src="https://github.com/Soumen2581/Capstone-Project/raw/master/docs/wiki/team/aniruddha-rath.jpg" width="200" height="250" alt="Aniruddha Rath" /><br/>
       <b>Aniruddha Rath</b><br/>
       (<a href="https://github.com/AniRath020697">AniRath020697</a>)<br/>
-      Developer
+      Backend Engineer
     </td>
     <td align="center" width="33%">
       <img src="https://github.com/Soumen2581/Capstone-Project/raw/master/docs/wiki/team/puneet-tulsiani.jpg" width="200" height="250" alt="Puneet Tulsiani" /><br/>
       <b>Puneet Tulsiani</b><br/>
       (<a href="https://github.com/puneett12">puneett12</a>)<br/>
-      Developer
+      Frontend Engineer
     </td>
     <td align="center" width="33%">
       <img src="https://github.com/Soumen2581/Capstone-Project/raw/master/docs/wiki/team/soumen-nageshkar.jpg" width="200" height="250" alt="Soumen Nageshkar" /><br/>
       <b>Soumen Nageshkar</b><br/>
       (<a href="https://github.com/Soumen2581">Soumen2581</a>)<br/>
-      Developer
+      Full-Stack / Platform Engineer
     </td>
   </tr>
   <tr>
@@ -78,18 +78,18 @@ Improved **consistency**, **scalability**, and reduced **wasted spend** through 
       <img src="https://github.com/Soumen2581/Capstone-Project/raw/master/docs/wiki/team/sutej-kulkarni.jpg" width="200" height="250" alt="Sutej Kulkarni" /><br/>
       <b>Sutej Kulkarni</b><br/>
       (<a href="https://github.com/Sutej12">Sutej12</a>)<br/>
-      Developer
+      DevOps / Infrastructure Engineer
     </td>
     <td align="center" width="33%">
       <img src="https://github.com/Soumen2581/Capstone-Project/raw/master/docs/wiki/team/gurjot-singh.jpg" width="200" height="250" alt="Gurjot Singh" /><br/>
       <b>Gurjot Singh</b><br/>
       (<a href="https://github.com/gurjotsingh01">gurjotsingh01</a>)<br/>
-      Developer
+      QA / Test Engineer
     </td>
     <td align="center" width="33%">
       <b>Om Jadhav</b><br/>
       (<a href="https://github.com/jadhavom37">jadhavom37</a>)<br/>
-      Developer<br/>
+      Documentation & Agile Lead<br/>
       <i>Photo coming soon</i>
     </td>
   </tr>
