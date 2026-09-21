@@ -31,7 +31,7 @@ export function IdeaSection() {
             An organization of agents can collaborate.
           </h2>
           <p className="mkt-body">
-            Agent Office is not a chat that fans the same prompt to many models. It is an operating
+            Agent Mesh is not a chat that fans the same prompt to many models. It is an operating
             system for specialist agents that plan, hand off, and share context until the brief is
             done, whatever the domain.
           </p>

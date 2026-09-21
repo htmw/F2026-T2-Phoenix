@@ -2,6 +2,9 @@
 
 import type { ReactNode } from "react";
 
+import { BrandLogo } from "@/components/BrandLogo";
+import { BRAND_NAME, BRAND_TAGLINE } from "@/lib/brand";
+
 export type NavTab = "home" | "agents" | "work" | "messages" | "settings";
 
 const NAV: { id: NavTab; label: string; testId: string }[] = [
@@ -27,12 +30,14 @@ export function AppShell({
     <div className="app-shell">
       <header className="titlebar">
         <div className="brand-row">
-          <a href="/" className="brand-mark" aria-label="Agent Office marketing site" />
+          <a href="/" className="brand-mark-link" aria-label={`${BRAND_NAME} marketing site`}>
+            <BrandLogo size={34} />
+          </a>
           <div className="brand-block">
             <h1 className="brand" data-testid="brand">
-              Agent Office
+              {BRAND_NAME}
             </h1>
-            <p className="tagline">Autonomous specialists. One brief. Clear results.</p>
+            <p className="tagline">{BRAND_TAGLINE}</p>
           </div>
         </div>
         <nav className="tabs" aria-label="Office sections" data-testid="office-tabs">

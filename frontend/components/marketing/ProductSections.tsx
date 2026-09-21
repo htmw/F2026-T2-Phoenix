@@ -101,7 +101,7 @@ export function WorkspaceSection() {
               <span />
               <span />
               <span />
-              <em>localhost · Agent Office</em>
+              <em>localhost · Agent Mesh</em>
             </div>
             <div className="product-preview-body">
               <div className="product-preview-side">

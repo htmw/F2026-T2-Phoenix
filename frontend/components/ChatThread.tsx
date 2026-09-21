@@ -2,7 +2,9 @@
 
 import type { WorkflowView } from "@/lib/types";
 import { formatWhen, shortAgentName } from "@/lib/office";
+import { BrandLogo } from "@/components/BrandLogo";
 import { ProviderIcon, providerIdFromModel } from "@/components/ProviderIcon";
+import { BRAND_NAME } from "@/lib/brand";
 
 function resultText(workflow: WorkflowView): string | null {
   const result = workflow.final_result;
@@ -161,7 +163,7 @@ function TurnView({
 
       {active && (live || busy) && (
         <article className="chat-bubble agent thinking">
-          <div className="chat-role">Office</div>
+          <div className="chat-role">Agent Mesh</div>
           <div className="chat-body">
             <span className="status-dot info" aria-hidden /> Agents are working…
           </div>
@@ -177,7 +179,7 @@ function TurnView({
 
       {turn.status === "failed" && turn.error && turn.nodes.length === 0 && (
         <article className="chat-bubble agent">
-          <div className="chat-role">Office</div>
+          <div className="chat-role">Agent Mesh</div>
           <p className="banner-err">{turn.error}</p>
         </article>
       )}
@@ -200,12 +202,16 @@ export function ChatThread({
     return (
       <div className="chat-thread empty">
         <div className="empty-state">
-          <div className={`empty-orb${busy ? " loading" : ""}`} aria-hidden />
+          {busy ? (
+            <div className="empty-orb loading" aria-hidden />
+          ) : (
+            <BrandLogo size={56} className="empty-brand-logo" />
+          )}
           <h3>{busy ? "Starting…" : "Start a conversation"}</h3>
           <p>
             {busy
               ? "Assigning specialists and opening the thread."
-              : "Describe a task below. Specialists plan, collaborate across models, and stream the answer here."}
+              : `Describe a task below. ${BRAND_NAME} specialists plan, collaborate across models, and stream the answer here.`}
           </p>
         </div>
       </div>

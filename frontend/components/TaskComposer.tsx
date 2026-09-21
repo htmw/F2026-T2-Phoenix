@@ -116,7 +116,7 @@ export function TaskComposer({
             rows={compact ? 2 : 4}
             required
             minLength={3}
-            placeholder={compact ? "Message Agent Office…" : "Describe your task…"}
+            placeholder={compact ? "Message Agent Mesh…" : "Describe your task…"}
             disabled={noModels}
           />
         </label>

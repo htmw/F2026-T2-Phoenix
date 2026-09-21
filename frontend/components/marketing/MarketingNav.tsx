@@ -4,6 +4,9 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import { Menu, X } from "lucide-react";
 
+import { BrandWordmark } from "@/components/BrandLogo";
+import { BRAND_NAME } from "@/lib/brand";
+
 const LINKS = [
   { href: "#agents", label: "Agents" },
   { href: "#how-it-works", label: "How it works" },
@@ -24,9 +27,7 @@ export function MarketingNav() {
   return (
     <header className={`mkt-nav ${scrolled ? "mkt-nav-scrolled" : ""}`}>
       <div className="mkt-nav-inner">
-        <a href="#top" className="mkt-logo">
-          Agent Office
-        </a>
+        <BrandWordmark href="#top" size={28} className="mkt-logo" />
         <nav className="mkt-nav-links" aria-label="Primary">
           {LINKS.map((link) => (
             <a key={link.href} href={link.href}>
@@ -36,7 +37,7 @@ export function MarketingNav() {
         </nav>
         <div className="mkt-nav-actions">
           <Link href="/office" className="mkt-btn mkt-btn-primary">
-            Open Agent Office
+            Open {BRAND_NAME}
           </Link>
           <button
             type="button"
@@ -57,7 +58,7 @@ export function MarketingNav() {
             </a>
           ))}
           <Link href="/office" className="mkt-btn mkt-btn-primary" onClick={() => setOpen(false)}>
-            Open Agent Office
+            Open {BRAND_NAME}
           </Link>
         </div>
       )}

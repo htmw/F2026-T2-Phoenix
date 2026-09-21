@@ -31,7 +31,7 @@ export function MarketingFooter() {
     <footer className="mkt-footer">
       <div className="mkt-grid mkt-footer-inner">
         <div>
-          <strong>Agent Office</strong>
+          <strong>Agent Mesh</strong>
           <p>An operating system for autonomous AI teams.</p>
         </div>
         <nav aria-label="Footer">

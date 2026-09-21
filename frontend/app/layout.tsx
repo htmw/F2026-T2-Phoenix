@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import type { ReactNode } from "react";
 import { DM_Sans, Instrument_Sans } from "next/font/google";
 
+import { BRAND_LOGO_PNG, BRAND_LOGO_SRC, BRAND_NAME } from "@/lib/brand";
+
 import "./globals.css";
 
 const instrument = Instrument_Sans({
@@ -18,20 +20,26 @@ const dmSans = DM_Sans({
 
 export const metadata: Metadata = {
   title: {
-    default: "Agent Office, AI agents that work as one organization",
-    template: "%s · Agent Office",
+    default: `${BRAND_NAME} — AI agents that work as one organization`,
+    template: `%s · ${BRAND_NAME}`,
   },
-  description:
-    "Describe any goal, market research, a product plan, analysis, or code, and Agent Office assembles a team of AI specialists to deliver it, designing a bespoke team when a task doesn't fit the standing desks. Bring your own model keys. Free AI mode available.",
+  description: `Describe any goal — market research, a product plan, analysis, or code — and ${BRAND_NAME} assembles a team of AI specialists to deliver it, designing a bespoke team when a task doesn't fit the standing desks. Bring your own model keys. Free AI mode available.`,
+  icons: {
+    icon: [{ url: BRAND_LOGO_SRC, type: "image/svg+xml" }, { url: BRAND_LOGO_PNG }],
+    apple: BRAND_LOGO_PNG,
+  },
   openGraph: {
-    title: "Agent Office",
-    description: "An operating system for autonomous AI teams, assembled for whatever you're working on.",
+    title: BRAND_NAME,
+    description:
+      "An operating system for autonomous AI teams, assembled for whatever you're working on.",
     type: "website",
+    images: [{ url: BRAND_LOGO_PNG }],
   },
   twitter: {
-    card: "summary_large_image",
-    title: "Agent Office",
+    card: "summary",
+    title: BRAND_NAME,
     description: "AI specialists that assemble into a team for any brief.",
+    images: [BRAND_LOGO_PNG],
   },
 };
 

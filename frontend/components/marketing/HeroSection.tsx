@@ -18,7 +18,7 @@ export function HeroSection() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
           >
-            Agent Office
+            Agent Mesh
           </motion.p>
           <motion.h1
             className="mkt-display"
