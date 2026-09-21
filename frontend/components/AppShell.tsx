@@ -3,6 +3,7 @@
 import type { ReactNode } from "react";
 
 import { BrandLogo } from "@/components/BrandLogo";
+import { ThemeToggle } from "@/components/ThemeToggle";
 import { BRAND_NAME, BRAND_TAGLINE } from "@/lib/brand";
 
 export type NavTab = "home" | "agents" | "work" | "messages" | "settings";
@@ -54,6 +55,7 @@ export function AppShell({
           ))}
         </nav>
         <div className="header-meta">
+          <ThemeToggle compact />
           <a href="/" className="px-btn ghost">
             Overview
           </a>

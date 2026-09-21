@@ -10,6 +10,7 @@ import type {
 } from "@/lib/types";
 import { providerMeta, tierLabel } from "@/lib/providers";
 import { ProviderIcon } from "@/components/ProviderIcon";
+import { ThemeToggle } from "@/components/ThemeToggle";
 
 export function SettingsPanel({
   actor,
@@ -68,6 +69,13 @@ export function SettingsPanel({
     <div className="settings-stack">
       <section className="panel panel-glow">
         <h2 className="panel-title">General</h2>
+        <div className="field" style={{ marginBottom: 16 }}>
+          <span>Appearance</span>
+          <ThemeToggle />
+          <p className="muted" style={{ marginTop: 8 }}>
+            Light or Dark. Saved in this browser.
+          </p>
+        </div>
         <label className="field">
           <span>Operator ID</span>
           <input

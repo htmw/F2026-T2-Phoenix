@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import { Menu, X } from "lucide-react";
 
 import { BrandWordmark } from "@/components/BrandLogo";
+import { ThemeToggle } from "@/components/ThemeToggle";
 import { BRAND_NAME } from "@/lib/brand";
 
 const LINKS = [
@@ -36,6 +37,7 @@ export function MarketingNav() {
           ))}
         </nav>
         <div className="mkt-nav-actions">
+          <ThemeToggle compact className="mkt-theme-toggle" />
           <Link href="/office" className="mkt-btn mkt-btn-primary">
             Open {BRAND_NAME}
           </Link>
@@ -57,6 +59,7 @@ export function MarketingNav() {
               {link.label}
             </a>
           ))}
+          <ThemeToggle />
           <Link href="/office" className="mkt-btn mkt-btn-primary" onClick={() => setOpen(false)}>
             Open {BRAND_NAME}
           </Link>

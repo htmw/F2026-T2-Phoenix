@@ -2,7 +2,9 @@ import type { Metadata } from "next";
 import type { ReactNode } from "react";
 import { DM_Sans, Instrument_Sans } from "next/font/google";
 
+import { ThemeProvider } from "@/components/ThemeProvider";
 import { BRAND_MARK_SRC, BRAND_NAME, BRAND_TAGLINE, BRAND_WORDMARK_SRC } from "@/lib/brand";
+import { THEME_BOOT_SCRIPT } from "@/lib/theme";
 
 import "./globals.css";
 
@@ -44,8 +46,13 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
-    <html lang="en" className={`${instrument.variable} ${dmSans.variable}`}>
-      <body>{children}</body>
+    <html lang="en" className={`${instrument.variable} ${dmSans.variable}`} suppressHydrationWarning>
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: THEME_BOOT_SCRIPT }} />
+      </head>
+      <body>
+        <ThemeProvider>{children}</ThemeProvider>
+      </body>
     </html>
   );
 }

@@ -5,14 +5,15 @@ import { motion, useReducedMotion } from "framer-motion";
 
 import { COMM_EDGES, OFFICE_AGENTS, type OfficeAgentId } from "@/lib/design/agents";
 
+/* Keep nodes above the reserved message strip so labels never overlap the ticker. */
 const POSITIONS: Record<OfficeAgentId, { x: number; y: number }> = {
-  researcher: { x: 50, y: 12 },
-  planner: { x: 18, y: 38 },
-  builder: { x: 50, y: 48 },
-  analyst: { x: 82, y: 38 },
-  reviewer: { x: 32, y: 72 },
-  strategist: { x: 68, y: 72 },
-  synthesizer: { x: 50, y: 90 },
+  researcher: { x: 50, y: 10 },
+  planner: { x: 18, y: 32 },
+  builder: { x: 50, y: 42 },
+  analyst: { x: 82, y: 32 },
+  reviewer: { x: 32, y: 62 },
+  strategist: { x: 68, y: 62 },
+  synthesizer: { x: 50, y: 76 },
 };
 
 type Props = {

@@ -9,5 +9,5 @@ export const BRAND_MARK_SRC = "/brand/icon.png";
 /** Horizontal wordmark (`frontend/public/brand/wordmark.png`). */
 export const BRAND_WORDMARK_SRC = "/brand/wordmark.png";
 
-/** Vector mark (`frontend/public/brand/logo.svg`) — favicon / crisp small UI. */
+/** Vector mark (`frontend/public/brand/logo.svg`). */
 export const BRAND_LOGO_SVG = "/brand/logo.svg";

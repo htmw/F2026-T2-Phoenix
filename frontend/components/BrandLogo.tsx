@@ -10,7 +10,7 @@ export function BrandLogo({
   size = 34,
   className = "",
   title = BRAND_NAME,
-  /** Square mark for compact slots; wordmark for headers. */
+  /** Square mark for compact slots; wordmark image for rare fixed assets. */
   variant = "mark",
 }: {
   size?: number;
@@ -49,22 +49,20 @@ export function BrandLogo({
   );
 }
 
+/** Theme-safe header mark: icon + text colored with CSS (readable in light and dark). */
 export function BrandWordmark({
   href = "/",
   size = 36,
-  showWord = false,
   className = "",
 }: {
   href?: string;
   size?: number;
-  /** Wordmark image already includes the name; keep false by default. */
-  showWord?: boolean;
   className?: string;
 }) {
   return (
     <a href={href} className={`brand-wordmark ${className}`.trim()} aria-label={BRAND_NAME}>
-      <BrandLogo size={size} variant="wordmark" />
-      {showWord ? <span className="brand-wordmark-text visually-hidden">{BRAND_NAME}</span> : null}
+      <BrandLogo size={size} variant="mark" />
+      <span className="brand-wordmark-text">{BRAND_NAME}</span>
     </a>
   );
 }
