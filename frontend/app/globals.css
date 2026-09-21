@@ -1,4 +1,4 @@
-/* Agent Mesh — premium light design system */
+/* AgentMesh — premium light design system */
 
 :root {
   --bg: #f6f5f2;
@@ -926,9 +926,19 @@ button:disabled {
   object-fit: cover;
 }
 
+.brand-logo-wordmark {
+  width: auto;
+  height: auto;
+  max-height: 40px;
+  border-radius: 0;
+  object-fit: contain;
+}
+
 .empty-brand-logo {
   border-radius: 14px;
   box-shadow: var(--shadow);
+  object-fit: contain;
+  background: #fff;
 }
 
 .brand-wordmark {

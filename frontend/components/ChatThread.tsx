@@ -163,7 +163,7 @@ function TurnView({
 
       {active && (live || busy) && (
         <article className="chat-bubble agent thinking">
-          <div className="chat-role">Agent Mesh</div>
+          <div className="chat-role">AgentMesh</div>
           <div className="chat-body">
             <span className="status-dot info" aria-hidden /> Agents are working…
           </div>
@@ -179,7 +179,7 @@ function TurnView({
 
       {turn.status === "failed" && turn.error && turn.nodes.length === 0 && (
         <article className="chat-bubble agent">
-          <div className="chat-role">Agent Mesh</div>
+          <div className="chat-role">AgentMesh</div>
           <p className="banner-err">{turn.error}</p>
         </article>
       )}
@@ -205,7 +205,7 @@ export function ChatThread({
           {busy ? (
             <div className="empty-orb loading" aria-hidden />
           ) : (
-            <BrandLogo size={56} className="empty-brand-logo" />
+            <BrandLogo size={64} variant="mark" className="empty-brand-logo" />
           )}
           <h3>{busy ? "Starting…" : "Start a conversation"}</h3>
           <p>

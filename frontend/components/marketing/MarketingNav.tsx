@@ -27,7 +27,7 @@ export function MarketingNav() {
   return (
     <header className={`mkt-nav ${scrolled ? "mkt-nav-scrolled" : ""}`}>
       <div className="mkt-nav-inner">
-        <BrandWordmark href="#top" size={28} className="mkt-logo" />
+        <BrandWordmark href="#top" size={40} className="mkt-logo" />
         <nav className="mkt-nav-links" aria-label="Primary">
           {LINKS.map((link) => (
             <a key={link.href} href={link.href}>

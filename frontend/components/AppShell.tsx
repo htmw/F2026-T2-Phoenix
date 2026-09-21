@@ -31,7 +31,7 @@ export function AppShell({
       <header className="titlebar">
         <div className="brand-row">
           <a href="/" className="brand-mark-link" aria-label={`${BRAND_NAME} marketing site`}>
-            <BrandLogo size={34} />
+            <BrandLogo size={36} variant="mark" />
           </a>
           <div className="brand-block">
             <h1 className="brand" data-testid="brand">
