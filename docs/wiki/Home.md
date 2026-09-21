@@ -38,7 +38,7 @@ Improved **consistency**, **scalability**, and reduced **wasted spend** through 
 
 <table>
   <tr>
-    <td align="center" width="33%">
+    <td align="center" colspan="3">
       <img src="https://github.com/Soumen2581/Capstone-Project/raw/master/docs/wiki/team/henry-wong.jpg" width="200" height="250" alt="Henry Wong" /><br/>
       <b>Henry Wong</b><br/>
       (<a href="mailto:hwong@pace.edu">hwong@pace.edu</a>)<br/>
