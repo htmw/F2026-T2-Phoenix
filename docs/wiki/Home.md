@@ -209,40 +209,7 @@ Agent Mesh follows an end-to-end modular-monolith pipeline:
 
 * * *
 
-# Agent Mesh Final Application Artifacts
-
-## Live Application
-- [Open Live Application](https://YOUR-DEPLOYMENT-URL) *(replace when deployed)*
-- Local: [http://localhost:3000](http://localhost:3000) · [Workspace `/office`](http://localhost:3000/office) · [API docs](http://localhost:8000/docs)
-
-## Final MVP Demo
-- [Watch MVP Demo Video (YouTube)](https://YOUR-YOUTUBE-LINK)
-- [Download MVP Demo Video (mp4)](https://YOUR-FILE-LINK)
-
----
-
-## Application Manuals
-
-### User Manual
-1. [View User Manual as PDF](https://YOUR-LINK)
-2. [Download User Manual as Word Document](https://YOUR-LINK)
-
-### Deployment Manual
-1. [View Deployment Manual as PDF](https://YOUR-LINK)
-2. [Download Deployment Manual as Word Document](https://YOUR-LINK)
-
-### API Documentation
-1. [OpenAPI / Swagger](http://localhost:8000/docs)
-2. [View API Documentation as PDF](https://YOUR-LINK)
-3. [Download API Documentation as Word Document](https://YOUR-LINK)
-
-### Agent Mesh Technical Paper
-1. [View Technical Paper as PDF](https://YOUR-LINK)
-2. [Download Technical Paper as Word Document](https://YOUR-LINK)
-
----
-
-# Course Deliverables
+# Course Deliverables — Sprint 0
 
 ## Presentations (Sprint Reviews)
 
@@ -252,56 +219,12 @@ Agent Mesh follows an end-to-end modular-monolith pipeline:
 0b. [Download Sprint 0 Presentation Slides as PowerPoint](https://YOUR-LINK)  
 Notes: [universal-office-sprint-0.md](https://github.com/Soumen2581/Capstone-Project/blob/master/docs/sprints/universal-office-sprint-0.md)
 
-### Sprint 1
-1. [Watch Sprint 1 Presentation Video](https://YOUR-YOUTUBE-LINK) | [Download mp4 File](https://YOUR-FILE-LINK)  
-1a. [View Sprint 1 Presentation Slides as PDF](https://YOUR-LINK)  
-1b. [Download Sprint 1 Presentation Slides as PowerPoint](https://YOUR-LINK)  
-1c. [Link to Prototype (Figma)](https://YOUR-FIGMA-LINK)  
-1d. [Watch Sprint 1 Demo](https://YOUR-YOUTUBE-LINK) | [Download Sprint 1 Demo (mp4)](https://YOUR-FILE-LINK)  
-1e. [Sprint 1 Front-End Source Code](https://github.com/Soumen2581/Capstone-Project/tree/master/frontend) | [Sprint 1 Back-End Source Code](https://github.com/Soumen2581/Capstone-Project/tree/master/backend)
-
-### Sprint 2
-2. [Watch Sprint 2 Presentation Video](https://YOUR-YOUTUBE-LINK) | [Download mp4 File](https://YOUR-FILE-LINK)  
-2a. [View Sprint 2 Presentation Slides as PDF](https://YOUR-LINK)  
-2b. [Download Sprint 2 Presentation Slides as PowerPoint](https://YOUR-LINK)  
-2c. [Watch Sprint 2 Demo](https://YOUR-YOUTUBE-LINK) | [Download Sprint 2 Demo (mp4)](https://YOUR-FILE-LINK)  
-2d. [Sprint 2 Front-End Source Code](https://github.com/Soumen2581/Capstone-Project/tree/master/frontend) | [Sprint 2 Back-End Source Code](https://github.com/Soumen2581/Capstone-Project/tree/master/backend)
-
-### Sprint 3
-3. [Watch Sprint 3 Presentation Video](https://YOUR-YOUTUBE-LINK) | [Download mp4 File](https://YOUR-FILE-LINK)  
-3a. [View Sprint 3 Presentation Slides as PDF](https://YOUR-LINK)  
-3b. [Download Sprint 3 Presentation Slides as PowerPoint](https://YOUR-LINK)  
-3c. [Watch Final MVP Demo](https://YOUR-YOUTUBE-LINK) | [Download Final MVP Demo (mp4)](https://YOUR-FILE-LINK)  
-3d. [MVP Front-End Source Code](https://github.com/Soumen2581/Capstone-Project/tree/master/frontend) | [MVP Back-End Source Code](https://github.com/Soumen2581/Capstone-Project/tree/master/backend)
-
 ---
 
 ## Sprint Burndown Charts and Completed Tasks
 
 ### Sprint 0
 1. [Sprint 0 Completed Tasks](https://YOUR-LINK)
-
-### Sprint 1
-1. [Sprint 1 Burndown Chart](https://YOUR-LINK) | [Sprint 1 Completed Tasks](https://YOUR-LINK)
-
-### Sprint 2
-1. [Sprint 2 Burndown Chart](https://YOUR-LINK) | [Sprint 2 Completed Tasks](https://YOUR-LINK)
-
-### Sprint 3
-1. [Sprint 3 Burndown Chart](https://YOUR-LINK) | [Sprint 3 Completed Tasks](https://YOUR-LINK)
-
----
-
-## Sprint Planning
-
-### Sprint 1
-1. [Watch Sprint 1 Planning Video](https://YOUR-YOUTUBE-LINK) | [Download mp4 File](https://YOUR-FILE-LINK)
-
-### Sprint 2
-1. [Watch Sprint 2 Planning Video](https://YOUR-YOUTUBE-LINK) | [Download mp4/zip File](https://YOUR-FILE-LINK)
-
-### Sprint 3
-1. [Watch Sprint 3 Planning Video](https://YOUR-YOUTUBE-LINK) | [Download mp4/zip File](https://YOUR-FILE-LINK)
 
 ---
 
@@ -310,17 +233,6 @@ Notes: [universal-office-sprint-0.md](https://github.com/Soumen2581/Capstone-Pro
 ### Sprint 0
 1. [Watch Sprint 0 Retrospective](https://YOUR-YOUTUBE-LINK) | [Download mp4 File](https://YOUR-FILE-LINK)  
 Written: [sprint-0.md](https://github.com/Soumen2581/Capstone-Project/blob/master/docs/agile/retrospectives/sprint-0.md)
-
-### Sprint 1
-1. [Watch Sprint 1 Retrospective](https://YOUR-YOUTUBE-LINK) | [Download mp4 File](https://YOUR-FILE-LINK)
-
-### Sprint 2
-1. [Watch Sprint 2 Retrospective](https://YOUR-YOUTUBE-LINK) | [Download mp4 File](https://YOUR-FILE-LINK)
-
-### Sprint 3
-1. [Watch Sprint 3 Retrospective](https://YOUR-YOUTUBE-LINK) | [Download mp4 File](https://YOUR-FILE-LINK)
-
-More written retros: [docs/agile/retrospectives/](https://github.com/Soumen2581/Capstone-Project/tree/master/docs/agile/retrospectives)
 
 ---
 
@@ -341,56 +253,12 @@ In-repo architecture write-up: [docs/architecture.md](https://github.com/Soumen2
 
 ---
 
-# Additional Project Artifacts
+## Source Code (Sprint 0)
 
-## Product Personas
-- [Individual practitioner](https://YOUR-LINK)
-- [Engineering team lead](https://YOUR-LINK)
-- [Platform operator](https://YOUR-LINK)
-
----
-
-## Product User Stories and Acceptance Criteria
-- [View User Stories & Acceptance Criteria as PDF](https://YOUR-LINK) | [Download as Excel Workbook](https://YOUR-LINK)
-- Product vision / backlog: [docs/agile/](https://github.com/Soumen2581/Capstone-Project/tree/master/docs/agile)
-
-## User Stories and Acceptance Criteria (Sprint-wise)
-
-### Sprint 1
-- [View Sprint 1 User Stories as PDF](https://YOUR-LINK) | [Download as Excel Workbook](https://YOUR-LINK)
-
-### Sprint 2
-- [View Sprint 2 User Stories & Acceptance Criteria as PDF](https://YOUR-LINK) | [Download as Excel Workbook](https://YOUR-LINK)
-
-### Sprint 3
-- [View Sprint 3 User Stories & Acceptance Criteria as PDF](https://YOUR-LINK) | [Download as Excel Workbook](https://YOUR-LINK)
-
----
-
-## Application Test Cases
-
-### Sprint 1
-- [View Test Cases as PDF](https://YOUR-LINK) | [Download as Excel Workbook](https://YOUR-LINK)
-
-### Sprint 2
-- [View Test Cases as PDF](https://YOUR-LINK) | [Download as Excel Workbook](https://YOUR-LINK)
-
-### Sprint 3
-- [View Test Cases as PDF](https://YOUR-LINK) | [Download as Excel Workbook](https://YOUR-LINK)
-
-Backend tests live in [`backend/tests/`](https://github.com/Soumen2581/Capstone-Project/tree/master/backend/tests). Frontend smoke: Playwright.
-
----
-
-## Source Code
-
-### Final MVP Source Code
-- [Frontend Source Code](https://github.com/Soumen2581/Capstone-Project/tree/master/frontend)
-- [Backend Source Code](https://github.com/Soumen2581/Capstone-Project/tree/master/backend)
+- [Frontend](https://github.com/Soumen2581/Capstone-Project/tree/master/frontend)
+- [Backend](https://github.com/Soumen2581/Capstone-Project/tree/master/backend)
 - [Docs / ADRs / Agile](https://github.com/Soumen2581/Capstone-Project/tree/master/docs)
 - **Monorepo:** [https://github.com/Soumen2581/Capstone-Project](https://github.com/Soumen2581/Capstone-Project)
-
-### Run locally
 
 ```bash
 git clone https://github.com/Soumen2581/Capstone-Project.git
@@ -404,7 +272,6 @@ docker compose up --build
 | http://localhost:3000 | Product site |
 | http://localhost:3000/office | Operator workspace |
 | http://localhost:8000/docs | API docs |
-| http://localhost:8000/healthz | Health |
 
 ---
 
@@ -414,4 +281,4 @@ docker compose up --build
 git clone https://github.com/htmw/F2026-T2-Phoenix.wiki.git
 ```
 
-Paste this file as **Home** when your team is ready to publish on [F2026-T2-Phoenix wiki](https://github.com/htmw/F2026-T2-Phoenix/wiki).
+Paste this file as **Home** when ready to publish on [F2026-T2-Phoenix wiki](https://github.com/htmw/F2026-T2-Phoenix/wiki).
