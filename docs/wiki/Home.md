@@ -87,10 +87,10 @@ Improved **consistency**, **scalability**, and reduced **wasted spend** through 
       QA / Test Engineer
     </td>
     <td align="center" width="33%">
+      <img src="https://github.com/Soumen2581/Capstone-Project/raw/master/docs/wiki/team/om-jadhav.jpg" width="200" height="250" alt="Om Jadhav" /><br/>
       <b>Om Jadhav</b><br/>
       (<a href="https://github.com/jadhavom37">jadhavom37</a>)<br/>
-      Documentation & Agile Lead<br/>
-      <i>Photo coming soon</i>
+      Documentation & Agile Lead
     </td>
   </tr>
 </table>
@@ -193,14 +193,51 @@ Agent Mesh follows an end-to-end modular-monolith pipeline:
 
 ### Sprint 0
 - Sprint notes: [universal-office-sprint-0.md](https://github.com/Soumen2581/Capstone-Project/blob/master/docs/sprints/universal-office-sprint-0.md)
+- Presentation video / slides (PDF & PPT) — *to be added*
+
+## Sprint Burndown Charts and Completed Tasks
+
+### Sprint 0
+- Sprint plan & completed scope: [universal-office-sprint-0.md](https://github.com/Soumen2581/Capstone-Project/blob/master/docs/sprints/universal-office-sprint-0.md)
+- Product backlog: [product-backlog.md](https://github.com/Soumen2581/Capstone-Project/blob/master/docs/agile/product-backlog.md)
+- Sprint plan overview: [sprint-plan.md](https://github.com/Soumen2581/Capstone-Project/blob/master/docs/agile/sprint-plan.md)
+- Burndown chart image — *to be added*
 
 ## Retrospectives
 
 ### Sprint 0
 - Written retrospective: [sprint-0.md](https://github.com/Soumen2581/Capstone-Project/blob/master/docs/agile/retrospectives/sprint-0.md)
+- Retrospective video — *to be added*
+
+## Team Working Agreement
+- Working agreement: [team-working-agreement.md](https://github.com/Soumen2581/Capstone-Project/blob/master/docs/agile/team-working-agreement.md)
+- Signed PDF / Word copies — *to be added*
 
 ## Diagrams
 - Architecture write-up: [docs/architecture.md](https://github.com/Soumen2581/Capstone-Project/blob/master/docs/architecture.md)
+- Conceptual / sequence / class diagram images — *to be added*
+
+## Additional Project Artifacts
+
+### Product Personas
+
+**Persona 1 — Maya (Solo practitioner)**  
+Independent researcher who needs multi-step analyses without manually juggling several AI tools. Wants one brief → one coherent result, with clear cost control.
+
+**Persona 2 — Alex (Engineering lead)**  
+Leads a small product team. Needs auditable multi-agent workflows (who did what, which model, what failed) for complex tickets like “audit, fix, test, report.”
+
+**Persona 3 — Jordan (Platform / ops engineer)**  
+Runs internal tooling. Needs Docker one-command setup, provider key isolation, rate limits, and offline demo mode when keys are unavailable.
+
+### User Stories
+- Product backlog / user stories: [product-backlog.md](https://github.com/Soumen2581/Capstone-Project/blob/master/docs/agile/product-backlog.md)
+
+### Acceptance Criteria & Definition of Done
+- [definition-of-done.md](https://github.com/Soumen2581/Capstone-Project/blob/master/docs/agile/definition-of-done.md)
+
+### Application Test Cases
+- Workflow test matrix: [workflow-test-matrix.md](https://github.com/Soumen2581/Capstone-Project/blob/master/docs/agile/workflow-test-matrix.md)
 
 ## Source Code (Sprint 0)
 
