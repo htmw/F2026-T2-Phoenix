@@ -1,309 +1,385 @@
 # Agent Mesh
-**Team 2 — Phoenix** · AI Agent Orchestration Platform
 
-> From one brief to a coordinated specialist team — select, route, execute, synthesise.
+* * *
+<div align="center">
+  <img width="280" alt="Agent Mesh" src="https://raw.githubusercontent.com/Soumen2581/Capstone-Project/master/docs/wiki/agent-mesh-logo.png" />
+</div>
 
-AI-assisted multi-agent orchestration with capability-driven selection, workflow graphs, multi-provider model routing, and an operator workspace (“the mesh”).
+<div align="center">
 
-**Course wiki:** [https://github.com/htmw/F2026-T2-Phoenix/wiki](https://github.com/htmw/F2026-T2-Phoenix/wiki)
+# Agent Mesh
 
----
+</div>
+
+<div align="center">
+  <b>From one brief to a coordinated specialist team — select, route, execute, synthesise.</b><br/>
+  <i>AI-assisted multi-agent orchestration with explainable workflows and shareable results.</i><br/>
+  <br/>
+  <b>Team 2 — Phoenix</b>
+</div>
+
+<br/>
+
+* * *
 
 ## Project Description
 
-**Agent Mesh** (Team 2 — Phoenix) is a web-based platform that uses specialised AI agents and an orchestration engine to handle complex, multi-step requests. For practitioners, researchers, and engineering teams who submit work that is too complex for a single model call, Agent Mesh analyses the brief, activates **only** the agents that are needed, runs them in the right order (sequential, parallel, or conditional), routes each agent to an appropriate model provider, validates outputs, and synthesises one result — unlike traditional multi-model chat tools that broadcast the same prompt to every model and leave coordination to the human.
+Agent Mesh is a web-based platform that uses specialised AI agents and an orchestration engine to handle complex, multi-step requests.
+For practitioners, researchers, and engineering teams
+who submit work too complex for a single model call
+the Agent Mesh app
+is a web-based application that analyses the brief, activates only the agents that are needed, and runs them in the right order
+that provides faster, coordinated, data-driven delivery
+unlike traditional multi-model chat tools that broadcast the same prompt to every model and leave coordination to the human
+our application improves accessibility and efficiency by deciding what to run, what *not* to run, which model powers each step, and how results are synthesised
 
----
+### Why this matters
+Complex requests such as “audit this code, fix the critical issues, write tests, and produce a report” are **many tasks with dependencies**, not one prompt. Manual prompting is **slow and inconsistent**; fan-out chat tools **multiply cost** without adding control.
+Agent Mesh addresses this by offering a scalable, consistent orchestration workflow using capability-driven selection, workflow graphs, and multi-provider routing.
 
-## Why this matters
+### Target users
+Designed for **individuals, researchers, and engineering teams** who need consistent and scalable multi-step AI work with auditability.
 
-Complex requests such as “audit this code, fix the critical issues, write tests, and produce a report” are not one task. They are many tasks with dependencies, different skills, and failure modes. Manual prompting is slow and inconsistent; fan-out chat tools multiply cost without adding control.
+### Scope note
+Agent Mesh is an **AI-assisted orchestration and research/engineering support tool**, **not a substitute for professional judgment** or regulated clinical/legal decision-making.
 
-Agent Mesh addresses this by offering a **scalable, consistent orchestration workflow**: decide what work is required, what is *not* required, in what order it runs, and which model powers each step — with visibility into cost, skips, retries, and approvals.
+### Expected benefits
+Improved **consistency**, **scalability**, and reduced **wasted spend** through selective agent activation and transparent cost/routing.
 
----
-
-## Target users
-
-Designed for:
-
-- **Individual practitioners** who need multi-step AI work done without manual orchestration  
-- **Engineering / research teams** who need repeatable pipelines with auditability  
-- **Platform operators** who need to control cost, connect providers, and observe failures  
-
----
-
-## Scope note
-
-Agent Mesh is an **AI-assisted orchestration and research/engineering support tool**. It coordinates specialised agents and models; it does **not** replace professional judgment, security review sign-off, or clinical/legal decision-making.
-
----
-
-## Expected benefits
-
-- Improved consistency in how multi-step work is decomposed and executed  
-- Lower wasted spend by skipping irrelevant agents and routing by capability/cost  
-- Transparency: which agents ran, which were skipped, what each cost, and why  
-- Provider flexibility: OpenAI, Anthropic (Claude), Google Gemini, Groq, Hugging Face, and others behind one routing layer  
-
----
+* * *
 
 ## Team Members
 
-**Team 2 — Phoenix**
+<table style="width:100%; border-collapse: collapse;">
+  <tr>
+    <td align="center" valign="top" style="padding: 10px;" colspan="3">
+      <img src="https://raw.githubusercontent.com/Soumen2581/Capstone-Project/master/docs/wiki/team/dhwani-dobariya.jpg" width="200" height="250" style="object-fit: cover;">
+      <br /><b>Dhwani Dobariya</b>
+      <br />(<a href="https://github.com/DhwaniDobariya">DhwaniDobariya</a>)
+      <br />Team Leader / Developer
+    </td>
+  </tr>
 
-| | Name | GitHub | Role |
-|---|------|--------|------|
-| <img src="https://raw.githubusercontent.com/Soumen2581/Capstone-Project/master/docs/wiki/team/dhwani-dobariya.jpg" width="96" height="96" alt="Dhwani Dobariya" /> | **Dhwani Dobariya** | [DhwaniDobariya](https://github.com/DhwaniDobariya) | Team Leader / Developer |
-| <img src="https://raw.githubusercontent.com/Soumen2581/Capstone-Project/master/docs/wiki/team/aniruddha-rath.jpg" width="96" height="96" alt="Aniruddha Rath" /> | **Aniruddha Rath** | [AniRath020697](https://github.com/AniRath020697) | Developer |
-| <img src="https://raw.githubusercontent.com/Soumen2581/Capstone-Project/master/docs/wiki/team/soumen-nageshkar.jpg" width="96" height="96" alt="Soumen Nageshkar" /> | **Soumen Nageshkar** | [Soumen2581](https://github.com/Soumen2581) | Developer |
-| <img src="https://raw.githubusercontent.com/Soumen2581/Capstone-Project/master/docs/wiki/team/puneet-tulsiani.jpg" width="96" height="96" alt="Puneet Tulsiani" /> | **Puneet Tulsiani** | [puneett12](https://github.com/puneett12) | Developer |
-| <img src="https://raw.githubusercontent.com/Soumen2581/Capstone-Project/master/docs/wiki/team/sutej-kulkarni.jpg" width="96" height="96" alt="Sutej Kulkarni" /> | **Sutej Kulkarni** | [Sutej12](https://github.com/Sutej12) | Developer |
-| <img src="https://raw.githubusercontent.com/Soumen2581/Capstone-Project/master/docs/wiki/team/gurjot-singh.jpg" width="96" height="96" alt="Gurjot Singh" /> | **Gurjot Singh** | [gurjotsingh01](https://github.com/gurjotsingh01) | Developer |
-| | **Om Jadhav** | [jadhavom37](https://github.com/jadhavom37) | Developer |
+  <tr>
+    <td align="center" valign="top" style="padding: 10px;">
+      <img src="https://raw.githubusercontent.com/Soumen2581/Capstone-Project/master/docs/wiki/team/aniruddha-rath.jpg" width="200" height="250" style="object-fit: cover;">
+      <br /><b>Aniruddha Rath</b>
+      <br />(<a href="https://github.com/AniRath020697">AniRath020697</a>)
+      <br />Developer
+    </td>
+    <td align="center" valign="top" style="padding: 10px;">
+      <img src="https://raw.githubusercontent.com/Soumen2581/Capstone-Project/master/docs/wiki/team/puneet-tulsiani.jpg" width="200" height="250" style="object-fit: cover;">
+      <br /><b>Puneet Tulsiani</b>
+      <br />(<a href="https://github.com/puneett12">puneett12</a>)
+      <br />Developer
+    </td>
+    <td align="center" valign="top" style="padding: 10px;">
+      <img src="https://raw.githubusercontent.com/Soumen2581/Capstone-Project/master/docs/wiki/team/soumen-nageshkar.jpg" width="200" height="250" style="object-fit: cover;">
+      <br /><b>Soumen Nageshkar</b>
+      <br />(<a href="https://github.com/Soumen2581">Soumen2581</a>)
+      <br />Developer
+    </td>
+  </tr>
 
-### Team photos
+  <tr>
+    <td align="center" valign="top" style="padding: 10px;">
+      <img src="https://raw.githubusercontent.com/Soumen2581/Capstone-Project/master/docs/wiki/team/sutej-kulkarni.jpg" width="200" height="250" style="object-fit: cover;">
+      <br /><b>Sutej Kulkarni</b>
+      <br />(<a href="https://github.com/Sutej12">Sutej12</a>)
+      <br />Developer
+    </td>
+    <td align="center" valign="top" style="padding: 10px;">
+      <img src="https://raw.githubusercontent.com/Soumen2581/Capstone-Project/master/docs/wiki/team/gurjot-singh.jpg" width="200" height="250" style="object-fit: cover;">
+      <br /><b>Gurjot Singh</b>
+      <br />(<a href="https://github.com/gurjotsingh01">gurjotsingh01</a>)
+      <br />Developer
+    </td>
+    <td align="center" valign="top" style="padding: 10px;">
+      <div style="width:200px;height:250px;border:1px dashed #bbb;display:flex;align-items:center;justify-content:center;margin:0 auto;color:#888;">Photo TBD</div>
+      <br /><b>Om Jadhav</b>
+      <br />(<a href="https://github.com/jadhavom37">jadhavom37</a>)
+      <br />Developer
+    </td>
+  </tr>
+</table>
 
-<p align="center">
-  <img src="https://raw.githubusercontent.com/Soumen2581/Capstone-Project/master/docs/wiki/team/dhwani-dobariya.jpg" width="140" alt="Dhwani Dobariya" /><br/>
-  <strong>Dhwani Dobariya</strong> — Team Leader
-</p>
-
-<p align="center">
-  <img src="https://raw.githubusercontent.com/Soumen2581/Capstone-Project/master/docs/wiki/team/aniruddha-rath.jpg" width="140" alt="Aniruddha Rath" />
-  &nbsp;
-  <img src="https://raw.githubusercontent.com/Soumen2581/Capstone-Project/master/docs/wiki/team/puneet-tulsiani.jpg" width="140" alt="Puneet Tulsiani" />
-  &nbsp;
-  <img src="https://raw.githubusercontent.com/Soumen2581/Capstone-Project/master/docs/wiki/team/soumen-nageshkar.jpg" width="140" alt="Soumen Nageshkar" />
-</p>
-<p align="center">
-  Aniruddha Rath &nbsp;·&nbsp; Puneet Tulsiani &nbsp;·&nbsp; Soumen Nageshkar
-</p>
-
-<p align="center">
-  <img src="https://raw.githubusercontent.com/Soumen2581/Capstone-Project/master/docs/wiki/team/sutej-kulkarni.jpg" width="140" alt="Sutej Kulkarni" />
-  &nbsp;
-  <img src="https://raw.githubusercontent.com/Soumen2581/Capstone-Project/master/docs/wiki/team/gurjot-singh.jpg" width="140" alt="Gurjot Singh" />
-</p>
-<p align="center">
-  Sutej Kulkarni &nbsp;·&nbsp; Gurjot Singh
-</p>
-
-> Add a photo for Om Jadhav when available. Pace emails and refined role titles can be filled in later.
-
----
+* * *
 
 ## Project Design
 
-### High-level architecture
-
+### High-level architecture (Sprint 0)
 Agent Mesh follows an end-to-end modular-monolith pipeline:
 
-| Layer | Stack | Responsibility |
-|-------|--------|----------------|
-| **Frontend (Web UI)** | Next.js (App Router) + TypeScript + CSS | Marketing site, `/office` workspace, chat threads, workflow progress, provider settings |
-| **Backend API** | Python + FastAPI + JWT / operator identity | Orchestration, agent registry, workflow engine, provider adapters, rate limits |
-| **Data layer** | PostgreSQL + Redis | Durable workflows/results (Postgres); queues, locks, cache (Redis) |
-| **Model providers** | External HTTP APIs | OpenAI, Anthropic, Google, Groq, Hugging Face, OpenRouter, etc. |
-| **Optional observability** | Prometheus + Grafana | Metrics scrape from `/metrics` |
-
-```
-Frontend (Next.js)  →  Backend (FastAPI)  →  AI providers
-                             │    │
-                      PostgreSQL  Redis
-```
-
-Architecture detail: [docs/architecture.md](https://github.com/Soumen2581/Capstone-Project/blob/master/docs/architecture.md)  
-ADRs: [docs/adr/](https://github.com/Soumen2581/Capstone-Project/tree/master/docs/adr)
+- **Frontend (Web UI):** Next.js (App Router) + TypeScript + CSS  
+  - Marketing site, `/office` workspace, chat threads, workflow progress, provider settings.
+- **Backend API:** Python + FastAPI + JWT / operator identity  
+  - Orchestration, agent registry, workflow engine, provider adapters, rate limits.
+- **Orchestration / AI layer:** Capability analysis + multi-agent DAG engine  
+  - Selects agents, routes models, validates outputs, synthesises a final result.
+  - Optional **Level 3 generative teams** design a bespoke team per request.
+- **Data Layer:** PostgreSQL + Redis  
+  - Durable workflows/results in Postgres; queues, locks, and cache in Redis.
 
 ### Core workflow
+1. **Brief:** Operator submits a task (or a follow-up in a continuous chat thread) in `/office`.
+2. **Analyse:** Capability analysis determines which specialist agents are required (and which are not).
+3. **Plan:** A workflow DAG is built (sequence, parallel joins, conditionals / approval gates).
+4. **Route:** Each agent is bound to a suitable model/provider (Auto, pinned, Free Only, or generative team).
+5. **Execute:** Agents run with retries, skips, hand-offs, and optional human approval.
+6. **Synthesise:** Validated outputs are combined into one result shown in the chat thread.
+7. **Persist:** Workflow, executions, cost, and conversation history are stored in PostgreSQL.
 
-1. **Brief** — Operator submits a task (or a follow-up in a continuous chat thread) in `/office`.  
-2. **Analyse** — Capability analysis determines which specialist agents are required (and which are not).  
-3. **Plan** — A workflow DAG is built (sequence, parallel joins, conditionals / approval gates).  
-4. **Route** — Each agent is bound to a suitable model/provider (Auto, pinned, Free Only, or generative team).  
-5. **Execute** — Agents run with retries, skips, hand-offs, and optional human approval.  
-6. **Synthesise** — Validated outputs are combined into one result shown in the chat thread.  
-7. **Persist** — Workflow, executions, cost, and conversation thread history are stored in PostgreSQL.
+### MVP (Sprint 1+ direction)
+- Web-based interface (product site + `/office`)
+- Capability-driven agent selection
+- Workflow engine (DAG: sequential / parallel / conditional)
+- Multi-provider model routing with fallback
+- Continuous chat threads
+- Optional generative agent teams (Level 3)
+- Docker Compose one-command local run
+- Offline demo mode when no API keys are configured
 
-### MVP (demo-ready direction)
-
-- Web UI with product site + `/office` workspace  
-- Capability-driven agent selection (not “run every agent”)  
-- Workflow engine (DAG: sequential / parallel / conditional)  
-- Multi-provider model routing with fallback  
-- Continuous chat threads (follow-ups on the same conversation)  
-- Optional **Level 3 generative teams** (design a bespoke team per request)  
-- Docker Compose one-command local run  
-- Offline demo mode when no API keys are configured  
-
----
+* * *
 
 ## Languages and Tools
 
 ### Languages
-- TypeScript  
-- Python  
-- SQL  
+<p>
+  <img height="48" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg" alt="TypeScript" />
+  <img height="48" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" alt="Python" />
+  <img height="48" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg" alt="SQL / PostgreSQL" />
+</p>
 
 ### Frontend
-- Next.js (App Router)  
-- React  
-- CSS (design system / Framer Motion on marketing surfaces)  
-- Playwright (browser smoke)  
+<p>
+  <img height="48" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" alt="React" />
+  <img height="48" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nextjs/nextjs-original.svg" alt="Next.js" />
+  <img height="48" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg" alt="CSS" />
+  <img height="48" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/framer/framer-original.svg" alt="Framer Motion" />
+</p>
 
 ### Backend
-- FastAPI  
-- Pydantic / SQLAlchemy / Alembic  
-- JWT + `X-Operator-Id` operator identity  
+<p>
+  <img height="48" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/fastapi/fastapi-original.svg" alt="FastAPI" />
+  <img height="48" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/sqlalchemy/sqlalchemy-original.svg" alt="SQLAlchemy" />
+  <img height="48" src="https://cdn.simpleicons.org/jsonwebtokens" alt="JWT" />
+  <img height="48" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/pytest/pytest-original.svg" alt="pytest" />
+</p>
 
 ### Orchestration / AI
-- Multi-agent workflow engine  
-- Provider adapters (OpenAI-compatible + Anthropic)  
-- Capability analysis + team designer (Level 3)  
+<p>
+  <img height="48" src="https://cdn.simpleicons.org/openai" alt="OpenAI" />
+  <img height="48" src="https://cdn.simpleicons.org/anthropic" alt="Anthropic" />
+  <img height="48" src="https://cdn.simpleicons.org/googlegemini" alt="Google Gemini" />
+  <img height="48" src="https://cdn.simpleicons.org/huggingface" alt="Hugging Face" />
+  <img height="48" src="https://raw.githubusercontent.com/Soumen2581/Capstone-Project/master/docs/wiki/agent-mesh-logo.png" alt="Agent Mesh" />
+</p>
 
-### Database & infrastructure
-- PostgreSQL  
-- Redis  
-- Docker / Docker Compose  
+### Database & Cloud
+<p>
+  <img height="48" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg" alt="PostgreSQL" />
+  <img height="48" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/redis/redis-original.svg" alt="Redis" />
+  <img height="48" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg" alt="Docker" />
+</p>
 
 ### Tools
-- GitHub  
-- VS Code / Cursor  
-- Make (CI-aligned checks)  
-- pytest / Vitest-style frontend checks as applicable  
+<p>
+  <img height="48" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg" alt="GitHub" />
+  <img height="48" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vscode/vscode-original.svg" alt="VS Code" />
+  <img height="48" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/jira/jira-original.svg" alt="Jira" />
+  <img height="48" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/prometheus/prometheus-original.svg" alt="Prometheus" />
+</p>
 
-### Misc.
-- Prometheus metrics  
-- Structured logging  
+### Misc. Libraries
+<p>
+  <img height="48" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/pytest/pytest-original.svg" alt="pytest" />
+  <img height="48" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/playwright/playwright-original.svg" alt="Playwright" />
+  <img height="48" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/eslint/eslint-original.svg" alt="ESLint" />
+  <img height="48" src="https://cdn.simpleicons.org/prettier" alt="Prettier" />
+</p>
 
----
+* * *
 
-## Final Application Artifacts
+# Agent Mesh Final Application Artifacts
 
-> Upload PDFs/videos to the wiki or Google Drive / YouTube, then replace the placeholder links below.
+## Live Application
+- [Open Live Application](https://YOUR-DEPLOYMENT-URL) *(replace when deployed)*
+- Local: [http://localhost:3000](http://localhost:3000) · [Workspace `/office`](http://localhost:3000/office) · [API docs](http://localhost:8000/docs)
 
-### Live Application
-- [Open Live Application](https://YOUR-DEPLOYMENT-URL) *(replace with Vercel / cloud URL when deployed)*  
-- Local: `http://localhost:3000` (site) · `http://localhost:3000/office` (workspace) · `http://localhost:8000/docs` (API)
-
-### Final MVP Demo
-- [Watch MVP Demo Video (YouTube)](https://YOUR-YOUTUBE-LINK)  
+## Final MVP Demo
+- [Watch MVP Demo Video (YouTube)](https://YOUR-YOUTUBE-LINK)
 - [Download MVP Demo Video (mp4)](https://YOUR-FILE-LINK)
 
-### Application Manuals
-- **User Manual** — [PDF](https://YOUR-LINK) · [Word](https://YOUR-LINK)  
-- **Deployment Manual** — [PDF](https://YOUR-LINK) · [Word](https://YOUR-LINK)  
-- **API Documentation** — [OpenAPI / Swagger](http://localhost:8000/docs) · [PDF](https://YOUR-LINK)
+---
 
-### Technical Paper
-- [View Technical Paper as PDF](https://YOUR-LINK)  
-- [Download Technical Paper as Word](https://YOUR-LINK)
+## Application Manuals
+
+### User Manual
+1. [View User Manual as PDF](https://YOUR-LINK)
+2. [Download User Manual as Word Document](https://YOUR-LINK)
+
+### Deployment Manual
+1. [View Deployment Manual as PDF](https://YOUR-LINK)
+2. [Download Deployment Manual as Word Document](https://YOUR-LINK)
+
+### API Documentation
+1. [OpenAPI / Swagger](http://localhost:8000/docs)
+2. [View API Documentation as PDF](https://YOUR-LINK)
+3. [Download API Documentation as Word Document](https://YOUR-LINK)
+
+### Agent Mesh Technical Paper
+1. [View Technical Paper as PDF](https://YOUR-LINK)
+2. [Download Technical Paper as Word Document](https://YOUR-LINK)
 
 ---
 
-## Course Deliverables (Sprint Reviews)
+# Course Deliverables
 
-> Mirror KneeVision: link presentation video, slides PDF/PPTX, demo, and source for each sprint. Keep filenames consistent on the wiki.
+## Presentations (Sprint Reviews)
 
-### Sprint 0 — Foundation
-- Watch Sprint 0 Presentation Video | Download mp4  
-- View Sprint 0 Slides (PDF) | Download PowerPoint  
-- Notes: [universal-office-sprint-0.md](https://github.com/Soumen2581/Capstone-Project/blob/master/docs/sprints/universal-office-sprint-0.md)  
-- Retro: [sprint-0.md](https://github.com/Soumen2581/Capstone-Project/blob/master/docs/agile/retrospectives/sprint-0.md)
+### Sprint 0
+0. [Watch Sprint 0 Presentation Video](https://YOUR-YOUTUBE-LINK) | [Download mp4 File](https://YOUR-FILE-LINK)  
+0a. [View Sprint 0 Presentation Slides as PDF](https://YOUR-LINK)  
+0b. [Download Sprint 0 Presentation Slides as PowerPoint](https://YOUR-LINK)  
+Notes: [universal-office-sprint-0.md](https://github.com/Soumen2581/Capstone-Project/blob/master/docs/sprints/universal-office-sprint-0.md)
 
 ### Sprint 1
-- Watch Sprint 1 Presentation Video | Download mp4  
-- View Sprint 1 Slides (PDF) | Download PowerPoint  
-- Watch Sprint 1 Demo | Download Demo (mp4)  
-- Frontend / Backend source: [Capstone-Project](https://github.com/Soumen2581/Capstone-Project)  
-- Retro: [sprint-1.md](https://github.com/Soumen2581/Capstone-Project/blob/master/docs/agile/retrospectives/sprint-1.md)
+1. [Watch Sprint 1 Presentation Video](https://YOUR-YOUTUBE-LINK) | [Download mp4 File](https://YOUR-FILE-LINK)  
+1a. [View Sprint 1 Presentation Slides as PDF](https://YOUR-LINK)  
+1b. [Download Sprint 1 Presentation Slides as PowerPoint](https://YOUR-LINK)  
+1c. [Link to Prototype (Figma)](https://YOUR-FIGMA-LINK)  
+1d. [Watch Sprint 1 Demo](https://YOUR-YOUTUBE-LINK) | [Download Sprint 1 Demo (mp4)](https://YOUR-FILE-LINK)  
+1e. [Sprint 1 Front-End Source Code](https://github.com/Soumen2581/Capstone-Project/tree/master/frontend) | [Sprint 1 Back-End Source Code](https://github.com/Soumen2581/Capstone-Project/tree/master/backend)
 
 ### Sprint 2
-- Watch Sprint 2 Presentation Video | Download mp4  
-- View Sprint 2 Slides (PDF) | Download PowerPoint  
-- Watch Sprint 2 Demo | Download Demo (mp4)  
-- Source: [Capstone-Project](https://github.com/Soumen2581/Capstone-Project)  
-- Retro: [sprint-2.md](https://github.com/Soumen2581/Capstone-Project/blob/master/docs/agile/retrospectives/sprint-2.md)
+2. [Watch Sprint 2 Presentation Video](https://YOUR-YOUTUBE-LINK) | [Download mp4 File](https://YOUR-FILE-LINK)  
+2a. [View Sprint 2 Presentation Slides as PDF](https://YOUR-LINK)  
+2b. [Download Sprint 2 Presentation Slides as PowerPoint](https://YOUR-LINK)  
+2c. [Watch Sprint 2 Demo](https://YOUR-YOUTUBE-LINK) | [Download Sprint 2 Demo (mp4)](https://YOUR-FILE-LINK)  
+2d. [Sprint 2 Front-End Source Code](https://github.com/Soumen2581/Capstone-Project/tree/master/frontend) | [Sprint 2 Back-End Source Code](https://github.com/Soumen2581/Capstone-Project/tree/master/backend)
 
-### Sprint 3+ / MVP
-- Watch Final MVP Demo | Download Final MVP Demo (mp4)  
-- MVP Source: [Frontend](https://github.com/Soumen2581/Capstone-Project/tree/master/frontend) · [Backend](https://github.com/Soumen2581/Capstone-Project/tree/master/backend)  
-- Product backlog / DoD: [docs/agile/](https://github.com/Soumen2581/Capstone-Project/tree/master/docs/agile)
+### Sprint 3
+3. [Watch Sprint 3 Presentation Video](https://YOUR-YOUTUBE-LINK) | [Download mp4 File](https://YOUR-FILE-LINK)  
+3a. [View Sprint 3 Presentation Slides as PDF](https://YOUR-LINK)  
+3b. [Download Sprint 3 Presentation Slides as PowerPoint](https://YOUR-LINK)  
+3c. [Watch Final MVP Demo](https://YOUR-YOUTUBE-LINK) | [Download Final MVP Demo (mp4)](https://YOUR-FILE-LINK)  
+3d. [MVP Front-End Source Code](https://github.com/Soumen2581/Capstone-Project/tree/master/frontend) | [MVP Back-End Source Code](https://github.com/Soumen2581/Capstone-Project/tree/master/backend)
 
-### Sprint burndown & completed tasks
-- Sprint 0 Completed Tasks — *(link)*  
-- Sprint 1 Burndown | Completed Tasks — *(link)*  
-- Sprint 2 Burndown | Completed Tasks — *(link)*  
-- Sprint 3 Burndown | Completed Tasks — *(link)*
+---
 
-### Sprint planning
-- Sprint 1 Planning Video | Download  
-- Sprint 2 Planning Video | Download  
-- Sprint 3 Planning Video | Download  
+## Sprint Burndown Charts and Completed Tasks
 
-### Retrospectives
-- Sprint 0–8 written retros: [docs/agile/retrospectives/](https://github.com/Soumen2581/Capstone-Project/tree/master/docs/agile/retrospectives)  
-- Add presentation recordings here when available  
+### Sprint 0
+1. [Sprint 0 Completed Tasks](https://YOUR-LINK)
 
-### Team Working Agreement
-- Team Working Agreement (PDF) | (Word) — *(upload & link)*
+### Sprint 1
+1. [Sprint 1 Burndown Chart](https://YOUR-LINK) | [Sprint 1 Completed Tasks](https://YOUR-LINK)
+
+### Sprint 2
+1. [Sprint 2 Burndown Chart](https://YOUR-LINK) | [Sprint 2 Completed Tasks](https://YOUR-LINK)
+
+### Sprint 3
+1. [Sprint 3 Burndown Chart](https://YOUR-LINK) | [Sprint 3 Completed Tasks](https://YOUR-LINK)
+
+---
+
+## Sprint Planning
+
+### Sprint 1
+1. [Watch Sprint 1 Planning Video](https://YOUR-YOUTUBE-LINK) | [Download mp4 File](https://YOUR-FILE-LINK)
+
+### Sprint 2
+1. [Watch Sprint 2 Planning Video](https://YOUR-YOUTUBE-LINK) | [Download mp4/zip File](https://YOUR-FILE-LINK)
+
+### Sprint 3
+1. [Watch Sprint 3 Planning Video](https://YOUR-YOUTUBE-LINK) | [Download mp4/zip File](https://YOUR-FILE-LINK)
+
+---
+
+## Retrospectives
+
+### Sprint 0
+1. [Watch Sprint 0 Retrospective](https://YOUR-YOUTUBE-LINK) | [Download mp4 File](https://YOUR-FILE-LINK)  
+Written: [sprint-0.md](https://github.com/Soumen2581/Capstone-Project/blob/master/docs/agile/retrospectives/sprint-0.md)
+
+### Sprint 1
+1. [Watch Sprint 1 Retrospective](https://YOUR-YOUTUBE-LINK) | [Download mp4 File](https://YOUR-FILE-LINK)
+
+### Sprint 2
+1. [Watch Sprint 2 Retrospective](https://YOUR-YOUTUBE-LINK) | [Download mp4 File](https://YOUR-FILE-LINK)
+
+### Sprint 3
+1. [Watch Sprint 3 Retrospective](https://YOUR-YOUTUBE-LINK) | [Download mp4 File](https://YOUR-FILE-LINK)
+
+More written retros: [docs/agile/retrospectives/](https://github.com/Soumen2581/Capstone-Project/tree/master/docs/agile/retrospectives)
+
+---
+
+## Team Working Agreement
+- [Team Working Agreement as PDF](https://YOUR-LINK) | [Team Working Agreement as Word Document](https://YOUR-LINK)
 
 ---
 
 ## Diagrams
-
-> Export from draw.io / Lucidchart / Excalidraw and upload images to the wiki (`[[File:architecture.png]]` or Markdown images).
-
-- Architecture Diagram — *(upload)*  
-- Sequence Diagram — *(upload)*  
-- Context Diagram — *(upload)*  
-- ER Diagram — *(upload)*  
-- State Diagram (workflow / node statuses) — *(upload)*  
-- Class / Module Diagram — *(upload)*  
+- [Architecture Diagram](https://YOUR-LINK)
+- [Sequence Diagram](https://YOUR-LINK)
+- [Context Diagram](https://YOUR-LINK)
+- [ER Diagram](https://YOUR-LINK)
+- [State Diagram](https://YOUR-LINK)
+- [Class Diagram](https://YOUR-LINK)
 
 In-repo architecture write-up: [docs/architecture.md](https://github.com/Soumen2581/Capstone-Project/blob/master/docs/architecture.md)
 
 ---
 
-## Additional Project Artifacts
+# Additional Project Artifacts
 
-### Product personas
-- Individual practitioner  
-- Engineering team lead  
-- Platform operator  
+## Product Personas
+- [Individual practitioner](https://YOUR-LINK)
+- [Engineering team lead](https://YOUR-LINK)
+- [Platform operator](https://YOUR-LINK)
 
-### Product vision & backlog
-- [Product Vision](https://github.com/Soumen2581/Capstone-Project/blob/master/docs/agile/product-vision.md)  
-- [Product Backlog](https://github.com/Soumen2581/Capstone-Project/blob/master/docs/agile/product-backlog.md)  
-- [Sprint Plan](https://github.com/Soumen2581/Capstone-Project/blob/master/docs/agile/sprint-plan.md)  
-- [Definition of Done](https://github.com/Soumen2581/Capstone-Project/blob/master/docs/agile/definition-of-done.md)  
-- [Workflow Test Matrix](https://github.com/Soumen2581/Capstone-Project/blob/master/docs/agile/workflow-test-matrix.md)
+---
 
-### User stories & acceptance criteria
-- View User Stories & Acceptance Criteria (PDF) | Download Excel — *(upload from Jira/export)*  
-- Sprint-wise stories — Sprint 1 / 2 / 3 — *(link)*  
+## Product User Stories and Acceptance Criteria
+- [View User Stories & Acceptance Criteria as PDF](https://YOUR-LINK) | [Download as Excel Workbook](https://YOUR-LINK)
+- Product vision / backlog: [docs/agile/](https://github.com/Soumen2581/Capstone-Project/tree/master/docs/agile)
 
-### Application test cases
-- Backend: `backend/tests/` (pytest)  
-- Continuous chat / generative teams: `test_continuous_chat.py`, `test_generative_teams.py`  
-- Frontend smoke: Playwright office smoke  
-- Sprint test-case workbooks — *(upload PDF/Excel)*  
+## User Stories and Acceptance Criteria (Sprint-wise)
 
-### Screenshots
-- Product site & office UI: [docs/images/](https://github.com/Soumen2581/Capstone-Project/tree/master/docs/images)
+### Sprint 1
+- [View Sprint 1 User Stories as PDF](https://YOUR-LINK) | [Download as Excel Workbook](https://YOUR-LINK)
+
+### Sprint 2
+- [View Sprint 2 User Stories & Acceptance Criteria as PDF](https://YOUR-LINK) | [Download as Excel Workbook](https://YOUR-LINK)
+
+### Sprint 3
+- [View Sprint 3 User Stories & Acceptance Criteria as PDF](https://YOUR-LINK) | [Download as Excel Workbook](https://YOUR-LINK)
+
+---
+
+## Application Test Cases
+
+### Sprint 1
+- [View Test Cases as PDF](https://YOUR-LINK) | [Download as Excel Workbook](https://YOUR-LINK)
+
+### Sprint 2
+- [View Test Cases as PDF](https://YOUR-LINK) | [Download as Excel Workbook](https://YOUR-LINK)
+
+### Sprint 3
+- [View Test Cases as PDF](https://YOUR-LINK) | [Download as Excel Workbook](https://YOUR-LINK)
+
+Backend tests live in [`backend/tests/`](https://github.com/Soumen2581/Capstone-Project/tree/master/backend/tests). Frontend smoke: Playwright.
 
 ---
 
 ## Source Code
 
-### Repository
-- **Monorepo:** [https://github.com/Soumen2581/Capstone-Project](https://github.com/Soumen2581/Capstone-Project)
-
 ### Final MVP Source Code
-- [Frontend Source Code](https://github.com/Soumen2581/Capstone-Project/tree/master/frontend)  
-- [Backend Source Code](https://github.com/Soumen2581/Capstone-Project/tree/master/backend)  
+- [Frontend Source Code](https://github.com/Soumen2581/Capstone-Project/tree/master/frontend)
+- [Backend Source Code](https://github.com/Soumen2581/Capstone-Project/tree/master/backend)
 - [Docs / ADRs / Agile](https://github.com/Soumen2581/Capstone-Project/tree/master/docs)
+- **Monorepo:** [https://github.com/Soumen2581/Capstone-Project](https://github.com/Soumen2581/Capstone-Project)
 
 ### Run locally
 
@@ -311,7 +387,6 @@ In-repo architecture write-up: [docs/architecture.md](https://github.com/Soumen2
 git clone https://github.com/Soumen2581/Capstone-Project.git
 cd Capstone-Project
 cp .env.example .env
-# Optional: add OPENAI_API_KEY / GOOGLE_API_KEY / GROQ_API_KEY / HUGGINGFACE_API_KEY / HF_TOKEN
 docker compose up --build
 ```
 
@@ -330,4 +405,4 @@ docker compose up --build
 git clone https://github.com/htmw/F2026-T2-Phoenix.wiki.git
 ```
 
-Paste this page as **Home** on [https://github.com/htmw/F2026-T2-Phoenix/wiki](https://github.com/htmw/F2026-T2-Phoenix/wiki) (or commit `Home.md` in the wiki clone and push).
+Paste this file as **Home** when your team is ready to publish on [F2026-T2-Phoenix wiki](https://github.com/htmw/F2026-T2-Phoenix/wiki).
