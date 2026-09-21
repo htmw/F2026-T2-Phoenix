@@ -157,12 +157,12 @@ async function main() {
   // Marketing
   await goto("http://localhost:3000/");
   await setNavVisible(true);
-  await shotClip("01-hero.jpg", await heroClip());
+  await shotClip("01-hero-light.jpg", await heroClip());
   for (const [sel, file] of [
-    ["#agents", "02-agents.jpg"],
-    ["#how-it-works", "03-workflow.jpg"],
-    ["#communication", "04-communication.jpg"],
-    ["#workspace", "05-workspace.jpg"],
+    ["#agents", "02-agents-roster.jpg"],
+    ["#how-it-works", "03-workflow-steps.jpg"],
+    ["#communication", "04-agent-mesh.jpg"],
+    ["#workspace", "05-one-workspace.jpg"],
   ]) {
     await goto("http://localhost:3000/");
     await setNavVisible(false);
@@ -183,8 +183,8 @@ async function main() {
     quality: 92,
     fromSurface: true,
   });
-  fs.writeFileSync(path.join(OUT, "06-office.jpg"), Buffer.from(officeData, "base64"));
-  console.log("ok 06-office.jpg");
+  fs.writeFileSync(path.join(OUT, "06-office-home.jpg"), Buffer.from(officeData, "base64"));
+  console.log("ok 06-office-home.jpg");
 
   // Settings — taller viewport so provider grid isn't clipped mid-row
   await Emulation.setDeviceMetricsOverride({
@@ -209,14 +209,11 @@ async function main() {
     quality: 92,
     fromSurface: true,
   });
-  fs.writeFileSync(path.join(OUT, "07-settings.jpg"), Buffer.from(settingsData, "base64"));
-  console.log("ok 07-settings.jpg");
+  fs.writeFileSync(path.join(OUT, "07-settings-providers.jpg"), Buffer.from(settingsData, "base64"));
+  console.log("ok 07-settings-providers.jpg");
 
   await client.close();
   chrome.kill("SIGKILL");
-  // cleanup leftover png
-  const png = path.join(OUT, "01-hero.png");
-  if (fs.existsSync(png)) fs.unlinkSync(png);
 }
 
 main().catch((err) => {
