@@ -1,9 +1,9 @@
 import { expect, test } from "@playwright/test";
 
-test.describe("AgentMesh smoke (J-2)", () => {
+test.describe("Agent Mesh smoke (J-2)", () => {
   test("office loads with brand and API badge", async ({ page }) => {
     await page.goto("/office");
-    await expect(page.getByTestId("brand")).toHaveText("AgentMesh");
+    await expect(page.getByTestId("brand")).toHaveText("Agent Mesh");
     await expect(page.getByTestId("office-tabs")).toBeVisible();
     await expect(page.getByTestId("command-form")).toBeVisible({ timeout: 30_000 });
   });

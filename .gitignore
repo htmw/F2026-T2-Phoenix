@@ -1,10 +1,17 @@
-# ---- Secrets: never commit ----
+# ---- Secrets: never commit real env files ----
+# Local secrets live in `.env` only (copy from `.env.example`).
 .env
-.env.*
-!.env.example
+.env.local
+.env.*.local
+# Accidental double-extension / misnamed copies
+.env.example.env
+.env.env
 *.pem
 *.key
 secrets/
+
+# Keep the committed template:
+!.env.example
 
 # ---- Python ----
 __pycache__/

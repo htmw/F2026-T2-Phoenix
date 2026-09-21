@@ -1,12 +1,9 @@
-# AgentMesh
-
-* * *
-<div align="center">
-  <img width="520" alt="AgentMesh" src="https://raw.githubusercontent.com/Soumen2581/Capstone-Project/master/frontend/public/brand/agent-mesh-wordmark.png" />
-</div>
+# Agent Mesh
 
 <div align="center">
-  <b>One request, many minds — orchestrated.</b><br/>
+  <img width="280" alt="Agent Mesh" src="https://raw.githubusercontent.com/Soumen2581/Capstone-Project/master/frontend/public/brand/wordmark.png" />
+  <br/><br/>
+  <b>From one brief to a coordinated specialist team — select, route, execute, synthesise.</b><br/>
   <i>AI-assisted multi-agent orchestration with explainable workflows and shareable results.</i><br/>
   <br/>
   <b>Team 2 — Phoenix</b>
@@ -18,10 +15,10 @@
 
 ## Project Description
 
-AgentMesh is a web-based platform that uses specialised AI agents and an orchestration engine to handle complex, multi-step requests.
+Agent Mesh is a web-based platform that uses specialised AI agents and an orchestration engine to handle complex, multi-step requests.
 For practitioners, researchers, and engineering teams
 who submit work too complex for a single model call
-the AgentMesh app
+the Agent Mesh app
 is a web-based application that analyses the brief, activates only the agents that are needed, and runs them in the right order
 that provides faster, coordinated, data-driven delivery
 unlike traditional multi-model chat tools that broadcast the same prompt to every model and leave coordination to the human
@@ -29,13 +26,13 @@ our application improves accessibility and efficiency by deciding what to run, w
 
 ### Why this matters
 Complex requests such as “audit this code, fix the critical issues, write tests, and produce a report” are **many tasks with dependencies**, not one prompt. Manual prompting is **slow and inconsistent**; fan-out chat tools **multiply cost** without adding control.
-AgentMesh addresses this by offering a scalable, consistent orchestration workflow using capability-driven selection, workflow graphs, and multi-provider routing.
+Agent Mesh addresses this by offering a scalable, consistent orchestration workflow using capability-driven selection, workflow graphs, and multi-provider routing.
 
 ### Target users
 Designed for **individuals, researchers, and engineering teams** who need consistent and scalable multi-step AI work with auditability.
 
 ### Scope note
-AgentMesh is an **AI-assisted orchestration and research/engineering support tool**, **not a substitute for professional judgment** or regulated clinical/legal decision-making.
+Agent Mesh is an **AI-assisted orchestration and research/engineering support tool**, **not a substitute for professional judgment** or regulated clinical/legal decision-making.
 
 ### Expected benefits
 Improved **consistency**, **scalability**, and reduced **wasted spend** through selective agent activation and transparent cost/routing.
@@ -46,7 +43,7 @@ Improved **consistency**, **scalability**, and reduced **wasted spend** through 
 
 <table style="width:100%; border-collapse: collapse;">
   <tr>
-    <td align="center" valign="top" style="padding: 10px;" colspan="2">
+    <td align="center" valign="top" style="padding: 10px;" colspan="3">
       <img src="https://raw.githubusercontent.com/Soumen2581/Capstone-Project/master/docs/wiki/team/henry-wong.jpg" width="200" height="250" style="object-fit: cover;">
       <br /><b>Henry Wong</b>
       <br />(<a href="mailto:hwong@pace.edu">hwong@pace.edu</a>)
@@ -55,7 +52,7 @@ Improved **consistency**, **scalability**, and reduced **wasted spend** through 
   </tr>
 
   <tr>
-    <td align="center" valign="top" style="padding: 10px;" colspan="2">
+    <td align="center" valign="top" style="padding: 10px;" colspan="3">
       <img src="https://raw.githubusercontent.com/Soumen2581/Capstone-Project/master/docs/wiki/team/dhwani-dobariya.jpg" width="200" height="250" style="object-fit: cover;">
       <br /><b>Dhwani Dobariya</b>
       <br />(<a href="https://github.com/DhwaniDobariya">DhwaniDobariya</a>)
@@ -65,39 +62,36 @@ Improved **consistency**, **scalability**, and reduced **wasted spend** through 
 
   <tr>
     <td align="center" valign="top" style="padding: 10px;">
+      <img src="https://raw.githubusercontent.com/Soumen2581/Capstone-Project/master/docs/wiki/team/aniruddha-rath.jpg" width="200" height="250" style="object-fit: cover;">
+      <br /><b>Aniruddha Rath</b>
+      <br />(<a href="https://github.com/AniRath020697">AniRath020697</a>)
+      <br />Developer
+    </td>
+    <td align="center" valign="top" style="padding: 10px;">
       <img src="https://raw.githubusercontent.com/Soumen2581/Capstone-Project/master/docs/wiki/team/puneet-tulsiani.jpg" width="200" height="250" style="object-fit: cover;">
       <br /><b>Puneet Tulsiani</b>
       <br />(<a href="https://github.com/puneett12">puneett12</a>)
       <br />Developer
     </td>
     <td align="center" valign="top" style="padding: 10px;">
+      <img src="https://raw.githubusercontent.com/Soumen2581/Capstone-Project/master/docs/wiki/team/soumen-nageshkar.jpg" width="200" height="250" style="object-fit: cover;">
+      <br /><b>Soumen Nageshkar</b>
+      <br />(<a href="https://github.com/Soumen2581">Soumen2581</a>)
+      <br />Developer
+    </td>
+  </tr>
+
+  <tr>
+    <td align="center" valign="top" style="padding: 10px;">
       <img src="https://raw.githubusercontent.com/Soumen2581/Capstone-Project/master/docs/wiki/team/sutej-kulkarni.jpg" width="200" height="250" style="object-fit: cover;">
       <br /><b>Sutej Kulkarni</b>
       <br />(<a href="https://github.com/Sutej12">Sutej12</a>)
       <br />Developer
     </td>
-  </tr>
-
-  <tr>
     <td align="center" valign="top" style="padding: 10px;">
       <img src="https://raw.githubusercontent.com/Soumen2581/Capstone-Project/master/docs/wiki/team/gurjot-singh.jpg" width="200" height="250" style="object-fit: cover;">
       <br /><b>Gurjot Singh</b>
       <br />(<a href="https://github.com/gurjotsingh01">gurjotsingh01</a>)
-      <br />Developer
-    </td>
-    <td align="center" valign="top" style="padding: 10px;">
-      <img src="https://raw.githubusercontent.com/Soumen2581/Capstone-Project/master/docs/wiki/team/aniruddha-rath.jpg" width="200" height="250" style="object-fit: cover;">
-      <br /><b>Aniruddha Rath</b>
-      <br />(<a href="https://github.com/AniRath020697">AniRath020697</a>)
-      <br />Developer
-    </td>
-  </tr>
-
-  <tr>
-    <td align="center" valign="top" style="padding: 10px;">
-      <img src="https://raw.githubusercontent.com/Soumen2581/Capstone-Project/master/docs/wiki/team/soumen-nageshkar.jpg" width="200" height="250" style="object-fit: cover;">
-      <br /><b>Soumen Nageshkar</b>
-      <br />(<a href="https://github.com/Soumen2581">Soumen2581</a>)
       <br />Developer
     </td>
     <td align="center" valign="top" style="padding: 10px;">
@@ -114,7 +108,7 @@ Improved **consistency**, **scalability**, and reduced **wasted spend** through 
 ## Project Design
 
 ### High-level architecture (Sprint 0)
-AgentMesh follows an end-to-end modular-monolith pipeline:
+Agent Mesh follows an end-to-end modular-monolith pipeline:
 
 - **Frontend (Web UI):** Next.js (App Router) + TypeScript + CSS  
   - Marketing site, `/office` workspace, chat threads, workflow progress, provider settings.
@@ -178,7 +172,7 @@ AgentMesh follows an end-to-end modular-monolith pipeline:
   <img height="48" src="https://cdn.simpleicons.org/anthropic" alt="Anthropic" />
   <img height="48" src="https://cdn.simpleicons.org/googlegemini" alt="Google Gemini" />
   <img height="48" src="https://cdn.simpleicons.org/huggingface" alt="Hugging Face" />
-  <img height="48" src="https://raw.githubusercontent.com/Soumen2581/Capstone-Project/master/frontend/public/brand/agent-mesh-wordmark.png" alt="AgentMesh" />
+  <img height="48" src="https://raw.githubusercontent.com/Soumen2581/Capstone-Project/master/frontend/public/brand/icon.png" alt="Agent Mesh" />
 </p>
 
 ### Database & Cloud

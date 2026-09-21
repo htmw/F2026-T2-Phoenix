@@ -3,7 +3,7 @@
 # Production uses the multi-stage `Dockerfile` in each service directory; this file
 # targets the `Dockerfile.dev` variants so source is bind-mounted and reloads live.
 
-name: agent-orchestration
+name: agent-mesh
 
 services:
   postgres:

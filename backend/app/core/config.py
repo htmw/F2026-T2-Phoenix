@@ -31,7 +31,7 @@ class Settings(BaseSettings):
     )
 
     # ---- Application ----
-    app_name: str = "AI Agent Orchestration Platform"
+    app_name: str = "Agent Mesh"
     environment: Environment = "development"
     debug: bool = False
     api_v1_prefix: str = "/api/v1"

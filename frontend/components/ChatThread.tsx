@@ -163,7 +163,7 @@ function TurnView({
 
       {active && (live || busy) && (
         <article className="chat-bubble agent thinking">
-          <div className="chat-role">AgentMesh</div>
+          <div className="chat-role">{BRAND_NAME}</div>
           <div className="chat-body">
             <span className="status-dot info" aria-hidden /> Agents are working…
           </div>
@@ -179,7 +179,7 @@ function TurnView({
 
       {turn.status === "failed" && turn.error && turn.nodes.length === 0 && (
         <article className="chat-bubble agent">
-          <div className="chat-role">AgentMesh</div>
+          <div className="chat-role">{BRAND_NAME}</div>
           <p className="banner-err">{turn.error}</p>
         </article>
       )}
