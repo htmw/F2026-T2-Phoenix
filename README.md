@@ -8,23 +8,33 @@ output, and synthesises a single result.
 
 ## Screenshots
 
-### Product site
+<p align="center">
+  <img src="docs/images/01-hero.jpg" alt="Agent Mesh — product hero" width="900" />
+</p>
 
-![Hero — Agent Mesh home](docs/images/01-hero.jpg)
+<p align="center">
+  <img src="docs/images/02-agents.jpg" alt="Specialist agents" width="900" />
+</p>
 
-![Specialist agents roster](docs/images/02-agents.jpg)
+<p align="center">
+  <img src="docs/images/03-workflow.jpg" alt="Workflow — brief to result" width="900" />
+</p>
 
-![Workflow — brief to result](docs/images/03-workflow.jpg)
+<p align="center">
+  <img src="docs/images/04-communication.jpg" alt="Agents talk to each other" width="900" />
+</p>
 
-![Agents talk to each other](docs/images/04-communication.jpg)
+<p align="center">
+  <img src="docs/images/05-workspace.jpg" alt="One workspace" width="900" />
+</p>
 
-![One workspace preview](docs/images/05-workspace.jpg)
+<p align="center">
+  <img src="docs/images/06-office.jpg" alt="Office workspace" width="900" />
+</p>
 
-### Workspace app (`/office`)
-
-![Office — start a conversation](docs/images/06-office.jpg)
-
-![Provider settings](docs/images/07-settings.jpg)
+<p align="center">
+  <img src="docs/images/07-settings.jpg" alt="Provider settings" width="900" />
+</p>
 
 It is not a chat interface that sends the same prompt to several models. The product is
 the orchestration decision: what to run, what *not* to run, in what order, and on which
