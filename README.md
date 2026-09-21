@@ -9,31 +9,31 @@ output, and synthesises a single result.
 ## Screenshots
 
 <p align="center">
-  <img src="docs/images/01-hero.jpg" alt="Agent Mesh — product hero" width="900" />
+  <img src="docs/images/01-hero.jpg" alt="Agent Mesh marketing hero — light theme with agent network" width="900" />
 </p>
 
 <p align="center">
-  <img src="docs/images/02-agents.jpg" alt="Specialist agents" width="900" />
+  <img src="docs/images/02-agents.jpg" alt="Specialist agent roster" width="900" />
 </p>
 
 <p align="center">
-  <img src="docs/images/03-workflow.jpg" alt="Workflow — brief to result" width="900" />
+  <img src="docs/images/03-workflow.jpg" alt="Workflow from brief to result" width="900" />
 </p>
 
 <p align="center">
-  <img src="docs/images/04-communication.jpg" alt="Agents talk to each other" width="900" />
+  <img src="docs/images/04-communication.jpg" alt="Agents collaborating over the mesh" width="900" />
 </p>
 
 <p align="center">
-  <img src="docs/images/05-workspace.jpg" alt="One workspace" width="900" />
+  <img src="docs/images/05-workspace.jpg" alt="One workspace for tasks, agents, and artifacts" width="900" />
 </p>
 
 <p align="center">
-  <img src="docs/images/06-office.jpg" alt="Office workspace" width="900" />
+  <img src="docs/images/06-office.jpg" alt="Office workspace — start a task" width="900" />
 </p>
 
 <p align="center">
-  <img src="docs/images/07-settings.jpg" alt="Provider settings" width="900" />
+  <img src="docs/images/07-settings.jpg" alt="Settings — light/dark theme and AI providers" width="900" />
 </p>
 
 It is not a chat interface that sends the same prompt to several models. The product is

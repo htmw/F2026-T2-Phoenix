@@ -72,9 +72,16 @@ async function main() {
           s.textContent = \`
             nextjs-portal,[data-next-badge-root],[data-nextjs-toast]{display:none!important}
             html{scroll-behavior:auto!important}
+            *,*::before,*::after{animation:none!important;transition:none!important}
           \`;
           document.head.appendChild(s);
         }
+        try {
+          localStorage.setItem('agent-mesh-theme', 'light');
+          document.documentElement.dataset.theme = 'light';
+          document.documentElement.dataset.themePreference = 'light';
+          document.documentElement.style.colorScheme = 'light';
+        } catch (e) {}
         return true;
       })()`,
     });
@@ -93,8 +100,9 @@ async function main() {
   async function goto(url) {
     await Page.navigate({ url });
     await Page.loadEventFired();
-    await sleep(1400);
+    await sleep(1600);
     await hideOverlays();
+    await sleep(300);
   }
 
   async function shotClip(file, clip) {
