@@ -53,6 +53,15 @@ Improved **consistency**, **scalability**, and reduced **wasted spend** through 
 <table style="width:100%; border-collapse: collapse;">
   <tr>
     <td align="center" valign="top" style="padding: 10px;" colspan="3">
+      <img src="https://raw.githubusercontent.com/Soumen2581/Capstone-Project/master/docs/wiki/team/henry-wong.jpg" width="200" height="250" style="object-fit: cover;">
+      <br /><b>Henry Wong</b>
+      <br />(<a href="mailto:hwong@pace.edu">hwong@pace.edu</a>)
+      <br />AI/ML Advisor
+    </td>
+  </tr>
+
+  <tr>
+    <td align="center" valign="top" style="padding: 10px;" colspan="3">
       <img src="https://raw.githubusercontent.com/Soumen2581/Capstone-Project/master/docs/wiki/team/dhwani-dobariya.jpg" width="200" height="250" style="object-fit: cover;">
       <br /><b>Dhwani Dobariya</b>
       <br />(<a href="https://github.com/DhwaniDobariya">DhwaniDobariya</a>)
