@@ -2,7 +2,7 @@
 
 * * *
 <div align="center">
-  <img width="280" alt="Agent Mesh" src="https://raw.githubusercontent.com/Soumen2581/Capstone-Project/master/docs/wiki/agent-mesh-logo.png" />
+  <img width="280" alt="Agent Mesh" src="https://raw.githubusercontent.com/Soumen2581/Capstone-Project/master/frontend/public/brand/agent-mesh.png" />
 </div>
 
 <div align="center">
@@ -181,7 +181,7 @@ Agent Mesh follows an end-to-end modular-monolith pipeline:
   <img height="48" src="https://cdn.simpleicons.org/anthropic" alt="Anthropic" />
   <img height="48" src="https://cdn.simpleicons.org/googlegemini" alt="Google Gemini" />
   <img height="48" src="https://cdn.simpleicons.org/huggingface" alt="Hugging Face" />
-  <img height="48" src="https://raw.githubusercontent.com/Soumen2581/Capstone-Project/master/docs/wiki/agent-mesh-logo.png" alt="Agent Mesh" />
+  <img height="48" src="https://raw.githubusercontent.com/Soumen2581/Capstone-Project/master/frontend/public/brand/agent-mesh.png" alt="Agent Mesh" />
 </p>
 
 ### Database & Cloud

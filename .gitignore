@@ -34,8 +34,11 @@ playwright/.cache/
 
 # ---- Editors / OS ----
 .DS_Store
+**/.DS_Store
 .idea/
 *.swp
+* 2
+*.orig
 
 # ---- Local data ----
 *.log
