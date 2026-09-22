@@ -206,9 +206,7 @@ Agent Mesh follows an end-to-end modular-monolith pipeline:
 ## Sprint Burndown Charts and Completed Tasks
 
 ### Sprint 0
-- Sprint plan & completed scope: [universal-office-sprint-0.md](https://github.com/htmw/F2026-T2-Phoenix/blob/main/docs/sprints/universal-office-sprint-0.md)
-- Product backlog: [product-backlog.md](https://github.com/htmw/F2026-T2-Phoenix/blob/main/docs/agile/product-backlog.md)
-- Sprint plan overview: [sprint-plan.md](https://github.com/htmw/F2026-T2-Phoenix/blob/main/docs/agile/sprint-plan.md)
+- Sprint notes: [universal-office-sprint-0.md](https://github.com/htmw/F2026-T2-Phoenix/blob/main/docs/sprints/universal-office-sprint-0.md)
 - Team Working Agreement (signed PDF): [Teamwork_Agreement_Team2_Phoenix.pdf](https://github.com/htmw/F2026-T2-Phoenix/blob/main/docs/agile/Teamwork_Agreement_Team2_Phoenix.pdf)
 - Sprint 0 Presentation video (YouTube): [https://www.youtube.com/watch?v=N24yQqrouek](https://www.youtube.com/watch?v=N24yQqrouek)
 - Sprint 0 Retrospective video (YouTube): [https://www.youtube.com/watch?v=OkWZ0Ngln0w](https://www.youtube.com/watch?v=OkWZ0Ngln0w)
@@ -218,8 +216,6 @@ Agent Mesh follows an end-to-end modular-monolith pipeline:
 <p align="center">
   <img src="https://github.com/htmw/F2026-T2-Phoenix/raw/main/docs/wiki/sprints/sprint-0-completed-tasks.jpg" alt="Sprint 0 completed tasks — SCRUM-1 through SCRUM-15" width="900" />
 </p>
-
-- Burndown chart image — *to be added*
 
 ## Retrospectives
 
@@ -234,7 +230,6 @@ Agent Mesh follows an end-to-end modular-monolith pipeline:
 
 ## Diagrams
 - Architecture write-up: [docs/architecture.md](https://github.com/htmw/F2026-T2-Phoenix/blob/main/docs/architecture.md)
-- Conceptual / sequence / class diagram images — *to be added*
 
 ## Additional Project Artifacts
 
@@ -253,15 +248,6 @@ From Sprint 0 — *Who we're building Agent Mesh for*:
 **Aisha — Technical Product Manager**  
 **Goal:** Visibility into which AI capability ran, why, and what it cost, for every workflow.  
 **Frustration:** Black-box chatbot answers make it impossible to audit cost, latency, or decision quality.
-
-### User Stories
-- Product backlog / user stories: [product-backlog.md](https://github.com/htmw/F2026-T2-Phoenix/blob/main/docs/agile/product-backlog.md)
-
-### Acceptance Criteria & Definition of Done
-- [definition-of-done.md](https://github.com/htmw/F2026-T2-Phoenix/blob/main/docs/agile/definition-of-done.md)
-
-### Application Test Cases
-- Workflow test matrix: [workflow-test-matrix.md](https://github.com/htmw/F2026-T2-Phoenix/blob/main/docs/agile/workflow-test-matrix.md)
 
 ## Source Code (Sprint 0)
 
