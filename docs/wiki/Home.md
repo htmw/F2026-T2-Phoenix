@@ -200,7 +200,7 @@ Agent Mesh follows an end-to-end modular-monolith pipeline:
 
 ### Sprint 0
 - [Watch deliverable Sprint 0 presentation video](https://www.youtube.com/watch?v=N24yQqrouek)
-- [Download deliverable Sprint 0 presentation video](https://drive.google.com/drive/folders/1GBdi5bs3_tnoIBh5kdQvxPU5Wdq4Zfyc)
+- [Download deliverable Sprint 0 presentation video](https://github.com/htmw/F2026-T2-Phoenix/blob/main/docs/sprints/AgentMesh_Sprint0_Presentation.mp4)
 - [Deliverable presentation slide as PowerPoint](https://github.com/htmw/F2026-T2-Phoenix/blob/main/docs/sprints/AgentMesh_Sprint0_Presentation_final.pptx)
 - [Deliverable presentation slide as PDF](https://github.com/htmw/F2026-T2-Phoenix/blob/main/docs/sprints/AgentMesh_Sprint0_Presentation_final.pdf)
 
@@ -217,7 +217,7 @@ Agent Mesh follows an end-to-end modular-monolith pipeline:
 ## Retrospectives
 
 ### Sprint 0
-0a. [Watch Sprint 0 Retrospective Video](https://www.youtube.com/watch?v=OkWZ0Ngln0w) | [Click here to download mp4 File](https://drive.google.com/drive/folders/1GBdi5bs3_tnoIBh5kdQvxPU5Wdq4Zfyc)
+0a. [Watch Sprint 0 Retrospective Video](https://www.youtube.com/watch?v=OkWZ0Ngln0w) | [Click here to download mp4 File](https://github.com/htmw/F2026-T2-Phoenix/blob/main/docs/sprints/AgentMesh_Sprint0_Retrospective.mp4)
 
 ## Team Working Agreement
 [Team Working Agreement as PDF](https://github.com/htmw/F2026-T2-Phoenix/blob/main/docs/agile/Teamwork_Agreement_Team2_Phoenix.pdf) | [Team Working Agreement (markdown)](https://github.com/htmw/F2026-T2-Phoenix/blob/main/docs/agile/team-working-agreement.md)
