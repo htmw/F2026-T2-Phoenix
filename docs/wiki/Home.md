@@ -199,18 +199,14 @@ Agent Mesh follows an end-to-end modular-monolith pipeline:
 ## Presentations (Sprint Reviews)
 
 ### Sprint 0
-- Sprint notes: [universal-office-sprint-0.md](https://github.com/htmw/F2026-T2-Phoenix/blob/main/docs/sprints/universal-office-sprint-0.md)
-- Watch Sprint 0 Presentation (YouTube): [https://www.youtube.com/watch?v=N24yQqrouek](https://www.youtube.com/watch?v=N24yQqrouek)
-- Sprint 0 videos (Google Drive folder): [https://drive.google.com/drive/folders/1GBdi5bs3_tnoIBh5kdQvxPU5Wdq4Zfyc](https://drive.google.com/drive/folders/1GBdi5bs3_tnoIBh5kdQvxPU5Wdq4Zfyc)
+0a. [Watch Sprint 0 Presentation Video](https://www.youtube.com/watch?v=N24yQqrouek) | [Click here to download mp4 File](https://drive.google.com/drive/folders/1GBdi5bs3_tnoIBh5kdQvxPU5Wdq4Zfyc)  
+0b. [Sprint 0 Presentation Slides as PDF](https://drive.google.com/drive/folders/1GBdi5bs3_tnoIBh5kdQvxPU5Wdq4Zfyc) | [Sprint 0 Presentation Slides as PowerPoint](https://drive.google.com/drive/folders/1GBdi5bs3_tnoIBh5kdQvxPU5Wdq4Zfyc)
 
 ## Sprint Burndown Charts and Completed Tasks
 
 ### Sprint 0
 - Sprint notes: [universal-office-sprint-0.md](https://github.com/htmw/F2026-T2-Phoenix/blob/main/docs/sprints/universal-office-sprint-0.md)
 - Team Working Agreement (signed PDF): [Teamwork_Agreement_Team2_Phoenix.pdf](https://github.com/htmw/F2026-T2-Phoenix/blob/main/docs/agile/Teamwork_Agreement_Team2_Phoenix.pdf)
-- Sprint 0 Presentation video (YouTube): [https://www.youtube.com/watch?v=N24yQqrouek](https://www.youtube.com/watch?v=N24yQqrouek)
-- Sprint 0 Retrospective video (YouTube): [https://www.youtube.com/watch?v=OkWZ0Ngln0w](https://www.youtube.com/watch?v=OkWZ0Ngln0w)
-- Sprint 0 videos download / Drive: [Google Drive folder](https://drive.google.com/drive/folders/1GBdi5bs3_tnoIBh5kdQvxPU5Wdq4Zfyc)
 - Completed tasks (SCRUM board):
 
 <p align="center">
@@ -220,13 +216,10 @@ Agent Mesh follows an end-to-end modular-monolith pipeline:
 ## Retrospectives
 
 ### Sprint 0
-- Written retrospective: [sprint-0.md](https://github.com/htmw/F2026-T2-Phoenix/blob/main/docs/agile/retrospectives/sprint-0.md)
-- Watch Sprint 0 Retrospective (YouTube): [https://www.youtube.com/watch?v=OkWZ0Ngln0w](https://www.youtube.com/watch?v=OkWZ0Ngln0w)
-- Sprint 0 videos (Google Drive folder): [https://drive.google.com/drive/folders/1GBdi5bs3_tnoIBh5kdQvxPU5Wdq4Zfyc](https://drive.google.com/drive/folders/1GBdi5bs3_tnoIBh5kdQvxPU5Wdq4Zfyc)
+0a. [Watch Sprint 0 Retrospective Video](https://www.youtube.com/watch?v=OkWZ0Ngln0w) | [Click here to download mp4 File](https://drive.google.com/drive/folders/1GBdi5bs3_tnoIBh5kdQvxPU5Wdq4Zfyc)
 
 ## Team Working Agreement
-- Working agreement: [team-working-agreement.md](https://github.com/htmw/F2026-T2-Phoenix/blob/main/docs/agile/team-working-agreement.md)
-- Signed PDF: [View Teamwork Agreement (PDF)](https://github.com/htmw/F2026-T2-Phoenix/blob/main/docs/agile/Teamwork_Agreement_Team2_Phoenix.pdf) · [Download](https://github.com/htmw/F2026-T2-Phoenix/raw/main/docs/agile/Teamwork_Agreement_Team2_Phoenix.pdf)
+[Team Working Agreement as PDF](https://github.com/htmw/F2026-T2-Phoenix/blob/main/docs/agile/Teamwork_Agreement_Team2_Phoenix.pdf) | [Team Working Agreement (markdown)](https://github.com/htmw/F2026-T2-Phoenix/blob/main/docs/agile/team-working-agreement.md)
 
 ## Diagrams
 - Architecture write-up: [docs/architecture.md](https://github.com/htmw/F2026-T2-Phoenix/blob/main/docs/architecture.md)
