@@ -61,7 +61,7 @@ model.
 
 ## Run with Docker
 
-Requires Docker with Compose v2+. From the repo root:
+Needs Docker with Compose v2+. From the repo root:
 
 ```bash
 cp .env.example .env
