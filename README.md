@@ -226,3 +226,9 @@ entirely, `make clean`.
 and file locking is unsupported on macOS bind mounts, so mounting the whole directory
 kills the dev server with `EDEADLK` (reported as `Unknown system error -35`). Add the new
 directory to the `frontend` service's `volumes` in `docker-compose.yml`.
+### Windows Note
+
+On Windows, make sure Docker Desktop is running before starting the project with:
+
+```bash
+docker compose up --build
