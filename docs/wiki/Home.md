@@ -208,6 +208,7 @@ Agent Mesh follows an end-to-end modular-monolith pipeline:
 - Sprint plan & completed scope: [universal-office-sprint-0.md](https://github.com/htmw/F2026-T2-Phoenix/blob/main/docs/sprints/universal-office-sprint-0.md)
 - Product backlog: [product-backlog.md](https://github.com/htmw/F2026-T2-Phoenix/blob/main/docs/agile/product-backlog.md)
 - Sprint plan overview: [sprint-plan.md](https://github.com/htmw/F2026-T2-Phoenix/blob/main/docs/agile/sprint-plan.md)
+- Team Working Agreement (signed PDF): [Teamwork_Agreement_Team2_Phoenix.pdf](https://github.com/htmw/F2026-T2-Phoenix/blob/main/docs/agile/Teamwork_Agreement_Team2_Phoenix.pdf)
 - Burndown chart image — *to be added*
 
 ## Retrospectives
@@ -218,7 +219,7 @@ Agent Mesh follows an end-to-end modular-monolith pipeline:
 
 ## Team Working Agreement
 - Working agreement: [team-working-agreement.md](https://github.com/htmw/F2026-T2-Phoenix/blob/main/docs/agile/team-working-agreement.md)
-- Signed PDF / Word copies — *to be added*
+- Signed PDF: [View Teamwork Agreement (PDF)](https://github.com/htmw/F2026-T2-Phoenix/blob/main/docs/agile/Teamwork_Agreement_Team2_Phoenix.pdf) · [Download](https://github.com/htmw/F2026-T2-Phoenix/raw/main/docs/agile/Teamwork_Agreement_Team2_Phoenix.pdf)
 
 ## Diagrams
 - Architecture write-up: [docs/architecture.md](https://github.com/htmw/F2026-T2-Phoenix/blob/main/docs/architecture.md)
