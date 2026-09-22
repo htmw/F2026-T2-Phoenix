@@ -199,8 +199,10 @@ Agent Mesh follows an end-to-end modular-monolith pipeline:
 ## Presentations (Sprint Reviews)
 
 ### Sprint 0
-0a. [Watch Sprint 0 Presentation Video](https://www.youtube.com/watch?v=N24yQqrouek) | [Click here to download mp4 File](https://drive.google.com/drive/folders/1GBdi5bs3_tnoIBh5kdQvxPU5Wdq4Zfyc)  
-0b. [Sprint 0 Presentation Slides as PDF](https://drive.google.com/drive/folders/1GBdi5bs3_tnoIBh5kdQvxPU5Wdq4Zfyc) | [Sprint 0 Presentation Slides as PowerPoint](https://drive.google.com/drive/folders/1GBdi5bs3_tnoIBh5kdQvxPU5Wdq4Zfyc)
+- [Watch deliverable Sprint 0 presentation video](https://www.youtube.com/watch?v=N24yQqrouek)
+- [Download deliverable Sprint 0 presentation video](https://drive.google.com/drive/folders/1GBdi5bs3_tnoIBh5kdQvxPU5Wdq4Zfyc)
+- [Deliverable presentation slide as PowerPoint](https://drive.google.com/drive/folders/1GBdi5bs3_tnoIBh5kdQvxPU5Wdq4Zfyc)
+- [Deliverable presentation slide as PDF](https://drive.google.com/drive/folders/1GBdi5bs3_tnoIBh5kdQvxPU5Wdq4Zfyc)
 
 ## Sprint Burndown Charts and Completed Tasks
 
