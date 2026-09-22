@@ -1,4 +1,4 @@
-# Agent Mesh
+# AgentMesh | one request, many minds - orchestrated.
 
 An orchestration engine for specialised AI agents. A user submits one complex request;
 the platform determines what work is required, activates **only** the agents whose
