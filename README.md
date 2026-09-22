@@ -40,7 +40,7 @@ It is not a chat interface that sends the same prompt to several models. The pro
 the orchestration decision: what to run, what *not* to run, in what order, and on which
 model.
 
-> **Status: Sprints 0–8 complete.** Specialised agents are selected by capability,
+> **Status: Sprint 0 complete.** Specialised agents are selected by capability,
 > planned as a DAG, and executed with skips, retries, approval, and synthesis. They also
 > talk directly: durable inboxes, scoped memory, and artifact references. Several
 > providers share one routing layer with logged fallback. Cost is visible from the API
