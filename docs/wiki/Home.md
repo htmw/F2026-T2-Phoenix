@@ -209,6 +209,12 @@ Agent Mesh follows an end-to-end modular-monolith pipeline:
 - Product backlog: [product-backlog.md](https://github.com/htmw/F2026-T2-Phoenix/blob/main/docs/agile/product-backlog.md)
 - Sprint plan overview: [sprint-plan.md](https://github.com/htmw/F2026-T2-Phoenix/blob/main/docs/agile/sprint-plan.md)
 - Team Working Agreement (signed PDF): [Teamwork_Agreement_Team2_Phoenix.pdf](https://github.com/htmw/F2026-T2-Phoenix/blob/main/docs/agile/Teamwork_Agreement_Team2_Phoenix.pdf)
+- Completed tasks (SCRUM board):
+
+<p align="center">
+  <img src="https://github.com/htmw/F2026-T2-Phoenix/raw/main/docs/wiki/sprints/sprint-0-completed-tasks.jpg" alt="Sprint 0 completed tasks — SCRUM-1 through SCRUM-15" width="900" />
+</p>
+
 - Burndown chart image — *to be added*
 
 ## Retrospectives
