@@ -221,7 +221,7 @@ check `docker compose ps` and the backend logs.
 **Stale dependencies after a pull.** `docker compose up --build`. To reset local data
 entirely, `make clean`.
 
-**Frontend edits to a new directory are not picked up.** Only `app/`, `lib/`, and
+**Frontend edits to a new directory are not picked up.** Only `app/`, `lib/`, `components/`, and
 `public/` are mounted. This is deliberate: Next.js takes a file lock on `next-env.d.ts`,
 and file locking is unsupported on macOS bind mounts, so mounting the whole directory
 kills the dev server with `EDEADLK` (reported as `Unknown system error -35`). Add the new
