@@ -1,7 +1,7 @@
 # Agent Mesh
 
 <div align="center">
-  <img width="320" alt="Agent Mesh" src="https://github.com/Soumen2581/Capstone-Project/raw/master/frontend/public/brand/agent-mesh-logo.png" />
+  <img width="320" alt="Agent Mesh" src="https://github.com/htmw/F2026-T2-Phoenix/raw/main/frontend/public/brand/agent-mesh-logo.png" />
   <br/><br/>
   <b>From one brief to a coordinated specialist team — select, route, execute, synthesise.</b><br/>
   <i>AI-assisted multi-agent orchestration with explainable workflows and shareable results.</i><br/>
@@ -39,7 +39,7 @@ Improved **consistency**, **scalability**, and reduced **wasted spend** through 
 <table>
   <tr>
     <td align="center" colspan="3">
-      <img src="https://github.com/Soumen2581/Capstone-Project/raw/master/docs/wiki/team/henry-wong.jpg" width="200" height="250" alt="Henry Wong" /><br/>
+      <img src="https://github.com/htmw/F2026-T2-Phoenix/raw/main/docs/wiki/team/henry-wong.jpg" width="200" height="250" alt="Henry Wong" /><br/>
       <b>Henry Wong</b><br/>
       (<a href="mailto:hwong@pace.edu">hwong@pace.edu</a>)<br/>
       AI/ML Advisor
@@ -47,50 +47,57 @@ Improved **consistency**, **scalability**, and reduced **wasted spend** through 
   </tr>
   <tr>
     <td align="center" colspan="3">
-      <img src="https://github.com/Soumen2581/Capstone-Project/raw/master/docs/wiki/team/dhwani-dobariya.jpg" width="200" height="250" alt="Dhwani Dobariya" /><br/>
+      <img src="https://github.com/htmw/F2026-T2-Phoenix/raw/main/docs/wiki/team/dhwani-dobariya.jpg" width="200" height="250" alt="Dhwani Dobariya" /><br/>
       <b>Dhwani Dobariya</b><br/>
       (<a href="https://github.com/DhwaniDobariya">DhwaniDobariya</a>)<br/>
-      Team Leader / Product Owner
+      Team Leader / Product Owner<br/>
+      <a href="mailto:dd46109n@pace.edu">dd46109n@pace.edu</a>
     </td>
   </tr>
   <tr>
     <td align="center" width="33%">
-      <img src="https://github.com/Soumen2581/Capstone-Project/raw/master/docs/wiki/team/aniruddha-rath.jpg" width="200" height="250" alt="Aniruddha Rath" /><br/>
+      <img src="https://github.com/htmw/F2026-T2-Phoenix/raw/main/docs/wiki/team/aniruddha-rath.jpg" width="200" height="250" alt="Aniruddha Rath" /><br/>
       <b>Aniruddha Rath</b><br/>
       (<a href="https://github.com/AniRath020697">AniRath020697</a>)<br/>
-      Backend Engineer
+      Backend Engineer<br/>
+      <a href="mailto:ar35067n@pace.edu">ar35067n@pace.edu</a>
     </td>
     <td align="center" width="33%">
-      <img src="https://github.com/Soumen2581/Capstone-Project/raw/master/docs/wiki/team/puneet-tulsiani.jpg" width="200" height="250" alt="Puneet Tulsiani" /><br/>
+      <img src="https://github.com/htmw/F2026-T2-Phoenix/raw/main/docs/wiki/team/puneet-tulsiani.jpg" width="200" height="250" alt="Puneet Tulsiani" /><br/>
       <b>Puneet Tulsiani</b><br/>
       (<a href="https://github.com/puneett12">puneett12</a>)<br/>
-      Frontend Engineer
+      Frontend Engineer<br/>
+      <a href="mailto:pt00057n@pace.edu">pt00057n@pace.edu</a>
     </td>
     <td align="center" width="33%">
-      <img src="https://github.com/Soumen2581/Capstone-Project/raw/master/docs/wiki/team/soumen-nageshkar.jpg" width="200" height="250" alt="Soumen Nageshkar" /><br/>
+      <img src="https://github.com/htmw/F2026-T2-Phoenix/raw/main/docs/wiki/team/soumen-nageshkar.jpg" width="200" height="250" alt="Soumen Nageshkar" /><br/>
       <b>Soumen Nageshkar</b><br/>
       (<a href="https://github.com/Soumen2581">Soumen2581</a>)<br/>
-      Full-Stack / Platform Engineer
+      Full-Stack / Platform Engineer<br/>
+      <a href="mailto:sn92267n@pace.edu">sn92267n@pace.edu</a>
     </td>
   </tr>
   <tr>
     <td align="center" width="33%">
-      <img src="https://github.com/Soumen2581/Capstone-Project/raw/master/docs/wiki/team/sutej-kulkarni.jpg" width="200" height="250" alt="Sutej Kulkarni" /><br/>
+      <img src="https://github.com/htmw/F2026-T2-Phoenix/raw/main/docs/wiki/team/sutej-kulkarni.jpg" width="200" height="250" alt="Sutej Kulkarni" /><br/>
       <b>Sutej Kulkarni</b><br/>
       (<a href="https://github.com/Sutej12">Sutej12</a>)<br/>
-      DevOps / Infrastructure Engineer
+      DevOps / Infrastructure Engineer<br/>
+      <a href="mailto:sk85676n@pace.edu">sk85676n@pace.edu</a>
     </td>
     <td align="center" width="33%">
-      <img src="https://github.com/Soumen2581/Capstone-Project/raw/master/docs/wiki/team/gurjot-singh.jpg" width="200" height="250" alt="Gurjot Singh" /><br/>
+      <img src="https://github.com/htmw/F2026-T2-Phoenix/raw/main/docs/wiki/team/gurjot-singh.jpg" width="200" height="250" alt="Gurjot Singh" /><br/>
       <b>Gurjot Singh</b><br/>
       (<a href="https://github.com/gurjotsingh01">gurjotsingh01</a>)<br/>
-      QA / Test Engineer
+      QA / Test Engineer<br/>
+      <a href="mailto:gs37994n@pace.edu">gs37994n@pace.edu</a>
     </td>
     <td align="center" width="33%">
-      <img src="https://github.com/Soumen2581/Capstone-Project/raw/master/docs/wiki/team/om-jadhav.jpg" width="200" height="250" alt="Om Jadhav" /><br/>
+      <img src="https://github.com/htmw/F2026-T2-Phoenix/raw/main/docs/wiki/team/om-jadhav.jpg" width="200" height="250" alt="Om Jadhav" /><br/>
       <b>Om Jadhav</b><br/>
       (<a href="https://github.com/jadhavom37">jadhavom37</a>)<br/>
-      Documentation & Agile Lead
+      Documentation & Agile Lead<br/>
+      <a href="mailto:oj82545n@pace.edu">oj82545n@pace.edu</a>
     </td>
   </tr>
 </table>
@@ -159,7 +166,7 @@ Agent Mesh follows an end-to-end modular-monolith pipeline:
   <img height="48" src="https://cdn.jsdelivr.net/npm/simple-icons@11.15.0/icons/anthropic.svg" alt="Anthropic" />
   <img height="48" src="https://cdn.jsdelivr.net/npm/simple-icons@11.15.0/icons/googlegemini.svg" alt="Google Gemini" />
   <img height="48" src="https://huggingface.co/front/assets/huggingface_logo-noborder.svg" alt="Hugging Face" />
-  <img height="48" src="https://github.com/Soumen2581/Capstone-Project/raw/master/frontend/public/brand/agent-mesh-icon.png" alt="Agent Mesh" />
+  <img height="48" src="https://github.com/htmw/F2026-T2-Phoenix/raw/main/frontend/public/brand/agent-mesh-icon.png" alt="Agent Mesh" />
 </p>
 
 ### Database & Cloud
@@ -192,63 +199,68 @@ Agent Mesh follows an end-to-end modular-monolith pipeline:
 ## Presentations (Sprint Reviews)
 
 ### Sprint 0
-- Sprint notes: [universal-office-sprint-0.md](https://github.com/Soumen2581/Capstone-Project/blob/master/docs/sprints/universal-office-sprint-0.md)
+- Sprint notes: [universal-office-sprint-0.md](https://github.com/htmw/F2026-T2-Phoenix/blob/main/docs/sprints/universal-office-sprint-0.md)
 - Presentation video / slides (PDF & PPT) — *to be added*
 
 ## Sprint Burndown Charts and Completed Tasks
 
 ### Sprint 0
-- Sprint plan & completed scope: [universal-office-sprint-0.md](https://github.com/Soumen2581/Capstone-Project/blob/master/docs/sprints/universal-office-sprint-0.md)
-- Product backlog: [product-backlog.md](https://github.com/Soumen2581/Capstone-Project/blob/master/docs/agile/product-backlog.md)
-- Sprint plan overview: [sprint-plan.md](https://github.com/Soumen2581/Capstone-Project/blob/master/docs/agile/sprint-plan.md)
+- Sprint plan & completed scope: [universal-office-sprint-0.md](https://github.com/htmw/F2026-T2-Phoenix/blob/main/docs/sprints/universal-office-sprint-0.md)
+- Product backlog: [product-backlog.md](https://github.com/htmw/F2026-T2-Phoenix/blob/main/docs/agile/product-backlog.md)
+- Sprint plan overview: [sprint-plan.md](https://github.com/htmw/F2026-T2-Phoenix/blob/main/docs/agile/sprint-plan.md)
 - Burndown chart image — *to be added*
 
 ## Retrospectives
 
 ### Sprint 0
-- Written retrospective: [sprint-0.md](https://github.com/Soumen2581/Capstone-Project/blob/master/docs/agile/retrospectives/sprint-0.md)
+- Written retrospective: [sprint-0.md](https://github.com/htmw/F2026-T2-Phoenix/blob/main/docs/agile/retrospectives/sprint-0.md)
 - Retrospective video — *to be added*
 
 ## Team Working Agreement
-- Working agreement: [team-working-agreement.md](https://github.com/Soumen2581/Capstone-Project/blob/master/docs/agile/team-working-agreement.md)
+- Working agreement: [team-working-agreement.md](https://github.com/htmw/F2026-T2-Phoenix/blob/main/docs/agile/team-working-agreement.md)
 - Signed PDF / Word copies — *to be added*
 
 ## Diagrams
-- Architecture write-up: [docs/architecture.md](https://github.com/Soumen2581/Capstone-Project/blob/master/docs/architecture.md)
+- Architecture write-up: [docs/architecture.md](https://github.com/htmw/F2026-T2-Phoenix/blob/main/docs/architecture.md)
 - Conceptual / sequence / class diagram images — *to be added*
 
 ## Additional Project Artifacts
 
 ### Product Personas
 
-**Persona 1 — Maya (Solo practitioner)**  
-Independent researcher who needs multi-step analyses without manually juggling several AI tools. Wants one brief → one coherent result, with clear cost control.
+From Sprint 0 — *Who we're building Agent Mesh for*:
 
-**Persona 2 — Alex (Engineering lead)**  
-Leads a small product team. Needs auditable multi-agent workflows (who did what, which model, what failed) for complex tickets like “audit, fix, test, report.”
+**Priya — Software Engineering Lead**  
+**Goal:** A single pipeline that runs security review, code fixes, and tests automatically before merge.  
+**Frustration:** Manually chaining separate AI tools for security, coding, and testing is slow and error-prone.
 
-**Persona 3 — Jordan (Platform / ops engineer)**  
-Runs internal tooling. Needs Docker one-command setup, provider key isolation, rate limits, and offline demo mode when keys are unavailable.
+**Daniel — Data Analyst**  
+**Goal:** Multi-step analysis — cleaning, analysis, and reporting — done from one plain-language request.  
+**Frustration:** General chat models lose track of steps and can't hand structured data cleanly between stages.
+
+**Aisha — Technical Product Manager**  
+**Goal:** Visibility into which AI capability ran, why, and what it cost, for every workflow.  
+**Frustration:** Black-box chatbot answers make it impossible to audit cost, latency, or decision quality.
 
 ### User Stories
-- Product backlog / user stories: [product-backlog.md](https://github.com/Soumen2581/Capstone-Project/blob/master/docs/agile/product-backlog.md)
+- Product backlog / user stories: [product-backlog.md](https://github.com/htmw/F2026-T2-Phoenix/blob/main/docs/agile/product-backlog.md)
 
 ### Acceptance Criteria & Definition of Done
-- [definition-of-done.md](https://github.com/Soumen2581/Capstone-Project/blob/master/docs/agile/definition-of-done.md)
+- [definition-of-done.md](https://github.com/htmw/F2026-T2-Phoenix/blob/main/docs/agile/definition-of-done.md)
 
 ### Application Test Cases
-- Workflow test matrix: [workflow-test-matrix.md](https://github.com/Soumen2581/Capstone-Project/blob/master/docs/agile/workflow-test-matrix.md)
+- Workflow test matrix: [workflow-test-matrix.md](https://github.com/htmw/F2026-T2-Phoenix/blob/main/docs/agile/workflow-test-matrix.md)
 
 ## Source Code (Sprint 0)
 
-- [Frontend](https://github.com/Soumen2581/Capstone-Project/tree/master/frontend)
-- [Backend](https://github.com/Soumen2581/Capstone-Project/tree/master/backend)
-- [Docs / ADRs / Agile](https://github.com/Soumen2581/Capstone-Project/tree/master/docs)
-- **Monorepo:** [https://github.com/Soumen2581/Capstone-Project](https://github.com/Soumen2581/Capstone-Project)
+- [Frontend](https://github.com/htmw/F2026-T2-Phoenix/tree/main/frontend)
+- [Backend](https://github.com/htmw/F2026-T2-Phoenix/tree/main/backend)
+- [Docs / ADRs / Agile](https://github.com/htmw/F2026-T2-Phoenix/tree/main/docs)
+- **Monorepo:** [https://github.com/htmw/F2026-T2-Phoenix](https://github.com/htmw/F2026-T2-Phoenix)
 
 ```bash
-git clone https://github.com/Soumen2581/Capstone-Project.git
-cd Capstone-Project
+git clone https://github.com/htmw/F2026-T2-Phoenix.git
+cd F2026-T2-Phoenix
 cp .env.example .env
 docker compose up --build
 ```
