@@ -200,7 +200,8 @@ Agent Mesh follows an end-to-end modular-monolith pipeline:
 
 ### Sprint 0
 - Sprint notes: [universal-office-sprint-0.md](https://github.com/htmw/F2026-T2-Phoenix/blob/main/docs/sprints/universal-office-sprint-0.md)
-- Presentation video / slides (PDF & PPT) — *to be added*
+- Watch Sprint 0 Presentation (YouTube): [https://www.youtube.com/watch?v=N24yQqrouek](https://www.youtube.com/watch?v=N24yQqrouek)
+- Sprint 0 videos (Google Drive folder): [https://drive.google.com/drive/folders/1GBdi5bs3_tnoIBh5kdQvxPU5Wdq4Zfyc](https://drive.google.com/drive/folders/1GBdi5bs3_tnoIBh5kdQvxPU5Wdq4Zfyc)
 
 ## Sprint Burndown Charts and Completed Tasks
 
@@ -209,6 +210,9 @@ Agent Mesh follows an end-to-end modular-monolith pipeline:
 - Product backlog: [product-backlog.md](https://github.com/htmw/F2026-T2-Phoenix/blob/main/docs/agile/product-backlog.md)
 - Sprint plan overview: [sprint-plan.md](https://github.com/htmw/F2026-T2-Phoenix/blob/main/docs/agile/sprint-plan.md)
 - Team Working Agreement (signed PDF): [Teamwork_Agreement_Team2_Phoenix.pdf](https://github.com/htmw/F2026-T2-Phoenix/blob/main/docs/agile/Teamwork_Agreement_Team2_Phoenix.pdf)
+- Sprint 0 Presentation video (YouTube): [https://www.youtube.com/watch?v=N24yQqrouek](https://www.youtube.com/watch?v=N24yQqrouek)
+- Sprint 0 Retrospective video (YouTube): [https://www.youtube.com/watch?v=OkWZ0Ngln0w](https://www.youtube.com/watch?v=OkWZ0Ngln0w)
+- Sprint 0 videos download / Drive: [Google Drive folder](https://drive.google.com/drive/folders/1GBdi5bs3_tnoIBh5kdQvxPU5Wdq4Zfyc)
 - Completed tasks (SCRUM board):
 
 <p align="center">
@@ -221,7 +225,8 @@ Agent Mesh follows an end-to-end modular-monolith pipeline:
 
 ### Sprint 0
 - Written retrospective: [sprint-0.md](https://github.com/htmw/F2026-T2-Phoenix/blob/main/docs/agile/retrospectives/sprint-0.md)
-- Retrospective video — *to be added*
+- Watch Sprint 0 Retrospective (YouTube): [https://www.youtube.com/watch?v=OkWZ0Ngln0w](https://www.youtube.com/watch?v=OkWZ0Ngln0w)
+- Sprint 0 videos (Google Drive folder): [https://drive.google.com/drive/folders/1GBdi5bs3_tnoIBh5kdQvxPU5Wdq4Zfyc](https://drive.google.com/drive/folders/1GBdi5bs3_tnoIBh5kdQvxPU5Wdq4Zfyc)
 
 ## Team Working Agreement
 - Working agreement: [team-working-agreement.md](https://github.com/htmw/F2026-T2-Phoenix/blob/main/docs/agile/team-working-agreement.md)
