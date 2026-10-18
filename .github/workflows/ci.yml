@@ -2,8 +2,9 @@ name: CI
 
 on:
   push:
-    branches: [main, develop]
+    branches: [master, main, develop]
   pull_request:
+  workflow_dispatch:
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
@@ -62,7 +63,15 @@ jobs:
       - name: Test
         # No provider credentials are supplied: a test that needs a paid API call must
         # fail here rather than pass quietly.
-        run: pytest
+        run: pytest --junitxml=pytest-results.xml
+
+      - name: Upload pytest results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: pytest-results
+          path: backend/pytest-results.xml
+          retention-days: 7
 
   frontend:
     name: Frontend (lint, types, build)
