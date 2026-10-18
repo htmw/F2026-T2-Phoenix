@@ -39,7 +39,7 @@ Improved **consistency**, **scalability**, and reduced **wasted spend** through 
 <table>
   <tr>
     <td align="center" colspan="3">
-      <img src="https://github.com/htmw/F2026-T2-Phoenix/raw/main/docs/wiki/team/henry-wong.jpg" width="200" height="250" alt="Henry Wong" /><br/>
+      <img src="https://github.com/Soumen2581/Capstone-Project/raw/master/docs/wiki/team/henry-wong.jpg" width="200" height="250" alt="Henry Wong" /><br/>
       <b>Henry Wong</b><br/>
       (<a href="mailto:hwong@pace.edu">hwong@pace.edu</a>)<br/>
       AI/ML Advisor
@@ -47,7 +47,7 @@ Improved **consistency**, **scalability**, and reduced **wasted spend** through 
   </tr>
   <tr>
     <td align="center" colspan="3">
-      <img src="https://github.com/htmw/F2026-T2-Phoenix/raw/main/docs/wiki/team/dhwani-dobariya.jpg" width="200" height="250" alt="Dhwani Dobariya" /><br/>
+      <img src="https://github.com/Soumen2581/Capstone-Project/raw/master/docs/wiki/team/dhwani-dobariya.jpg" width="200" height="250" alt="Dhwani Dobariya" /><br/>
       <b>Dhwani Dobariya</b><br/>
       (<a href="https://github.com/DhwaniDobariya">DhwaniDobariya</a>)<br/>
       Team Leader / Product Owner<br/>
@@ -56,21 +56,21 @@ Improved **consistency**, **scalability**, and reduced **wasted spend** through 
   </tr>
   <tr>
     <td align="center" width="33%">
-      <img src="https://github.com/htmw/F2026-T2-Phoenix/raw/main/docs/wiki/team/aniruddha-rath.jpg" width="200" height="250" alt="Aniruddha Rath" /><br/>
+      <img src="https://github.com/Soumen2581/Capstone-Project/raw/master/docs/wiki/team/aniruddha-rath.jpg" width="200" height="250" alt="Aniruddha Rath" /><br/>
       <b>Aniruddha Rath</b><br/>
       (<a href="https://github.com/AniRath020697">AniRath020697</a>)<br/>
       Backend Engineer<br/>
       <a href="mailto:ar35067n@pace.edu">ar35067n@pace.edu</a>
     </td>
     <td align="center" width="33%">
-      <img src="https://github.com/htmw/F2026-T2-Phoenix/raw/main/docs/wiki/team/puneet-tulsiani.jpg" width="200" height="250" alt="Puneet Tulsiani" /><br/>
+      <img src="https://github.com/Soumen2581/Capstone-Project/raw/master/docs/wiki/team/puneet-tulsiani.jpg" width="200" height="250" alt="Puneet Tulsiani" /><br/>
       <b>Puneet Tulsiani</b><br/>
       (<a href="https://github.com/puneett12">puneett12</a>)<br/>
       Frontend Engineer<br/>
       <a href="mailto:pt00057n@pace.edu">pt00057n@pace.edu</a>
     </td>
     <td align="center" width="33%">
-      <img src="https://github.com/htmw/F2026-T2-Phoenix/raw/main/docs/wiki/team/soumen-nageshkar.jpg" width="200" height="250" alt="Soumen Nageshkar" /><br/>
+      <img src="https://github.com/Soumen2581/Capstone-Project/raw/master/docs/wiki/team/soumen-nageshkar.jpg" width="200" height="250" alt="Soumen Nageshkar" /><br/>
       <b>Soumen Nageshkar</b><br/>
       (<a href="https://github.com/Soumen2581">Soumen2581</a>)<br/>
       Full-Stack / Platform Engineer<br/>
@@ -79,21 +79,21 @@ Improved **consistency**, **scalability**, and reduced **wasted spend** through 
   </tr>
   <tr>
     <td align="center" width="33%">
-      <img src="https://github.com/htmw/F2026-T2-Phoenix/raw/main/docs/wiki/team/sutej-kulkarni.jpg" width="200" height="250" alt="Sutej Kulkarni" /><br/>
+      <img src="https://github.com/Soumen2581/Capstone-Project/raw/master/docs/wiki/team/sutej-kulkarni.jpg" width="200" height="250" alt="Sutej Kulkarni" /><br/>
       <b>Sutej Kulkarni</b><br/>
       (<a href="https://github.com/Sutej12">Sutej12</a>)<br/>
       DevOps / Infrastructure Engineer<br/>
       <a href="mailto:sk85676n@pace.edu">sk85676n@pace.edu</a>
     </td>
     <td align="center" width="33%">
-      <img src="https://github.com/htmw/F2026-T2-Phoenix/raw/main/docs/wiki/team/gurjot-singh.jpg" width="200" height="250" alt="Gurjot Singh" /><br/>
+      <img src="https://github.com/Soumen2581/Capstone-Project/raw/master/docs/wiki/team/gurjot-singh.jpg" width="200" height="250" alt="Gurjot Singh" /><br/>
       <b>Gurjot Singh</b><br/>
       (<a href="https://github.com/gurjotsingh01">gurjotsingh01</a>)<br/>
       QA / Test Engineer<br/>
       <a href="mailto:gs37994n@pace.edu">gs37994n@pace.edu</a>
     </td>
     <td align="center" width="33%">
-      <img src="https://github.com/htmw/F2026-T2-Phoenix/raw/main/docs/wiki/team/om-jadhav.jpg" width="200" height="250" alt="Om Jadhav" /><br/>
+      <img src="https://github.com/Soumen2581/Capstone-Project/raw/master/docs/wiki/team/om-jadhav.jpg" width="200" height="250" alt="Om Jadhav" /><br/>
       <b>Om Jadhav</b><br/>
       (<a href="https://github.com/jadhavom37">jadhavom37</a>)<br/>
       Documentation & Agile Lead<br/>
