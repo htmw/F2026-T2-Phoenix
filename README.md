@@ -1,4 +1,4 @@
-# Agent Mesh
+# AgentMesh | one request, many minds - orchestrated.
 
 An orchestration engine for specialised AI agents. A user submits one complex request;
 the platform determines what work is required, activates **only** the agents whose
@@ -40,7 +40,7 @@ It is not a chat interface that sends the same prompt to several models. The pro
 the orchestration decision: what to run, what *not* to run, in what order, and on which
 model.
 
-> **Status: Sprints 0–8 complete.** Specialised agents are selected by capability,
+> **Status: Sprint 0 complete.** Specialised agents are selected by capability,
 > planned as a DAG, and executed with skips, retries, approval, and synthesis. They also
 > talk directly: durable inboxes, scoped memory, and artifact references. Several
 > providers share one routing layer with logged fallback. Cost is visible from the API
@@ -61,7 +61,7 @@ model.
 
 ## Run with Docker
 
-Requires Docker with Compose v2+. From the repo root:
+Needs Docker with Compose v2+. From the repo root:
 
 ```bash
 cp .env.example .env
@@ -221,8 +221,16 @@ check `docker compose ps` and the backend logs.
 **Stale dependencies after a pull.** `docker compose up --build`. To reset local data
 entirely, `make clean`.
 
-**Frontend edits to a new directory are not picked up.** Only `app/`, `lib/`, and
+**Frontend edits to a new directory are not picked up.** Only `app/`, `lib/`, `components/`, and
 `public/` are mounted. This is deliberate: Next.js takes a file lock on `next-env.d.ts`,
 and file locking is unsupported on macOS bind mounts, so mounting the whole directory
 kills the dev server with `EDEADLK` (reported as `Unknown system error -35`). Add the new
 directory to the `frontend` service's `volumes` in `docker-compose.yml`.
+
+### Windows Note
+
+On Windows, make sure Docker Desktop is running before starting the project with:
+
+```bash
+docker compose up --build
+```
