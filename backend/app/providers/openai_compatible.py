@@ -216,8 +216,8 @@ class OpenAICompatibleProvider(LLMProvider):
                 # Retired or mistyped model ids often surface as bare 404s.
                 if detail.upper().startswith("HTTP ") or detail.strip() == "":
                     detail = (
-                        f"model not found (HTTP 404). Refresh models in Settings or "
-                        f"pick a current catalogue id."
+                        "model not found (HTTP 404). Refresh models in Settings or "
+                        "pick a current catalogue id."
                     )
             case 408:
                 kind = ErrorKind.TIMEOUT

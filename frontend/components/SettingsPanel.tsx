@@ -10,6 +10,7 @@ import type {
 } from "@/lib/types";
 import { providerMeta, tierLabel } from "@/lib/providers";
 import { ProviderIcon } from "@/components/ProviderIcon";
+import { AccountMenu } from "@/components/AccountMenu";
 import { ThemeToggle } from "@/components/ThemeToggle";
 
 export function SettingsPanel({
@@ -85,6 +86,7 @@ export function SettingsPanel({
             onChange={(event) => onActor(event.target.value)}
           />
         </label>
+        <AccountMenu />
         <label className="check" style={{ marginTop: 12 }}>
           <input type="checkbox" checked={freeOnly} onChange={onToggleFree} />
           Free Only, prefer free/cheapest models when available

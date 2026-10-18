@@ -19,6 +19,7 @@ from app.models.provider import (
     ProviderRecord,
     RoutingPolicyRecord,
 )
+from app.models.user import UserRecord
 from app.models.workflow import (
     AgentResultRecord,
     ExecutionRecord,
@@ -44,6 +45,7 @@ __all__ = [
     "ProviderRecord",
     "RoutingPolicyRecord",
     "TaskRecord",
+    "UserRecord",
     "WorkflowEdgeRecord",
     "WorkflowNodeRecord",
     "WorkflowRecord",

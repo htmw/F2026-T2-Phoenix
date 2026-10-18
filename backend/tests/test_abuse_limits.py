@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+from collections.abc import AsyncIterator
 from datetime import UTC, datetime, timedelta
 
 import pytest
@@ -43,9 +44,9 @@ def tight_settings(settings: Settings) -> Settings:
 @pytest.fixture
 async def tight_client(
     tight_settings: Settings,
-    session_factory: async_sessionmaker,
+    session_factory: async_sessionmaker[AsyncSession],
     fake_provider: FakeProvider,
-) -> AsyncClient:
+) -> AsyncIterator[AsyncClient]:
     app = create_app(tight_settings)
     app.state.session_factory = session_factory
     app.state.provider_registry = ProviderRegistry([fake_provider])
@@ -55,7 +56,7 @@ async def tight_client(
         await seed_agents(session, BUILTIN_AGENTS)
         await session.commit()
 
-    async def override_session():
+    async def override_session() -> AsyncIterator[AsyncSession]:
         async with session_factory() as request_session:
             yield request_session
             await request_session.commit()
@@ -90,7 +91,7 @@ async def test_me_limits_endpoint(db_client: AsyncClient) -> None:
 
 
 async def test_operator_budget_blocks_new_submit(
-    tight_client: AsyncClient, session_factory: async_sessionmaker
+    tight_client: AsyncClient, session_factory: async_sessionmaker[AsyncSession]
 ) -> None:
     # Seed prior spend under the same operator id used by auth_mode=off.
     async with session_factory() as session:

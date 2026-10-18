@@ -229,14 +229,18 @@ async def test_failing_tests_send_work_back_to_the_coding_agent(
     seeded_session: AsyncSession,
 ) -> None:
     provider = FakeProvider()
-    provider.queue_json({"changes": [{"file": "app.py", "action": "modify"}]})
+    provider.queue_json(
+        {"changes": [{"file": "app.py", "action": "modify"}], "summary": "Updated app.py."}
+    )
     provider.queue_json(
         {
             "passed": False,
             "failures": [{"test": "test_login", "message": "test_login asserts 200, got 500"}],
         }
     )
-    provider.queue_json({"changes": [{"file": "app.py", "action": "modify"}]})
+    provider.queue_json(
+        {"changes": [{"file": "app.py", "action": "modify"}], "summary": "Updated app.py."}
+    )
     provider.queue_json({"passed": True, "tests": [{"name": "test_login"}]})
 
     run, _, _ = await run_plan(seeded_session, provider, code_then_test_plan())
@@ -250,14 +254,18 @@ async def test_failing_tests_send_work_back_to_the_coding_agent(
 
 async def test_the_revision_is_told_what_failed(seeded_session: AsyncSession) -> None:
     provider = FakeProvider()
-    provider.queue_json({"changes": [{"file": "app.py", "action": "modify"}]})
+    provider.queue_json(
+        {"changes": [{"file": "app.py", "action": "modify"}], "summary": "Updated app.py."}
+    )
     provider.queue_json(
         {
             "passed": False,
             "failures": [{"test": "test_login", "message": "test_login asserts 200, got 500"}],
         }
     )
-    provider.queue_json({"changes": [{"file": "app.py", "action": "modify"}]})
+    provider.queue_json(
+        {"changes": [{"file": "app.py", "action": "modify"}], "summary": "Updated app.py."}
+    )
     provider.queue_json({"passed": True})
 
     await run_plan(seeded_session, provider, code_then_test_plan())
@@ -270,9 +278,13 @@ async def test_the_revision_is_told_what_failed(seeded_session: AsyncSession) ->
 
 async def test_a_repair_reruns_everything_downstream(seeded_session: AsyncSession) -> None:
     provider = FakeProvider()
-    provider.queue_json({"changes": []})
+    provider.queue_json(
+        {"changes": [{"file": "app.py", "action": "modify"}], "summary": "Updated app.py."}
+    )
     provider.queue_json({"passed": False, "failures": [{"test": "suite", "message": "broken"}]})
-    provider.queue_json({"changes": []})
+    provider.queue_json(
+        {"changes": [{"file": "app.py", "action": "modify"}], "summary": "Updated app.py."}
+    )
     provider.queue_json({"passed": True})
 
     _, repository, workflow_id = await run_plan(seeded_session, provider, code_then_test_plan())
@@ -299,9 +311,13 @@ async def test_the_repair_loop_is_bounded(seeded_session: AsyncSession) -> None:
         "passed": False,
         "failures": [{"test": "suite", "message": "still broken"}],
     }
-    provider.queue_json({"changes": []})
+    provider.queue_json(
+        {"changes": [{"file": "app.py", "action": "modify"}], "summary": "Updated app.py."}
+    )
     provider.queue_json(still_broken)
-    provider.queue_json({"changes": []})
+    provider.queue_json(
+        {"changes": [{"file": "app.py", "action": "modify"}], "summary": "Updated app.py."}
+    )
     provider.queue_json(still_broken)
 
     run, _, _ = await run_plan(seeded_session, provider, code_then_test_plan(), max_repair_cycles=1)
@@ -315,7 +331,9 @@ async def test_the_repair_loop_is_bounded(seeded_session: AsyncSession) -> None:
 
 async def test_zero_repair_cycles_disables_the_loop(seeded_session: AsyncSession) -> None:
     provider = FakeProvider()
-    provider.queue_json({"changes": []})
+    provider.queue_json(
+        {"changes": [{"file": "app.py", "action": "modify"}], "summary": "Updated app.py."}
+    )
     provider.queue_json({"passed": False, "failures": [{"test": "suite", "message": "broken"}]})
 
     run, _, _ = await run_plan(seeded_session, provider, code_then_test_plan(), max_repair_cycles=0)
@@ -326,7 +344,9 @@ async def test_zero_repair_cycles_disables_the_loop(seeded_session: AsyncSession
 
 async def test_passing_tests_do_not_trigger_a_repair(seeded_session: AsyncSession) -> None:
     provider = FakeProvider()
-    provider.queue_json({"changes": []})
+    provider.queue_json(
+        {"changes": [{"file": "app.py", "action": "modify"}], "summary": "Updated app.py."}
+    )
     provider.queue_json({"passed": True})
 
     run, _, _ = await run_plan(seeded_session, provider, code_then_test_plan())
@@ -490,7 +510,9 @@ async def test_resume_does_not_rerun_completed_nodes(seeded_session: AsyncSessio
 
     # Second pass: resume with a fresh provider that only answers the remaining node.
     resumed_provider = FakeProvider()
-    resumed_provider.queue_json({"changes": [{"file": "db.py", "action": "modify"}]})
+    resumed_provider.queue_json(
+        {"changes": [{"file": "db.py", "action": "modify"}], "summary": "Updated db.py."}
+    )
     result = await service_for(seeded_session, resumed_provider).resume(workflow.id)
     await seeded_session.commit()
 
@@ -526,7 +548,9 @@ async def test_resume_hands_the_earlier_result_to_the_remaining_node(
     await seeded_session.commit()
 
     resumed_provider = FakeProvider()
-    resumed_provider.queue_json({"changes": [{"file": "db.py", "action": "modify"}]})
+    resumed_provider.queue_json(
+        {"changes": [{"file": "db.py", "action": "modify"}], "summary": "Updated db.py."}
+    )
     await service_for(seeded_session, resumed_provider).resume(workflow.id)
 
     # The hand-off has to come from the database, or the resumed node works blind.

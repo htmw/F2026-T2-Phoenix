@@ -205,11 +205,13 @@ class AgentRuntimeStatus(StrEnum):
 
 
 class MemoryVisibility(StrEnum):
-    """The three knowledge scopes. Mixing them in one row is a bug."""
+    """Knowledge scopes. Mixing them in one row is a bug."""
 
     PRIVATE = "private"
     SHARED = "shared"
     WORKFLOW = "workflow"
+    # Durable facts for one authenticated user. Never returned to another operator.
+    OPERATOR = "operator"
 
 
 class ArtifactKind(StrEnum):

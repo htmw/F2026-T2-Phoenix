@@ -70,7 +70,10 @@ async def test_unknown_parent_is_ignored_rather_than_failing(db_client: AsyncCli
     # no dangling link, and nothing threaded in.
     response = await db_client.post(
         "/api/v1/tasks?wait=true",
-        json={"request": "Give me a short poem about the sea.", "parent_workflow_id": str(uuid.uuid4())},
+        json={
+            "request": "Give me a short poem about the sea.",
+            "parent_workflow_id": str(uuid.uuid4()),
+        },
     )
     assert response.status_code == 200, response.text
     body = response.json()

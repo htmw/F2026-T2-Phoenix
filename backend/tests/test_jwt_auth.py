@@ -2,12 +2,14 @@
 
 from __future__ import annotations
 
+from collections.abc import AsyncIterator
 from datetime import UTC, datetime, timedelta
 
 import jwt
 import pytest
 from httpx import ASGITransport, AsyncClient
-from sqlalchemy.ext.asyncio import async_sessionmaker
+from sqlalchemy.ext.asyncio import AsyncSession, async_sessionmaker
+from starlette.requests import Request
 
 from app.agents.builtin import BUILTIN_AGENTS
 from app.agents.seed import seed_agents
@@ -17,8 +19,6 @@ from app.core.identity import operator_id_from_jwt, resolve_operator
 from app.main import create_app
 from app.providers.fake import FakeProvider
 from app.providers.registry import ProviderRegistry
-from starlette.requests import Request
-
 
 JWT_SECRET = "test-jwt-secret-for-sprint-12"
 
@@ -52,9 +52,9 @@ def mint_token(
 
 @pytest.fixture
 async def jwt_client(
-    session_factory: async_sessionmaker,
+    session_factory: async_sessionmaker[AsyncSession],
     fake_provider: FakeProvider,
-) -> AsyncClient:
+) -> AsyncIterator[AsyncClient]:
     settings = _settings()
     app = create_app(settings)
     app.state.session_factory = session_factory
@@ -65,7 +65,7 @@ async def jwt_client(
         await seed_agents(session, BUILTIN_AGENTS)
         await session.commit()
 
-    async def override_session():
+    async def override_session() -> AsyncIterator[AsyncSession]:
         async with session_factory() as request_session:
             yield request_session
             await request_session.commit()
@@ -100,7 +100,9 @@ def test_expired_jwt_is_401() -> None:
 
 def test_missing_sub_is_401() -> None:
     settings = _settings()
-    token = jwt.encode({"exp": datetime.now(UTC) + timedelta(hours=1)}, JWT_SECRET, algorithm="HS256")
+    token = jwt.encode(
+        {"exp": datetime.now(UTC) + timedelta(hours=1)}, JWT_SECRET, algorithm="HS256"
+    )
     with pytest.raises(Exception) as exc:
         operator_id_from_jwt(token, settings)
     assert getattr(exc.value, "status_code", None) == 401

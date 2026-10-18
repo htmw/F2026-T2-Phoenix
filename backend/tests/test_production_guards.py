@@ -52,9 +52,7 @@ def test_production_accepts_hardened_settings() -> None:
         ({"allowed_hosts": ["*"]}, "ALLOWED_HOSTS must not include"),
     ],
 )
-def test_production_rejects_insecure_defaults(
-    overrides: dict[str, object], needle: str
-) -> None:
+def test_production_rejects_insecure_defaults(overrides: dict[str, object], needle: str) -> None:
     with pytest.raises(ValidationError) as exc:
         _prod(**overrides)
     assert needle in str(exc.value)
@@ -68,11 +66,11 @@ def test_non_production_still_allows_auth_off() -> None:
 
 def test_create_app_adds_trusted_host_in_production() -> None:
     app = create_app(_prod())
-    names = [middleware.cls.__name__ for middleware in app.user_middleware]
+    names = [getattr(middleware.cls, "__name__", "") for middleware in app.user_middleware]
     assert "TrustedHostMiddleware" in names
 
 
 def test_create_app_skips_trusted_host_outside_production() -> None:
     app = create_app(make_settings(environment="test", auth_mode="off"))
-    names = [middleware.cls.__name__ for middleware in app.user_middleware]
+    names = [getattr(middleware.cls, "__name__", "") for middleware in app.user_middleware]
     assert "TrustedHostMiddleware" not in names

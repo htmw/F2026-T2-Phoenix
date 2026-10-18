@@ -123,7 +123,9 @@ class OrchestrationService:
         self._repository = repository
         self._providers = providers
 
-    async def submit(self, request: TaskRequest, *, owner_id: str = "operator") -> OrchestrationResult:
+    async def submit(
+        self, request: TaskRequest, *, owner_id: str = "operator"
+    ) -> OrchestrationResult:
         """Plan and execute in one call. The caller waits for the whole workflow."""
         prepared = await self.prepare(request, owner_id=owner_id)
         run = await self.execute(prepared)
@@ -468,8 +470,7 @@ class OrchestrationService:
                 workflow_id=workflow_id,
                 title="Agent selection",
                 summary=selection.reasoning
-                or f"Selected {chosen}"
-                + (f"; excluded {excluded_n}" if excluded_n else ""),
+                or f"Selected {chosen}" + (f"; excluded {excluded_n}" if excluded_n else ""),
                 payload={
                     "required_capabilities": [c.value for c in selection.required_capabilities],
                     "selected": list(selection.selected),

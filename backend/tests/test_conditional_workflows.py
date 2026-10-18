@@ -194,7 +194,9 @@ async def test_a_skip_is_recorded_with_a_reason(seeded_session: AsyncSession) ->
 async def test_findings_mean_the_coding_agent_does_run(seeded_session: AsyncSession) -> None:
     provider = FakeProvider()
     provider.queue_json({"findings": [{"severity": "high", "issue": "SQL injection"}]})
-    provider.queue_json({"changes": [{"file": "db.py", "action": "modify"}]})
+    provider.queue_json(
+        {"changes": [{"file": "db.py", "action": "modify"}], "summary": "Updated db.py."}
+    )
     provider.queue_json({"document": "# Report", "format": "markdown"})
 
     run, _ = await run_plan(seeded_session, provider, audit_then_fix_plan())

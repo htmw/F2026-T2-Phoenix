@@ -17,7 +17,12 @@ _DESIGN = {
     "domain": "research",
     "reasoning": "gather facts, then write them up",
     "agents": [
-        {"role": "Researcher", "objective": "Gather the facts.", "depends_on": [], "is_synthesizer": False},
+        {
+            "role": "Researcher",
+            "objective": "Gather the facts.",
+            "depends_on": [],
+            "is_synthesizer": False,
+        },
         {
             "role": "Report Writer",
             "objective": "Write the summary.",

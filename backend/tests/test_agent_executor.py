@@ -194,8 +194,8 @@ async def test_non_json_output_is_invalid_not_an_exception() -> None:
 
 
 async def test_output_missing_a_required_field_is_invalid() -> None:
-    provider = FakeProvider()
-    provider.queue_json({"score": 10})
+    # Every ranked model must misbehave, or fallback rescues the attempt.
+    provider = FakeProvider(default_response=json.dumps({"score": 10}))
     agent = simple_agent()
 
     output = await executor_with(provider).execute(agent, input_for(agent))
@@ -206,8 +206,7 @@ async def test_output_missing_a_required_field_is_invalid() -> None:
 
 
 async def test_output_with_a_wrong_type_is_invalid() -> None:
-    provider = FakeProvider()
-    provider.queue_json({"answer": "ok", "score": "not-a-number"})
+    provider = FakeProvider(default_response=json.dumps({"answer": "ok", "score": "not-a-number"}))
     agent = simple_agent()
 
     output = await executor_with(provider).execute(agent, input_for(agent))

@@ -143,14 +143,17 @@ class MemoryService:
     def __init__(self, session: AsyncSession) -> None:
         self._session = session
 
-    async def remember(self, entry: MemoryCreate) -> MemoryView:
+    async def remember(self, entry: MemoryCreate, *, operator_id: str | None = None) -> MemoryView:
         if entry.visibility is MemoryVisibility.PRIVATE and not entry.owner_agent_id:
             raise ValueError("private memory requires an owner agent")
         if entry.visibility is MemoryVisibility.WORKFLOW and entry.workflow_id is None:
             raise ValueError("workflow memory requires a workflow id")
+        if entry.visibility is MemoryVisibility.OPERATOR and not operator_id:
+            raise ValueError("operator memory requires an operator")
         row = MemoryRecord(
             visibility=entry.visibility.value,
             owner_agent_id=entry.owner_agent_id,
+            operator_id=operator_id if entry.visibility is MemoryVisibility.OPERATOR else None,
             source_agent_id=entry.source_agent_id,
             workflow_id=entry.workflow_id,
             title=entry.title,
@@ -197,6 +200,32 @@ class MemoryService:
         )
         return [self._view(row) for row in rows]
 
+    async def for_operator(self, operator_id: str, *, limit: int = 50) -> list[MemoryView]:
+        rows = (
+            (
+                await self._session.execute(
+                    select(MemoryRecord)
+                    .where(
+                        MemoryRecord.visibility == MemoryVisibility.OPERATOR,
+                        MemoryRecord.operator_id == operator_id,
+                    )
+                    .order_by(MemoryRecord.importance.desc(), MemoryRecord.created_at.desc())
+                    .limit(limit)
+                )
+            )
+            .scalars()
+            .all()
+        )
+        return [self._view(row) for row in rows]
+
+    async def delete_for_operator(self, memory_id: uuid.UUID, operator_id: str) -> bool:
+        row = await self._session.get(MemoryRecord, memory_id)
+        if row is None or row.operator_id != operator_id:
+            return False
+        await self._session.delete(row)
+        await self._session.flush()
+        return True
+
     async def shared(self, *, limit: int = 50) -> list[MemoryView]:
         rows = (
             (
@@ -237,6 +266,7 @@ class MemoryService:
             title=row.title,
             content=row.content,
             owner_agent_id=row.owner_agent_id,
+            operator_id=row.operator_id,
             source_agent_id=row.source_agent_id,
             workflow_id=row.workflow_id,
             tags=list(row.tags or []),
@@ -253,6 +283,7 @@ class ArtifactStore:
         row = ArtifactRecord(
             kind=artifact.kind.value,
             created_by=artifact.created_by,
+            owner_id=artifact.owner_id,
             workflow_id=artifact.workflow_id,
             uri=artifact.uri,
             content_type=artifact.content_type,
@@ -301,6 +332,7 @@ class ArtifactStore:
             id=row.id,
             kind=ArtifactKind(row.kind),
             created_by=row.created_by,
+            owner_id=row.owner_id,
             uri=row.uri,
             title=row.title,
             workflow_id=row.workflow_id,
@@ -444,7 +476,7 @@ class ContextManager:
         decision_rows: list[dict[str, object]] = []
         lines: list[str] = []
         for item in memories[:8]:
-            row = {
+            row: dict[str, object] = {
                 "id": str(item.id),
                 "visibility": item.visibility.value,
                 "title": item.title,
@@ -458,17 +490,17 @@ class ContextManager:
         logged = await self._decisions.list(workflow_id=workflow_id, agent_id=agent_id, limit=8)
         if not logged and workflow_id is not None:
             logged = await self._decisions.list(workflow_id=workflow_id, limit=8)
-        for item in logged:
+        for decision in logged:
             decision_rows.append(
                 {
-                    "id": str(item.id),
-                    "kind": item.kind.value,
-                    "title": item.title,
-                    "actor_id": item.actor_id,
+                    "id": str(decision.id),
+                    "kind": decision.kind.value,
+                    "title": decision.title,
+                    "actor_id": decision.actor_id,
                     "source": "decision_log",
                 }
             )
-            lines.append(f"- [decision:{item.kind.value}] {item.title}")
+            lines.append(f"- [decision:{decision.kind.value}] {decision.title}")
 
         message_rows: list[dict[str, object]] = []
         if workflow_id is not None:

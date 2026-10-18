@@ -119,7 +119,9 @@ async def discover_models(provider: LLMProvider) -> list[str]:
     return list(await list_fn())
 
 
-async def test_provider_key(provider_id: str, api_key: str) -> tuple[ProviderConnectionStatus, list[str], str | None]:
+async def test_provider_key(
+    provider_id: str, api_key: str
+) -> tuple[ProviderConnectionStatus, list[str], str | None]:
     """Validate a key by listing models (or falling back to catalogue presence)."""
     try:
         provider = make_provider(provider_id, api_key)
@@ -136,14 +138,14 @@ async def test_provider_key(provider_id: str, api_key: str) -> tuple[ProviderCon
         return ProviderConnectionStatus.UNAVAILABLE, [], str(exc)
 
 
-async def rebuild_app_registry(request: Request, session: AsyncSession, settings: Settings) -> ProviderRegistry:
+async def rebuild_app_registry(
+    request: Request, session: AsyncSession, settings: Settings
+) -> ProviderRegistry:
     from app.services import routing_policy as routing_policy_service
 
     overrides = await connections.load_connection_secrets(session, settings)
     policy = await routing_policy_service.get_policy(session)
-    registry = build_provider_registry(
-        settings, credential_overrides=overrides, policy=policy
-    )
+    registry = build_provider_registry(settings, credential_overrides=overrides, policy=policy)
     request.app.state.provider_registry = registry
     runner = getattr(request.app.state, "workflow_runner", None)
     if runner is not None:

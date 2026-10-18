@@ -12,6 +12,7 @@ from app.agents.registry import DatabaseAgentRegistry
 from app.domain.enums import MemoryVisibility, MessageStatus, MessageType
 from app.providers.fake import FakeProvider
 from app.providers.registry import ProviderRegistry
+from app.schemas.agent import AgentDefinition
 from app.schemas.execution import AgentInput
 from app.schemas.messaging import AgentMessageCreate
 from app.services import hive as hive_service
@@ -26,7 +27,7 @@ class LiveFakeProvider(FakeProvider):
 
 
 @pytest.fixture
-def coding_agent():
+def coding_agent() -> AgentDefinition:
     return next(agent for agent in BUILTIN_AGENTS if agent.id == "coding-agent")
 
 
@@ -81,7 +82,7 @@ async def test_blackboard_is_shared_memory(seeded_session: AsyncSession) -> None
 
 
 async def test_prepare_attempt_merges_inbox_into_notes(
-    seeded_session: AsyncSession, coding_agent
+    seeded_session: AsyncSession, coding_agent: AgentDefinition
 ) -> None:
     registry = DatabaseAgentRegistry(seeded_session)
     collab = Collaboration(seeded_session, registry, providers=ProviderRegistry([FakeProvider()]))
@@ -115,7 +116,7 @@ async def test_prepare_attempt_merges_inbox_into_notes(
 
 
 async def test_consult_peers_asks_specialist_via_provider(
-    seeded_session: AsyncSession, coding_agent
+    seeded_session: AsyncSession, coding_agent: AgentDefinition
 ) -> None:
     provider = LiveFakeProvider()
     provider.queue_json(
@@ -188,13 +189,13 @@ async def test_reply_to_waiting_peers_closes_requests(seeded_session: AsyncSessi
     assert any(item.id == request.id for item in done)
 
 
-async def test_system_prompt_teaches_hive_collaboration(coding_agent) -> None:
+async def test_system_prompt_teaches_hive_collaboration(coding_agent: AgentDefinition) -> None:
     prompt = build_system_prompt(coding_agent)
     assert "shared office floor" in prompt
     assert "Inbox" in prompt
 
 
-async def test_user_prompt_preserves_inbox_heading(coding_agent) -> None:
+async def test_user_prompt_preserves_inbox_heading(coding_agent: AgentDefinition) -> None:
     prompt = build_user_prompt(
         AgentInput(
             task_id=uuid.uuid4(),

@@ -44,7 +44,9 @@ def gated_code_then_test() -> WorkflowPlan:
 
 async def test_a_gated_node_pauses_before_it_runs(seeded_session: AsyncSession) -> None:
     provider = FakeProvider()
-    provider.queue_json({"changes": [{"file": "app.py", "action": "modify"}]})
+    provider.queue_json(
+        {"changes": [{"file": "app.py", "action": "modify"}], "summary": "Updated app.py."}
+    )
 
     run, repository, workflow_id = await run_plan(seeded_session, provider, gated_code_then_test())
     await seeded_session.commit()
@@ -67,7 +69,9 @@ async def test_approving_a_gate_runs_the_node_and_everything_after(
     assert run.status is WorkflowStatus.AWAITING_APPROVAL
 
     resumed_provider = FakeProvider()
-    resumed_provider.queue_json({"changes": [{"file": "app.py", "action": "modify"}]})
+    resumed_provider.queue_json(
+        {"changes": [{"file": "app.py", "action": "modify"}], "summary": "Updated app.py."}
+    )
     resumed_provider.queue_json({"passed": True, "tests": [{"name": "test_feature"}]})
 
     result = await service_for(seeded_session, resumed_provider).approve_node(
@@ -136,7 +140,9 @@ async def test_retrying_a_failed_node_reruns_it_and_downstream(
     await seeded_session.commit()
 
     retry_provider = FakeProvider()
-    retry_provider.queue_json({"changes": [{"file": "app.py", "action": "modify"}]})
+    retry_provider.queue_json(
+        {"changes": [{"file": "app.py", "action": "modify"}], "summary": "Updated app.py."}
+    )
     retry_provider.queue_json({"passed": True})
     result = await service_for(seeded_session, retry_provider).retry_node(workflow_id, "coding")
 
@@ -316,7 +322,9 @@ async def test_approve_endpoint_resumes_a_paused_workflow(
     assert coding["status"] == NodeStatus.AWAITING_APPROVAL.value
     assert coding["requires_approval"] is True
 
-    fake_provider.queue_json({"changes": [{"file": "login.py", "action": "modify"}]})
+    fake_provider.queue_json(
+        {"changes": [{"file": "login.py", "action": "modify"}], "summary": "Updated login.py."}
+    )
     approved = await db_client.post(
         f"/api/v1/workflows/{body['id']}/nodes/{coding['key']}/approve",
         json={"decided_by": "alice", "reason": "go ahead"},
@@ -361,7 +369,9 @@ async def test_retry_endpoint_recovers_a_failed_agent(
     assert submitted.json()["status"] == WorkflowStatus.FAILED.value
     node_key = submitted.json()["nodes"][0]["key"]
 
-    fake_provider.queue_json({"changes": [{"file": "login.py", "action": "modify"}]})
+    fake_provider.queue_json(
+        {"changes": [{"file": "login.py", "action": "modify"}], "summary": "Updated login.py."}
+    )
     retried = await db_client.post(
         f"/api/v1/workflows/{submitted.json()['id']}/nodes/{node_key}/retry"
     )

@@ -45,7 +45,7 @@ from app.services import routing_policy as routing_policy_service
 
 router = APIRouter(prefix="/providers", tags=["providers"])
 
-_CATALOGUE_MODELS: dict[str, tuple] = {
+_CATALOGUE_MODELS: dict[str, tuple[ModelSpec, ...]] = {
     "openai": OpenAIProvider.models,
     "anthropic": AnthropicProvider.models,
     "google": GeminiProvider.models,

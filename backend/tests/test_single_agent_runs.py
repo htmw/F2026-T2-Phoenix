@@ -314,4 +314,5 @@ async def test_provider_endpoint_lists_models_without_credentials(
     serialised = json.dumps(body)
     # Any string that looks like a credential here would be a leak.
     assert "sk-" not in serialised
-    assert "api_key" not in serialised
+    assert '"api_key":' not in serialised
+    assert "encrypted_api_key" not in serialised

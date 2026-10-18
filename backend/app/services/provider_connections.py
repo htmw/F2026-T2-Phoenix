@@ -44,9 +44,7 @@ def decrypt_secret(settings: Settings, ciphertext: str) -> str:
 def _fernet_key(settings: Settings) -> bytes:
     """Derive a Fernet key from ENCRYPTION_KEY (or a documented dev fallback)."""
     raw = (
-        settings.encryption_key.get_secret_value()
-        if settings.encryption_key is not None
-        else None
+        settings.encryption_key.get_secret_value() if settings.encryption_key is not None else None
     )
     if not raw:
         if settings.is_production:
@@ -56,9 +54,7 @@ def _fernet_key(settings: Settings) -> bytes:
     return base64.urlsafe_b64encode(digest)
 
 
-async def load_connection_secrets(
-    session: AsyncSession, settings: Settings
-) -> dict[str, str]:
+async def load_connection_secrets(session: AsyncSession, settings: Settings) -> dict[str, str]:
     """Decrypt stored keys for registry construction. Never log the values."""
     rows = (await session.execute(select(ProviderConnectionRecord))).scalars().all()
     secrets: dict[str, str] = {}

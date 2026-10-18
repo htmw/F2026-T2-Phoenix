@@ -13,6 +13,9 @@ secrets/
 # Keep the committed template:
 !.env.example
 
+# Generated deliverables (user files, not source)
+data/
+
 # ---- Python ----
 __pycache__/
 *.py[cod]

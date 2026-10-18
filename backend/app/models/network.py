@@ -79,6 +79,7 @@ class MemoryRecord(Base, TimestampMixin):
         String(16), nullable=False, default=MemoryVisibility.SHARED
     )
     owner_agent_id: Mapped[str | None] = mapped_column(String(64), nullable=True)
+    operator_id: Mapped[str | None] = mapped_column(String(64), nullable=True)
     source_agent_id: Mapped[str | None] = mapped_column(String(64), nullable=True)
     workflow_id: Mapped[uuid.UUID | None] = mapped_column(UUID(as_uuid=True), nullable=True)
     title: Mapped[str] = mapped_column(String(240), nullable=False)
@@ -88,6 +89,7 @@ class MemoryRecord(Base, TimestampMixin):
 
     __table_args__ = (
         Index("ix_memories_owner_visibility", "owner_agent_id", "visibility"),
+        Index("ix_memories_operator_visibility", "operator_id", "visibility"),
         Index("ix_memories_workflow", "workflow_id"),
     )
 
@@ -98,6 +100,7 @@ class ArtifactRecord(Base, TimestampMixin):
     id: Mapped[uuid.UUID] = mapped_column(UUID(as_uuid=True), primary_key=True, default=new_uuid)
     kind: Mapped[str] = mapped_column(String(24), nullable=False, default=ArtifactKind.FILE)
     created_by: Mapped[str] = mapped_column(String(64), nullable=False)
+    owner_id: Mapped[str | None] = mapped_column(String(64), nullable=True)
     workflow_id: Mapped[uuid.UUID | None] = mapped_column(UUID(as_uuid=True), nullable=True)
     uri: Mapped[str] = mapped_column(Text, nullable=False)
     content_type: Mapped[str | None] = mapped_column(String(128), nullable=True)
@@ -105,7 +108,10 @@ class ArtifactRecord(Base, TimestampMixin):
     extra: Mapped[dict[str, Any]] = mapped_column(nullable=False, default=dict)
     size_bytes: Mapped[int] = mapped_column(Integer, nullable=False, default=0)
 
-    __table_args__ = (Index("ix_artifacts_created_by", "created_by"),)
+    __table_args__ = (
+        Index("ix_artifacts_created_by", "created_by"),
+        Index("ix_artifacts_owner_id", "owner_id"),
+    )
 
 
 class DecisionRecord(Base, TimestampMixin):

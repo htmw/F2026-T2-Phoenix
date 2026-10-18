@@ -16,7 +16,18 @@ from fastapi.middleware.trustedhost import TrustedHostMiddleware
 from app.agents.builtin import BUILTIN_AGENTS
 from app.agents.seed import seed_agents
 from app.api.middleware import RequestContextMiddleware
-from app.api.routes import agents, capabilities, health, metrics, network, providers, runs, tasks
+from app.api.routes import (
+    agents,
+    auth,
+    capabilities,
+    files,
+    health,
+    metrics,
+    network,
+    providers,
+    runs,
+    tasks,
+)
 from app.core.config import Settings, get_settings
 from app.core.logging import configure_logging, get_logger
 from app.core.redis_client import close_redis, create_redis
@@ -128,6 +139,8 @@ def create_app(settings: Settings | None = None) -> FastAPI:
     v1.include_router(tasks.router)
     v1.include_router(metrics.api_router)
     v1.include_router(network.router)
+    v1.include_router(auth.router)
+    v1.include_router(files.router)
     app.include_router(v1)
 
     app.state.settings = settings

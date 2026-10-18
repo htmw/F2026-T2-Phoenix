@@ -19,6 +19,25 @@ import type {
 const API_BASE = process.env.NEXT_PUBLIC_API_BASE_URL ?? "http://localhost:8000";
 
 const OPERATOR_STORAGE_KEY = "agentorch.operatorId";
+const SESSION_STORAGE_KEY = "agent-mesh-session";
+
+export function getSessionToken(): string | null {
+  if (typeof window === "undefined") {
+    return null;
+  }
+  return window.sessionStorage.getItem(SESSION_STORAGE_KEY);
+}
+
+export function setSessionToken(token: string | null): void {
+  if (typeof window === "undefined") {
+    return;
+  }
+  if (token) {
+    window.sessionStorage.setItem(SESSION_STORAGE_KEY, token);
+  } else {
+    window.sessionStorage.removeItem(SESSION_STORAGE_KEY);
+  }
+}
 
 export function getOperatorId(): string {
   if (typeof window === "undefined") {
@@ -46,11 +65,15 @@ export class ApiError extends Error {
 }
 
 async function request<T>(path: string, init?: RequestInit): Promise<T> {
+  const session = getSessionToken();
   const response = await fetch(`${API_BASE}${path}`, {
     ...init,
+    credentials: "include",
     headers: {
       "Content-Type": "application/json",
-      "X-Operator-Id": getOperatorId(),
+      ...(session
+        ? { Authorization: `Bearer ${session}` }
+        : { "X-Operator-Id": getOperatorId() }),
       ...(init?.headers ?? {}),
     },
   });
@@ -68,7 +91,37 @@ async function request<T>(path: string, init?: RequestInit): Promise<T> {
     }
     throw new ApiError(detail, response.status);
   }
+  if (response.status === 204) {
+    return undefined as T;
+  }
   return (await response.json()) as T;
+}
+
+export type SignedInUser = {
+  id: string;
+  email: string;
+  display_name: string | null;
+  picture_url: string | null;
+};
+
+export async function loginWithGoogle(idToken: string): Promise<SignedInUser> {
+  const result = await request<{ user: SignedInUser; session_token: string }>(
+    "/api/v1/auth/google",
+    {
+      method: "POST",
+      body: JSON.stringify({ id_token: idToken }),
+    },
+  );
+  setSessionToken(result.session_token);
+  return result.user;
+}
+
+export async function logoutSession(): Promise<void> {
+  try {
+    await request<void>("/api/v1/auth/logout", { method: "POST" });
+  } finally {
+    setSessionToken(null);
+  }
 }
 
 export async function fetchBackendStatus(): Promise<BackendStatus> {

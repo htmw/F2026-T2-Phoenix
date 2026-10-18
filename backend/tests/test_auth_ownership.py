@@ -2,11 +2,12 @@
 
 from __future__ import annotations
 
+from collections.abc import AsyncIterator
+
 import pytest
 from httpx import ASGITransport, AsyncClient
-from sqlalchemy.ext.asyncio import async_sessionmaker
-
 from pydantic import SecretStr
+from sqlalchemy.ext.asyncio import AsyncSession, async_sessionmaker
 
 from app.agents.builtin import BUILTIN_AGENTS
 from app.agents.seed import seed_agents
@@ -31,9 +32,9 @@ def auth_settings(settings: Settings) -> Settings:
 @pytest.fixture
 async def auth_client(
     auth_settings: Settings,
-    session_factory: async_sessionmaker,
+    session_factory: async_sessionmaker[AsyncSession],
     fake_provider: FakeProvider,
-) -> AsyncClient:
+) -> AsyncIterator[AsyncClient]:
     app = create_app(auth_settings)
     app.state.session_factory = session_factory
     app.state.provider_registry = ProviderRegistry([fake_provider])
@@ -42,7 +43,7 @@ async def auth_client(
         await seed_agents(session, BUILTIN_AGENTS)
         await session.commit()
 
-    async def override_session():
+    async def override_session() -> AsyncIterator[AsyncSession]:
         async with session_factory() as request_session:
             yield request_session
             await request_session.commit()
@@ -107,8 +108,9 @@ async def test_decision_actor_comes_from_header_not_body(auth_client: AsyncClien
 
 
 async def test_bearer_jwt_accepted_as_operator_id(auth_client: AsyncClient) -> None:
-    import jwt
     from datetime import UTC, datetime, timedelta
+
+    import jwt
 
     token = jwt.encode(
         {

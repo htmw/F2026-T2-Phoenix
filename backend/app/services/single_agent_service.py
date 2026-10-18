@@ -133,9 +133,7 @@ class SingleAgentService:
             )
             await self._repository.set_task_status(task.id, TaskStatus.COMPLETED)
             if self._presence is not None:
-                await self._presence.set(
-                    agent.id, AgentRuntimeStatus.IDLE, detail="completed"
-                )
+                await self._presence.set(agent.id, AgentRuntimeStatus.IDLE, detail="completed")
         else:
             # A single-node workflow has nowhere to recover to, so a failed attempt ends
             # the workflow. Retries and alternative routing arrive with the engine.

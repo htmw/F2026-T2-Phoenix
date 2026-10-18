@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import pytest
 from httpx import AsyncClient
 from sqlalchemy.ext.asyncio import AsyncSession
 
@@ -55,12 +56,14 @@ async def test_list_providers_includes_disconnected_catalogue(
 
 
 async def test_connect_requires_successful_auth(
-    db_client: AsyncClient, monkeypatch: object
+    db_client: AsyncClient, monkeypatch: pytest.MonkeyPatch
 ) -> None:
-    async def fail(_provider_id: str, _api_key: str):
+    async def fail(
+        _provider_id: str, _api_key: str
+    ) -> tuple[ProviderConnectionStatus, list[str], str | None]:
         return ProviderConnectionStatus.AUTH_FAILED, [], "invalid api key sk-leak"
 
-    monkeypatch.setattr(management, "test_provider_key", fail)  # type: ignore[arg-type]
+    monkeypatch.setattr(management, "test_provider_key", fail)
     response = await db_client.post(
         "/api/v1/providers/openai/connect",
         json={"api_key": "sk-definitely-fake-key"},
@@ -71,12 +74,17 @@ async def test_connect_requires_successful_auth(
 
 
 async def test_connect_persists_masked_credential(
-    db_client: AsyncClient, seeded_session: AsyncSession, settings: Settings, monkeypatch: object
+    db_client: AsyncClient,
+    seeded_session: AsyncSession,
+    settings: Settings,
+    monkeypatch: pytest.MonkeyPatch,
 ) -> None:
-    async def ok(_provider_id: str, _api_key: str):
+    async def ok(
+        _provider_id: str, _api_key: str
+    ) -> tuple[ProviderConnectionStatus, list[str], str | None]:
         return ProviderConnectionStatus.CONNECTED, ["gpt-4o", "gpt-4o-mini"], None
 
-    monkeypatch.setattr(management, "test_provider_key", ok)  # type: ignore[arg-type]
+    monkeypatch.setattr(management, "test_provider_key", ok)
     response = await db_client.post(
         "/api/v1/providers/openai/connect",
         json={"api_key": "sk-test-openai-secret-9999"},
@@ -94,12 +102,14 @@ async def test_connect_persists_masked_credential(
 
 
 async def test_disconnect_removes_settings_credential(
-    db_client: AsyncClient, monkeypatch: object
+    db_client: AsyncClient, monkeypatch: pytest.MonkeyPatch
 ) -> None:
-    async def ok(_provider_id: str, _api_key: str):
+    async def ok(
+        _provider_id: str, _api_key: str
+    ) -> tuple[ProviderConnectionStatus, list[str], str | None]:
         return ProviderConnectionStatus.CONNECTED, ["gpt-4o"], None
 
-    monkeypatch.setattr(management, "test_provider_key", ok)  # type: ignore[arg-type]
+    monkeypatch.setattr(management, "test_provider_key", ok)
     await db_client.post(
         "/api/v1/providers/anthropic/connect",
         json={"api_key": "sk-ant-test-key-1234"},

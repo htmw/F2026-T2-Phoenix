@@ -1,18 +1,12 @@
 "use client";
 
-import {
-  createContext,
-  useContext,
-  useEffect,
-  useEffectEvent,
-  useState,
-  type ReactNode,
-} from "react";
+import { createContext, useContext, useEffect, useSyncExternalStore, type ReactNode } from "react";
 
 import {
   applyTheme,
   getStoredThemePreference,
   resolveTheme,
+  THEME_STORAGE_KEY,
   type ResolvedTheme,
   type ThemePreference,
 } from "@/lib/theme";
@@ -24,35 +18,34 @@ type ThemeContextValue = {
 };
 
 const ThemeContext = createContext<ThemeContextValue | null>(null);
+const THEME_CHANGE = "agent-mesh-theme-change";
+
+function subscribe(onChange: () => void) {
+  const onStorage = (event: StorageEvent) => {
+    if (event.key === THEME_STORAGE_KEY) onChange();
+  };
+  window.addEventListener("storage", onStorage);
+  window.addEventListener(THEME_CHANGE, onChange);
+  return () => {
+    window.removeEventListener("storage", onStorage);
+    window.removeEventListener(THEME_CHANGE, onChange);
+  };
+}
 
 export function ThemeProvider({ children }: { children: ReactNode }) {
-  const [preference, setPreferenceState] = useState<ThemePreference>("light");
-  const [resolved, setResolved] = useState<ResolvedTheme>("light");
-
-  const syncFromPreference = useEffectEvent((next: ThemePreference) => {
-    setPreferenceState(next);
-    setResolved(applyTheme(next));
-  });
+  const preference = useSyncExternalStore(subscribe, getStoredThemePreference, () => "light");
 
   useEffect(() => {
-    syncFromPreference(getStoredThemePreference());
-  }, []);
-
-  useEffect(() => {
-    const onStorage = (event: StorageEvent) => {
-      if (event.key !== "agent-mesh-theme") return;
-      syncFromPreference(getStoredThemePreference());
-    };
-    window.addEventListener("storage", onStorage);
-    return () => window.removeEventListener("storage", onStorage);
-  }, []);
+    applyTheme(preference);
+  }, [preference]);
 
   const setPreference = (next: ThemePreference) => {
-    syncFromPreference(next);
+    applyTheme(next);
+    window.dispatchEvent(new Event(THEME_CHANGE));
   };
 
   return (
-    <ThemeContext.Provider value={{ preference, resolved, setPreference }}>
+    <ThemeContext.Provider value={{ preference, resolved: preference, setPreference }}>
       {children}
     </ThemeContext.Provider>
   );

@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import type { ReactNode } from "react";
 
 import { BrandLogo } from "@/components/BrandLogo";
@@ -31,9 +32,9 @@ export function AppShell({
     <div className="app-shell">
       <header className="titlebar">
         <div className="brand-row">
-          <a href="/" className="brand-mark-link" aria-label={`${BRAND_NAME} marketing site`}>
+          <Link href="/" className="brand-mark-link" aria-label={`${BRAND_NAME} marketing site`}>
             <BrandLogo size={36} variant="mark" />
-          </a>
+          </Link>
           <div className="brand-block">
             <h1 className="brand" data-testid="brand">
               {BRAND_NAME}
@@ -56,9 +57,9 @@ export function AppShell({
         </nav>
         <div className="header-meta">
           <ThemeToggle compact />
-          <a href="/" className="px-btn ghost">
+          <Link href="/" className="px-btn ghost">
             Overview
-          </a>
+          </Link>
           <button type="button" className="px-btn primary" onClick={onNewTask}>
             New task
           </button>

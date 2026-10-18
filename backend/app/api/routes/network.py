@@ -174,11 +174,26 @@ async def discover_agents(
 
 
 @router.post("/memory", response_model=MemoryView, status_code=status.HTTP_201_CREATED)
-async def write_memory(entry: MemoryCreate, session: SessionDep) -> MemoryView:
+async def write_memory(
+    entry: MemoryCreate, session: SessionDep, operator: OperatorDep
+) -> MemoryView:
     try:
-        return await MemoryService(session).remember(entry)
+        operator_id = operator.id if entry.visibility.value == "operator" else None
+        return await MemoryService(session).remember(entry, operator_id=operator_id)
     except ValueError as exc:
         raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail=str(exc)) from None
+
+
+@router.get("/memory/mine", response_model=list[MemoryView])
+async def my_memory(session: SessionDep, operator: OperatorDep) -> list[MemoryView]:
+    return await MemoryService(session).for_operator(operator.id)
+
+
+@router.delete("/memory/{memory_id}", status_code=status.HTTP_204_NO_CONTENT)
+async def delete_memory(memory_id: uuid.UUID, session: SessionDep, operator: OperatorDep) -> None:
+    deleted = await MemoryService(session).delete_for_operator(memory_id, operator.id)
+    if not deleted:
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="memory not found")
 
 
 @router.get("/memory", response_model=list[MemoryView])

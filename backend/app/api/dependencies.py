@@ -11,7 +11,7 @@ from __future__ import annotations
 from collections.abc import AsyncIterator
 from typing import Annotated
 
-from fastapi import Depends, Request
+from fastapi import Depends, HTTPException, Request, status
 from sqlalchemy.ext.asyncio import AsyncSession, async_sessionmaker
 
 from app.agents.registry import AgentRegistry, DatabaseAgentRegistry
@@ -69,9 +69,25 @@ async def get_session(
 SessionDep = Annotated[AsyncSession, Depends(get_session)]
 
 
-def get_operator(request: Request, settings: SettingsDep) -> OperatorIdentity:
-    """Resolve the calling operator (JWT ``sub`` slot later)."""
-    identity = resolve_operator(request, settings)
+async def get_operator(request: Request, settings: SettingsDep) -> OperatorIdentity:
+    """Resolve the calling operator.
+
+    ``google`` mode ignores ``X-Operator-Id``. The header is chosen by the browser and
+    is not proof of identity. Header and dev modes do not open a database session.
+    """
+    if settings.auth_mode == "google":
+        from app.api.routes.auth import operator_from_session
+
+        factory = getattr(request.app.state, "session_factory", None)
+        if factory is None:
+            raise HTTPException(
+                status_code=status.HTTP_503_SERVICE_UNAVAILABLE,
+                detail="database is not ready",
+            )
+        async with factory() as session:
+            identity = await operator_from_session(request, settings, session)
+    else:
+        identity = resolve_operator(request, settings)
     request.state.operator_id = identity.id
     return identity
 
@@ -158,9 +174,7 @@ def get_single_agent_service(
 ) -> SingleAgentService:
     from app.messaging.store import PresenceService
 
-    return SingleAgentService(
-        registry, executor, repository, presence=PresenceService(session)
-    )
+    return SingleAgentService(registry, executor, repository, presence=PresenceService(session))
 
 
 SingleAgentServiceDep = Annotated[SingleAgentService, Depends(get_single_agent_service)]

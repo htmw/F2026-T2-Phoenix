@@ -457,7 +457,14 @@ def test_registry_falls_back_to_the_fake_provider_without_credentials() -> None:
 
 
 def test_production_never_registers_the_demo_provider() -> None:
-    registry = build_provider_registry(settings_with(environment="production"))
+    registry = build_provider_registry(
+        settings_with(
+            environment="production",
+            seed_agents_on_startup=False,
+            encryption_key="prod-test-encryption-key-value",
+            jwt_secret="prod-test-jwt-secret-value",
+        )
+    )
 
     assert registry.names == []
 

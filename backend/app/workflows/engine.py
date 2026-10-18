@@ -483,9 +483,7 @@ class WorkflowEngine:
 
         return outputs
 
-    async def _record_routing_decision(
-        self, workflow_id: uuid.UUID, output: AgentOutput
-    ) -> None:
+    async def _record_routing_decision(self, workflow_id: uuid.UUID, output: AgentOutput) -> None:
         """Persist why this attempt used its provider/model (and what else was eligible)."""
         if not output.routing_reason and not output.provider:
             return

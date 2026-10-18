@@ -17,7 +17,7 @@ from pydantic import AliasChoices, Field, SecretStr, field_validator, model_vali
 from pydantic_settings import BaseSettings, NoDecode, SettingsConfigDict
 
 Environment = Literal["development", "test", "staging", "production"]
-AuthMode = Literal["off", "header"]
+AuthMode = Literal["off", "header", "google"]
 
 
 class Settings(BaseSettings):
@@ -38,7 +38,8 @@ class Settings(BaseSettings):
 
     # ---- Auth foundations (Universal Office Sprint 9) ----
     # ``off`` — resolve a default operator (dev/tests); still stamps ownership.
-    # ``header`` — require X-Operator-Id or Bearer; JWT validation replaces Bearer later.
+    # ``header`` — require X-Operator-Id or Bearer.
+    # ``google`` — require a server-issued session (Google ID token exchanged for a JWT).
     # Production forbids ``off`` (see ``_production_invariants``).
     auth_mode: AuthMode = "header"
     # Used when auth_mode=off and no identity header is present.
@@ -132,6 +133,16 @@ class Settings(BaseSettings):
     jwt_secret: SecretStr | None = None
     jwt_audience: str | None = None
     jwt_issuer: str | None = None
+    # Hours a Google session JWT stays valid. Logout bumps the user's session version
+    # so outstanding tokens stop working before this expiry.
+    session_ttl_hours: int = Field(default=12, ge=1, le=168)
+
+    # Google OAuth client ID (audience). The client secret is not used: the browser
+    # obtains an ID token and the API verifies it. Never put a client secret here.
+    google_client_id: str | None = None
+    # Where generated files are stored. The download API checks ownership and never
+    # returns this path to clients.
+    artifact_dir: str = "data/artifacts"
 
     @field_validator("cors_allow_origins", "allowed_hosts", mode="before")
     @classmethod
@@ -149,21 +160,17 @@ class Settings(BaseSettings):
 
         errors: list[str] = []
         if self.auth_mode == "off":
-            errors.append("AUTH_MODE=off is forbidden in production (use header)")
+            errors.append("AUTH_MODE=off is forbidden in production (use header or google)")
+        if self.auth_mode == "google" and not (self.google_client_id or "").strip():
+            errors.append("GOOGLE_CLIENT_ID is required when AUTH_MODE=google")
         if self.debug:
             errors.append("DEBUG must be false in production")
         if self.seed_agents_on_startup:
             errors.append("SEED_AGENTS_ON_STARTUP must be false in production")
-        key = (
-            self.encryption_key.get_secret_value()
-            if self.encryption_key is not None
-            else ""
-        )
+        key = self.encryption_key.get_secret_value() if self.encryption_key is not None else ""
         if not key.strip():
             errors.append("ENCRYPTION_KEY is required in production")
-        jwt = (
-            self.jwt_secret.get_secret_value() if self.jwt_secret is not None else ""
-        )
+        jwt = self.jwt_secret.get_secret_value() if self.jwt_secret is not None else ""
         if not jwt.strip():
             errors.append("JWT_SECRET is required in production")
         if not self.cors_allow_origins:

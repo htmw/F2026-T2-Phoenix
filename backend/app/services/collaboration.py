@@ -32,7 +32,7 @@ from app.providers.registry import ProviderRegistry
 from app.schemas.agent import AgentDefinition
 from app.schemas.execution import AgentOutput
 from app.schemas.memory import ArtifactCreate, MemoryCreate
-from app.schemas.messaging import ORCHESTRATOR_ID, AgentMessageCreate
+from app.schemas.messaging import ORCHESTRATOR_ID, AgentMessageCreate, AgentMessageView
 from app.schemas.workflow import WorkflowPlan
 from app.services import hive as hive_service
 from app.services.hive import DrainedMail
@@ -320,7 +320,7 @@ class Collaboration:
         workflow_id: uuid.UUID | None,
         query: str,
         task_id: uuid.UUID | None = None,
-    ):
+    ) -> AgentMessageView:
         """Ask a peer for a relevant context packet (not a full history dump)."""
         return await self.bus.send(
             AgentMessageCreate(
@@ -341,7 +341,7 @@ class Collaboration:
         message_id: uuid.UUID,
         agent_id: str,
         objective: str | None = None,
-    ):
+    ) -> AgentMessageView:
         """Answer a context_request with a ContextManager packet."""
         parent = await self.bus.get(message_id)
         if parent.type is not MessageType.CONTEXT_REQUEST:
@@ -375,7 +375,7 @@ class Collaboration:
         payload: dict[str, object] | None = None,
         task_id: uuid.UUID | None = None,
         artifact_ids: tuple[uuid.UUID, ...] = (),
-    ):
+    ) -> AgentMessageView:
         """Hand a sub-task to another agent via a typed delegation envelope."""
         return await self.bus.send(
             AgentMessageCreate(

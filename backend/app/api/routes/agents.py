@@ -10,7 +10,13 @@ from typing import Annotated
 from fastapi import APIRouter, HTTPException, Query, status
 
 from app.agents.registry import AgentNotFoundError, DatabaseAgentRegistry
-from app.api.dependencies import AbuseGuardDep, OperatorDep, ProviderRegistryDep, RegistryDep, SessionDep
+from app.api.dependencies import (
+    AbuseGuardDep,
+    OperatorDep,
+    ProviderRegistryDep,
+    RegistryDep,
+    SessionDep,
+)
 from app.domain.enums import Capability
 from app.schemas.agent import AgentModelBinding, AgentSummary
 

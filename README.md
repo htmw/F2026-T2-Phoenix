@@ -168,6 +168,19 @@ identity (`X-Operator-Id` or Bearer); workflows are scoped to `owner_id`. Set
 Production images and the secrets-manager path: [`docs/operations/production.md`](docs/operations/production.md).
 Grafana: `docker compose --profile observability up` then http://localhost:3001.
 
+## Google sign-in
+
+`AUTH_MODE=google` replaces the browser-supplied operator id with a verified Google account.
+
+1. In Google Cloud Console, create an OAuth client of type **Web application**.
+2. Add authorized JavaScript origin `http://localhost:3000` (and the production origin).
+3. No redirect URI is required for the ID-token button. Do not put a client secret in the repo.
+4. Set `GOOGLE_CLIENT_ID` and `NEXT_PUBLIC_GOOGLE_CLIENT_ID` to that client id.
+5. Set `JWT_SECRET` so the API can issue its own session token after Google verifies the ID token.
+6. Set `AUTH_MODE=google`.
+
+The API checks the token signature, issuer (`https://accounts.google.com`), audience, expiry, and `email_verified`. The account key is Google's `sub`. A different Google account with the same email is rejected instead of linked. Logout increments a session version so the previous token stops working. Generated files and operator memories are readable only by that `sub`.
+
 ## Quality gates
 
 ```bash
@@ -179,9 +192,11 @@ make e2e-ci      # Playwright browser smoke (Demo Mode compose overlay)
 ```
 
 Backend code is linted with `ruff`, type-checked with `mypy --strict`, and tested with
-`pytest`. Frontend uses ESLint and `tsc --noEmit`. CI additionally builds the development
-and production images, runs Playwright Chromium smoke against compose (J-2), and scans
-the history for committed secrets.
+`pytest`. Frontend uses ESLint and `tsc --noEmit`. CI (`.github/workflows/ci.yml`) runs on
+`master`, `main`, and `develop`. It lints and type-checks both apps, applies migrations
+to PostgreSQL, runs pytest (including auth isolation and file-generation tests), builds
+the Docker images, runs Playwright Chromium smoke against compose, and scans history for
+committed secrets. Workflow runs can also be started manually.
 
 ## Configuration and secrets
 

@@ -37,6 +37,7 @@ class MemoryView(BaseModel):
     title: str
     content: dict[str, object]
     owner_agent_id: str | None
+    operator_id: str | None = None
     source_agent_id: str | None
     workflow_id: uuid.UUID | None
     tags: list[str]
@@ -49,6 +50,7 @@ class ArtifactCreate(BaseModel):
 
     kind: ArtifactKind = ArtifactKind.FILE
     created_by: str = Field(min_length=1, max_length=64)
+    owner_id: str | None = Field(default=None, max_length=64)
     uri: str = Field(min_length=1, max_length=4_000)
     title: str = Field(min_length=1, max_length=240)
     workflow_id: uuid.UUID | None = None
@@ -63,6 +65,7 @@ class ArtifactView(BaseModel):
     id: uuid.UUID
     kind: ArtifactKind
     created_by: str
+    owner_id: str | None = None
     uri: str
     title: str
     workflow_id: uuid.UUID | None

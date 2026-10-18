@@ -243,4 +243,3 @@ class ProviderStatusView(BaseModel):
 class ProviderActionResult(BaseModel):
     provider: ProviderStatusView
     message: str
-
