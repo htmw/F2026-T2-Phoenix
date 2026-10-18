@@ -231,17 +231,28 @@ Agent Mesh follows an end-to-end modular-monolith pipeline:
 
 From Sprint 0 — *Who we're building Agent Mesh for*:
 
-**Priya — Software Engineering Lead**  
-**Goal:** A single pipeline that runs security review, code fixes, and tests automatically before merge.  
-**Frustration:** Manually chaining separate AI tools for security, coding, and testing is slow and error-prone.
-
-**Daniel — Data Analyst**  
-**Goal:** Multi-step analysis — cleaning, analysis, and reporting — done from one plain-language request.  
-**Frustration:** General chat models lose track of steps and can't hand structured data cleanly between stages.
-
-**Aisha — Technical Product Manager**  
-**Goal:** Visibility into which AI capability ran, why, and what it cost, for every workflow.  
-**Frustration:** Black-box chatbot answers make it impossible to audit cost, latency, or decision quality.
+<table>
+  <tr>
+    <td align="center" width="33%">
+      <img src="https://github.com/Soumen2581/Capstone-Project/raw/master/docs/wiki/personas/persona-priya.jpg" width="200" height="260" alt="Priya, Software Engineering Lead" /><br/>
+      <b>Priya — Software Engineering Lead</b><br/>
+      <b>Goal:</b> A single pipeline that runs security review, code fixes, and tests automatically before merge.<br/>
+      <b>Frustration:</b> Manually chaining separate AI tools for security, coding, and testing is slow and error-prone.
+    </td>
+    <td align="center" width="33%">
+      <img src="https://github.com/Soumen2581/Capstone-Project/raw/master/docs/wiki/personas/persona-daniel.jpg" width="200" height="260" alt="Daniel, Data Analyst" /><br/>
+      <b>Daniel — Data Analyst</b><br/>
+      <b>Goal:</b> Multi-step analysis — cleaning, analysis, and reporting — done from one plain-language request.<br/>
+      <b>Frustration:</b> General chat models lose track of steps and can't hand structured data cleanly between stages.
+    </td>
+    <td align="center" width="33%">
+      <img src="https://github.com/Soumen2581/Capstone-Project/raw/master/docs/wiki/personas/persona-aisha.jpg" width="200" height="260" alt="Aisha, Technical Product Manager" /><br/>
+      <b>Aisha — Technical Product Manager</b><br/>
+      <b>Goal:</b> Visibility into which AI capability ran, why, and what it cost, for every workflow.<br/>
+      <b>Frustration:</b> Black-box chatbot answers make it impossible to audit cost, latency, or decision quality.
+    </td>
+  </tr>
+</table>
 
 ## Source Code (Sprint 0)
 
