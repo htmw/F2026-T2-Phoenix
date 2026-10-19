@@ -362,6 +362,44 @@ DOCUMENTATION_AGENT = AgentDefinition(
 )
 
 
+DATA_CLEANER_AGENT = AgentDefinition(
+    id="data-cleaner-agent",
+    name="Data Cleaner Agent",
+    description=(
+        "Cleans tabular data such as CSV files: fixes types and formats, removes "
+        "duplicates, handles missing values, and reports every change it made."
+    ),
+    capabilities=frozenset({Capability.DATA_CLEANING}),
+    instructions=(
+        "You are a data cleaning agent. Clean only the dataset supplied in the objective "
+        "or upstream context. Normalise formats and types, remove exact duplicate rows, "
+        "and handle missing values conservatively (never invent data). Return the full "
+        "cleaned dataset in `cleaned_data` in the same format it arrived in, a readable "
+        "`change_summary`, and one entry per change in `changes`. If no dataset was "
+        "supplied, say so in `change_summary` and return `cleaned_data` empty."
+    ),
+    output_schema={
+        "type": "object",
+        "required": ["summary", "cleaned_data", "change_summary"],
+        "properties": {
+            "summary": {"type": "string"},
+            "cleaned_data": {"type": "string"},
+            "change_summary": {"type": "string"},
+            "changes": _STRING_ARRAY,
+            "rows_before": {"type": "integer", "minimum": 0},
+            "rows_after": {"type": "integer", "minimum": 0},
+        },
+    },
+    model_preference=ModelPreference(
+        preferred_traits=(ModelTrait.STRUCTURED_OUTPUT, ModelTrait.LONG_CONTEXT),
+        min_context_tokens=32_000,
+        max_output_tokens=8_192,
+        temperature=0.0,
+    ),
+    limits=AgentLimits(timeout_seconds=180.0, max_cost_usd=0.40),
+)
+
+
 GENERAL_AGENT = AgentDefinition(
     id="general-agent",
     name="General Agent",
@@ -419,6 +457,7 @@ BUILTIN_AGENTS: tuple[AgentDefinition, ...] = (
     TESTING_AGENT,
     REVIEW_AGENT,
     DOCUMENTATION_AGENT,
+    DATA_CLEANER_AGENT,
     GENERAL_AGENT,
 )
 

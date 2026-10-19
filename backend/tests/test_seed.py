@@ -21,7 +21,7 @@ async def test_seeding_creates_all_builtin_agents(session: AsyncSession) -> None
     created, updated = await seed_agents(session, BUILTIN_AGENTS)
     await session.commit()
 
-    assert (created, updated) == (8, 0)
+    assert (created, updated) == (len(BUILTIN_AGENTS), 0)
     assert await registered_agent_ids(session) == {d.id for d in BUILTIN_AGENTS}
 
 
@@ -36,7 +36,7 @@ async def test_seeding_twice_creates_no_duplicates(session: AsyncSession) -> Non
 
     # Startup seeding runs on every boot, so a non-idempotent upsert would grow the
     # table without bound.
-    assert (created, updated) == (0, 8)
+    assert (created, updated) == (0, len(BUILTIN_AGENTS))
     assert await count(session, AgentRecord) == agents_after_first
     assert await count(session, AgentCapabilityRecord) == capabilities_after_first
 

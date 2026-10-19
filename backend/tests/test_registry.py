@@ -66,7 +66,7 @@ async def test_duplicate_registration_is_rejected() -> None:
 async def test_all_builtin_agents_are_registered(memory_registry: InMemoryAgentRegistry) -> None:
     listed = await memory_registry.list_all()
 
-    assert len(listed) == len(BUILTIN_AGENTS) == 8
+    assert len(listed) == len(BUILTIN_AGENTS) == 9
 
 
 async def test_capability_lookup_returns_only_providers(

@@ -12,7 +12,7 @@ async def test_list_agents_returns_all_seeded_agents(db_client: AsyncClient) -> 
 
     assert response.status_code == 200
     body = response.json()
-    assert len(body) == 8
+    assert len(body) == 9
     assert {agent["id"] for agent in body} >= {
         "planning-agent",
         "security-agent",

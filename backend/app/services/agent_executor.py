@@ -291,6 +291,7 @@ class AgentExecutor:
                 provider=response.provider,
                 model=model.id,
                 validation_error=outcome.error,
+                fields=list(outcome.fields),
                 cost_usd=round(cost, 6),
             )
             return AgentOutput(

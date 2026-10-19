@@ -26,6 +26,8 @@ class ValidationOutcome:
     payload: dict[str, object]
     error: str | None = None
     recovered_from_fence: bool = False
+    #: Paths of the fields that failed validation, e.g. ``("score",)``.
+    fields: tuple[str, ...] = ()
 
 
 def extract_json_object(text: str) -> tuple[dict[str, object] | None, str | None, bool]:
@@ -75,17 +77,27 @@ def validate_agent_output(text: str, output_schema: dict[str, object]) -> Valida
             payload=payload,
             error=_describe_errors(errors),
             recovered_from_fence=recovered,
+            fields=tuple(dict.fromkeys(_field_of(error) for error in errors)),
         )
 
     return ValidationOutcome(valid=True, payload=payload, recovered_from_fence=recovered)
+
+
+def _field_of(error: SchemaValidationError) -> str:
+    location = "/".join(str(part) for part in error.path)
+    # A missing required property is reported against its parent; name the property.
+    if error.validator == "required" and isinstance(error.message, str):
+        missing = error.message.split("'")
+        if len(missing) >= 2:
+            return f"{location}/{missing[1]}" if location else missing[1]
+    return location or "(root)"
 
 
 def _describe_errors(errors: list[SchemaValidationError]) -> str:
     """Render schema errors compactly enough to log and to feed back to the model."""
     described = []
     for error in errors[:5]:
-        location = "/".join(str(part) for part in error.path) or "(root)"
-        described.append(f"{location}: {error.message}")
+        described.append(f"{_field_of(error)}: {error.message}")
     if len(errors) > 5:
         described.append(f"... and {len(errors) - 5} more")
     return "; ".join(described)

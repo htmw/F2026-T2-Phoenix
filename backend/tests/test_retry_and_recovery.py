@@ -657,6 +657,10 @@ async def test_async_submission_returns_the_graph_before_it_runs(
     assert body["status"] in {WorkflowStatus.PENDING.value, WorkflowStatus.RUNNING.value}
     assert [node["key"] for node in body["nodes"]] == ["security"]
 
+    # Let the background run finish so teardown does not drop tables under it.
+    runner = db_client._transport.app.state.workflow_runner  # type: ignore[attr-defined]
+    assert await runner.wait_for(uuid.UUID(body["id"]), seconds=30)
+
 
 async def test_background_run_reaches_completion(
     db_client: AsyncClient, fake_provider: FakeProvider

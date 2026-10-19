@@ -110,6 +110,17 @@ _SIGNALS: dict[Capability, tuple[str, ...]] = {
     Capability.CODE_REVIEW: ("review", "code quality", "critique", "assess the code"),
     Capability.DOCUMENTATION: ("document", "readme", "docstring", "api docs", "changelog"),
     Capability.REPORT_GENERATION: ("report", "write up", "summary document", "findings document"),
+    Capability.DATA_CLEANING: (
+        "csv",
+        "clean the data",
+        "clean this data",
+        "clean my data",
+        "data cleaning",
+        "dataset",
+        "spreadsheet",
+        "deduplicate",
+        "missing values",
+    ),
 }
 
 # Requests mentioning several distinct areas need decomposition; a single-area request

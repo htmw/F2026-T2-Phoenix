@@ -15,6 +15,7 @@ from app.domain.enums import DecisionKind, NodeStatus, RoutingStrategy, TaskStat
 from app.messaging.store import DecisionService
 from app.models.workflow import WorkflowNodeRecord, WorkflowRecord
 from app.orchestration.capability_analysis import CapabilityAnalyser, CapabilityAnalysis
+from app.orchestration.clarification import CLARIFYING_QUESTION, needs_clarification
 from app.orchestration.planner import WorkflowPlanner
 from app.orchestration.selection import (
     AgentSelector,
@@ -66,6 +67,18 @@ def _augment_request(request_text: str, prior_answer: str) -> str:
 
 class UnservableRequestError(RuntimeError):
     """Raised when no registered agent can satisfy part of the request."""
+
+
+class ClarificationNeededError(UnservableRequestError):
+    """Raised instead of spawning agents when the brief does not say what is wanted."""
+
+
+def _require_clear_brief(request: TaskRequest) -> None:
+    # Follow-ups lean on the thread ("now add tests") and an explicit roster says what
+    # should run, so only a fresh, auto-routed brief is checked.
+    fresh_auto_brief = request.parent_workflow_id is None and not request.agent_ids
+    if fresh_auto_brief and needs_clarification(request.request):
+        raise ClarificationNeededError(CLARIFYING_QUESTION)
 
 
 class UnknownModelOverrideError(RuntimeError):
@@ -144,6 +157,7 @@ class OrchestrationService:
         # Capability analysis sees only the follow-up text: the prior result belongs in
         # the agents' objectives (what to build on), not in the selection signal, where a
         # large earlier payload could over-activate desks.
+        _require_clear_brief(request)
         analysis = await self._analyser.analyse(request.request)
         self._validate_routing_models(request)
 
@@ -397,6 +411,7 @@ class OrchestrationService:
         Exposed so a user can see which agents a request would activate, and the most
         it could cost, before committing to the spend.
         """
+        _require_clear_brief(request)
         analysis = await self._analyser.analyse(request.request)
         self._validate_routing_models(request)
         try:

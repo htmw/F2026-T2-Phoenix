@@ -14,6 +14,7 @@ from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.orm import selectinload
 
+from app.agents.tables import store_agent_row
 from app.core.metrics import process_metrics
 from app.domain.enums import (
     Capability,
@@ -22,6 +23,7 @@ from app.domain.enums import (
     TaskStatus,
     WorkflowStatus,
 )
+from app.models.agent import AgentRecord
 from app.models.workflow import (
     AgentResultRecord,
     ExecutionRecord,
@@ -49,6 +51,8 @@ class WorkflowNotFoundError(KeyError):
 class WorkflowRepository:
     def __init__(self, session: AsyncSession) -> None:
         self._session = session
+        # agent id -> (result table, output schema); None for agents without a table.
+        self._agent_tables: dict[str, tuple[str, dict[str, object]] | None] = {}
 
     async def commit(self) -> None:
         """Make everything written so far durable.
@@ -290,10 +294,13 @@ class WorkflowRepository:
         self._session.add(execution)
         await self._session.flush()
 
+        invalid = output.status is ExecutionStatus.INVALID_OUTPUT
         self._session.add(
             AgentResultRecord(
                 execution_id=execution.id,
-                payload=output.payload,
+                # Output that failed validation is never stored as data; only the error
+                # and the raw text (for debugging) are kept.
+                payload={} if invalid else output.payload,
                 summary=output.summary,
                 schema_valid=output.status is not ExecutionStatus.INVALID_OUTPUT,
                 validation_error=(
@@ -312,6 +319,7 @@ class WorkflowRepository:
         if output.succeeded:
             node.status = NodeStatus.COMPLETED
             node.result_payload = output.payload
+            await self._store_in_agent_table(workflow_id, execution.id, output)
         elif output.status is ExecutionStatus.CANCELLED:
             node.status = NodeStatus.CANCELLED
 
@@ -331,6 +339,32 @@ class WorkflowRepository:
 
         await self._session.flush()
         return execution
+
+    async def _store_in_agent_table(
+        self, workflow_id: uuid.UUID, execution_id: uuid.UUID, output: AgentOutput
+    ) -> None:
+        if output.agent_id not in self._agent_tables:
+            # Generated (ephemeral) agents have no registry row and therefore no table.
+            agent = await self._session.get(AgentRecord, output.agent_id)
+            self._agent_tables[output.agent_id] = (
+                (agent.table_name, dict(agent.output_schema))
+                if agent is not None and agent.table_name
+                else None
+            )
+        target = self._agent_tables[output.agent_id]
+        if target is None:
+            return
+        table_name, output_schema = target
+        await store_agent_row(
+            self._session,
+            agent_id=output.agent_id,
+            table_name=table_name,
+            output_schema=output_schema,
+            payload=output.payload,
+            execution_id=execution_id,
+            workflow_id=workflow_id,
+            node_key=output.node_key,
+        )
 
     async def mark_node_failed(self, workflow_id: uuid.UUID, node_key: str) -> None:
         await self.set_node_status(workflow_id, node_key, NodeStatus.FAILED)

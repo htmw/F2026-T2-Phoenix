@@ -39,6 +39,7 @@ _STAGE_RANKS: dict[Capability, int] = {
     Capability.WEB_RESEARCH: 10,
     Capability.SUMMARISATION: 10,
     Capability.SOURCE_EXTRACTION: 10,
+    Capability.DATA_CLEANING: 15,
     Capability.DEPENDENCY_AUDIT: 20,
     Capability.VULNERABILITY_ANALYSIS: 20,
     Capability.SECURITY_RECOMMENDATION: 20,
@@ -73,6 +74,7 @@ _TESTING = frozenset(
 _REVIEW = frozenset({Capability.CODE_REVIEW, Capability.QUALITY_ASSESSMENT})
 _PLANNING = frozenset({Capability.TASK_DECOMPOSITION})
 _GENERAL = frozenset({Capability.GENERAL_ASSISTANCE})
+_DATA = frozenset({Capability.DATA_CLEANING})
 
 # What each capability needs to see before it can do useful work. Anything absent from a
 # consumer's set is, by construction, something it can run alongside: a security audit
@@ -81,6 +83,7 @@ _CONSUMES: dict[Capability, frozenset[Capability]] = {
     **dict.fromkeys(_PLANNING, frozenset()),
     **dict.fromkeys(_GENERAL, frozenset()),
     **dict.fromkeys(_RESEARCH, _PLANNING),
+    **dict.fromkeys(_DATA, _PLANNING),
     **dict.fromkeys(_SECURITY, _PLANNING),
     **dict.fromkeys(_CODE, _PLANNING | _RESEARCH | _SECURITY),
     **dict.fromkeys(_TESTING, _PLANNING | _CODE),

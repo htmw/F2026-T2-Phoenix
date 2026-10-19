@@ -88,6 +88,7 @@ class AgentDefinition(BaseModel):
     limits: AgentLimits = AgentLimits()
     retry_policy: RetryPolicy = RetryPolicy()
     enabled: bool = True
+    supported_models: tuple[str, ...] = ()
 
     @model_validator(mode="after")
     def _require_object_output_schema(self) -> AgentDefinition:
@@ -127,9 +128,16 @@ class AgentSummary(BaseModel):
     max_cost_usd: float
     max_attempts: int
     enabled: bool
+    #: ``active`` agents are offered to the orchestrator; ``disabled`` ones never are.
+    status: str = "active"
+    supported_models: list[str] = Field(default_factory=list)
+    #: Fully qualified per-agent result table, when one has been created.
+    table_name: str | None = None
 
     @classmethod
-    def from_definition(cls, definition: AgentDefinition) -> AgentSummary:
+    def from_definition(
+        cls, definition: AgentDefinition, *, table_name: str | None = None
+    ) -> AgentSummary:
         preference = definition.model_preference
         return cls(
             id=definition.id,
@@ -146,4 +154,73 @@ class AgentSummary(BaseModel):
             max_cost_usd=definition.limits.max_cost_usd,
             max_attempts=definition.retry_policy.max_attempts,
             enabled=definition.enabled,
+            status="active" if definition.enabled else "disabled",
+            supported_models=list(definition.supported_models),
+            table_name=table_name,
         )
+
+
+class CostProfile(BaseModel):
+    """What one run of the agent may spend and how long it may take."""
+
+    model_config = ConfigDict(extra="forbid")
+
+    max_cost_usd: float = Field(default=0.50, gt=0, le=100.0)
+    timeout_seconds: float = Field(default=120.0, gt=0, le=1_800)
+
+
+def _clean_models(models: list[str]) -> list[str]:
+    cleaned: list[str] = []
+    for model in models:
+        value = model.strip()
+        if not value:
+            raise ValueError("supported_models entries must be non-empty")
+        if value not in cleaned:
+            cleaned.append(value)
+    return cleaned
+
+
+class AgentEnrollment(BaseModel):
+    """Everything needed to make a new agent selectable, in one request."""
+
+    model_config = ConfigDict(extra="forbid", str_strip_whitespace=True)
+
+    name: str = Field(min_length=1, max_length=120)
+    description: str = Field(min_length=1, max_length=1_000)
+    capabilities: list[Capability] = Field(min_length=1, max_length=32)
+    supported_models: list[str] = Field(default_factory=list, max_length=20)
+    input_schema: dict[str, object] = Field(default_factory=dict)
+    output_schema: dict[str, object]
+    cost_profile: CostProfile = CostProfile()
+    #: Prompt for the agent; a default is derived from the description when omitted.
+    instructions: str | None = Field(default=None, min_length=1, max_length=20_000)
+
+    @model_validator(mode="after")
+    def _normalise(self) -> AgentEnrollment:
+        object.__setattr__(self, "capabilities", list(dict.fromkeys(self.capabilities)))
+        object.__setattr__(self, "supported_models", _clean_models(self.supported_models))
+        return self
+
+
+class AgentUpdate(BaseModel):
+    """A partial change to an enrolled agent. Omitted fields are left as they are."""
+
+    model_config = ConfigDict(extra="forbid", str_strip_whitespace=True)
+
+    name: str | None = Field(default=None, min_length=1, max_length=120)
+    description: str | None = Field(default=None, min_length=1, max_length=1_000)
+    capabilities: list[Capability] | None = Field(default=None, min_length=1, max_length=32)
+    supported_models: list[str] | None = Field(default=None, max_length=20)
+    input_schema: dict[str, object] | None = None
+    output_schema: dict[str, object] | None = None
+    cost_profile: CostProfile | None = None
+    instructions: str | None = Field(default=None, min_length=1, max_length=20_000)
+    enabled: bool | None = None
+
+    @model_validator(mode="after")
+    def _normalise(self) -> AgentUpdate:
+        if self.capabilities is not None:
+            object.__setattr__(self, "capabilities", list(dict.fromkeys(self.capabilities)))
+        if self.supported_models is not None:
+            object.__setattr__(self, "supported_models", _clean_models(self.supported_models))
+        return self

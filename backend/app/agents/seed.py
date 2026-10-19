@@ -12,6 +12,7 @@ from __future__ import annotations
 from sqlalchemy import delete, select
 from sqlalchemy.ext.asyncio import AsyncSession
 
+from app.agents.tables import ensure_agent_table
 from app.core.logging import get_logger
 from app.models.agent import AgentCapabilityRecord, AgentRecord
 from app.schemas.agent import AgentDefinition
@@ -47,6 +48,7 @@ async def upsert_agent(session: AsyncSession, definition: AgentDefinition) -> bo
     record.permissions = list(definition.permissions)
     record.timeout_seconds = definition.limits.timeout_seconds
     record.max_cost_usd = definition.limits.max_cost_usd
+    record.supported_models = list(definition.supported_models)
     if created:
         # Respect an operator who disabled an existing agent; only set it on insert.
         record.enabled = definition.enabled
@@ -62,14 +64,35 @@ async def upsert_agent(session: AsyncSession, definition: AgentDefinition) -> bo
     return created
 
 
+async def seed_agent_with_table(
+    session: AsyncSession, definition: AgentDefinition, *, strict: bool
+) -> AgentRecord:
+    """Upsert an agent and make sure its result table exists, in the caller's transaction.
+
+    Both happen in one transaction, so if the table cannot be created the agent row is
+    rolled back with it and no half-enrolled agent is left behind.
+    """
+    await upsert_agent(session, definition)
+    table_name = await ensure_agent_table(
+        session, definition.id, definition.output_schema, strict=strict
+    )
+    record = await session.get(AgentRecord, definition.id)
+    if record is None:
+        raise RuntimeError(f"agent '{definition.id}' vanished during enrollment")
+    record.table_name = table_name
+    await session.flush()
+    return record
+
+
 async def seed_agents(
     session: AsyncSession, definitions: tuple[AgentDefinition, ...]
 ) -> tuple[int, int]:
     """Seed definitions, returning (created, updated) counts."""
     created = 0
     for definition in definitions:
-        if await upsert_agent(session, definition):
+        if await session.get(AgentRecord, definition.id) is None:
             created += 1
+        await seed_agent_with_table(session, definition, strict=False)
 
     total = len(definitions)
     logger.info("agents_seeded", created=created, updated=total - created, total=total)

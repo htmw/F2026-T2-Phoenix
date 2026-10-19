@@ -38,6 +38,8 @@ class ApprovalView(BaseModel):
 
 
 class NodeView(BaseModel):
+    #: Instance id of this spawned agent: unique across every workflow, unlike ``key``.
+    id: uuid.UUID | None = None
     key: str
     agent_id: str
     #: Original agent display name (e.g. "Security Agent"), never a stripped id.
@@ -110,6 +112,7 @@ class WorkflowView(BaseModel):
                 ]
             nodes.append(
                 NodeView(
+                    id=node.id,
                     key=node.node_key,
                     agent_id=node.agent_id,
                     agent_name=agent_display_name(node.agent_id),

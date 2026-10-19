@@ -17,11 +17,13 @@ from collections.abc import AsyncIterator
 import pytest
 import pytest_asyncio
 from httpx import ASGITransport, AsyncClient
+from sqlalchemy import text
 from sqlalchemy.ext.asyncio import AsyncEngine, AsyncSession, async_sessionmaker
 
 from app.agents.builtin import BUILTIN_AGENTS
 from app.agents.registry import InMemoryAgentRegistry
 from app.agents.seed import seed_agents
+from app.agents.tables import AGENT_DATA_SCHEMA
 from app.api.dependencies import get_session
 from app.core.config import Settings
 from app.database.base import Base
@@ -99,13 +101,17 @@ async def engine(settings: Settings) -> AsyncIterator[AsyncEngine]:
     # Schema is created from metadata rather than by running migrations: these tests
     # verify application behaviour, and a dedicated migration test covers the migration
     # path itself.
+    # Per-agent result tables are created at enrollment, outside the metadata.
+    drop_agent_tables = text(f"DROP SCHEMA IF EXISTS {AGENT_DATA_SCHEMA} CASCADE")
     async with engine.begin() as connection:
+        await connection.execute(drop_agent_tables)
         await connection.run_sync(Base.metadata.drop_all)
         await connection.run_sync(Base.metadata.create_all)
 
     yield engine
 
     async with engine.begin() as connection:
+        await connection.execute(drop_agent_tables)
         await connection.run_sync(Base.metadata.drop_all)
     await engine.dispose()
 

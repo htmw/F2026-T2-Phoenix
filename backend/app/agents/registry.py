@@ -224,4 +224,5 @@ def record_to_definition(record: AgentRecord) -> AgentDefinition:
         ),
         retry_policy=RetryPolicy.model_validate(record.retry_policy),
         enabled=record.enabled,
+        supported_models=tuple(record.supported_models or ()),
     )

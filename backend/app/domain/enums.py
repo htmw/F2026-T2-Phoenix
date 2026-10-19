@@ -35,6 +35,7 @@ class Capability(StrEnum):
     QUALITY_ASSESSMENT = "review.quality"
     DOCUMENTATION = "documentation.authoring"
     REPORT_GENERATION = "documentation.report"
+    DATA_CLEANING = "data.cleaning"
 
 
 class ModelTrait(StrEnum):
