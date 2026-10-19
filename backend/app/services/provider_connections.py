@@ -73,6 +73,16 @@ async def load_connection_secrets(session: AsyncSession, settings: Settings) -> 
     return secrets
 
 
+async def load_discovered_models(session: AsyncSession) -> dict[str, list[str]]:
+    """Model ids each connected key reported at connect time, keyed by provider id."""
+    rows = (await session.execute(select(ProviderConnectionRecord))).scalars().all()
+    return {
+        row.provider_id: list(row.discovered_models)
+        for row in rows
+        if row.status != ProviderConnectionStatus.DISCONNECTED.value and row.discovered_models
+    }
+
+
 async def get_connection(
     session: AsyncSession, provider_id: str
 ) -> ProviderConnectionRecord | None:

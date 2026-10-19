@@ -144,8 +144,11 @@ async def rebuild_app_registry(
     from app.services import routing_policy as routing_policy_service
 
     overrides = await connections.load_connection_secrets(session, settings)
+    discovered = await connections.load_discovered_models(session)
     policy = await routing_policy_service.get_policy(session)
-    registry = build_provider_registry(settings, credential_overrides=overrides, policy=policy)
+    registry = build_provider_registry(
+        settings, credential_overrides=overrides, discovered_models=discovered, policy=policy
+    )
     request.app.state.provider_registry = registry
     runner = getattr(request.app.state, "workflow_runner", None)
     if runner is not None:

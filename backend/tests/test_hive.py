@@ -9,7 +9,7 @@ from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.agents.builtin import BUILTIN_AGENTS
 from app.agents.registry import DatabaseAgentRegistry
-from app.domain.enums import MemoryVisibility, MessageStatus, MessageType
+from app.domain.enums import ErrorKind, MemoryVisibility, MessageStatus, MessageType
 from app.providers.fake import FakeProvider
 from app.providers.registry import ProviderRegistry
 from app.schemas.agent import AgentDefinition
@@ -113,6 +113,27 @@ async def test_prepare_attempt_merges_inbox_into_notes(
     assert "Did you parameterize auth?" in notes
     # Fake-only registry must not burn an LLM consult call.
     assert "Peer consult answers" not in notes
+
+
+async def test_consult_peers_skips_when_the_model_is_unavailable(
+    seeded_session: AsyncSession, coding_agent: AgentDefinition
+) -> None:
+    provider = LiveFakeProvider()
+    provider.queue_failure(ErrorKind.INVALID_REQUEST, "model does not exist")
+    registry = DatabaseAgentRegistry(seeded_session)
+    collab = Collaboration(seeded_session, registry, providers=ProviderRegistry([provider]))
+
+    answers = await hive_service.consult_peers(
+        collab,
+        ProviderRegistry([provider]),
+        agent=coding_agent,
+        objective="Fix security findings",
+        peer_ids=("security-agent",),
+        workflow_id=uuid.uuid4(),
+        task_id=uuid.uuid4(),
+    )
+
+    assert answers == ""
 
 
 async def test_consult_peers_asks_specialist_via_provider(

@@ -74,13 +74,20 @@ def create_app(settings: Settings | None = None) -> FastAPI:
         try:
             async with session_scope(session_factory) as session:
                 from app.providers.registry import build_provider_registry
-                from app.services.provider_connections import load_connection_secrets
+                from app.services.provider_connections import (
+                    load_connection_secrets,
+                    load_discovered_models,
+                )
                 from app.services.routing_policy import get_policy
 
                 overrides = await load_connection_secrets(session, settings)
+                discovered = await load_discovered_models(session)
                 policy = await get_policy(session)
                 app.state.provider_registry = build_provider_registry(
-                    settings, credential_overrides=overrides, policy=policy
+                    settings,
+                    credential_overrides=overrides,
+                    discovered_models=discovered,
+                    policy=policy,
                 )
         except Exception:
             logger.exception("provider_connection_load_failed")

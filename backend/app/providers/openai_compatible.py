@@ -527,15 +527,15 @@ class OpenRouterProvider(OpenAICompatibleProvider):
 
 
 class GroqProvider(OpenAICompatibleProvider):
-    """Groq OpenAI-compatible inference (Llama / Mixtral)."""
+    """Groq OpenAI-compatible inference (open-weight GPT-OSS models)."""
 
     name = "groq"
     base_url = "https://api.groq.com/openai/v1"
     models = (
         ModelSpec(
-            id="groq:llama-3.3-70b-versatile",
+            id="groq:openai/gpt-oss-120b",
             provider="groq",
-            model_name="llama-3.3-70b-versatile",
+            model_name="openai/gpt-oss-120b",
             traits=frozenset(
                 {
                     ModelTrait.FAST,
@@ -545,16 +545,16 @@ class GroqProvider(OpenAICompatibleProvider):
                     ModelTrait.STRUCTURED_OUTPUT,
                 }
             ),
-            context_tokens=128_000,
+            context_tokens=131_072,
             max_output_tokens=32_768,
-            input_cost_per_million=0.59,
-            output_cost_per_million=0.79,
-            typical_latency_ms=400,
+            input_cost_per_million=0.15,
+            output_cost_per_million=0.60,
+            typical_latency_ms=500,
         ),
         ModelSpec(
-            id="groq:llama-3.1-8b-instant",
+            id="groq:openai/gpt-oss-20b",
             provider="groq",
-            model_name="llama-3.1-8b-instant",
+            model_name="openai/gpt-oss-20b",
             traits=frozenset(
                 {
                     ModelTrait.FAST,
@@ -562,11 +562,11 @@ class GroqProvider(OpenAICompatibleProvider):
                     ModelTrait.STRUCTURED_OUTPUT,
                 }
             ),
-            context_tokens=128_000,
-            max_output_tokens=8_192,
-            input_cost_per_million=0.05,
-            output_cost_per_million=0.08,
-            typical_latency_ms=200,
+            context_tokens=131_072,
+            max_output_tokens=32_768,
+            input_cost_per_million=0.075,
+            output_cost_per_million=0.30,
+            typical_latency_ms=300,
         ),
     )
 

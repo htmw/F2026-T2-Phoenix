@@ -496,6 +496,28 @@ def test_anthropic_is_configured_from_its_own_key() -> None:
     assert registry.names == ["anthropic"]
 
 
+def test_routing_skips_catalogue_models_the_key_cannot_use() -> None:
+    registry = build_provider_registry(
+        settings_with(groq_api_key="gsk-test", google_api_key="g-test"),
+        discovered_models={
+            "groq": ["openai/gpt-oss-20b", "whisper-large-v3"],
+            "google": ["models/gemini-flash-latest"],
+        },
+    )
+
+    ids = {model.id for model in registry.available_models()}
+    assert ids == {"groq:openai/gpt-oss-20b", "google:gemini-flash-latest"}
+
+
+def test_provider_with_no_usable_catalogue_models_is_not_routed() -> None:
+    registry = build_provider_registry(
+        settings_with(groq_api_key="gsk-test", openai_api_key="sk-test"),
+        discovered_models={"groq": ["whisper-large-v3"]},
+    )
+
+    assert registry.names == ["openai"]
+
+
 def test_google_is_configured_from_its_own_key() -> None:
     registry = build_provider_registry(settings_with(google_api_key="sk-google"))
 

@@ -28,6 +28,7 @@ from app.providers.openai_compatible import (
     HuggingFaceProvider,
     MistralProvider,
     MoonshotProvider,
+    OpenAICompatibleProvider,
     OpenAIProvider,
     OpenRouterProvider,
     PerplexityProvider,
@@ -253,11 +254,14 @@ def build_provider_registry(
     *,
     include_fake: bool | None = None,
     credential_overrides: dict[str, str] | None = None,
+    discovered_models: dict[str, list[str]] | None = None,
     policy: RoutingPolicy | None = None,
 ) -> ProviderRegistry:
     """Construct the registry from configuration and optional Settings-stored keys.
 
     Stored connection secrets override environment values for the same provider id.
+    When a connected key reported its model list, routing is limited to catalogue
+    models on that list, so retired or inaccessible ids are never selected.
     The fake provider is included only when no real provider is configured and the
     environment is not production (unless ``include_fake`` forces it).
     """
@@ -288,6 +292,8 @@ def build_provider_registry(
     ]
 
     configured = [provider for provider in candidates if provider.is_configured()]
+    for provider_name, names in (discovered_models or {}).items():
+        configured = _restrict_to_discovered(configured, provider_name, names)
 
     if include_fake is None:
         use_fake = not configured and not settings.is_production
@@ -307,6 +313,30 @@ def build_provider_registry(
 
     logger.info("provider_registry_built", providers=[p.name for p in configured])
     return ProviderRegistry(configured, policy=policy)
+
+
+def _restrict_to_discovered(
+    providers: list[LLMProvider], provider_name: str, names: list[str]
+) -> list[LLMProvider]:
+    available = {name.removeprefix("models/") for name in names}
+    if not available:
+        return providers
+    kept: list[LLMProvider] = []
+    for provider in providers:
+        if provider.name != provider_name or not isinstance(
+            provider, OpenAICompatibleProvider | AnthropicProvider
+        ):
+            kept.append(provider)
+            continue
+        catalogue = provider.get_model_capabilities()
+        usable = tuple(model for model in catalogue if model.model_name in available)
+        dropped = sorted(model.model_name for model in catalogue if model not in usable)
+        if dropped:
+            logger.warning("catalogue_models_unavailable", provider=provider_name, models=dropped)
+        if usable:
+            provider.models = usable
+            kept.append(provider)
+    return kept
 
 
 def cheapest_model_with(registry: ProviderRegistry, trait: ModelTrait) -> ModelSpec | None:

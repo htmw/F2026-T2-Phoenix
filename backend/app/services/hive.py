@@ -20,7 +20,7 @@ from app.domain.enums import (
     MessageStatus,
     MessageType,
 )
-from app.providers.base import CompletionRequest, LLMProvider, ModelSpec
+from app.providers.base import CompletionRequest, LLMProvider, ModelSpec, ProviderError
 from app.providers.registry import NoSuitableModelError, ProviderRegistry
 from app.schemas.agent import AgentDefinition, ModelPreference
 from app.schemas.memory import MemoryCreate
@@ -163,7 +163,14 @@ async def consult_peers(
         "If you can proceed from upstream results and inbox alone, set need_help false.\n"
         "Otherwise list at most three concrete questions for specific peer agent ids."
     )
-    decision = await _json_completion(provider, model, prompt, _CONSULT_SCHEMA)
+    try:
+        decision = await _json_completion(provider, model, prompt, _CONSULT_SCHEMA)
+    except ProviderError as exc:
+        # Consulting peers is optional; a provider failure must not sink the agent's turn.
+        logger.warning(
+            "peer_consult_skipped", agent_id=agent.id, model=model.id, error_kind=exc.kind.value
+        )
+        return ""
     if not decision.get("need_help"):
         return ""
 
