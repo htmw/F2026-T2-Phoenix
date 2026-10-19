@@ -20,17 +20,71 @@ import uuid
 from collections.abc import Coroutine
 from typing import Any
 
+from sqlalchemy import select, update
 from sqlalchemy.ext.asyncio import AsyncSession, async_sessionmaker
 
 from app.core.config import Settings
 from app.core.logging import get_logger
-from app.domain.enums import TaskStatus, WorkflowStatus
+from app.domain.enums import AgentRuntimeStatus, NodeStatus, TaskStatus, WorkflowStatus
+from app.models.network import AgentPresenceRecord
+from app.models.workflow import WorkflowNodeRecord, WorkflowRecord
 from app.providers.registry import ProviderRegistry
 from app.services.factory import build_orchestration_service
 from app.services.orchestration_service import PreparedWorkflow
 from app.services.workflow_repository import WorkflowRepository
 
 logger = get_logger(__name__)
+
+INTERRUPTED_ERROR = "interrupted by a server restart; resume to continue"
+
+
+async def mark_interrupted_runs(session: AsyncSession) -> int:
+    """Flag workflows a previous process left ``RUNNING`` so the UI stops spinning.
+
+    Only safe when this process is the sole runner: with several replicas, one restart
+    would cancel runs another replica is still executing.
+    """
+    stale = (
+        (
+            await session.execute(
+                select(WorkflowRecord.id).where(
+                    WorkflowRecord.status.in_((WorkflowStatus.RUNNING, WorkflowStatus.PENDING))
+                )
+            )
+        )
+        .scalars()
+        .all()
+    )
+    repository = WorkflowRepository(session)
+    for workflow_id in stale:
+        await repository.finish_workflow(
+            workflow_id, WorkflowStatus.CANCELLED, error=INTERRUPTED_ERROR
+        )
+    await session.execute(
+        update(WorkflowNodeRecord)
+        .where(
+            WorkflowNodeRecord.status == NodeStatus.RUNNING,
+            WorkflowNodeRecord.workflow_id.in_(
+                select(WorkflowRecord.id).where(WorkflowRecord.status != WorkflowStatus.RUNNING)
+            ),
+        )
+        .values(status=NodeStatus.CANCELLED)
+    )
+    await session.execute(
+        update(AgentPresenceRecord)
+        .where(AgentPresenceRecord.status != AgentRuntimeStatus.IDLE)
+        .values(
+            status=AgentRuntimeStatus.IDLE,
+            current_task=None,
+            waiting_for=None,
+            sending_to=None,
+            detail="idle after restart",
+        )
+    )
+    await repository.commit()
+    if stale:
+        logger.info("interrupted_workflows_marked", count=len(stale))
+    return len(stale)
 
 
 class WorkflowRunner:

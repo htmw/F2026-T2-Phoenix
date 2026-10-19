@@ -70,6 +70,15 @@ def create_app(settings: Settings | None = None) -> FastAPI:
             except Exception:
                 logger.exception("agent_seeding_failed")
 
+        if not settings.is_production:
+            try:
+                from app.services.workflow_runner import mark_interrupted_runs
+
+                async with session_scope(session_factory) as session:
+                    await mark_interrupted_runs(session)
+            except Exception:
+                logger.exception("interrupted_workflow_sweep_failed")
+
         # Overlay Settings-stored provider keys and routing policy onto the registry.
         try:
             async with session_scope(session_factory) as session:
