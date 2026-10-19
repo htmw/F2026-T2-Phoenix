@@ -20,6 +20,10 @@ type ThemeContextValue = {
 const ThemeContext = createContext<ThemeContextValue | null>(null);
 const THEME_CHANGE = "agent-mesh-theme-change";
 
+function serverPreference(): ThemePreference {
+  return "light";
+}
+
 function subscribe(onChange: () => void) {
   const onStorage = (event: StorageEvent) => {
     if (event.key === THEME_STORAGE_KEY) onChange();
@@ -33,7 +37,7 @@ function subscribe(onChange: () => void) {
 }
 
 export function ThemeProvider({ children }: { children: ReactNode }) {
-  const preference = useSyncExternalStore(subscribe, getStoredThemePreference, () => "light");
+  const preference = useSyncExternalStore(subscribe, getStoredThemePreference, serverPreference);
 
   useEffect(() => {
     applyTheme(preference);
@@ -45,7 +49,7 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
   };
 
   return (
-    <ThemeContext.Provider value={{ preference, resolved: preference, setPreference }}>
+    <ThemeContext.Provider value={{ preference, resolved: resolveTheme(preference), setPreference }}>
       {children}
     </ThemeContext.Provider>
   );
