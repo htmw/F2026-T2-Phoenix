@@ -2188,3 +2188,38 @@ button:disabled {
   margin-top: 8px;
   width: fit-content;
 }
+
+.registry-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9rem;
+}
+
+.registry-table th,
+.registry-table td {
+  padding: var(--space-2) var(--space-3);
+  border-bottom: 1px solid var(--border);
+  text-align: left;
+  vertical-align: top;
+}
+
+.registry-table td .chip {
+  margin: 0 4px 4px 0;
+}
+
+.banner.ok {
+  margin: var(--space-2) 0;
+  padding: var(--space-3);
+  border-radius: var(--radius-sm);
+  border: 1px solid color-mix(in srgb, var(--ok) 40%, transparent);
+  background: color-mix(in srgb, var(--ok) 12%, var(--bg-elevated));
+}
+
+.selection-reasons {
+  margin-top: var(--space-4);
+}
+
+.selection-reasons ul {
+  margin: var(--space-2) 0 0;
+  padding-left: var(--space-4);
+}

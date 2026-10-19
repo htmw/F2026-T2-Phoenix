@@ -1,9 +1,11 @@
 import type {
+  AgentEnrollment,
   AgentMailbox,
   AgentMessage,
   AgentSummary,
   ArtifactView,
   BackendStatus,
+  CapabilityCoverage,
   DecisionView,
   MemoryView,
   MetricsSummary,
@@ -64,6 +66,25 @@ export class ApiError extends Error {
   }
 }
 
+/** FastAPI validation errors arrive as a list of {loc, msg}; show them as "field: message". */
+export function describeErrorDetail(detail: unknown): string {
+  if (typeof detail === "string") {
+    return detail;
+  }
+  if (Array.isArray(detail)) {
+    const lines = detail.map((item) => {
+      if (item && typeof item === "object" && "msg" in item) {
+        const { loc, msg } = item as { loc?: unknown; msg: unknown };
+        const path = Array.isArray(loc) ? loc.filter((part) => part !== "body").join(".") : "";
+        return path ? `${path}: ${String(msg)}` : String(msg);
+      }
+      return JSON.stringify(item);
+    });
+    return lines.join("; ");
+  }
+  return JSON.stringify(detail);
+}
+
 async function request<T>(path: string, init?: RequestInit): Promise<T> {
   const session = getSessionToken();
   const response = await fetch(`${API_BASE}${path}`, {
@@ -81,10 +102,8 @@ async function request<T>(path: string, init?: RequestInit): Promise<T> {
     let detail = response.statusText;
     try {
       const body = (await response.json()) as { detail?: unknown };
-      if (typeof body.detail === "string") {
-        detail = body.detail;
-      } else if (body.detail !== undefined) {
-        detail = JSON.stringify(body.detail);
+      if (body.detail !== undefined) {
+        detail = describeErrorDetail(body.detail);
       }
     } catch {
       detail = await response.text();
@@ -147,8 +166,27 @@ export async function getOperatorLimits(): Promise<OperatorLimits> {
   return request<OperatorLimits>("/api/v1/me/limits");
 }
 
-export async function listAgents(): Promise<AgentSummary[]> {
-  return request<AgentSummary[]>("/api/v1/agents");
+export async function listAgents(options?: { includeDisabled?: boolean }): Promise<AgentSummary[]> {
+  const query = options?.includeDisabled ? "?include_disabled=true" : "";
+  return request<AgentSummary[]>(`/api/v1/agents${query}`);
+}
+
+export async function enrollAgent(body: AgentEnrollment): Promise<AgentSummary> {
+  return request<AgentSummary>("/api/v1/agents", {
+    method: "POST",
+    body: JSON.stringify(body),
+  });
+}
+
+export async function setAgentEnabled(agentId: string, enabled: boolean): Promise<AgentSummary> {
+  return request<AgentSummary>(`/api/v1/agents/${encodeURIComponent(agentId)}`, {
+    method: "PATCH",
+    body: JSON.stringify({ enabled }),
+  });
+}
+
+export async function listCapabilities(): Promise<CapabilityCoverage[]> {
+  return request<CapabilityCoverage[]>("/api/v1/capabilities");
 }
 
 export async function listProviders(): Promise<ProviderStatus[]> {

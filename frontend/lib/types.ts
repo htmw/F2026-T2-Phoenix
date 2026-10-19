@@ -37,6 +37,7 @@ export type ApprovalView = {
 };
 
 export type NodeView = {
+  id?: string | null;
   key: string;
   agent_id: string;
   agent_name: string;
@@ -118,6 +119,28 @@ export type AgentSummary = {
   preferred_provider: string | null;
   preferred_model: string | null;
   enabled: boolean;
+  version?: string;
+  status?: "active" | "disabled";
+  supported_models?: string[];
+  table_name?: string | null;
+  max_cost_usd?: number;
+  timeout_seconds?: number;
+};
+
+export type AgentEnrollment = {
+  name: string;
+  description: string;
+  capabilities: string[];
+  supported_models: string[];
+  input_schema: Record<string, unknown>;
+  output_schema: Record<string, unknown>;
+  cost_profile: { max_cost_usd: number; timeout_seconds: number };
+};
+
+export type CapabilityCoverage = {
+  capability: string;
+  agent_ids: string[];
+  covered: boolean;
 };
 
 export type ModelView = {

@@ -120,6 +120,13 @@ export function TaskComposer({
             disabled={noModels}
           />
         </label>
+        {!noModels && request.trim().length < 3 && (
+          <p className="meta" data-testid="brief-hint" role="status">
+            {request.trim().length === 0
+              ? "Enter a brief to start: describe the task and what you want back."
+              : "The brief is too short. Use at least 3 characters."}
+          </p>
+        )}
 
         {!compact && (
           <div className="examples">

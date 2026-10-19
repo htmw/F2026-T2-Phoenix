@@ -3,6 +3,7 @@
 import { FormEvent, useCallback, useEffect, useMemo, useState } from "react";
 
 import { AgentDrawer } from "@/components/AgentDrawer";
+import { AgentRegistryPanel } from "@/components/AgentRegistryPanel";
 import { AgentStrip } from "@/components/AgentStrip";
 import { AppShell, type NavTab } from "@/components/AppShell";
 import { ChatThread } from "@/components/ChatThread";
@@ -17,6 +18,7 @@ import {
   connectProvider,
   controlNode,
   disconnectProvider,
+  enrollAgent,
   getMailbox,
   getMemory,
   getOffice,
@@ -27,9 +29,11 @@ import {
   getWorkflow,
   listAgents,
   listArtifacts,
+  listCapabilities,
   listProviders,
   listWorkflows,
   refreshProviderModels,
+  setAgentEnabled,
   setAgentModelBinding,
   setOperatorId,
   submitGenerativeTask,
@@ -45,6 +49,7 @@ import {
   setFreeOnly,
 } from "@/lib/office";
 import type {
+  AgentEnrollment,
   AgentMailbox,
   AgentSummary,
   ArtifactView,
@@ -80,6 +85,9 @@ export default function HomePage() {
   // stays in `workflow`; these render above it so a follow-up reads as one thread.
   const [threadHistory, setThreadHistory] = useState<WorkflowView[]>([]);
   const [agents, setAgents] = useState<AgentSummary[]>([]);
+  const [registry, setRegistry] = useState<AgentSummary[]>([]);
+  const [capabilities, setCapabilities] = useState<string[]>([]);
+  const [registryBusy, setRegistryBusy] = useState<string | null>(null);
   const [providers, setProviders] = useState<ProviderStatus[]>([]);
   const [pickAgents, setPickAgents] = useState(false);
   const [selectedAgents, setSelectedAgents] = useState<string[]>([]);
@@ -356,6 +364,52 @@ export default function HomePage() {
     }
   };
 
+  const refreshRegistry = useCallback(async () => {
+    try {
+      const [all, enabled] = await Promise.all([
+        listAgents({ includeDisabled: true }),
+        listAgents(),
+      ]);
+      setRegistry(all);
+      setAgents(enabled);
+    } catch (cause) {
+      setError(cause instanceof Error ? cause.message : "Failed to load the registry");
+    }
+  }, []);
+
+  useEffect(() => {
+    if (tab !== "agents") {
+      return;
+    }
+    void refreshRegistry();
+    if (capabilities.length === 0) {
+      void listCapabilities()
+        .then((items) => setCapabilities(items.map((item) => item.capability)))
+        .catch(() => setCapabilities([]));
+    }
+  }, [tab, refreshRegistry, capabilities.length]);
+
+  const toggleAgentEnabled = async (agent: AgentSummary) => {
+    setRegistryBusy(agent.id);
+    setError(null);
+    try {
+      await setAgentEnabled(agent.id, !agent.enabled);
+      await refreshRegistry();
+      void refreshOffice();
+    } catch (cause) {
+      setError(cause instanceof Error ? cause.message : "Failed to update the agent");
+    } finally {
+      setRegistryBusy(null);
+    }
+  };
+
+  const enrollNewAgent = async (body: AgentEnrollment): Promise<AgentSummary> => {
+    const created = await enrollAgent(body);
+    await refreshRegistry();
+    void refreshOffice();
+    return created;
+  };
+
   const toggleAgent = (agentId: string) => {
     setSelectedAgents((current) =>
       current.includes(agentId)
@@ -618,6 +672,13 @@ export default function HomePage() {
 
       {tab === "agents" && (
         <div className="stack-gap">
+          <AgentRegistryPanel
+            agents={registry}
+            capabilities={capabilities}
+            busyAgent={registryBusy}
+            onToggleEnabled={(agent) => void toggleAgentEnabled(agent)}
+            onEnroll={enrollNewAgent}
+          />
           <section className="panel">
             <h2 className="panel-title">Agent roster</h2>
             <p className="muted">Click an agent for status, mail, and artifacts.</p>

@@ -61,6 +61,13 @@ export function WorkflowProgress({
     [workflow.nodes, workflow.edges],
   );
   const ordered = ranks.flat();
+  const excluded = workflow.selection?.excluded;
+  const skipped =
+    excluded && typeof excluded === "object"
+      ? Object.entries(excluded as Record<string, unknown>).map(
+          ([agentId, reason]) => [agentId, String(reason)] as const,
+        )
+      : [];
   const live = !TERMINAL_STATUSES.has(workflow.status);
   const answer =
     typeof workflow.final_result.answer === "string"
@@ -115,11 +122,22 @@ export function WorkflowProgress({
             <div>
               <div className="step-label">{node.agent_name || node.agent_id}</div>
               <div className="step-meta">
-                {node.status.replaceAll("_", " ")}
+                <span data-testid={`node-status-${node.key}`} data-status={node.status}>
+                  {node.status.replaceAll("_", " ")}
+                </span>
                 {!compact && node.objective
                   ? ` · ${node.objective.slice(0, 80)}${node.objective.length > 80 ? "…" : ""}`
                   : ""}
               </div>
+              {!compact && (
+                <div className="step-meta" data-testid={`node-reason-${node.key}`}>
+                  {node.satisfies.length > 0
+                    ? `Selected for: ${node.satisfies.join(", ")}`
+                    : "Selected by the operator"}
+                  {node.skip_reason ? ` · Skipped: ${node.skip_reason}` : ""}
+                  {node.id ? ` · Instance ${node.id.slice(0, 8)}` : ""}
+                </div>
+              )}
               {!compact && (
                 <div className="node-actions">
                   {node.status === "awaiting_approval" && (
@@ -173,6 +191,19 @@ export function WorkflowProgress({
           </div>
         ))}
       </div>
+
+      {!compact && skipped.length > 0 && (
+        <details className="selection-reasons" data-testid="skipped-agents" open>
+          <summary className="muted">Not spawned ({skipped.length})</summary>
+          <ul>
+            {skipped.map(([agentId, reason]) => (
+              <li key={agentId} className="step-meta" data-testid={`skipped-${agentId}`}>
+                <strong>{agentId}</strong>: {reason}
+              </li>
+            ))}
+          </ul>
+        </details>
+      )}
 
       {workflow.final_result && Object.keys(workflow.final_result).length > 0 && (
         <div style={{ marginTop: 16 }} data-testid="workflow-result">
