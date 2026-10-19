@@ -231,28 +231,20 @@ Agent Mesh follows an end-to-end modular-monolith pipeline:
 
 From Sprint 0 — *Who we're building Agent Mesh for*:
 
-<table>
-  <tr>
-    <td align="center" width="33%">
-      <img src="https://github.com/Soumen2581/Capstone-Project/raw/master/docs/wiki/personas/persona-priya.jpg" width="200" height="260" alt="Priya, Software Engineering Lead" /><br/>
-      <b>Priya — Software Engineering Lead</b><br/>
-      <b>Goal:</b> A single pipeline that runs security review, code fixes, and tests automatically before merge.<br/>
-      <b>Frustration:</b> Manually chaining separate AI tools for security, coding, and testing is slow and error-prone.
-    </td>
-    <td align="center" width="33%">
-      <img src="https://github.com/Soumen2581/Capstone-Project/raw/master/docs/wiki/personas/persona-daniel.jpg" width="200" height="260" alt="Daniel, Data Analyst" /><br/>
-      <b>Daniel — Data Analyst</b><br/>
-      <b>Goal:</b> Multi-step analysis — cleaning, analysis, and reporting — done from one plain-language request.<br/>
-      <b>Frustration:</b> General chat models lose track of steps and can't hand structured data cleanly between stages.
-    </td>
-    <td align="center" width="33%">
-      <img src="https://github.com/Soumen2581/Capstone-Project/raw/master/docs/wiki/personas/persona-aisha.jpg" width="200" height="260" alt="Aisha, Technical Product Manager" /><br/>
-      <b>Aisha — Technical Product Manager</b><br/>
-      <b>Goal:</b> Visibility into which AI capability ran, why, and what it cost, for every workflow.<br/>
-      <b>Frustration:</b> Black-box chatbot answers make it impossible to audit cost, latency, or decision quality.
-    </td>
-  </tr>
-</table>
+<p align="center">
+  <img src="https://github.com/Soumen2581/Capstone-Project/raw/master/docs/wiki/personas/persona-priya-slide.jpg" width="800" alt="Persona 1: Priya, Software Engineering Lead" /><br/>
+  <a href="https://github.com/Soumen2581/Capstone-Project/blob/master/docs/wiki/personas/persona-priya.pdf">Persona 1: Priya, Software Engineering Lead (PDF)</a>
+</p>
+
+<p align="center">
+  <img src="https://github.com/Soumen2581/Capstone-Project/raw/master/docs/wiki/personas/persona-daniel-slide.jpg" width="800" alt="Persona 2: Daniel, Data Analyst" /><br/>
+  <a href="https://github.com/Soumen2581/Capstone-Project/blob/master/docs/wiki/personas/persona-daniel.pdf">Persona 2: Daniel, Data Analyst (PDF)</a>
+</p>
+
+<p align="center">
+  <img src="https://github.com/Soumen2581/Capstone-Project/raw/master/docs/wiki/personas/persona-aisha-slide.jpg" width="800" alt="Persona 3: Aisha, Technical Product Manager" /><br/>
+  <a href="https://github.com/Soumen2581/Capstone-Project/blob/master/docs/wiki/personas/persona-aisha.pdf">Persona 3: Aisha, Technical Product Manager (PDF)</a>
+</p>
 
 ## Source Code (Sprint 0)
 
