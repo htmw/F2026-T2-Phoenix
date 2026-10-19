@@ -44,6 +44,12 @@ def test_single_cors_origin_from_environment(monkeypatch: pytest.MonkeyPatch) ->
     assert make_settings().cors_allow_origins == ["http://localhost:3000"]
 
 
+def test_blank_operator_budget_means_no_cap(monkeypatch: pytest.MonkeyPatch) -> None:
+    monkeypatch.setenv("OPERATOR_BUDGET_USD", "")
+
+    assert make_settings().operator_budget_usd is None
+
+
 def test_settings_load_from_environment_like_production(
     monkeypatch: pytest.MonkeyPatch,
 ) -> None:

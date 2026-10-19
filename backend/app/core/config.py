@@ -152,6 +152,14 @@ class Settings(BaseSettings):
             return [item.strip() for item in value.split(",") if item.strip()]
         return value
 
+    @field_validator("operator_budget_usd", mode="before")
+    @classmethod
+    def _blank_budget_is_unlimited(cls, value: object) -> object:
+        """``OPERATOR_BUDGET_USD=`` in a copied `.env.example` means no cap."""
+        if isinstance(value, str) and not value.strip():
+            return None
+        return value
+
     @model_validator(mode="after")
     def _production_invariants(self) -> Settings:
         """Fail fast on misconfigured production rather than serving insecure defaults."""
