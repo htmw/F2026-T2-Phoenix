@@ -235,6 +235,36 @@ Agent Mesh follows an end-to-end modular-monolith pipeline:
 ## Diagrams
 - Architecture write-up: [docs/architecture.md](https://github.com/htmw/F2026-T2-Phoenix/blob/main/docs/architecture.md)
 
+<p align="center">
+  <img src="https://github.com/Soumen2581/Capstone-Project/raw/master/docs/wiki/diagrams/architecture-diagram.jpg" width="900" alt="Architecture Diagram" /><br/>
+  <a href="https://github.com/Soumen2581/Capstone-Project/blob/master/docs/wiki/diagrams/architecture-diagram.jpg">Architecture Diagram</a>
+</p>
+
+<p align="center">
+  <img src="https://github.com/Soumen2581/Capstone-Project/raw/master/docs/wiki/diagrams/sequence-diagram.jpg" width="900" alt="Sequence Diagram" /><br/>
+  <a href="https://github.com/Soumen2581/Capstone-Project/blob/master/docs/wiki/diagrams/sequence-diagram.jpg">Sequence Diagram</a>
+</p>
+
+<p align="center">
+  <img src="https://github.com/Soumen2581/Capstone-Project/raw/master/docs/wiki/diagrams/context-diagram.jpg" width="900" alt="Context Diagram" /><br/>
+  <a href="https://github.com/Soumen2581/Capstone-Project/blob/master/docs/wiki/diagrams/context-diagram.jpg">Context Diagram</a>
+</p>
+
+<p align="center">
+  <img src="https://github.com/Soumen2581/Capstone-Project/raw/master/docs/wiki/diagrams/er-diagram.jpg" width="900" alt="ER Diagram" /><br/>
+  <a href="https://github.com/Soumen2581/Capstone-Project/blob/master/docs/wiki/diagrams/er-diagram.jpg">ER Diagram</a>
+</p>
+
+<p align="center">
+  <img src="https://github.com/Soumen2581/Capstone-Project/raw/master/docs/wiki/diagrams/state-diagram.jpg" width="900" alt="State Diagram" /><br/>
+  <a href="https://github.com/Soumen2581/Capstone-Project/blob/master/docs/wiki/diagrams/state-diagram.jpg">State Diagram</a>
+</p>
+
+<p align="center">
+  <img src="https://github.com/Soumen2581/Capstone-Project/raw/master/docs/wiki/diagrams/class-diagram.jpg" width="900" alt="Class Diagram" /><br/>
+  <a href="https://github.com/Soumen2581/Capstone-Project/blob/master/docs/wiki/diagrams/class-diagram.jpg">Class Diagram</a>
+</p>
+
 ## Additional Project Artifacts
 
 ### Product Personas
