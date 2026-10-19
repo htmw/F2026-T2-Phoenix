@@ -20,7 +20,13 @@ test.describe("Agent Mesh smoke (J-2)", () => {
     await page.getByTestId("agent-general-agent").check();
 
     await page.getByTestId("request-input").fill("Say hello from the office smoke test.");
+    // Submitting returns the office to Home, so open Work only after the response lands.
+    const submitted = page.waitForResponse(
+      (response) =>
+        response.request().method() === "POST" && /\/api\/v1\/tasks(\?|$)/.test(response.url()),
+    );
     await page.getByTestId("assign-work").click();
+    expect((await submitted).ok()).toBe(true);
     await page.getByTestId("tab-work").click();
 
     const status = page.getByTestId("workflow-status");
