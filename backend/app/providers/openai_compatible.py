@@ -489,9 +489,10 @@ class GeminiProvider(OpenAICompatibleProvider):
             id="google:gemini-flash-latest",
             provider="google",
             model_name="gemini-flash-latest",
+            # Not tagged FAST: it thinks before answering, and measured calls take
+            # 7-80s against well under a second for Groq.
             traits=frozenset(
                 {
-                    ModelTrait.FAST,
                     ModelTrait.CHEAP,
                     ModelTrait.REASONING,
                     ModelTrait.LONG_CONTEXT,
@@ -503,7 +504,7 @@ class GeminiProvider(OpenAICompatibleProvider):
             max_output_tokens=65_536,
             input_cost_per_million=0.15,
             output_cost_per_million=0.60,
-            typical_latency_ms=1_200,
+            typical_latency_ms=8_000,
         ),
     )
 
@@ -543,6 +544,7 @@ class GroqProvider(OpenAICompatibleProvider):
                     ModelTrait.CODING,
                     ModelTrait.REASONING,
                     ModelTrait.STRUCTURED_OUTPUT,
+                    ModelTrait.LONG_CONTEXT,
                 }
             ),
             context_tokens=131_072,
@@ -560,6 +562,7 @@ class GroqProvider(OpenAICompatibleProvider):
                     ModelTrait.FAST,
                     ModelTrait.CHEAP,
                     ModelTrait.STRUCTURED_OUTPUT,
+                    ModelTrait.LONG_CONTEXT,
                 }
             ),
             context_tokens=131_072,
