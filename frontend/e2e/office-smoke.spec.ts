@@ -21,6 +21,7 @@ test.describe("Agent Mesh smoke (J-2)", () => {
 
     await page.getByTestId("request-input").fill("Say hello from the office smoke test.");
     await page.getByTestId("assign-work").click();
+    await page.getByTestId("tab-work").click();
 
     const status = page.getByTestId("workflow-status");
     await expect(status).toBeVisible({ timeout: 30_000 });
