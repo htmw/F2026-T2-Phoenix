@@ -194,7 +194,7 @@ Agent Mesh follows an end-to-end modular-monolith pipeline:
 
 ---
 
-# Course Deliverables — Sprint 0
+# Course Deliverables
 
 ## Presentations (Sprint Reviews)
 
@@ -204,6 +204,9 @@ Agent Mesh follows an end-to-end modular-monolith pipeline:
 - [Deliverable presentation slide as PowerPoint](https://github.com/htmw/F2026-T2-Phoenix/blob/main/docs/sprints/AgentMesh_Sprint0_Presentation_final.pptx)
 - [Deliverable presentation slide as PDF](https://github.com/htmw/F2026-T2-Phoenix/blob/main/docs/sprints/AgentMesh_Sprint0_Presentation_final.pdf)
 
+### Sprint 1
+- [Sprint 1 Front-End Source Code](https://github.com/Soumen2581/Capstone-Project/tree/master/frontend) | [Sprint 1 Back-End Source Code](https://github.com/Soumen2581/Capstone-Project/tree/master/backend)
+
 ## Sprint Burndown Charts and Completed Tasks
 
 ### Sprint 0
@@ -212,6 +215,13 @@ Agent Mesh follows an end-to-end modular-monolith pipeline:
 
 <p align="center">
   <img src="https://github.com/htmw/F2026-T2-Phoenix/raw/main/docs/wiki/sprints/sprint-0-completed-tasks.jpg" alt="Sprint 0 completed tasks — SCRUM-1 through SCRUM-15" width="900" />
+</p>
+
+### Sprint 1
+- [Sprint 1 Burndown Chart](https://github.com/Soumen2581/Capstone-Project/blob/master/docs/wiki/sprints/sprint-1-burndown.png)
+
+<p align="center">
+  <img src="https://github.com/Soumen2581/Capstone-Project/raw/master/docs/wiki/sprints/sprint-1-burndown.png" alt="Sprint 1 burndown chart — Sep 22 to Oct 19, 2026" width="900" />
 </p>
 
 ## Retrospectives
@@ -245,6 +255,19 @@ From Sprint 0 — *Who we're building Agent Mesh for*:
   <img src="https://github.com/Soumen2581/Capstone-Project/raw/master/docs/wiki/personas/persona-aisha-slide.jpg" width="800" alt="Persona 3: Aisha, Technical Product Manager" /><br/>
   <a href="https://github.com/Soumen2581/Capstone-Project/blob/master/docs/wiki/personas/persona-aisha.pdf">Persona 3: Aisha, Technical Product Manager (PDF)</a>
 </p>
+
+### Product User Stories and Acceptance Criteria
+- [View User Stories & Acceptance Criteria as PDF](https://github.com/Soumen2581/Capstone-Project/blob/master/docs/agile/user-stories/AgentMesh_UserStories.pdf) | [Download as Excel Workbook](https://github.com/Soumen2581/Capstone-Project/raw/master/docs/agile/user-stories/AgentMesh_UserStories.xlsx)
+
+### User Stories and Acceptance Criteria (Sprint-wise)
+
+#### Sprint 1
+- [View Sprint 1 User Stories as PDF](https://github.com/Soumen2581/Capstone-Project/blob/master/docs/agile/user-stories/AgentMesh_Sprint1_UserStories.pdf) | [Download as Excel Workbook](https://github.com/Soumen2581/Capstone-Project/raw/master/docs/agile/user-stories/AgentMesh_Sprint1_UserStories.xlsx)
+
+### Application Test Cases
+
+#### Sprint 1
+- [View Test Cases as PDF](https://github.com/Soumen2581/Capstone-Project/blob/master/docs/agile/test-cases/AgentMesh_Sprint1_TestCases.pdf) | [Download as Excel Workbook](https://github.com/Soumen2581/Capstone-Project/raw/master/docs/agile/test-cases/AgentMesh_Sprint1_TestCases.xlsx)
 
 ## Source Code (Sprint 0)
 
