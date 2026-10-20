@@ -237,6 +237,7 @@ Agent Mesh follows an end-to-end modular-monolith pipeline:
 - [ER Diagram](https://github.com/Soumen2581/Capstone-Project/blob/master/docs/wiki/diagrams/er-diagram.png)
 - [State Diagram](https://github.com/Soumen2581/Capstone-Project/blob/master/docs/wiki/diagrams/state-diagram.png)
 - [Class Diagram](https://github.com/Soumen2581/Capstone-Project/blob/master/docs/wiki/diagrams/class-diagram.png)
+
 ## Additional Project Artifacts
 
 ### Product Personas
