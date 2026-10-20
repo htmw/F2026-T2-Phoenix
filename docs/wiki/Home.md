@@ -217,7 +217,6 @@ Agent Mesh follows an end-to-end modular-monolith pipeline:
 ## Sprint Burndown Charts and Completed Tasks
 
 ### Sprint 0
-- Team Working Agreement (signed PDF): [Teamwork_Agreement_Team2_Phoenix.pdf](https://github.com/htmw/F2026-T2-Phoenix/blob/main/docs/agile/Teamwork_Agreement_Team2_Phoenix.pdf)
 - [Sprint 0 Completed Tasks](https://github.com/htmw/F2026-T2-Phoenix/blob/main/docs/wiki/sprints/sprint-0-completed-tasks.jpg) (SCRUM board)
 
 ### Sprint 1
