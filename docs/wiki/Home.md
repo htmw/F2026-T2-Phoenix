@@ -205,7 +205,14 @@ Agent Mesh follows an end-to-end modular-monolith pipeline:
 - [Deliverable presentation slide as PDF](https://github.com/htmw/F2026-T2-Phoenix/blob/main/docs/sprints/AgentMesh_Sprint0_Presentation_final.pdf)
 
 ### Sprint 1
-- [Sprint 1 Front-End Source Code](https://github.com/Soumen2581/Capstone-Project/tree/master/frontend) | [Sprint 1 Back-End Source Code](https://github.com/Soumen2581/Capstone-Project/tree/master/backend)
+#### Sprint 1 Presentation Video
+- [Watch Sprint 1 Presentation Video](https://www.youtube.com/watch?v=NQy178euy0E)
+- [Download Sprint 1 Presentation Video](https://github.com/Soumen2581/Capstone-Project/releases/download/sprint-1/AgentMesh_Sprint1_Presentation.mp4)
+1a. [View Sprint 1 Presentation Slides as PDF](https://github.com/htmw/F2026-T2-Phoenix/blob/main/docs/sprints/AgentMesh_Sprint1_Presentation.pdf)
+1b. [Download Sprint 1 Presentation Slides as PowerPoint](https://github.com/htmw/F2026-T2-Phoenix/blob/main/docs/sprints/AgentMesh_Sprint1_Presentation.pptx)
+#### Live Demo
+1d. [Watch Sprint 1 Demo](https://www.youtube.com/watch?v=Dd_9gl4ELgk) | [Download Sprint 1 Demo (mp4)](https://github.com/htmw/F2026-T2-Phoenix/raw/main/docs/sprints/AgentMesh_Sprint1_Demo.mp4)
+1e. [Sprint 1 Front-End Source Code](https://github.com/Soumen2581/Capstone-Project/tree/master/frontend) | [Sprint 1 Back-End Source Code](https://github.com/Soumen2581/Capstone-Project/tree/master/backend)
 
 ## Sprint Burndown Charts and Completed Tasks
 
@@ -219,12 +226,15 @@ Agent Mesh follows an end-to-end modular-monolith pipeline:
 ## Sprint Planning
 
 ### Sprint 1
-1. [Watch Sprint 1 Planning Video](https://www.youtube.com/watch?v=9tktC_Bq3pc)
+1. [Watch Sprint 1 Planning Video](https://www.youtube.com/watch?v=9tktC_Bq3pc) | [Download mp4 File](https://github.com/Soumen2581/Capstone-Project/releases/download/sprint-1/AgentMesh_Sprint1_Planning.mp4)
 
 ## Retrospectives
 
 ### Sprint 0
 0a. [Watch Sprint 0 Retrospective Video](https://www.youtube.com/watch?v=OkWZ0Ngln0w) | [Click here to download mp4 File](https://github.com/htmw/F2026-T2-Phoenix/blob/main/docs/sprints/AgentMesh_Sprint0_Retrospective.mp4)
+
+### Sprint 1
+1. [Watch Sprint 1 Retrospective Video](https://www.youtube.com/watch?v=xaOZLz6WfMU) | [Download mp4 File](https://github.com/Soumen2581/Capstone-Project/releases/download/sprint-1/AgentMesh_Sprint1_Retrospective.mp4)
 
 ## Team Working Agreement
 [Team Working Agreement as PDF](https://github.com/htmw/F2026-T2-Phoenix/blob/main/docs/agile/Teamwork_Agreement_Team2_Phoenix.pdf) | [Team Working Agreement (markdown)](https://github.com/htmw/F2026-T2-Phoenix/blob/main/docs/agile/team-working-agreement.md)
