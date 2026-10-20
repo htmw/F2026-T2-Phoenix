@@ -236,33 +236,33 @@ Agent Mesh follows an end-to-end modular-monolith pipeline:
 - Architecture write-up: [docs/architecture.md](https://github.com/htmw/F2026-T2-Phoenix/blob/main/docs/architecture.md)
 
 <p align="center">
-  <img src="https://github.com/Soumen2581/Capstone-Project/raw/master/docs/wiki/diagrams/architecture-diagram.jpg" width="900" alt="Architecture Diagram" /><br/>
-  <a href="https://github.com/Soumen2581/Capstone-Project/blob/master/docs/wiki/diagrams/architecture-diagram.jpg">Architecture Diagram</a>
+  <img src="https://github.com/Soumen2581/Capstone-Project/raw/master/docs/wiki/diagrams/architecture-diagram.png" width="900" alt="Architecture Diagram" /><br/>
+  <a href="https://github.com/Soumen2581/Capstone-Project/blob/master/docs/wiki/diagrams/architecture-diagram.svg">Architecture Diagram (full size)</a>
 </p>
 
 <p align="center">
-  <img src="https://github.com/Soumen2581/Capstone-Project/raw/master/docs/wiki/diagrams/sequence-diagram.jpg" width="900" alt="Sequence Diagram" /><br/>
-  <a href="https://github.com/Soumen2581/Capstone-Project/blob/master/docs/wiki/diagrams/sequence-diagram.jpg">Sequence Diagram</a>
+  <img src="https://github.com/Soumen2581/Capstone-Project/raw/master/docs/wiki/diagrams/sequence-diagram.png" width="900" alt="Sequence Diagram" /><br/>
+  <a href="https://github.com/Soumen2581/Capstone-Project/blob/master/docs/wiki/diagrams/sequence-diagram.svg">Sequence Diagram (full size)</a>
 </p>
 
 <p align="center">
-  <img src="https://github.com/Soumen2581/Capstone-Project/raw/master/docs/wiki/diagrams/context-diagram.jpg" width="900" alt="Context Diagram" /><br/>
-  <a href="https://github.com/Soumen2581/Capstone-Project/blob/master/docs/wiki/diagrams/context-diagram.jpg">Context Diagram</a>
+  <img src="https://github.com/Soumen2581/Capstone-Project/raw/master/docs/wiki/diagrams/context-diagram.png" width="900" alt="Context Diagram" /><br/>
+  <a href="https://github.com/Soumen2581/Capstone-Project/blob/master/docs/wiki/diagrams/context-diagram.svg">Context Diagram (full size)</a>
 </p>
 
 <p align="center">
-  <img src="https://github.com/Soumen2581/Capstone-Project/raw/master/docs/wiki/diagrams/er-diagram.jpg" width="900" alt="ER Diagram" /><br/>
-  <a href="https://github.com/Soumen2581/Capstone-Project/blob/master/docs/wiki/diagrams/er-diagram.jpg">ER Diagram</a>
+  <img src="https://github.com/Soumen2581/Capstone-Project/raw/master/docs/wiki/diagrams/er-diagram.png" width="900" alt="ER Diagram" /><br/>
+  <a href="https://github.com/Soumen2581/Capstone-Project/blob/master/docs/wiki/diagrams/er-diagram.svg">ER Diagram (full size)</a>
 </p>
 
 <p align="center">
-  <img src="https://github.com/Soumen2581/Capstone-Project/raw/master/docs/wiki/diagrams/state-diagram.jpg" width="900" alt="State Diagram" /><br/>
-  <a href="https://github.com/Soumen2581/Capstone-Project/blob/master/docs/wiki/diagrams/state-diagram.jpg">State Diagram</a>
+  <img src="https://github.com/Soumen2581/Capstone-Project/raw/master/docs/wiki/diagrams/state-diagram.png" width="900" alt="State Diagram" /><br/>
+  <a href="https://github.com/Soumen2581/Capstone-Project/blob/master/docs/wiki/diagrams/state-diagram.svg">State Diagram (full size)</a>
 </p>
 
 <p align="center">
-  <img src="https://github.com/Soumen2581/Capstone-Project/raw/master/docs/wiki/diagrams/class-diagram.jpg" width="900" alt="Class Diagram" /><br/>
-  <a href="https://github.com/Soumen2581/Capstone-Project/blob/master/docs/wiki/diagrams/class-diagram.jpg">Class Diagram</a>
+  <img src="https://github.com/Soumen2581/Capstone-Project/raw/master/docs/wiki/diagrams/class-diagram.png" width="900" alt="Class Diagram" /><br/>
+  <a href="https://github.com/Soumen2581/Capstone-Project/blob/master/docs/wiki/diagrams/class-diagram.svg">Class Diagram (full size)</a>
 </p>
 
 ## Additional Project Artifacts

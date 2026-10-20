@@ -1,0 +1,79 @@
+digraph State {
+  graph [label=<<B>Agent Mesh — State Diagram</B><BR/><FONT POINT-SIZE="15">a brief before it runs · each workflow node (workflow_nodes.status) · the workflow outcome (workflows.status)</FONT>>,
+         labelloc=t, fontsize=30, fontname="Helvetica", rankdir=TB, nodesep=0.6, ranksep=0.7, pad=0.5,
+         newrank=true, compound=true, bgcolor="white"];
+  node  [shape=box, style="rounded,filled", fontname="Helvetica", fontsize=15, penwidth=1.8, margin="0.25,0.12"];
+  edge  [fontname="Helvetica", fontsize=13, color="#3e4c59", penwidth=1.6, arrowsize=0.9];
+
+  start [shape=circle, label="", width=0.3, style=filled, fillcolor="#1f2933", color="#1f2933"];
+
+  subgraph cluster_before {
+    label=<<B>Before a run exists</B>  (POST /api/v1/tasks)>; fontsize=17; style="rounded,dashed"; color="#7b8794";
+    composer  [fillcolor="#eef0ff", color="#4c4fd6", label=<<B>Brief in the composer</B><BR/><FONT POINT-SIZE="12">Office Home tab</FONT>>];
+    clarify   [fillcolor="#fff3c4", color="#b7791f", label=<<B>Needs clarification</B><BR/><FONT POINT-SIZE="12">422 + clarifying question</FONT>>];
+    planning  [fillcolor="#eef0ff", color="#4c4fd6", label=<<B>Planning</B><BR/><FONT POINT-SIZE="12">analyse capabilities · select agents · plan DAG</FONT>>];
+    nomatch   [fillcolor="#ffe3e3", color="#c92a2a", label=<<B>Rejected</B><BR/><FONT POINT-SIZE="12">422 names the missing capability</FONT>>];
+    pending   [fillcolor="#dbe4ff", color="#3b5bdb", label=<<B>pending</B><BR/><FONT POINT-SIZE="12">task, DAG and selection saved</FONT>>];
+  }
+
+  start -> composer;
+  composer -> composer [label="  empty → submit blocked"];
+  composer -> clarify [label="vague brief"];
+  clarify -> composer [label="operator edits"];
+  composer -> planning [label="clear brief"];
+  planning -> nomatch [label="no enabled agent\nfor a capability"];
+  nomatch -> composer [label="rephrase, or an\nengineer enrolls an agent", style=dashed];
+  planning -> pending [label="every capability covered"];
+
+  subgraph cluster_running {
+    label=<<B>running</B> — the engine loop; every node follows its own machine>; fontsize=17;
+    style="rounded,filled"; fillcolor="#f5f7ff"; color="#3b5bdb"; penwidth=2.2;
+    nstart   [shape=circle, label="", width=0.25, style=filled, fillcolor="#1f2933", color="#1f2933"];
+    waiting  [fillcolor="white", color="#52606d", label=<<B>waiting</B><BR/><FONT POINT-SIZE="12">upstream not resolved</FONT>>];
+    ready    [fillcolor="white", color="#52606d", label=<<B>ready</B><BR/><FONT POINT-SIZE="12">all (or any) upstream resolved</FONT>>];
+    gate     [shape=diamond, label="", width=0.45, height=0.45, style=filled, fillcolor="white", color="#52606d"];
+    approval [fillcolor="#fff3c4", color="#b7791f", label=<<B>awaiting_approval</B><BR/><FONT POINT-SIZE="12">human gate on this node</FONT>>];
+    nrunning [fillcolor="#dbe4ff", color="#3b5bdb", label=<<B>running</B><BR/><FONT POINT-SIZE="12">AgentExecutor attempt</FONT>>];
+    ncomplete[fillcolor="#d3f9d8", color="#2b8a3e", label=<<B>completed</B><BR/><FONT POINT-SIZE="12">output passed its JSON Schema</FONT>>];
+    nfailed  [fillcolor="#ffe3e3", color="#c92a2a", label=<<B>failed</B><BR/><FONT POINT-SIZE="12">retries exhausted · reason kept</FONT>>];
+    nskipped [fillcolor="#e9ecef", color="#495057", label=<<B>skipped</B><BR/><FONT POINT-SIZE="12">with a recorded reason</FONT>>];
+    nend     [shape=doublecircle, label="", width=0.22, style=filled, fillcolor="#1f2933", color="#1f2933"];
+
+    nstart -> waiting;
+    waiting -> ready [label="upstream resolved"];
+    ready -> gate;
+    gate -> approval [label="needs approval"];
+    approval -> gate [label="approved"];
+    approval -> nskipped [label="rejected"];
+    gate -> nskipped [label="condition false ·\nupstream skipped"];
+    gate -> nrunning [label="runnable"];
+    nrunning -> nrunning [label="retry: backoff ·\nnext model (≤ 3)"];
+    nrunning -> ncomplete [label="valid output"];
+    nrunning -> nfailed [label="not retryable or\nattempts used"];
+    nfailed -> waiting [label="operator retries the node", style=dashed, constraint=false];
+    ncomplete -> waiting [label="repair verdict reopens it\n(max 1 cycle)", style=dashed, constraint=false];
+    ncomplete -> nend; nskipped -> nend;
+  }
+
+  pending -> nstart [lhead=cluster_running, label="WorkflowEngine.run()"];
+
+  subgraph cluster_outcomes {
+    label=<<B>Workflow outcomes</B>  (workflows.status)>; fontsize=17; style="rounded,dashed"; color="#7b8794";
+    wapproval [fillcolor="#fff3c4", color="#b7791f", label=<<B>awaiting_approval</B><BR/><FONT POINT-SIZE="12">run paused for a person</FONT>>];
+    wcomplete [fillcolor="#d3f9d8", color="#2b8a3e", label=<<B>completed</B><BR/><FONT POINT-SIZE="12">synthesised answer · cost saved</FONT>>];
+    wfailed   [fillcolor="#ffe3e3", color="#c92a2a", label=<<B>failed</B><BR/><FONT POINT-SIZE="12">first hard node failure</FONT>>];
+    wcancel   [fillcolor="#e9ecef", color="#495057", label=<<B>cancelled</B><BR/><FONT POINT-SIZE="12">on request or restart sweep</FONT>>];
+    followup  [fillcolor="#eef0ff", color="#4c4fd6", label=<<B>Follow-up brief</B><BR/><FONT POINT-SIZE="12">same thread · parent_workflow_id</FONT>>];
+    wend      [shape=doublecircle, label="", width=0.22, style=filled, fillcolor="#1f2933", color="#1f2933"];
+  }
+
+  ncomplete -> wapproval [ltail=cluster_running, label="every ready node is gated"];
+  wapproval -> nstart [lhead=cluster_running, label="approve / reject → resume()", style=dashed, constraint=false];
+  ncomplete -> wcomplete [ltail=cluster_running, label="nothing left to run → synthesise"];
+  nfailed -> wfailed [ltail=cluster_running, label="a node failed"];
+  wfailed -> nstart [lhead=cluster_running, label="retry node → resume()", style=dashed, constraint=false];
+  nrunning -> wcancel [ltail=cluster_running, label="POST …/cancel"];
+  wcomplete -> followup [label="operator asks a follow-up"];
+  followup -> pending [label="new workflow linked to its parent", constraint=false];
+  wcomplete -> wend; wcancel -> wend;
+}
