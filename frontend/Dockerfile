@@ -39,4 +39,7 @@ USER nextjs
 
 EXPOSE 3000
 
-CMD ["node", "server.js"]
+# Bind all interfaces: the Next.js standalone server reads HOSTNAME, which Docker sets to
+# the container id by default, so the host platform (e.g. Render) can't reach it -> 502.
+# PORT is honoured from the environment (the platform assigns it).
+CMD ["sh", "-c", "HOSTNAME=0.0.0.0 node server.js"]
