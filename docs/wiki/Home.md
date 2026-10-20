@@ -211,11 +211,7 @@ Agent Mesh follows an end-to-end modular-monolith pipeline:
 
 ### Sprint 0
 - Team Working Agreement (signed PDF): [Teamwork_Agreement_Team2_Phoenix.pdf](https://github.com/htmw/F2026-T2-Phoenix/blob/main/docs/agile/Teamwork_Agreement_Team2_Phoenix.pdf)
-- Completed tasks (SCRUM board):
-
-<p align="center">
-  <img src="https://github.com/htmw/F2026-T2-Phoenix/raw/main/docs/wiki/sprints/sprint-0-completed-tasks.jpg" alt="Sprint 0 completed tasks — SCRUM-1 through SCRUM-15" width="900" />
-</p>
+- [Sprint 0 Completed Tasks](https://github.com/htmw/F2026-T2-Phoenix/blob/main/docs/wiki/sprints/sprint-0-completed-tasks.jpg) (SCRUM board)
 
 ### Sprint 1
 - [Sprint 1 Burndown Chart](https://github.com/Soumen2581/Capstone-Project/blob/master/docs/wiki/sprints/sprint-1-burndown.png)
@@ -224,11 +220,7 @@ Agent Mesh follows an end-to-end modular-monolith pipeline:
   <img src="https://github.com/Soumen2581/Capstone-Project/raw/master/docs/wiki/sprints/sprint-1-burndown.png" alt="Sprint 1 burndown chart — Sep 22 to Oct 19, 2026" width="900" />
 </p>
 
-- [Sprint 1 Completed Tasks](https://github.com/Soumen2581/Capstone-Project/blob/master/docs/wiki/sprints/sprint-1-completed-tasks.png) (SCRUM board):
-
-<p align="center">
-  <img src="https://github.com/Soumen2581/Capstone-Project/raw/master/docs/wiki/sprints/sprint-1-completed-tasks.png" alt="Sprint 1 completed tasks — SCRUM-16 through SCRUM-36" width="900" />
-</p>
+- [Sprint 1 Completed Tasks](https://github.com/Soumen2581/Capstone-Project/blob/master/docs/wiki/sprints/sprint-1-completed-tasks.png) (SCRUM board)
 
 ## Sprint Planning
 
