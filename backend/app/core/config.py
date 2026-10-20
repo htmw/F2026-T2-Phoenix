@@ -160,6 +160,33 @@ class Settings(BaseSettings):
             return None
         return value
 
+    @field_validator("database_url", mode="before")
+    @classmethod
+    def _normalise_database_url(cls, value: object) -> object:
+        """Accept a managed ``postgres(ql)://`` URL and target the asyncpg driver.
+
+        Managed hosts (Render, Heroku, …) hand out ``postgres://`` or ``postgresql://``
+        connection strings, but the async stack needs ``postgresql+asyncpg://``. A
+        libpq-only ``sslmode`` query param is dropped because asyncpg does not accept it;
+        managed internal connections do not require it.
+        """
+        if not isinstance(value, str) or not value:
+            return value
+        url = value
+        if url.startswith("postgres://"):
+            url = "postgresql+asyncpg://" + url[len("postgres://") :]
+        elif url.startswith("postgresql://"):
+            url = "postgresql+asyncpg://" + url[len("postgresql://") :]
+        if "?" in url:
+            base, _, query = url.partition("?")
+            kept = "&".join(
+                part
+                for part in query.split("&")
+                if part and not part.lower().startswith("sslmode=")
+            )
+            url = base + (f"?{kept}" if kept else "")
+        return url
+
     @model_validator(mode="after")
     def _production_invariants(self) -> Settings:
         """Fail fast on misconfigured production rather than serving insecure defaults."""

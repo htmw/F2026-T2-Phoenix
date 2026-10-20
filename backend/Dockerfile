@@ -30,6 +30,10 @@ WORKDIR /app
 
 COPY --from=builder /opt/venv /opt/venv
 COPY --chown=appuser:appuser app ./app
+# Migrations are included so the schema can be applied as a deploy step
+# (e.g. Render preDeployCommand: `alembic upgrade head`).
+COPY --chown=appuser:appuser alembic.ini ./
+COPY --chown=appuser:appuser migrations ./migrations
 
 USER appuser
 

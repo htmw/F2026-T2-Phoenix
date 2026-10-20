@@ -1,0 +1,93 @@
+# Render Blueprint - one-click deploy of Agent Mesh (FastAPI + Next.js + Postgres + Redis).
+#
+# How to deploy:
+#   1. Push this repo to GitHub (render.yaml must be at the repo root).
+#   2. On Render: New > Blueprint > pick this repo > Apply. Render creates all 4 resources.
+#   3. The app boots in demo mode (simulated AI). For live AI, set OPENAI_API_KEY on the
+#      "agent-mesh-api" service (Environment tab) and redeploy.
+#
+# Notes:
+#   - Free web services sleep after ~15 min idle (first request wakes them in ~30-60s).
+#   - Free Postgres expires after 90 days. Upgrade plans to "starter" for always-on.
+#   - If the auto-assigned URLs differ from the names below (global name collision),
+#     update NEXT_PUBLIC_API_BASE_URL / BACKEND_INTERNAL_URL / CORS_ALLOW_ORIGINS and redeploy.
+
+databases:
+  - name: agent-mesh-db
+    databaseName: agentmesh
+    user: agentmesh
+    plan: free
+
+services:
+  # ---- Key Value (Redis-compatible): rate limits, cache, locks ----
+  - type: keyvalue
+    name: agent-mesh-redis
+    plan: free
+    ipAllowList: []          # internal only; no public access
+
+  # ---- Backend API (FastAPI) ----
+  - type: web
+    name: agent-mesh-api
+    runtime: docker
+    plan: free
+    region: oregon
+    dockerfilePath: ./backend/Dockerfile
+    dockerContext: ./backend
+    healthCheckPath: /healthz
+    # uvicorn's port is fixed in the image CMD; Render assigns $PORT, so bind to it and
+    # apply migrations first (idempotent; safe on every boot for a single instance).
+    dockerCommand: sh -c "alembic upgrade head && uvicorn app.main:app --host 0.0.0.0 --port $PORT"
+    envVars:
+      - key: ENVIRONMENT
+        value: staging
+      - key: DEBUG
+        value: "false"
+      - key: LOG_FORMAT
+        value: json
+      - key: AUTH_MODE
+        value: header          # app works with the default operator; Google sign-in optional
+      - key: SEED_AGENTS_ON_STARTUP
+        value: "true"
+      - key: RATE_LIMIT_BACKEND
+        value: redis
+      - key: ARTIFACT_DIR
+        value: /tmp/artifacts  # writable on Render's ephemeral filesystem
+      - key: DATABASE_URL
+        fromDatabase:
+          name: agent-mesh-db
+          property: connectionString
+      - key: REDIS_URL
+        fromService:
+          type: keyvalue
+          name: agent-mesh-redis
+          property: connectionString
+      - key: CORS_ALLOW_ORIGINS
+        value: https://agent-mesh-web.onrender.com
+      - key: JWT_SECRET
+        generateValue: true
+      # Optional provider keys for live AI (otherwise the app runs in demo mode).
+      - key: OPENAI_API_KEY
+        sync: false
+      - key: ANTHROPIC_API_KEY
+        sync: false
+      - key: GOOGLE_API_KEY
+        sync: false
+
+  # ---- Frontend (Next.js) ----
+  - type: web
+    name: agent-mesh-web
+    runtime: docker
+    plan: free
+    region: oregon
+    dockerfilePath: ./frontend/Dockerfile
+    dockerContext: ./frontend
+    envVars:
+      # Browser-visible API base (baked into the client bundle at build time).
+      - key: NEXT_PUBLIC_API_BASE_URL
+        value: https://agent-mesh-api.onrender.com
+      # Server-side base for Next.js server components.
+      - key: BACKEND_INTERNAL_URL
+        value: https://agent-mesh-api.onrender.com
+      # Optional: enable the Google sign-in button (same value as the API's GOOGLE_CLIENT_ID).
+      - key: NEXT_PUBLIC_GOOGLE_CLIENT_ID
+        sync: false
