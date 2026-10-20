@@ -224,6 +224,12 @@ Agent Mesh follows an end-to-end modular-monolith pipeline:
   <img src="https://github.com/Soumen2581/Capstone-Project/raw/master/docs/wiki/sprints/sprint-1-burndown.png" alt="Sprint 1 burndown chart — Sep 22 to Oct 19, 2026" width="900" />
 </p>
 
+- [Sprint 1 Completed Tasks](https://github.com/Soumen2581/Capstone-Project/blob/master/docs/wiki/sprints/sprint-1-completed-tasks.png) (SCRUM board):
+
+<p align="center">
+  <img src="https://github.com/Soumen2581/Capstone-Project/raw/master/docs/wiki/sprints/sprint-1-completed-tasks.png" alt="Sprint 1 completed tasks — SCRUM-16 through SCRUM-36" width="900" />
+</p>
+
 ## Sprint Planning
 
 ### Sprint 1
