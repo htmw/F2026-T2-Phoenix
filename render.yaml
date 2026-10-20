@@ -34,9 +34,8 @@ services:
     dockerfilePath: ./backend/Dockerfile
     dockerContext: ./backend
     healthCheckPath: /healthz
-    # uvicorn's port is fixed in the image CMD; Render assigns $PORT, so bind to it and
-    # apply migrations first (idempotent; safe on every boot for a single instance).
-    dockerCommand: sh -c "alembic upgrade head && uvicorn app.main:app --host 0.0.0.0 --port $PORT"
+    # The image's start.sh runs migrations then binds uvicorn to Render's $PORT, so no
+    # dockerCommand override is needed (inline shell commands get mangled by Render).
     envVars:
       - key: ENVIRONMENT
         value: staging
