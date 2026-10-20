@@ -282,20 +282,9 @@ Agent Mesh follows an end-to-end modular-monolith pipeline:
 
 From Sprint 0 — *Who we're building Agent Mesh for*:
 
-<p align="center">
-  <img src="https://github.com/Soumen2581/Capstone-Project/raw/master/docs/wiki/personas/persona-priya-slide.jpg" width="800" alt="Persona 1: Priya, Software Engineering Lead" /><br/>
-  <a href="https://github.com/Soumen2581/Capstone-Project/blob/master/docs/wiki/personas/persona-priya.pdf">Persona 1: Priya, Software Engineering Lead (PDF)</a>
-</p>
-
-<p align="center">
-  <img src="https://github.com/Soumen2581/Capstone-Project/raw/master/docs/wiki/personas/persona-daniel-slide.jpg" width="800" alt="Persona 2: Daniel, Data Analyst" /><br/>
-  <a href="https://github.com/Soumen2581/Capstone-Project/blob/master/docs/wiki/personas/persona-daniel.pdf">Persona 2: Daniel, Data Analyst (PDF)</a>
-</p>
-
-<p align="center">
-  <img src="https://github.com/Soumen2581/Capstone-Project/raw/master/docs/wiki/personas/persona-aisha-slide.jpg" width="800" alt="Persona 3: Aisha, Technical Product Manager" /><br/>
-  <a href="https://github.com/Soumen2581/Capstone-Project/blob/master/docs/wiki/personas/persona-aisha.pdf">Persona 3: Aisha, Technical Product Manager (PDF)</a>
-</p>
+- [Persona 1: Priya, Software Engineering Lead (PDF)](https://github.com/Soumen2581/Capstone-Project/blob/master/docs/wiki/personas/persona-priya.pdf)
+- [Persona 2: Daniel, Data Analyst (PDF)](https://github.com/Soumen2581/Capstone-Project/blob/master/docs/wiki/personas/persona-daniel.pdf)
+- [Persona 3: Aisha, Technical Product Manager (PDF)](https://github.com/Soumen2581/Capstone-Project/blob/master/docs/wiki/personas/persona-aisha.pdf)
 
 ### Product User Stories and Acceptance Criteria
 - [View User Stories & Acceptance Criteria as PDF](https://github.com/Soumen2581/Capstone-Project/blob/master/docs/agile/user-stories/AgentMesh_UserStories.pdf) | [Download as Excel Workbook](https://github.com/Soumen2581/Capstone-Project/raw/master/docs/agile/user-stories/AgentMesh_UserStories.xlsx)
@@ -310,50 +299,6 @@ From Sprint 0 — *Who we're building Agent Mesh for*:
 #### Sprint 1
 - [View Test Cases as PDF](https://github.com/Soumen2581/Capstone-Project/blob/master/docs/agile/test-cases/AgentMesh_Sprint1_TestCases.pdf) | [Download as Excel Workbook](https://github.com/Soumen2581/Capstone-Project/raw/master/docs/agile/test-cases/AgentMesh_Sprint1_TestCases.xlsx)
 
-### Prototype (UI Screenshots)
-
-#### Sprint 1
-Screenshots of the running application (local Docker stack), captured with Playwright:
-
-<p align="center">
-  <img src="https://github.com/Soumen2581/Capstone-Project/raw/master/docs/wiki/prototype/01-product-site.png" width="900" alt="Product site: landing page" /><br/>
-  <em>Product site: landing page</em>
-</p>
-
-<p align="center">
-  <img src="https://github.com/Soumen2581/Capstone-Project/raw/master/docs/wiki/prototype/02-empty-brief-blocked.png" width="900" alt="Empty brief: Start task stays disabled with a hint" /><br/>
-  <em>Empty brief: Start task stays disabled with a hint</em>
-</p>
-
-<p align="center">
-  <img src="https://github.com/Soumen2581/Capstone-Project/raw/master/docs/wiki/prototype/03-vague-brief-clarification.png" width="900" alt="Vague brief: the orchestrator asks for clarification instead of planning" /><br/>
-  <em>Vague brief: the orchestrator asks for clarification instead of planning</em>
-</p>
-
-<p align="center">
-  <img src="https://github.com/Soumen2581/Capstone-Project/raw/master/docs/wiki/prototype/04-brief-ready-to-submit.png" width="900" alt="Clear brief ready to submit" /><br/>
-  <em>Clear brief ready to submit</em>
-</p>
-
-<p align="center">
-  <img src="https://github.com/Soumen2581/Capstone-Project/raw/master/docs/wiki/prototype/05-spawned-agents-with-reasons.png" width="900" alt="Workflow: spawned agents with selection reasons, skipped steps and not-spawned agents" /><br/>
-  <em>Workflow: spawned agents with selection reasons, skipped steps and not-spawned agents</em>
-</p>
-
-<p align="center">
-  <img src="https://github.com/Soumen2581/Capstone-Project/raw/master/docs/wiki/prototype/06-agent-registry.png" width="900" alt="Agent registry and enrollment form" /><br/>
-  <em>Agent registry and enrollment form</em>
-</p>
-
-<p align="center">
-  <img src="https://github.com/Soumen2581/Capstone-Project/raw/master/docs/wiki/prototype/07-enroll-missing-capability-error.png" width="900" alt="Enrollment validation: at least one capability required" /><br/>
-  <em>Enrollment validation: at least one capability required</em>
-</p>
-
-<p align="center">
-  <img src="https://github.com/Soumen2581/Capstone-Project/raw/master/docs/wiki/prototype/08-enroll-duplicate-name-error.png" width="900" alt="Enrollment validation: duplicate agent name rejected" /><br/>
-  <em>Enrollment validation: duplicate agent name rejected</em>
-</p>
 ## Source Code (Sprint 0)
 
 - [Frontend](https://github.com/htmw/F2026-T2-Phoenix/tree/main/frontend)
