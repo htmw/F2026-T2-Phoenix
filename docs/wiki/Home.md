@@ -1,4 +1,4 @@
-# Agent Mesh
+## Agent Mesh
 
 <div align="center">
   <img width="320" alt="Agent Mesh" src="https://github.com/htmw/F2026-T2-Phoenix/raw/main/frontend/public/brand/agent-mesh-logo.png" />
@@ -39,7 +39,7 @@ Improved **consistency**, **scalability**, and reduced **wasted spend** through 
 <table>
   <tr>
     <td align="center" colspan="3">
-      <img src="https://github.com/Soumen2581/Capstone-Project/raw/master/docs/wiki/team/henry-wong.jpg" width="200" height="250" alt="Henry Wong" /><br/>
+      <img src="https://github.com/htmw/F2026-T2-Phoenix/raw/main/docs/wiki/team/henry-wong.jpg" width="200" height="250" alt="Henry Wong" /><br/>
       <b>Henry Wong</b><br/>
       (<a href="mailto:hwong@pace.edu">hwong@pace.edu</a>)<br/>
       AI/ML Advisor
@@ -47,7 +47,7 @@ Improved **consistency**, **scalability**, and reduced **wasted spend** through 
   </tr>
   <tr>
     <td align="center" colspan="3">
-      <img src="https://github.com/Soumen2581/Capstone-Project/raw/master/docs/wiki/team/dhwani-dobariya.jpg" width="200" height="250" alt="Dhwani Dobariya" /><br/>
+      <img src="https://github.com/htmw/F2026-T2-Phoenix/raw/main/docs/wiki/team/dhwani-dobariya.jpg" width="200" height="250" alt="Dhwani Dobariya" /><br/>
       <b>Dhwani Dobariya</b><br/>
       (<a href="https://github.com/DhwaniDobariya">DhwaniDobariya</a>)<br/>
       Team Leader / Product Owner<br/>
@@ -56,21 +56,21 @@ Improved **consistency**, **scalability**, and reduced **wasted spend** through 
   </tr>
   <tr>
     <td align="center" width="33%">
-      <img src="https://github.com/Soumen2581/Capstone-Project/raw/master/docs/wiki/team/aniruddha-rath.jpg" width="200" height="250" alt="Aniruddha Rath" /><br/>
+      <img src="https://github.com/htmw/F2026-T2-Phoenix/raw/main/docs/wiki/team/aniruddha-rath.jpg" width="200" height="250" alt="Aniruddha Rath" /><br/>
       <b>Aniruddha Rath</b><br/>
       (<a href="https://github.com/AniRath020697">AniRath020697</a>)<br/>
       Backend Engineer<br/>
       <a href="mailto:ar35067n@pace.edu">ar35067n@pace.edu</a>
     </td>
     <td align="center" width="33%">
-      <img src="https://github.com/Soumen2581/Capstone-Project/raw/master/docs/wiki/team/puneet-tulsiani.jpg" width="200" height="250" alt="Puneet Tulsiani" /><br/>
+      <img src="https://github.com/htmw/F2026-T2-Phoenix/raw/main/docs/wiki/team/puneet-tulsiani.jpg" width="200" height="250" alt="Puneet Tulsiani" /><br/>
       <b>Puneet Tulsiani</b><br/>
       (<a href="https://github.com/puneett12">puneett12</a>)<br/>
       Frontend Engineer<br/>
       <a href="mailto:pt00057n@pace.edu">pt00057n@pace.edu</a>
     </td>
     <td align="center" width="33%">
-      <img src="https://github.com/Soumen2581/Capstone-Project/raw/master/docs/wiki/team/soumen-nageshkar.jpg" width="200" height="250" alt="Soumen Nageshkar" /><br/>
+      <img src="https://github.com/htmw/F2026-T2-Phoenix/raw/main/docs/wiki/team/soumen-nageshkar.jpg" width="200" height="250" alt="Soumen Nageshkar" /><br/>
       <b>Soumen Nageshkar</b><br/>
       (<a href="https://github.com/Soumen2581">Soumen2581</a>)<br/>
       Full-Stack / Platform Engineer<br/>
@@ -79,21 +79,21 @@ Improved **consistency**, **scalability**, and reduced **wasted spend** through 
   </tr>
   <tr>
     <td align="center" width="33%">
-      <img src="https://github.com/Soumen2581/Capstone-Project/raw/master/docs/wiki/team/sutej-kulkarni.jpg" width="200" height="250" alt="Sutej Kulkarni" /><br/>
+      <img src="https://github.com/htmw/F2026-T2-Phoenix/raw/main/docs/wiki/team/sutej-kulkarni.jpg" width="200" height="250" alt="Sutej Kulkarni" /><br/>
       <b>Sutej Kulkarni</b><br/>
       (<a href="https://github.com/Sutej12">Sutej12</a>)<br/>
       DevOps / Infrastructure Engineer<br/>
       <a href="mailto:sk85676n@pace.edu">sk85676n@pace.edu</a>
     </td>
     <td align="center" width="33%">
-      <img src="https://github.com/Soumen2581/Capstone-Project/raw/master/docs/wiki/team/gurjot-singh.jpg" width="200" height="250" alt="Gurjot Singh" /><br/>
+      <img src="https://github.com/htmw/F2026-T2-Phoenix/raw/main/docs/wiki/team/gurjot-singh.jpg" width="200" height="250" alt="Gurjot Singh" /><br/>
       <b>Gurjot Singh</b><br/>
       (<a href="https://github.com/gurjotsingh01">gurjotsingh01</a>)<br/>
       QA / Test Engineer<br/>
       <a href="mailto:gs37994n@pace.edu">gs37994n@pace.edu</a>
     </td>
-    <td align="center" width="33%">
-      <img src="https://github.com/Soumen2581/Capstone-Project/raw/master/docs/wiki/team/om-jadhav.jpg" width="200" height="250" alt="Om Jadhav" /><br/>
+    <td align="center" width="30%">
+      <img src="https://github.com/htmw/F2026-T2-Phoenix/raw/main/docs/wiki/team/om-jadhav.jpg" width="200" height="250" alt="Om Jadhav" /><br/>
       <b>Om Jadhav</b><br/>
       (<a href="https://github.com/jadhavom37">jadhavom37</a>)<br/>
       Documentation & Agile Lead<br/>
@@ -199,53 +199,46 @@ Agent Mesh follows an end-to-end modular-monolith pipeline:
 ## Presentations (Sprint Reviews)
 
 ### Sprint 0
-- [Watch deliverable Sprint 0 presentation video](https://www.youtube.com/watch?v=N24yQqrouek)
-- [Download deliverable Sprint 0 presentation video](https://github.com/htmw/F2026-T2-Phoenix/blob/main/docs/sprints/AgentMesh_Sprint0_Presentation.mp4)
-- [Deliverable presentation slide as PowerPoint](https://github.com/htmw/F2026-T2-Phoenix/blob/main/docs/sprints/AgentMesh_Sprint0_Presentation_final.pptx)
-- [Deliverable presentation slide as PDF](https://github.com/htmw/F2026-T2-Phoenix/blob/main/docs/sprints/AgentMesh_Sprint0_Presentation_final.pdf)
+- 0a) [Watch deliverable Sprint 0 presentation video](https://www.youtube.com/watch?v=N24yQqrouek) | [Download deliverable Sprint 0 presentation video](https://github.com/htmw/F2026-T2-Phoenix/blob/main/docs/sprints/AgentMesh_Sprint0_Presentation.mp4)
+- 0b) [Deliverable presentation slide as PowerPoint](https://github.com/htmw/F2026-T2-Phoenix/blob/main/docs/sprints/AgentMesh_Sprint0_Presentation_final.pptx) | [Deliverable presentation slide as PDF](https://github.com/htmw/F2026-T2-Phoenix/blob/main/docs/sprints/AgentMesh_Sprint0_Presentation_final.pdf)
+- 0c) Source Code(Sprint 0) : [Frontend](https://github.com/htmw/F2026-T2-Phoenix/tree/main/frontend) | [Backend](https://github.com/htmw/F2026-T2-Phoenix/tree/main/backend)
 
 ### Sprint 1
-#### Sprint 1 Presentation Video
-- [Watch Sprint 1 Presentation Video](https://www.youtube.com/watch?v=NQy178euy0E)
-- [Download Sprint 1 Presentation Video](https://github.com/Soumen2581/Capstone-Project/releases/download/sprint-1/AgentMesh_Sprint1_Presentation.mp4)
-1a. [View Sprint 1 Presentation Slides as PDF](https://github.com/htmw/F2026-T2-Phoenix/blob/main/docs/sprints/AgentMesh_Sprint1_Presentation.pdf)
-1b. [Download Sprint 1 Presentation Slides as PowerPoint](https://github.com/htmw/F2026-T2-Phoenix/blob/main/docs/sprints/AgentMesh_Sprint1_Presentation.pptx)
-#### Live Demo
-1d. [Watch Sprint 1 Demo](https://www.youtube.com/watch?v=Dd_9gl4ELgk) | [Download Sprint 1 Demo (mp4)](https://github.com/htmw/F2026-T2-Phoenix/raw/main/docs/sprints/AgentMesh_Sprint1_Demo.mp4)
-1e. [Sprint 1 Front-End Source Code](https://github.com/Soumen2581/Capstone-Project/tree/master/frontend) | [Sprint 1 Back-End Source Code](https://github.com/Soumen2581/Capstone-Project/tree/master/backend)
+
+- 1a) [Watch Sprint 1 Presentation Video](https://www.youtube.com/watch?v=NQy178euy0E) | [Click here to Download Sprint 1 Presentation Video](https://github.com/htmw/F2026-T2-Phoenix/releases/download/sprint-1/AgentMesh_Sprint1_Presentation.mp4)
+- 1b) [View Sprint 1 Presentation Slides as PDF](https://github.com/htmw/F2026-T2-Phoenix/blob/main/docs/sprints/AgentMesh_Sprint1_Presentation.pdf) | [View Sprint 1 Presentation Slides as PowerPoint](https://github.com/htmw/F2026-T2-Phoenix/blob/main/docs/sprints/AgentMesh_Sprint1_Presentation.pptx)
+- 1c) [Prototype - Live Link](https://agent-mesh-web.onrender.com/)
+- 1d) [Watch Sprint 1 Demo](https://www.youtube.com/watch?v=Dd_9gl4ELgk) | [Download Sprint 1 Demo (mp4)](https://github.com/htmw/F2026-T2-Phoenix/raw/main/docs/sprints/AgentMesh_Sprint1_Demo.mp4)
+- 1e) [Sprint 1 Front-End Source Code](https://github.com/htmw/F2026-T2-Phoenix/tree/main/frontend) | [Sprint 1 Back-End Source Code](https://github.com/htmw/F2026-T2-Phoenix/tree/main/backend)
 
 ## Sprint Burndown Charts and Completed Tasks
 
 ### Sprint 0
-- [Sprint 0 Completed Tasks](https://github.com/htmw/F2026-T2-Phoenix/blob/main/docs/wiki/sprints/sprint-0-completed-tasks.jpg) (SCRUM board)
+- [Sprint 0 Completed Tasks](https://github.com/htmw/F2026-T2-Phoenix/blob/main/docs/wiki/sprints/sprint-0-completed-tasks.jpg)
 
 ### Sprint 1
-- [Sprint 1 Burndown Chart](https://github.com/Soumen2581/Capstone-Project/blob/master/docs/wiki/sprints/sprint-1-burndown.png) | [Sprint 1 Completed Tasks](https://github.com/Soumen2581/Capstone-Project/blob/master/docs/wiki/sprints/sprint-1-completed-tasks.png) (SCRUM board)
-
+- [Sprint 1 Burndown Chart](https://github.com/htmw/F2026-T2-Phoenix/blob/main/docs/wiki/sprints/sprint-1-burndown.png) | [Sprint 1 Completed Tasks](https://github.com/htmw/F2026-T2-Phoenix/blob/main/docs/wiki/sprints/sprint-1-completed-tasks.png)
 ## Sprint Planning
 
-### Sprint 1
-1. [Watch Sprint 1 Planning Video](https://www.youtube.com/watch?v=9tktC_Bq3pc) | [Download mp4 File](https://github.com/Soumen2581/Capstone-Project/releases/download/sprint-1/AgentMesh_Sprint1_Planning.mp4)
+- [Watch Sprint 1 Planning Video](https://www.youtube.com/watch?v=9tktC_Bq3pc) | [Download mp4 File](https://github.com/htmw/F2026-T2-Phoenix/releases/download/sprint-1/AgentMesh_Sprint1_Planning.mp4)
 
 ## Retrospectives
 
-### Sprint 0
-0a. [Watch Sprint 0 Retrospective Video](https://www.youtube.com/watch?v=OkWZ0Ngln0w) | [Click here to download mp4 File](https://github.com/htmw/F2026-T2-Phoenix/blob/main/docs/sprints/AgentMesh_Sprint0_Retrospective.mp4)
+- [Watch Sprint 0 Retrospective Video](https://www.youtube.com/watch?v=OkWZ0Ngln0w) | [Click here to download mp4 File](https://github.com/htmw/F2026-T2-Phoenix/blob/main/docs/sprints/AgentMesh_Sprint0_Retrospective.mp4)
 
-### Sprint 1
-1. [Watch Sprint 1 Retrospective Video](https://www.youtube.com/watch?v=xaOZLz6WfMU) | [Download mp4 File](https://github.com/Soumen2581/Capstone-Project/releases/download/sprint-1/AgentMesh_Sprint1_Retrospective.mp4)
+- [Watch Sprint 1 Retrospective Video](https://www.youtube.com/watch?v=xaOZLz6WfMU) | [Download mp4 File](https://github.com/htmw/F2026-T2-Phoenix/releases/download/sprint-1/AgentMesh_Sprint1_Retrospective.mp4)
 
 ## Team Working Agreement
 [Team Working Agreement as PDF](https://github.com/htmw/F2026-T2-Phoenix/blob/main/docs/agile/Teamwork_Agreement_Team2_Phoenix.pdf) | [Team Working Agreement (markdown)](https://github.com/htmw/F2026-T2-Phoenix/blob/main/docs/agile/team-working-agreement.md)
 
 ## Diagrams
 - Architecture write-up: [docs/architecture.md](https://github.com/htmw/F2026-T2-Phoenix/blob/main/docs/architecture.md)
-- [Architecture Diagram](https://github.com/Soumen2581/Capstone-Project/blob/master/docs/wiki/diagrams/architecture-diagram.png)
-- [Sequence Diagram](https://github.com/Soumen2581/Capstone-Project/blob/master/docs/wiki/diagrams/sequence-diagram.png)
-- [Context Diagram](https://github.com/Soumen2581/Capstone-Project/blob/master/docs/wiki/diagrams/context-diagram.png)
-- [ER Diagram](https://github.com/Soumen2581/Capstone-Project/blob/master/docs/wiki/diagrams/er-diagram.png)
-- [State Diagram](https://github.com/Soumen2581/Capstone-Project/blob/master/docs/wiki/diagrams/state-diagram.png)
-- [Class Diagram](https://github.com/Soumen2581/Capstone-Project/blob/master/docs/wiki/diagrams/class-diagram.png)
+- [Architecture Diagram](https://github.com/htmw/F2026-T2-Phoenix/blob/main/docs/wiki/diagrams/architecture-diagram.png)
+- [Sequence Diagram](https://github.com/htmw/F2026-T2-Phoenix/blob/main/docs/wiki/diagrams/sequence-diagram.png)
+- [Context Diagram](https://github.com/htmw/F2026-T2-Phoenix/blob/main/docs/wiki/diagrams/context-diagram.png)
+- [ER Diagram](https://github.com/htmw/F2026-T2-Phoenix/blob/main/docs/wiki/diagrams/er-diagram.png)
+- [State Diagram](https://github.com/htmw/F2026-T2-Phoenix/blob/main/docs/wiki/diagrams/state-diagram.png)
+- [Class Diagram](https://github.com/htmw/F2026-T2-Phoenix/blob/main/docs/wiki/diagrams/class-diagram.png)
 
 ## Additional Project Artifacts
 
@@ -253,28 +246,24 @@ Agent Mesh follows an end-to-end modular-monolith pipeline:
 
 From Sprint 0 — *Who we're building Agent Mesh for*:
 
-- [Persona 1: Priya, Software Engineering Lead (PDF)](https://github.com/Soumen2581/Capstone-Project/blob/master/docs/wiki/personas/persona-priya.pdf)
-- [Persona 2: Daniel, Data Analyst (PDF)](https://github.com/Soumen2581/Capstone-Project/blob/master/docs/wiki/personas/persona-daniel.pdf)
-- [Persona 3: Aisha, Technical Product Manager (PDF)](https://github.com/Soumen2581/Capstone-Project/blob/master/docs/wiki/personas/persona-aisha.pdf)
+- [Persona 1: Priya, Software Engineering Lead (PDF)](https://github.com/htmw/F2026-T2-Phoenix/blob/main/docs/wiki/personas/persona-priya.pdf)
+- [Persona 2: Daniel, Data Analyst (PDF)](https://github.com/htmw/F2026-T2-Phoenix/blob/main/docs/wiki/personas/persona-daniel.pdf)
+- [Persona 3: Aisha, Technical Product Manager (PDF)](https://github.com/htmw/F2026-T2-Phoenix/blob/main/docs/wiki/personas/persona-aisha.pdf)
 
 ### Product User Stories and Acceptance Criteria
-- [View User Stories & Acceptance Criteria as PDF](https://github.com/Soumen2581/Capstone-Project/blob/master/docs/agile/user-stories/AgentMesh_UserStories.pdf) | [Download as Excel Workbook](https://github.com/Soumen2581/Capstone-Project/raw/master/docs/agile/user-stories/AgentMesh_UserStories.xlsx)
+- [View User Stories & Acceptance Criteria as PDF](https://github.com/htmw/F2026-T2-Phoenix/blob/main/docs/agile/user-stories/AgentMesh_UserStories.pdf) | [Download as Excel Workbook](https://github.com/htmw/F2026-T2-Phoenix/blob/main/docs/agile/user-stories/AgentMesh_UserStories.xlsx)
 
 ### User Stories and Acceptance Criteria (Sprint-wise)
 
 #### Sprint 1
-- [View Sprint 1 User Stories as PDF](https://github.com/Soumen2581/Capstone-Project/blob/master/docs/agile/user-stories/AgentMesh_Sprint1_UserStories.pdf) | [Download as Excel Workbook](https://github.com/Soumen2581/Capstone-Project/raw/master/docs/agile/user-stories/AgentMesh_Sprint1_UserStories.xlsx)
+- [View Sprint 1 User Stories as PDF](https://github.com/htmw/F2026-T2-Phoenix/blob/main/docs/agile/user-stories/AgentMesh_Sprint1_UserStories.pdf) | [Download as Excel Workbook](https://github.com/htmw/F2026-T2-Phoenix/blob/main/docs/agile/user-stories/AgentMesh_Sprint1_UserStories.xlsx)
 
 ### Application Test Cases
 
 #### Sprint 1
-- [View Test Cases as PDF](https://github.com/Soumen2581/Capstone-Project/blob/master/docs/agile/test-cases/AgentMesh_Sprint1_TestCases.pdf) | [Download as Excel Workbook](https://github.com/Soumen2581/Capstone-Project/raw/master/docs/agile/test-cases/AgentMesh_Sprint1_TestCases.xlsx)
+- [View Test Cases as PDF](https://github.com/htmw/F2026-T2-Phoenix/blob/main/docs/agile/test-cases/AgentMesh_Sprint1_TestCases.pdf) | [Download as Excel Workbook](https://github.com/htmw/F2026-T2-Phoenix/blob/main/docs/agile/test-cases/AgentMesh_Sprint1_TestCases.xlsx)
 
-## Source Code (Sprint 0)
 
-- [Frontend](https://github.com/htmw/F2026-T2-Phoenix/tree/main/frontend)
-- [Backend](https://github.com/htmw/F2026-T2-Phoenix/tree/main/backend)
-- [Docs / ADRs / Agile](https://github.com/htmw/F2026-T2-Phoenix/tree/main/docs)
 - **Monorepo:** [https://github.com/htmw/F2026-T2-Phoenix](https://github.com/htmw/F2026-T2-Phoenix)
 
 ```bash
