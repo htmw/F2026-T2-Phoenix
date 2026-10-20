@@ -10,13 +10,13 @@ export function HeroSection() {
 
   return (
     <section className="mkt-hero" id="top">
-      <div className="mkt-grid">
+      <div className="mkt-grid mkt-hero-layout">
         <div className="mkt-hero-copy">
           <motion.p
             className="mkt-eyebrow"
             initial={reduce ? false : { opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
+            transition={{ duration: 0.2, ease: "easeOut" }}
           >
             Agent Mesh
           </motion.p>
@@ -24,7 +24,7 @@ export function HeroSection() {
             className="mkt-display"
             initial={reduce ? false : { opacity: 0, y: 18 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.55, delay: 0.05 }}
+            transition={{ duration: 0.25, delay: 0.03, ease: "easeOut" }}
           >
             AI agents.
             <br />
@@ -34,7 +34,7 @@ export function HeroSection() {
             className="mkt-lede"
             initial={reduce ? false : { opacity: 0, y: 14 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.12 }}
+            transition={{ duration: 0.25, delay: 0.06, ease: "easeOut" }}
           >
             A collaborative AI workspace where a team of specialists is assembled for your brief:
             market research, a product plan, analysis, code, and more, working together as one
@@ -44,7 +44,7 @@ export function HeroSection() {
             className="mkt-hero-cta"
             initial={reduce ? false : { opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.45, delay: 0.18 }}
+            transition={{ duration: 0.2, delay: 0.1, ease: "easeOut" }}
           >
             <Link href="/office" className="mkt-btn mkt-btn-primary mkt-btn-lg">
               Start a task
@@ -58,7 +58,7 @@ export function HeroSection() {
           className="mkt-hero-visual"
           initial={reduce ? false : { opacity: 0, scale: 0.98 }}
           animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.7, delay: 0.15 }}
+          transition={{ duration: 0.25, delay: 0.12, ease: "easeOut" }}
         >
           <AgentNetwork />
         </motion.div>

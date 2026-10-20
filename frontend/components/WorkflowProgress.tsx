@@ -110,7 +110,7 @@ export function WorkflowProgress({
 
       <div className="workflow-steps">
         {ordered.map((node) => (
-          <div className="workflow-step" key={node.key}>
+          <div className={`workflow-step is-${node.status}`} key={node.key} data-status={node.status}>
             <span className={`status-dot ${statusClass(node.status)}`} aria-hidden />
             <div>
               <div className="step-label">{node.agent_name || node.agent_id}</div>

@@ -48,6 +48,14 @@ export function AgentCard({
     (presence.status === "idle" ? "Ready" : presence.status);
   const pinnedProvider = providerIdFromModel(agent.preferred_model);
 
+  const label = shortAgentName(agent.id);
+  const initials = label
+    .split(/\s+/)
+    .map((part) => part[0])
+    .join("")
+    .slice(0, 2)
+    .toUpperCase();
+
   return (
     <button
       type="button"
@@ -57,10 +65,15 @@ export function AgentCard({
       style={{ ["--stagger" as string]: `${staggerMs}ms` }}
     >
       <div className="agent-card-head">
-        <p className="agent-card-name">{shortAgentName(agent.id)}</p>
+        <span className="agent-avatar" aria-hidden>
+          {initials || "?"}
+        </span>
+        <div className="agent-card-identity">
+          <p className="agent-card-name">{label}</p>
+          <p className="agent-card-task">{task}</p>
+        </div>
         <span className={`status-dot ${statusTone(presence.status)}`} aria-hidden />
       </div>
-      <p className="agent-card-task">{task}</p>
       <p className="agent-card-meta model-meta">
         {pinnedProvider ? <ProviderIcon providerId={pinnedProvider} size={12} /> : null}
         {presence.status.replaceAll("_", " ")}
@@ -97,7 +110,7 @@ export function AgentStrip({
             item={item}
             selected={selected === item.agent.id}
             onSelect={() => onSelect(item.agent.id)}
-            staggerMs={index * 45}
+            staggerMs={index * 30}
           />
         </div>
       ))}

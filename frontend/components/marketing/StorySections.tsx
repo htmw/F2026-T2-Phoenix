@@ -19,23 +19,56 @@ function Reveal({ children, delay = 0 }: { children: ReactNode; delay?: number }
   );
 }
 
+const FEATURES = [
+  {
+    title: "Select only what is needed",
+    body: "Capability-driven routing activates the specialists a brief requires — and skips the rest.",
+    mark: "01",
+  },
+  {
+    title: "Wire a workflow DAG",
+    body: "Sequential, parallel, or conditional graphs with retries, approval gates, and clear handoffs.",
+    mark: "02",
+  },
+  {
+    title: "Synthesise one result",
+    body: "Validated outputs from every desk combine into a single deliverable you can trust and share.",
+    mark: "03",
+  },
+] as const;
+
 export function IdeaSection() {
   return (
     <section className="mkt-section" id="idea">
-      <div className="mkt-grid mkt-section-narrow">
+      <div className="mkt-grid">
         <Reveal>
-          <p className="mkt-kicker">01 · The idea</p>
-          <h2 className="mkt-title">
-            One AI can work.
-            <br />
-            An organization of agents can collaborate.
-          </h2>
-          <p className="mkt-body">
-            Agent Mesh is not a chat that fans the same prompt to many models. It is an operating
-            system for specialist agents that plan, hand off, and share context until the brief is
-            done, whatever the domain.
-          </p>
+          <div className="mkt-section-narrow">
+            <p className="mkt-kicker">01 · The idea</p>
+            <h2 className="mkt-title">
+              One AI can work.
+              <br />
+              An organization of agents can collaborate.
+            </h2>
+            <p className="mkt-body">
+              Agent Mesh is not a chat that fans the same prompt to many models. It is an operating
+              system for specialist agents that plan, hand off, and share context until the brief is
+              done, whatever the domain.
+            </p>
+          </div>
         </Reveal>
+        <div className="mkt-feature-grid">
+          {FEATURES.map((feature, i) => (
+            <Reveal key={feature.title} delay={i * 0.03}>
+              <article className="mkt-feature-card">
+                <span className="mkt-feature-icon" aria-hidden>
+                  {feature.mark}
+                </span>
+                <h3 className="mkt-feature-title">{feature.title}</h3>
+                <p className="mkt-feature-body">{feature.body}</p>
+              </article>
+            </Reveal>
+          ))}
+        </div>
       </div>
     </section>
   );

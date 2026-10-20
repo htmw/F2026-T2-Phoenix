@@ -535,7 +535,7 @@ export default function HomePage() {
       )}
 
       {tab === "home" && (
-        <div className="workspace chat">
+        <div className="workspace chat office-panes">
           <ConversationSidebar
             conversations={conversations}
             activeId={workflow?.id ?? null}
@@ -543,23 +543,6 @@ export default function HomePage() {
             onNew={startNewChat}
           />
           <div className="chat-main">
-            <ChatThread
-              workflow={workflow}
-              history={threadHistory}
-              busy={busy}
-              onOpenWork={() => setTab("work")}
-            />
-            <label
-              className="muted"
-              style={{ display: "flex", alignItems: "center", gap: 8, padding: "4px 12px", cursor: "pointer" }}
-            >
-              <input
-                type="checkbox"
-                checked={generative}
-                onChange={(event) => setGenerative(event.target.checked)}
-              />
-              Design a bespoke team for this task (beta), spawns up to 4 specialists on the cheapest model
-            </label>
             <TaskComposer
               compact={composerMode === "followup" || !!workflow}
               request={request}
@@ -600,19 +583,38 @@ export default function HomePage() {
               freeOnlyBlocked={freeOnlyBlocked}
               onSubmit={(event) => void onSubmit(event)}
             />
-            <details className="panel" style={{ padding: "8px 12px" }}>
-              <summary className="muted" style={{ cursor: "pointer" }}>
-                Agents ({office?.agents.length ?? 0})
-              </summary>
-              <div style={{ marginTop: 12 }}>
-                <AgentStrip
-                  agents={office?.agents ?? []}
-                  selected={selected}
-                  onSelect={openAgent}
-                />
-              </div>
-            </details>
+            <label className="muted generative-toggle">
+              <input
+                type="checkbox"
+                checked={generative}
+                onChange={(event) => setGenerative(event.target.checked)}
+              />
+              Design a bespoke team for this task (beta), spawns up to 4 specialists on the cheapest
+              model
+            </label>
+            {workflow && (
+              <WorkflowProgress
+                workflow={workflow}
+                busy={busy}
+                compact
+                onControl={(action, nodeKey) => void runControl(action, nodeKey)}
+              />
+            )}
+            <ChatThread
+              workflow={workflow}
+              history={threadHistory}
+              busy={busy}
+              onOpenWork={() => setTab("work")}
+            />
           </div>
+          <aside className="office-agents-pane panel" aria-label="Agents">
+            <h2 className="chat-sidebar-label">Agents</h2>
+            <AgentStrip
+              agents={office?.agents ?? []}
+              selected={selected}
+              onSelect={openAgent}
+            />
+          </aside>
         </div>
       )}
 
