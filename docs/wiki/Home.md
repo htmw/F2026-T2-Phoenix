@@ -231,12 +231,15 @@ Agent Mesh follows an end-to-end modular-monolith pipeline:
 ## Sprint Planning
 
 - [Watch Sprint 1 Planning Video](https://www.youtube.com/watch?v=9tktC_Bq3pc) | [Download mp4 File](https://github.com/htmw/F2026-T2-Phoenix/releases/download/sprint-1/AgentMesh_Sprint1_Planning.mp4)
+- [Watch Sprint 2 Planning Video](https://www.youtube.com/watch?v=xgsjFYFc9og) | [Download mp4 File](https://github.com/htmw/F2026-T2-Phoenix/releases/download/sprint-2/AgentMesh_Sprint2_Planning.mp4)
 
 ## Retrospectives
 
 - [Watch Sprint 0 Retrospective Video](https://www.youtube.com/watch?v=OkWZ0Ngln0w) | [Click here to download mp4 File](https://github.com/htmw/F2026-T2-Phoenix/blob/main/docs/sprints/AgentMesh_Sprint0_Retrospective.mp4)
 
 - [Watch Sprint 1 Retrospective Video](https://www.youtube.com/watch?v=xaOZLz6WfMU) | [Download mp4 File](https://github.com/htmw/F2026-T2-Phoenix/releases/download/sprint-1/AgentMesh_Sprint1_Retrospective.mp4)
+
+- [Watch Sprint 2 Retrospective Video](https://www.youtube.com/watch?v=twiKLbI92vU) | [Download mp4 File](https://github.com/htmw/F2026-T2-Phoenix/releases/download/sprint-2/AgentMesh_Sprint2_Retrospective.mp4)
 
 ## Team Working Agreement
 [Team Working Agreement as PDF](https://github.com/htmw/F2026-T2-Phoenix/blob/main/docs/agile/Teamwork_Agreement_Team2_Phoenix.pdf) | [Team Working Agreement (markdown)](https://github.com/htmw/F2026-T2-Phoenix/blob/main/docs/agile/team-working-agreement.md)
