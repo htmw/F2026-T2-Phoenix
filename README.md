@@ -40,24 +40,52 @@ It is not a chat interface that sends the same prompt to several models. The pro
 the orchestration decision: what to run, what *not* to run, in what order, and on which
 model.
 
-> **Status: Sprint 0 complete.** Specialised agents are selected by capability,
-> planned as a DAG, and executed with skips, retries, approval, and synthesis. They also
-> talk directly: durable inboxes, scoped memory, and artifact references. Several
-> providers share one routing layer with logged fallback. Cost is visible from the API
-> and from Prometheus.
+> **Status: Sprint 0–2 implemented (local).** Specialised agents are selected by
+> capability, planned as a DAG, and executed with dependencies, skips, retries,
+> approval gates, and synthesis. Sprint 2 adds durable workflow persistence, office
+> Build/Work surfaces (including a workflow builder), Data Analyst capability, and CI
+> with Postgres + Playwright smoke. The product runs **locally via Docker**; this README
+> does not claim a production deployment URL.
 >
 > Product shape: an **office of specialists** (brief once; watch desks, mail, and the
-> workflow graph) — inspired by multi-agent office harnesses, implemented as a web
-> orchestrator rather than a desktop CLI wrapper. See
+> workflow graph). See
 > [`docs/adr/0006-office-of-specialists.md`](docs/adr/0006-office-of-specialists.md).
 >
-> Operator identity (`X-Operator-Id`) and workflow ownership shipped in Universal Office
-> Sprint 9; rate limits and soft budgets in Sprint 10; production fail-fast in Sprint 11;
-> HS256 JWT Bearer validation in Sprint 12; Playwright browser smoke (J-2) in Sprint 13 —
-> see ADRs
+> Course wiki index: [`docs/wiki/Home.md`](docs/wiki/Home.md).
+>
+> Technical paper draft: [`PDF`](docs/paper/AgentMesh_Sprint2_Technical_Paper_Draft.pdf) · [`DOCX`](docs/paper/AgentMesh_Sprint2_Technical_Paper_Draft.docx).
+>
+> Operator identity, rate limits, production fail-fast, and JWT — ADRs
 > [0007](docs/adr/0007-operator-identity.md),
 > [0008](docs/adr/0008-rate-limits.md),
 > [0009](docs/adr/0009-production-fail-fast.md).
+
+## Prerequisites
+
+- Docker Desktop (or Docker Engine) with Compose v2+
+- Optional host tooling: Python 3.12+, Node.js 24+, `make`
+- Optional provider API keys in `.env` (Demo Mode works without them)
+
+Environment template: [`.env.example`](.env.example).
+
+## What ships through Sprint 2 (MVP)
+
+- Capability-based agent selection and DAG planning
+- Workflow execution with retries, skip/approve/reject, cancel/resume
+- PostgreSQL-backed workflow state; Redis for ephemeral coordination
+- Operator office at `/office` (roster, Build/Work, live node status)
+- Workflow builder wired to backend planning/execution APIs
+- Data Analyst agent capability
+- Demo Mode for local demos and CI browser smoke
+- GitHub Actions: lint, types, pytest (Postgres), Docker build, gitleaks, Playwright
+
+| Sprint | Focus |
+|--------|-------|
+| **0** | Monorepo foundation, Compose stack, ADRs, agents, orchestration core, office shell |
+| **1** | Auth/enrollment paths, multi-agent plans, schema validation, workflow tests, frontend office |
+| **2** | DAG persistence and controls, builder/dashboard, Data Analyst, richer CI/e2e, sprint artifacts |
+
+Sprint 3+ under `docs/SPRINT_3_*` is **planning only**.
 
 ## Run with Docker
 

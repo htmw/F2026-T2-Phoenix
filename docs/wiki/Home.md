@@ -214,10 +214,10 @@ Agent Mesh follows an end-to-end modular-monolith pipeline:
 
 ### Sprint 2
 
-- 3a) [Watch Sprint 2 Presentation Video](https://www.youtube.com/watch?v=QPmhcV6kkbc) | [Download Sprint 2 Presentation Video](https://github.com/htmw/F2026-T2-Phoenix/releases/download/sprint-2/AgentMesh_Sprint2_Presentation.mp4)
-- 3b) [View Sprint 2 Presentation Slides as PDF](https://github.com/htmw/F2026-T2-Phoenix/blob/main/docs/sprints/AgentMesh_Sprint2_Presentation.pdf) | [View Sprint 2 Presentation Slides as PowerPoint](https://github.com/htmw/F2026-T2-Phoenix/blob/main/docs/sprints/AgentMesh_Sprint2_Presentation.pptx)
-- 3c) [Watch Sprint 2 Demo](https://www.youtube.com/watch?v=73D30fI-xio) | [Download Sprint 2 Demo (mp4)](https://github.com/htmw/F2026-T2-Phoenix/raw/main/docs/sprints/AgentMesh_Sprint2_Demo.mp4)
-- 3d) [Sprint 2 Front-End Source Code](https://github.com/htmw/F2026-T2-Phoenix/tree/main/frontend) | [Sprint 2 Back-End Source Code](https://github.com/htmw/F2026-T2-Phoenix/tree/main/backend)
+- 2a) [Watch Sprint 2 Presentation Video](https://www.youtube.com/watch?v=QPmhcV6kkbc) | [Download Sprint 2 Presentation Video](https://github.com/htmw/F2026-T2-Phoenix/releases/download/sprint-2/AgentMesh_Sprint2_Presentation.mp4)
+- 2b) [View Sprint 2 Presentation Slides as PDF](https://github.com/htmw/F2026-T2-Phoenix/blob/main/docs/sprints/AgentMesh_Sprint2_Presentation.pdf) | [View Sprint 2 Presentation Slides as PowerPoint](https://github.com/htmw/F2026-T2-Phoenix/blob/main/docs/sprints/AgentMesh_Sprint2_Presentation.pptx)
+- 2c) [Watch Sprint 2 Demo](https://www.youtube.com/watch?v=73D30fI-xio) | [Download Sprint 2 Demo (mp4)](https://github.com/htmw/F2026-T2-Phoenix/raw/main/docs/sprints/AgentMesh_Sprint2_Demo.mp4)
+- 2d) [Sprint 2 Front-End Source Code](https://github.com/htmw/F2026-T2-Phoenix/tree/main/frontend) | [Sprint 2 Back-End Source Code](https://github.com/htmw/F2026-T2-Phoenix/tree/main/backend)
 
 ## Sprint Burndown Charts and Completed Tasks
 
@@ -249,12 +249,16 @@ Agent Mesh follows an end-to-end modular-monolith pipeline:
 
 ## Diagrams
 - Architecture write-up: [docs/architecture.md](https://github.com/htmw/F2026-T2-Phoenix/blob/main/docs/architecture.md)
-- [Architecture Diagram](https://github.com/htmw/F2026-T2-Phoenix/blob/main/docs/wiki/diagrams/architecture-diagram.png)
-- [Sequence Diagram](https://github.com/htmw/F2026-T2-Phoenix/blob/main/docs/wiki/diagrams/sequence-diagram.png)
-- [Context Diagram](https://github.com/htmw/F2026-T2-Phoenix/blob/main/docs/wiki/diagrams/context-diagram.png)
-- [ER Diagram](https://github.com/htmw/F2026-T2-Phoenix/blob/main/docs/wiki/diagrams/er-diagram.png)
-- [State Diagram](https://github.com/htmw/F2026-T2-Phoenix/blob/main/docs/wiki/diagrams/state-diagram.png)
-- [Class Diagram](https://github.com/htmw/F2026-T2-Phoenix/blob/main/docs/wiki/diagrams/class-diagram.png)
+1. [Context Diagram](https://github.com/htmw/F2026-T2-Phoenix/blob/main/docs/wiki/diagrams/context-diagram.png)
+2. [Architecture Diagram](https://github.com/htmw/F2026-T2-Phoenix/blob/main/docs/wiki/diagrams/architecture-diagram.png)
+3. [Sequence Diagram](https://github.com/htmw/F2026-T2-Phoenix/blob/main/docs/wiki/diagrams/sequence-diagram.png)
+4. [ER Diagram](https://github.com/htmw/F2026-T2-Phoenix/blob/main/docs/wiki/diagrams/er-diagram.png)
+5. [State Diagram](https://github.com/htmw/F2026-T2-Phoenix/blob/main/docs/wiki/diagrams/state-diagram.png)
+6. [Class Diagram](https://github.com/htmw/F2026-T2-Phoenix/blob/main/docs/wiki/diagrams/class-diagram.png)
+
+## Technical Paper
+
+- [Agent Mesh Sprint 2 Technical Paper Draft (PDF)](https://github.com/htmw/F2026-T2-Phoenix/blob/main/docs/paper/AgentMesh_Sprint2_Technical_Paper_Draft.pdf) | [DOCX](https://github.com/htmw/F2026-T2-Phoenix/blob/main/docs/paper/AgentMesh_Sprint2_Technical_Paper_Draft.docx)
 
 ## Additional Project Artifacts
 
@@ -267,25 +271,24 @@ From Sprint 0 — *Who we're building Agent Mesh for*:
 - [Persona 3: Aisha, Technical Product Manager (PDF)](https://github.com/htmw/F2026-T2-Phoenix/blob/main/docs/wiki/personas/persona-aisha.pdf)
 
 ### Product User Stories and Acceptance Criteria
-- [View User Stories & Acceptance Criteria as PDF](https://github.com/htmw/F2026-T2-Phoenix/blob/main/docs/agile/user-stories/AgentMesh_UserStories.pdf) | [Download as Excel Workbook](https://github.com/htmw/F2026-T2-Phoenix/blob/main/docs/agile/user-stories/AgentMesh_UserStories.xlsx)
-- [View User Stories & Acceptance Criteria v2 (PDF)](https://github.com/htmw/F2026-T2-Phoenix/blob/main/docs/agile/user-stories/AgentMesh_UserStories_v2.pdf)
+- [View User Stories & Acceptance Criteria as PDF](https://github.com/htmw/F2026-T2-Phoenix/blob/main/docs/agile/user-stories/AgentMesh_UserStories.pdf) | [Download as Excel Workbook](https://github.com/htmw/F2026-T2-Phoenix/raw/main/docs/agile/user-stories/AgentMesh_UserStories.xlsx)
+- [User Stories v2 (PDF)](https://github.com/htmw/F2026-T2-Phoenix/blob/main/docs/agile/user-stories/AgentMesh_UserStories_v2.pdf) | [Excel](https://github.com/htmw/F2026-T2-Phoenix/raw/main/docs/agile/user-stories/AgentMesh_UserStories_v2.xlsx)
 
 ### User Stories and Acceptance Criteria (Sprint-wise)
 
 #### Sprint 1
-- [View Sprint 1 User Stories as PDF](https://github.com/htmw/F2026-T2-Phoenix/blob/main/docs/agile/user-stories/AgentMesh_Sprint1_UserStories.pdf) | [Download as Excel Workbook](https://github.com/htmw/F2026-T2-Phoenix/blob/main/docs/agile/user-stories/AgentMesh_Sprint1_UserStories.xlsx)
+- [View Sprint 1 User Stories as PDF](https://github.com/htmw/F2026-T2-Phoenix/blob/main/docs/agile/user-stories/AgentMesh_Sprint1_UserStories.pdf) | [Download as Excel Workbook](https://github.com/htmw/F2026-T2-Phoenix/raw/main/docs/agile/user-stories/AgentMesh_Sprint1_UserStories.xlsx)
 
 #### Sprint 2
-- [View Sprint 2 User Stories as PDF](https://github.com/htmw/F2026-T2-Phoenix/blob/main/docs/agile/user-stories/AgentMesh_Sprint2_UserStories.pdf)
+- [View Sprint 2 User Stories as PDF](https://github.com/htmw/F2026-T2-Phoenix/blob/main/docs/agile/user-stories/AgentMesh_Sprint2_UserStories.pdf) | [Download as Excel Workbook](https://github.com/htmw/F2026-T2-Phoenix/raw/main/docs/agile/user-stories/AgentMesh_Sprint2_UserStories.xlsx)
 
 ### Application Test Cases
 
 #### Sprint 1
-- [View Test Cases as PDF](https://github.com/htmw/F2026-T2-Phoenix/blob/main/docs/agile/test-cases/AgentMesh_Sprint1_TestCases.pdf) | [Download as Excel Workbook](https://github.com/htmw/F2026-T2-Phoenix/blob/main/docs/agile/test-cases/AgentMesh_Sprint1_TestCases.xlsx)
+- [View Test Cases as PDF](https://github.com/htmw/F2026-T2-Phoenix/blob/main/docs/agile/test-cases/AgentMesh_Sprint1_TestCases.pdf) | [Download as Excel Workbook](https://github.com/htmw/F2026-T2-Phoenix/raw/main/docs/agile/test-cases/AgentMesh_Sprint1_TestCases.xlsx)
 
 #### Sprint 2
-- [View Sprint 2 Test Cases as PDF](https://github.com/htmw/F2026-T2-Phoenix/blob/main/docs/agile/test-cases/AgentMesh_Sprint2_TestCases.pdf)
-
+- [View Sprint 2 Test Cases as PDF](https://github.com/htmw/F2026-T2-Phoenix/blob/main/docs/agile/test-cases/AgentMesh_Sprint2_TestCases.pdf) | [Download as Excel Workbook](https://github.com/htmw/F2026-T2-Phoenix/raw/main/docs/agile/test-cases/AgentMesh_Sprint2_TestCases.xlsx)
 
 - **Monorepo:** [https://github.com/htmw/F2026-T2-Phoenix](https://github.com/htmw/F2026-T2-Phoenix)
 

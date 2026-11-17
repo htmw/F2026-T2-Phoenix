@@ -1,6 +1,6 @@
 # Sprint 2 implementation report
 
-Repository: personal (`Soumen2581/Capstone-Project`)  
+Repository: course (`htmw/F2026-T2-Phoenix`)  
 Branch: `sprint-2-implementation`  
 Date: 2026-11-03
 
