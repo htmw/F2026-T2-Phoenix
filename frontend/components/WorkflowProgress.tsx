@@ -115,79 +115,100 @@ export function WorkflowProgress({
 
       {workflow.error && <p className="banner-err">{workflow.error}</p>}
 
-      <div className="workflow-steps">
-        {ordered.map((node) => (
-          <div className="workflow-step" key={node.key}>
-            <span className={`status-dot ${statusClass(node.status)}`} aria-hidden />
-            <div>
-              <div className="step-label">{node.agent_name || node.agent_id}</div>
-              <div className="step-meta">
-                <span data-testid={`node-status-${node.key}`} data-status={node.status}>
-                  {node.status.replaceAll("_", " ")}
-                </span>
-                {!compact && node.objective
-                  ? ` · ${node.objective.slice(0, 80)}${node.objective.length > 80 ? "…" : ""}`
-                  : ""}
+      <div
+        className={compact ? "workflow-steps" : "workflow-dag"}
+        data-testid="workflow-dag"
+        aria-label="Workflow DAG"
+      >
+        {(compact ? [ordered] : ranks).map((column, columnIndex) => (
+          <div className={compact ? undefined : "workflow-dag-column"} key={`rank-${columnIndex}`}>
+            {!compact && column.length > 1 && (
+              <p className="meta workflow-dag-label">Parallel · rank {columnIndex + 1}</p>
+            )}
+            {column.map((node) => (
+              <div className="workflow-step" key={node.key}>
+                <span className={`status-dot ${statusClass(node.status)}`} aria-hidden />
+                <div>
+                  <div className="step-label">{node.agent_name || node.agent_id}</div>
+                  <div className="step-meta">
+                    <span data-testid={`node-status-${node.key}`} data-status={node.status}>
+                      {node.status.replaceAll("_", " ")}
+                    </span>
+                    {!compact && node.objective
+                      ? ` · ${node.objective.slice(0, 80)}${node.objective.length > 80 ? "…" : ""}`
+                      : ""}
+                  </div>
+                  {!compact && (
+                    <div className="step-meta" data-testid={`node-reason-${node.key}`}>
+                      {node.satisfies.length > 0
+                        ? `Selected for: ${node.satisfies.join(", ")}`
+                        : "Selected by the operator"}
+                      {node.skip_reason ? ` · Skipped: ${node.skip_reason}` : ""}
+                      {node.attempts > 1 ? ` · Attempts ${node.attempts}` : ""}
+                      {node.id ? ` · Instance ${node.id.slice(0, 8)}` : ""}
+                    </div>
+                  )}
+                  {!compact && workflow.edges.some((edge) => edge.target === node.key) && (
+                    <div className="step-meta">
+                      Depends on:{" "}
+                      {workflow.edges
+                        .filter((edge) => edge.target === node.key)
+                        .map((edge) => edge.source)
+                        .join(", ")}
+                    </div>
+                  )}
+                  {!compact && (
+                    <div className="node-actions">
+                      {node.status === "awaiting_approval" && (
+                        <>
+                          <button
+                            type="button"
+                            className="px-btn primary"
+                            disabled={busy}
+                            onClick={() => onControl("approve", node.key)}
+                          >
+                            Approve
+                          </button>
+                          <button
+                            type="button"
+                            className="px-btn danger"
+                            disabled={busy}
+                            onClick={() => onControl("reject", node.key)}
+                          >
+                            Reject
+                          </button>
+                        </>
+                      )}
+                      {node.status === "failed" && (
+                        <>
+                          <button
+                            type="button"
+                            className="px-btn"
+                            disabled={busy}
+                            onClick={() => onControl("retry", node.key)}
+                          >
+                            Retry
+                          </button>
+                          <button
+                            type="button"
+                            className="px-btn"
+                            disabled={busy}
+                            onClick={() => onControl("skip", node.key)}
+                          >
+                            Skip
+                          </button>
+                        </>
+                      )}
+                    </div>
+                  )}
+                  {showAdvanced && node.executions.length > 0 && (
+                    <pre className="details-block" style={{ marginTop: 8 }}>
+                      {JSON.stringify(node.executions.at(-1), null, 2)}
+                    </pre>
+                  )}
+                </div>
               </div>
-              {!compact && (
-                <div className="step-meta" data-testid={`node-reason-${node.key}`}>
-                  {node.satisfies.length > 0
-                    ? `Selected for: ${node.satisfies.join(", ")}`
-                    : "Selected by the operator"}
-                  {node.skip_reason ? ` · Skipped: ${node.skip_reason}` : ""}
-                  {node.id ? ` · Instance ${node.id.slice(0, 8)}` : ""}
-                </div>
-              )}
-              {!compact && (
-                <div className="node-actions">
-                  {node.status === "awaiting_approval" && (
-                    <>
-                      <button
-                        type="button"
-                        className="px-btn primary"
-                        disabled={busy}
-                        onClick={() => onControl("approve", node.key)}
-                      >
-                        Approve
-                      </button>
-                      <button
-                        type="button"
-                        className="px-btn danger"
-                        disabled={busy}
-                        onClick={() => onControl("reject", node.key)}
-                      >
-                        Reject
-                      </button>
-                    </>
-                  )}
-                  {node.status === "failed" && (
-                    <>
-                      <button
-                        type="button"
-                        className="px-btn"
-                        disabled={busy}
-                        onClick={() => onControl("retry", node.key)}
-                      >
-                        Retry
-                      </button>
-                      <button
-                        type="button"
-                        className="px-btn"
-                        disabled={busy}
-                        onClick={() => onControl("skip", node.key)}
-                      >
-                        Skip
-                      </button>
-                    </>
-                  )}
-                </div>
-              )}
-              {showAdvanced && node.executions.length > 0 && (
-                <pre className="details-block" style={{ marginTop: 8 }}>
-                  {JSON.stringify(node.executions.at(-1), null, 2)}
-                </pre>
-              )}
-            </div>
+            ))}
           </div>
         ))}
       </div>

@@ -6,12 +6,6 @@ capabilities are needed, wires them into a workflow graph (sequential, parallel,
 conditional), routes each agent to an appropriate model provider, validates every
 output, and synthesises a single result.
 
-## Deploy to Render (one click)
-
-[![Deploy to Render](https://render.com/images/deploy-to-render-button.svg)](https://render.com/deploy?repo=https://github.com/htmw/F2026-T2-Phoenix)
-
-One click provisions everything from [`render.yaml`](render.yaml): PostgreSQL, Redis (Key Value), the FastAPI backend, and the Next.js frontend. The app boots in **demo mode** (simulated AI) with no configuration. For live AI, set `OPENAI_API_KEY` on the `agent-mesh-api` service and redeploy. Details: [docs/operations/render.md](docs/operations/render.md).
-
 ## Screenshots
 
 <p align="center">

@@ -121,6 +121,17 @@ _SIGNALS: dict[Capability, tuple[str, ...]] = {
         "deduplicate",
         "missing values",
     ),
+    Capability.DATA_ANALYSIS: (
+        "analyse the data",
+        "analyze the data",
+        "data analysis",
+        "data analyst",
+        "statistical",
+        "trends",
+        "insights from the data",
+        "correlate",
+        "distribution",
+    ),
 }
 
 # Requests mentioning several distinct areas need decomposition; a single-area request

@@ -4,6 +4,7 @@ from __future__ import annotations
 
 from httpx import AsyncClient
 
+from app.agents.builtin import BUILTIN_AGENTS
 from app.domain.enums import Capability
 
 
@@ -12,10 +13,11 @@ async def test_list_agents_returns_all_seeded_agents(db_client: AsyncClient) -> 
 
     assert response.status_code == 200
     body = response.json()
-    assert len(body) == 9
+    assert len(body) == len(BUILTIN_AGENTS)
     assert {agent["id"] for agent in body} >= {
         "planning-agent",
         "security-agent",
+        "data-analyst-agent",
         "general-agent",
     }
 

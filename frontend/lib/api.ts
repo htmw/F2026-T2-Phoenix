@@ -11,6 +11,7 @@ import type {
   MetricsSummary,
   OfficeSnapshot,
   OperatorLimits,
+  PlanPreview,
   ProviderActionResult,
   ProviderStatus,
   RoutingPolicy,
@@ -257,6 +258,19 @@ export async function submitTask(body: {
       shared_model: body.shared_model,
       model_overrides: body.model_overrides,
       parent_workflow_id: body.parent_workflow_id ?? null,
+    }),
+  });
+}
+
+export async function previewPlan(body: {
+  request: string;
+  agent_ids: string[] | null;
+}): Promise<PlanPreview> {
+  return request<PlanPreview>("/api/v1/tasks/plan", {
+    method: "POST",
+    body: JSON.stringify({
+      request: body.request,
+      agent_ids: body.agent_ids,
     }),
   });
 }

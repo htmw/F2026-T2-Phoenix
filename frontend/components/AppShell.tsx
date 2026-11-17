@@ -7,11 +7,12 @@ import { BrandLogo } from "@/components/BrandLogo";
 import { ThemeToggle } from "@/components/ThemeToggle";
 import { BRAND_NAME, BRAND_TAGLINE } from "@/lib/brand";
 
-export type NavTab = "home" | "agents" | "work" | "messages" | "settings";
+export type NavTab = "home" | "agents" | "build" | "work" | "messages" | "settings";
 
 const NAV: { id: NavTab; label: string; testId: string }[] = [
   { id: "home", label: "Home", testId: "tab-command" },
   { id: "agents", label: "Agents", testId: "tab-agents" },
+  { id: "build", label: "Build", testId: "tab-build" },
   { id: "work", label: "Work", testId: "tab-work" },
   { id: "messages", label: "Messages", testId: "tab-activity" },
   { id: "settings", label: "Settings", testId: "tab-settings" },

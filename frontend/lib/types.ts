@@ -127,6 +127,16 @@ export type AgentSummary = {
   timeout_seconds?: number;
 };
 
+export type PlanPreview = {
+  required_capabilities: string[];
+  reasoning: string;
+  analysis_source: string;
+  nodes: Array<Record<string, unknown>>;
+  edges: Array<Record<string, string | null>>;
+  excluded_agents: Record<string, string>;
+  estimated_max_cost_usd: number;
+};
+
 export type AgentEnrollment = {
   name: string;
   description: string;

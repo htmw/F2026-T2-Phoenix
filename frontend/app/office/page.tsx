@@ -11,6 +11,7 @@ import { ConversationSidebar } from "@/components/ConversationSidebar";
 import { MessagesPanel } from "@/components/MessagesPanel";
 import { SettingsPanel } from "@/components/SettingsPanel";
 import { TaskComposer } from "@/components/TaskComposer";
+import { WorkflowBuilder } from "@/components/WorkflowBuilder";
 import { WorkflowProgress } from "@/components/WorkflowProgress";
 import {
   ApiError,
@@ -32,6 +33,7 @@ import {
   listCapabilities,
   listProviders,
   listWorkflows,
+  previewPlan,
   refreshProviderModels,
   setAgentEnabled,
   setAgentModelBinding,
@@ -689,6 +691,40 @@ export default function HomePage() {
             />
           </section>
         </div>
+      )}
+
+      {tab === "build" && (
+        <WorkflowBuilder
+          agents={agents}
+          busy={busy}
+          onPreview={(brief, agentIds) => previewPlan({ request: brief, agent_ids: agentIds })}
+          onRun={async (brief, agentIds) => {
+            setBusy(true);
+            setError(null);
+            try {
+              const created = await submitTask({
+                request: brief,
+                max_cost_usd: maxCost.trim() ? Number(maxCost) : null,
+                require_approval: requireApproval,
+                agent_ids: agentIds,
+                routing_strategy: routingStrategy,
+                shared_model: routingStrategy === "one" ? sharedModel || null : null,
+                model_overrides: routingStrategy === "mixed" ? modelOverrides : {},
+              });
+              setThreadHistory([]);
+              setWorkflow(created);
+              setComposerMode("followup");
+              setTab("work");
+              void listAgents().then(setAgents);
+              void refreshConversations();
+            } catch (cause) {
+              setError(cause instanceof Error ? cause.message : "Failed to start workflow");
+              throw cause;
+            } finally {
+              setBusy(false);
+            }
+          }}
+        />
       )}
 
       {tab === "work" && (

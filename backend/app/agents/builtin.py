@@ -114,7 +114,10 @@ RESEARCH_AGENT = AgentDefinition(
 SECURITY_AGENT = AgentDefinition(
     id="security-agent",
     name="Security Agent",
-    description=("Analyses code and dependencies for vulnerabilities and recommends remediation."),
+    description=(
+        "Code Auditor — analyses code and dependencies for vulnerabilities and "
+        "recommends remediation (Review-Fix-Test pipeline)."
+    ),
     capabilities=frozenset(
         {
             Capability.VULNERABILITY_ANALYSIS,
@@ -162,13 +165,17 @@ SECURITY_AGENT = AgentDefinition(
     ),
     permissions=("repo:read",),
     limits=AgentLimits(timeout_seconds=240.0, max_cost_usd=0.75),
+    retry_policy=RetryPolicy(max_attempts=3),
 )
 
 
 CODING_AGENT = AgentDefinition(
     id="coding-agent",
     name="Coding Agent",
-    description="Writes, modifies, and debugs code in response to a concrete objective.",
+    description=(
+        "Code Fixer — writes, modifies, and debugs code in response to a concrete "
+        "objective (Review-Fix-Test pipeline)."
+    ),
     capabilities=frozenset(
         {
             Capability.CODE_GENERATION,
@@ -230,7 +237,10 @@ CODING_AGENT = AgentDefinition(
 TESTING_AGENT = AgentDefinition(
     id="testing-agent",
     name="Testing Agent",
-    description="Generates tests, analyses failures, and reports test outcomes.",
+    description=(
+        "Automated Test Writer — generates tests, analyses failures, and reports "
+        "outcomes (Review-Fix-Test pipeline)."
+    ),
     capabilities=frozenset(
         {
             Capability.TEST_GENERATION,
@@ -286,7 +296,7 @@ TESTING_AGENT = AgentDefinition(
     ),
     permissions=("repo:read", "repo:write", "process:execute"),
     limits=AgentLimits(timeout_seconds=300.0, max_cost_usd=0.90),
-    retry_policy=RetryPolicy(max_attempts=2),
+    retry_policy=RetryPolicy(max_attempts=3),
 )
 
 
@@ -397,6 +407,56 @@ DATA_CLEANER_AGENT = AgentDefinition(
         temperature=0.0,
     ),
     limits=AgentLimits(timeout_seconds=180.0, max_cost_usd=0.40),
+    retry_policy=RetryPolicy(max_attempts=3),
+)
+
+
+DATA_ANALYST_AGENT = AgentDefinition(
+    id="data-analyst-agent",
+    name="Data Analyst Agent",
+    description=(
+        "Analyses cleaned tabular data: distributions, trends, correlations, and "
+        "structured insights for downstream reporting (Sprint 2 data pipeline)."
+    ),
+    capabilities=frozenset({Capability.DATA_ANALYSIS}),
+    instructions=(
+        "You are a data analyst. Prefer the cleaned dataset from upstream "
+        "(`cleaned_data`) when present; otherwise use the objective or context. "
+        "Produce concrete, evidence-backed insights — do not invent numbers. "
+        "Put a short office label in `summary`, the main narrative in `analysis`, "
+        "bullet insights in `insights`, and any metrics in `metrics` as "
+        "name/value pairs. If no dataset is available, say so clearly in "
+        "`analysis` and leave `insights` empty."
+    ),
+    output_schema={
+        "type": "object",
+        "required": ["summary", "analysis", "insights"],
+        "properties": {
+            "summary": {"type": "string"},
+            "analysis": {"type": "string"},
+            "insights": _STRING_ARRAY,
+            "metrics": {
+                "type": "array",
+                "items": {
+                    "type": "object",
+                    "required": ["name", "value"],
+                    "properties": {
+                        "name": {"type": "string"},
+                        "value": {"type": "string"},
+                    },
+                },
+            },
+            "limitations": _STRING_ARRAY,
+        },
+    },
+    model_preference=ModelPreference(
+        preferred_traits=(ModelTrait.REASONING, ModelTrait.STRUCTURED_OUTPUT),
+        min_context_tokens=32_000,
+        max_output_tokens=8_192,
+        temperature=0.1,
+    ),
+    limits=AgentLimits(timeout_seconds=240.0, max_cost_usd=0.60),
+    retry_policy=RetryPolicy(max_attempts=3),
 )
 
 
@@ -458,6 +518,7 @@ BUILTIN_AGENTS: tuple[AgentDefinition, ...] = (
     REVIEW_AGENT,
     DOCUMENTATION_AGENT,
     DATA_CLEANER_AGENT,
+    DATA_ANALYST_AGENT,
     GENERAL_AGENT,
 )
 

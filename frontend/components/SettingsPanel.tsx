@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import type { CSSProperties } from "react";
 
 import type {
@@ -87,6 +88,9 @@ export function SettingsPanel({
           />
         </label>
         <AccountMenu />
+        <p className="meta" style={{ marginTop: 8 }}>
+          <Link href="/login">Open login page</Link>
+        </p>
         <label className="check" style={{ marginTop: 12 }}>
           <input type="checkbox" checked={freeOnly} onChange={onToggleFree} />
           Free Only, prefer free/cheapest models when available

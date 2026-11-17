@@ -268,16 +268,23 @@ From Sprint 0 — *Who we're building Agent Mesh for*:
 
 ### Product User Stories and Acceptance Criteria
 - [View User Stories & Acceptance Criteria as PDF](https://github.com/htmw/F2026-T2-Phoenix/blob/main/docs/agile/user-stories/AgentMesh_UserStories.pdf) | [Download as Excel Workbook](https://github.com/htmw/F2026-T2-Phoenix/blob/main/docs/agile/user-stories/AgentMesh_UserStories.xlsx)
+- [View User Stories & Acceptance Criteria v2 (PDF)](https://github.com/htmw/F2026-T2-Phoenix/blob/main/docs/agile/user-stories/AgentMesh_UserStories_v2.pdf)
 
 ### User Stories and Acceptance Criteria (Sprint-wise)
 
 #### Sprint 1
 - [View Sprint 1 User Stories as PDF](https://github.com/htmw/F2026-T2-Phoenix/blob/main/docs/agile/user-stories/AgentMesh_Sprint1_UserStories.pdf) | [Download as Excel Workbook](https://github.com/htmw/F2026-T2-Phoenix/blob/main/docs/agile/user-stories/AgentMesh_Sprint1_UserStories.xlsx)
 
+#### Sprint 2
+- [View Sprint 2 User Stories as PDF](https://github.com/htmw/F2026-T2-Phoenix/blob/main/docs/agile/user-stories/AgentMesh_Sprint2_UserStories.pdf)
+
 ### Application Test Cases
 
 #### Sprint 1
 - [View Test Cases as PDF](https://github.com/htmw/F2026-T2-Phoenix/blob/main/docs/agile/test-cases/AgentMesh_Sprint1_TestCases.pdf) | [Download as Excel Workbook](https://github.com/htmw/F2026-T2-Phoenix/blob/main/docs/agile/test-cases/AgentMesh_Sprint1_TestCases.xlsx)
+
+#### Sprint 2
+- [View Sprint 2 Test Cases as PDF](https://github.com/htmw/F2026-T2-Phoenix/blob/main/docs/agile/test-cases/AgentMesh_Sprint2_TestCases.pdf)
 
 
 - **Monorepo:** [https://github.com/htmw/F2026-T2-Phoenix](https://github.com/htmw/F2026-T2-Phoenix)

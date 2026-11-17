@@ -13,7 +13,10 @@ type GoogleAccounts = {
         client_id: string;
         callback: (response: GoogleCredential) => void;
       }) => void;
-      renderButton: (parent: HTMLElement, options: { theme: string; size: string }) => void;
+      renderButton: (
+        parent: HTMLElement,
+        options: { theme: string; size: string; width?: number },
+      ) => void;
     };
   };
 };
