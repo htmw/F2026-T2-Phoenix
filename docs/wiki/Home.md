@@ -228,7 +228,7 @@ Agent Mesh follows an end-to-end modular-monolith pipeline:
 - [Sprint 1 Burndown Chart](https://github.com/htmw/F2026-T2-Phoenix/blob/main/docs/wiki/sprints/sprint-1-burndown.png) | [Sprint 1 Completed Tasks](https://github.com/htmw/F2026-T2-Phoenix/blob/main/docs/wiki/sprints/sprint-1-completed-tasks.png)
 
 ### Sprint 2
-- [Sprint 2 Burndown Chart](https://github.com/htmw/F2026-T2-Phoenix/blob/main/docs/wiki/sprints/sprint-2-burndown.png) | [Sprint 2 Completed Tasks](https://github.com/htmw/F2026-T2-Phoenix/blob/main/docs/wiki/sprints/sprint-2-completed-tasks.png)
+- [Sprint 2 Burndown Chart](https://github.com/htmw/F2026-T2-Phoenix/blob/main/docs/wiki/sprints/sprint-2-burndown.png) | [Sprint 2 Completed Tasks (1)](https://github.com/htmw/F2026-T2-Phoenix/blob/main/docs/wiki/sprints/sprint-2-completed-tasks.png) | [Sprint 2 Completed Tasks (2)](https://github.com/htmw/F2026-T2-Phoenix/blob/main/docs/wiki/sprints/sprint-2-completed-tasks-2.png)
 
 
 ## Sprint Planning
