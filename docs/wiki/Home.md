@@ -211,6 +211,14 @@ Agent Mesh follows an end-to-end modular-monolith pipeline:
 - 1d) [Watch Sprint 1 Demo](https://www.youtube.com/watch?v=Dd_9gl4ELgk) | [Download Sprint 1 Demo (mp4)](https://github.com/htmw/F2026-T2-Phoenix/raw/main/docs/sprints/AgentMesh_Sprint1_Demo.mp4)
 - 1e) [Sprint 1 Front-End Source Code](https://github.com/htmw/F2026-T2-Phoenix/tree/main/frontend) | [Sprint 1 Back-End Source Code](https://github.com/htmw/F2026-T2-Phoenix/tree/main/backend)
 
+
+### Sprint 2
+
+- 3a) [Watch Sprint 2 Presentation Video](https://www.youtube.com/watch?v=QPmhcV6kkbc) | [Download Sprint 2 Presentation Video](https://github.com/htmw/F2026-T2-Phoenix/releases/download/sprint-2/AgentMesh_Sprint2_Presentation.mp4)
+- 3b) [View Sprint 2 Presentation Slides as PDF](https://github.com/htmw/F2026-T2-Phoenix/blob/main/docs/sprints/AgentMesh_Sprint2_Presentation.pdf) | [View Sprint 2 Presentation Slides as PowerPoint](https://github.com/htmw/F2026-T2-Phoenix/blob/main/docs/sprints/AgentMesh_Sprint2_Presentation.pptx)
+- 3c) [Download Sprint 2 Demo (mp4)](https://github.com/htmw/F2026-T2-Phoenix/raw/main/docs/sprints/AgentMesh_Sprint2_Demo.mp4)
+- 3d) [Sprint 2 Front-End Source Code](https://github.com/htmw/F2026-T2-Phoenix/tree/main/frontend) | [Sprint 2 Back-End Source Code](https://github.com/htmw/F2026-T2-Phoenix/tree/main/backend)
+
 ## Sprint Burndown Charts and Completed Tasks
 
 ### Sprint 0
@@ -218,6 +226,8 @@ Agent Mesh follows an end-to-end modular-monolith pipeline:
 
 ### Sprint 1
 - [Sprint 1 Burndown Chart](https://github.com/htmw/F2026-T2-Phoenix/blob/main/docs/wiki/sprints/sprint-1-burndown.png) | [Sprint 1 Completed Tasks](https://github.com/htmw/F2026-T2-Phoenix/blob/main/docs/wiki/sprints/sprint-1-completed-tasks.png)
+
+
 ## Sprint Planning
 
 - [Watch Sprint 1 Planning Video](https://www.youtube.com/watch?v=9tktC_Bq3pc) | [Download mp4 File](https://github.com/htmw/F2026-T2-Phoenix/releases/download/sprint-1/AgentMesh_Sprint1_Planning.mp4)
